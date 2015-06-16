@@ -1,2 +1,1 @@
-# docs
-文档
+# EasyWeChat 文档 - 中文版
