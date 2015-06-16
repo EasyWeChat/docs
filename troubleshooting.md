@@ -1,4 +1,4 @@
-title: 疑难解答
+title: Troubleshooting
 ---
 
-### 疑难解答
+### Troubleshooting

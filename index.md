@@ -1,18 +1,18 @@
-title: 文档
+title: Documentation
 ---
-当你在使用过程中遇到问题，请查阅 [疑难解答](troubleshooting.html) 或者在这里提问 [GitHub](https://github.com/overtrue/wechat/issues)。
+Welcome to the Easy WeChat documentation. If you encounter any problems when using EasyWeChat, have a look at the  [troubleshooting guide](troubleshooting.html), raise an issue on [GitHub](https://github.com/overtrue/wechat/issues).
 
-## EasyWeChat 是什么？
+## What is EasyWeChat?
 
-EasyWeChat 是一个 [微信](http://www.wechat.com) 非官方 SDK。
+EasyWeChat is SDK for [WeChat](http://www.wechat.com).
 
-## 安装
+## Installation
 
-EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https://getcomposer.org/) 包。
+It only takes few minutes to set up EasyWeChat. If you encounter a problem and can't find the solution here, please [submit a GitHub issue](https://github.com/overtrue/wechat/issues) and I'll try to solve it.
 
-### 环境需求
+### Requirements
 
-- PHP >= 5.3
-- Mcrypt 拓展
+ - PHP >= 5.3
+ - mcrypt extension
 
 TODO

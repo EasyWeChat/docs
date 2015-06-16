@@ -1,46 +1,46 @@
-title: 贡献代码
+title: Contributing
 ---
-## 开发
+## Development
 
-我们欢迎广大开发者贡献大家的智慧，让我们共同让它变得更完美.
+We welcome you to join the development of EasyWeChat. This document will help you through the process.
 
-### 开始之前
+### Before You Start
 
-请严格遵循以下代码标准:
+Please follow the coding style:
 
-- [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
-- 使用 4 个空格作为缩进。
+- Follow [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
+- Use soft-tabs with a four space indent.
 
-### 流程
+### Workflow
 
-1. Fork [overtrue/wechat] 到本地.
-2. 创建新的分支：
+1. Fork [overtrue/wechat].
+2. Create a feature branch.
 
     {% code %}
     $ git checkout -b new_feature
     {% endcode %}
 
-3. 编写代码。
-4. Push 到你的分支:
+3. Start hacking.
+4. Push the branch:
 
     {% code %}
     $ git push origin new_feature
     {% endcode %}
 
-5. 创建 Pull Request 并描述你完成的功能或者做出的修改。
+5. Create a pull request and describe the change.
 
-### 注意
+### Notice
 
 TODO
 
-## 更新文档
+## Updating Documentation
 
-我们的文档也是开源的，基于 [Hexo](http://hexo.io)，源代码在 [EasyWeChat/site]。
+The EasyWeChat documentation is open source and you can find the source code on [EasyWeChat/site].
 
-### 流程
+### Workflow
 
 1. Fork [EasyWeChat/site]
-2. Clone 到你的电脑并且安装依赖包：
+2. Clone the repository to your computer and install dependencies.
 
     {% code %}
     $ git clone https://github.com/<username>/site.git
@@ -48,25 +48,25 @@ TODO
     $ npm install
     {% endcode %}
 
-3. 编辑文档，同时你可以开启本地服务器实时预览：
+3. Start editing the documentation. You can start the server for live previewing.
 
     {% code %}
     $ hexo server
     {% endcode %}
 
-4. Push 到你的分支。
-5. 创建 Pull Request 并描述你完成的功能或者做出的修改。
+4. Push the branch.
+5. Create a pull request and describe the change.
 
-### 多语言
+### Translating
 
-1. 添加一个语言目录到 `source` 目录下. (小写目录名称)
-2. 复制 `source` 下的所有文件到到你新建的语言目录下。
-3. 编辑 `source/_data/language.yml`，添加你的语言。
-4. 复制 `en.yml` 到 `themes/easywechat/languages` 并且改名 (全部小写).
+1. Add a new language folder in `source` folder. (All lower case)
+2. Copy Markdown and template files in `source` folder to the new language folder.
+3. Add the new language to `source/_data/language.yml`.
+4. Copy `en.yml` in `themes/easywechat/languages` and rename to the language name (all lower case).
 
-## 报告 Bug
+## Reporting Issues
 
-当你在使用过程中遇到问题，请查阅 [疑难解答](troubleshooting.html) 或者在这里提问 [GitHub](https://github.com/overtrue/wechat/issues). 如果还是不能解决你的问题，请到 GitHub 联系我们。
+When you encounter some problems when using EasyWeChat, you can find the solutions in [Troubleshooting](troubleshooting.html) or ask me on [GitHub](https://github.com/overtrue/wechat/issues). If you can't find the answer, please report it on GitHub.
 
 [overtrue/wechat]: https://github.com/overtrue/wechat
 [EasyWeChat/site]: https://github.com/EasyWeChat/site

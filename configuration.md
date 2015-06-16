@@ -1,4 +1,4 @@
-title: 配置
+title: Configuration
 ---
 
-### 配置
+### Configuration

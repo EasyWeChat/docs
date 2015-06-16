@@ -1,4 +1,4 @@
-title: 其它
+title: Miscellaneous
 ---
 
-### 其它
+### Miscellaneous

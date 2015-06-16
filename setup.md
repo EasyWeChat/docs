@@ -1,4 +1,4 @@
-title: 开始使用
+title: Setup
 ---
 
-### 开始使用
+### Setup

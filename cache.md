@@ -1,4 +1,4 @@
-title: 缓存
+title: Cache
 ---
 
-### 缓存
+### Cache
