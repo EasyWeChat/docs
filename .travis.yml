@@ -1,0 +1,4 @@
+notifications:
+  webhooks:
+    urls:
+      - http://hooks.travis-ci.org/easywechat/site/master
