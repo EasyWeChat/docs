@@ -2,4 +2,6 @@ language: php
 install:
     - wget https://gist.githubusercontent.com/overtrue/af88ce80410fa0b03f92/raw/acb96f93cf465bf9bef753c91100b34874f023fb/easywechat-site-travis-build-tigger.sh
     - chmod +x easywechat-site-travis-build-tigger.sh
+
+script:
     - ./easywechat-site-travis-build-tigger.sh
