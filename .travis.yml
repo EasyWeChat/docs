@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+    - "0.12"
+
+install:
+    - npm install travis-ci@2.0.3
+    - wget https://raw.githubusercontent.com/EasyWeChat/site/master/deploy-doc.js
+
+script:
+    - node deploy-doc.js
