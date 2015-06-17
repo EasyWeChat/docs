@@ -1,4 +1,4 @@
 language: php
 
 script:
-  - echo 'Hello world!'
+  - curl -s -X POST -H \"Content-Type: application/json\" -H \"Accept: application/json\" -H \"Travis-API-Version: 3\" -H \"Authorization: token $CI_TOKEN\" -d \"$body\"
