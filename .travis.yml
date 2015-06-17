@@ -1,3 +1,8 @@
-language: php
+language: node_js
 
-script: "curl -s -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Travis-API-Version: 3' -H 'Authorization: token $CI_TOKEN' -d '{ \"request\": { \"message\": \"Build site.\", \"branch\":\"master\"} }' https://api.travis-ci.org/repo/EasyWeChat%2Fsite/requests"
+install:
+    - npm install travis-ci@2.0.3
+    - wget https://raw.githubusercontent.com/EasyWeChat/site/master/scripts/deploy-doc.js
+
+script:
+    - node deploy-doc.js
