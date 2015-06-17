@@ -4,7 +4,7 @@ title: 文档
 
 ## EasyWeChat 是什么？
 
-EasyWeChat 是一个 [微信](http://www.wechat.com) 非官方 SDK。
+EasyWeChat 是一个开源的 [微信](http://www.wechat.com) 非官方 SDK。
 
 ## 安装
 
