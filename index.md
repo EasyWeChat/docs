@@ -1,5 +1,6 @@
 title: Documentation
 ---
+
 Welcome to the Easy WeChat documentation. If you encounter any problems when using EasyWeChat, have a look at the  [troubleshooting guide](troubleshooting.html), raise an issue on [GitHub](https://github.com/overtrue/wechat/issues).
 
 ## What is EasyWeChat?
