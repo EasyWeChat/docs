@@ -13,7 +13,6 @@ EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https:
 
 ### 环境需求
 
-- PHP >= 5.3
-- Mcrypt 拓展
+- PHP >= 5.5.9
+- mcrypt 拓展
 
-TODO
