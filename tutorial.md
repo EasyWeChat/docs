@@ -66,42 +66,30 @@ $server->serve()->send();
 
 我们先来分析上面的代码：
 
-```
+```php
+<?php
+
+// 这行代码是引入 `composer` 的入口文件，这样我们的类才能正常加载。
 include __DIR__ . '/vendor/autoload.php';
-```
 
-这行代码是引入 `composer` 的入口文件，这样我们的类才能正常加载。
-
-```php
+// 引入我们的主项目的入口类。
 use Overtrue\WeChat\Application;
-```
 
-引入我们的主项目的入口类。
-
-```php
+// 一些配置
 $options = [...];
-```
 
-一些配置。
-
-```php
+// 使用配置来初始化一个项目。
 $app = new Application($options);
-```
 
-使用配置来初始化一个项目。
-
-```php
+// 从项目实例中得到服务端应用实例。
 $server = $app['server'];
-```
 
-从项目实例中得到服务端应用实例。
-
-```
 $server->serve()->send();
 ```
 
-这一行我有必要详细讲一下：
+最后这一行我有必要详细讲一下：
 
+>
 1. 我们的 `$server->serve()` 就是执行服务端业务了，那么它的返回值呢，是一个 `Symfony\Component\HttpFoundation\Response` 实例。
 2. 我这里是直接调用了它的 `send()` 方法，它就是直接输出了，我们在一些框架就不能直接输出了，那你就直接拿到 Response 实例后做相应的操作即可，比如 Laravel 里你就可以直接 `return $server->serve();`
 
@@ -112,18 +100,18 @@ $response = $server->serve();
 echo $response;
 ```
 
-OK, 有了上面的代码，那么请你按[微信官方的接入指引](http://mp.weixin.qq.com/wiki/17/2d4265491f12608cd170a95559800f2d.html) 操作，并相应修改上面的 `$options` 的配置。
+OK, 有了上面的代码，那么请你按**[微信官方的接入指引](http://mp.weixin.qq.com/wiki/17/2d4265491f12608cd170a95559800f2d.html)** 操作，并相应修改上面的 `$options` 的配置。
 
-URL 就是我们的 `http://easywechat.org/server.php`，这里我是举例哦，你可不要填写我的域名。
+> URL 就是我们的 `http://easywechat.org/server.php`，这里我是举例哦，你可不要填写我的域名。
 
-OK，点击验证就OK了。
+这样，点击提交验证就OK了。
 
 
 ## 接收 & 回复用户消息
 
 那服务端验证通过了，我们就来试一下接收消息吧。
 
-在刚刚上面代码最后一行 `$server->serve()->send();` 前面，我们调用 `$server` 的 `setMessageHandler()` 方法来注册一个消息处理函数，这里用到了**[PHP闭包](http://php.net/manual/zh/functions.anonymous.php)**的知识，如果你不熟悉赶紧补课去。
+> 在刚刚上面代码最后一行 `$server->serve()->send();` 前面，我们调用 `$server` 的 `setMessageHandler()` 方法来注册一个消息处理函数，这里用到了**[PHP闭包](http://php.net/manual/zh/functions.anonymous.php)**的知识，如果你不熟悉赶紧补课去。
 
 ```php
 // ...
@@ -136,11 +124,11 @@ $server->serve()->send();
 
 ```
 
-OK，打开你的微信客户端，向你的公众号发送任意一条消息，你应该会收到回复：`您好！欢迎关注我!`。
+好吧，打开你的微信客户端，向你的公众号发送任意一条消息，你应该会收到回复：`您好！欢迎关注我!`。
 
-没有收到回复？看到了“你的公众号暂时无法提供服务” ？， 好，那检查一下你的日志吧，日志在哪儿？我们的配置里写了日志路径了(`'/tmp/easywechat.log'`)。 没有这个文件？看看权限哦。
+> 没有收到回复？看到了“你的公众号暂时无法提供服务” ？， 好，那检查一下你的日志吧，日志在哪儿？我们的配置里写了日志路径了(`'/tmp/easywechat.log'`)。 没有这个文件？看看权限哦。
 
-好了，一个基本的服务端验证就完成了。
+一个基本的服务端验证就完成了。
 
 ## 总结
 
@@ -160,7 +148,7 @@ OK，打开你的微信客户端，向你的公众号发送任意一条消息，
 
 2. 所有的 API 返回值均为 [`EasyWeChat\Support\Collection`](https://github.com/EasyWeChat/support/blob/master/src/Collection.php) 类，这个类是个什么东西呢？
 
- 它实现了一些 **[PHP预定义接口](http://php.net/manual/zh/reserved.interfaces.php)**，比如：`[ArrayAccess](http://php.net/manual/zh/class.arrayaccess.php)`、`[Serializable](http://php.net/manual/zh/class.serializable.php)` 等。
+ 它实现了一些 **[PHP预定义接口](http://php.net/manual/zh/reserved.interfaces.php)**，比如：[`ArrayAccess`](http://php.net/manual/zh/class.arrayaccess.php)、[`Serializable`](http://php.net/manual/zh/class.serializable.php) 等。
 
  有啥好处呢？它让我们操作起返回值来更方便，比如：
 
@@ -185,5 +173,3 @@ OK，打开你的微信客户端，向你的公众号发送任意一条消息，
  希望你在使用本 SDK 的时候能忘记微信官方给你的痛苦，同时如果你发现 SDK 的不足，欢迎提交 PR 或者给我[提建议&报告问题](https://github.com/overtrue/wechat/issues)。
 
  祝你生活愉快！
-
- - overtrue.
