@@ -1,7 +1,11 @@
+language: bash
 before_script:
-    - gem install travis
+    - gem install travis --no-rdoc --no-ri --skip-completion-check
+    - travis version
+    - travis login --org --github-token=${GH_TOKEN}
+    - export TOKEN=$(travis token | awk -F 'is' '{print $1}')
     - wget https://raw.githubusercontent.com/EasyWeChat/site/master/deploy.sh
 
 script:
     - chmod +x ./deploy.sh
-    - ./deploy.sh
+    - ./deploy.sh && echo 'Completed.'
