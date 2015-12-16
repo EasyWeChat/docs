@@ -1,4 +1,5 @@
 before_script:
+    - gem install travis
     - wget https://raw.githubusercontent.com/EasyWeChat/site/master/deploy.sh
 
 script:
