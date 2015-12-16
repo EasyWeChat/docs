@@ -89,7 +89,7 @@ $server->serve()->send();
 
 最后这一行我有必要详细讲一下：
 
->
+
 >1. 我们的 `$server->serve()` 就是执行服务端业务了，那么它的返回值呢，是一个 `Symfony\Component\HttpFoundation\Response` 实例。
 >2. 我这里是直接调用了它的 `send()` 方法，它就是直接输出了，我们在一些框架就不能直接输出了，那你就直接拿到 Response 实例后做相应的操作即可，比如 Laravel 里你就可以直接 `return $server->serve();`
 
