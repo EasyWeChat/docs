@@ -1,6 +1,6 @@
 language: bash
 before_script:
-    - gem install travis --no-rdoc --no-ri --skip-completion-check
+    - gem install travis --no-rdoc --no-ri
     - travis version
     - travis login --org --github-token=${GH_TOKEN}
     - export TOKEN=$(travis token | awk -F 'is' '{print $1}')
