@@ -139,8 +139,8 @@ $server->serve()->send();
 
  // services...
  $server = $app['server'];
- $user = $app['user'];
- $oauth = $app['oauth'];
+ $user   = $app['user'];
+ $oauth  = $app['oauth'];
 
  // ... js/menu/staff/material/qrcode/notice/stats...
 
