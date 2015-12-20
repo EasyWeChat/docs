@@ -19,6 +19,8 @@ $app = new Application($options);
 return [
     /**
      * Debug 模式，bool 值：true/false
+     *
+     * 当值为 false 时，所有的日志都不会记录
      */
     'debug'  => true,
 
