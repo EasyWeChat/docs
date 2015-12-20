@@ -1,54 +1,84 @@
 title: 用户
 ---
 
-本 SDK 中上传素材通过 `Overtrue\Wechat\User`、`Overtrue\Wechat\Group` 提供用户与用户组管理服务。
+用户信息的获取是微信开发中比较常用的一个功能了，以下所有的用户信息的获取与更新，都是**基于微信的 `openid` 的，并且是已关注当前账号的**，其它情况可能无法正常使用。
 
 ### 获取实例
 
 ```php
 <?php
 
-use Overtrue\Wechat\User;
+// ... 前面部分省略
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
+$app = new Application($options);
 
-$userService = new User($appId, $secret);
+$userService = $app['user'];
 ```
 
 ## API
 
-+ `$userService->get($openId);` 获取用户信息
-+ `$userService->lists($nextOpenId = null);` 获取用户列表, `$nextOpenId` 可选
-+ `$userService->remark($openId, $remark);` 修改用户备注, 返回boolean
-+ `$userService->group($openId);` 获取用户所属用户组ID
+### 获取用户信息
 
-example:
+```php
+$userService->get($openId);
+```
 
 ```php
 $user = $userService->get($openId);
 
-echo $user->nickname;
+echo $user->nickname; // or $user['nickname']
 ```
 
-## 用户组
+### 获取用户列表
 
 ```php
-<?php
-
-use Overtrue\Wechat\Group;
-
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
-
-$group = new Group($appId, $secret);
+$userService->lists($nextOpenId = null);  // $nextOpenId 可选
 ```
 
-+ `$group->lists();` 获取所有分组
-+ `$group->create($name);` 创建分组
-+ `$group->update($groupId, $name);` 修改分组信息
-+ `$group->delete($groupId);` 删除分组
-+ `$group->moveUser($openId, $groupId);` 移动单个用户到指定分组
-+ `$group->moveUsers(array $openIds, $groupId);` 批量移动用户到指定分组
+ example:
+
+ ```php
+ $users = $userService->lists();
+
+ // result
+ {
+  "total": 2,
+  "count": 2,
+  "data": {
+    "openid": [
+      "",
+      "OPENID1",
+      "OPENID2"
+    ]
+  },
+  "next_openid": "NEXT_OPENID"
+}
+
+$users->total; // 2
+ ```
+
+### 修改用户备注
+
+```php
+$userService->remark($openId, $remark); // 成功返回boolean
+```
+
+example:
+
+```php
+$userService->remark($openId, "僵尸粉");
+```
+
+### 获取用户所属用户组ID
+
+```php
+$userService->group($openId);
+```
+
+example:
+
+```php
+$userGroupId = $userService->group($openId);
+```
 
 关于用户与用户组管理请参考微信官方文档：http://mp.weixin.qq.com/wiki/ `用户管理` 章节。
