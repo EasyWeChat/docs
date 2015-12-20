@@ -1,22 +1,101 @@
 title: 用户组
 ---
 
-## 用户组
+用户组的使用就非常简单了，基本的增删改查。
 
 ```php
 <?php
 
-use Overtrue\Wechat\Group;
+// ... 前面部分省略
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
+$app = new Application($options);
 
-$group = new Group($appId, $secret);
+$group = $app['user.group'];
 ```
 
-+ `$group->lists();` 获取所有分组
-+ `$group->create($name);` 创建分组
-+ `$group->update($groupId, $name);` 修改分组信息
-+ `$group->delete($groupId);` 删除分组
-+ `$group->moveUser($openId, $groupId);` 移动单个用户到指定分组
-+ `$group->moveUsers(array $openIds, $groupId);` 批量移动用户到指定分组
+### 获取所有分组
+
+```php
+$group->lists();
+```
+example:
+
+```php
+$groups = $group->lists();
+
+// {
+//     "groups": [
+//         {
+//             "id": 0,
+//             "name": "未分组",
+//             "count": 72596
+//         },
+//         {
+//             "id": 1,
+//             "name": "黑名单",
+//             "count": 36
+//         },
+//         ...
+//     ]
+// }
+
+var_dump($groups->groups[0]['name']) // “未分组”
+```
+
+### 创建分组
+
+```php
+$group->create($name);
+```
+example:
+
+```php
+$group->create($name);
+```
+
+### 修改分组信息
+
+```php
+$group->update($groupId, $name);
+```
+example:
+
+```php
+$group->update($groupId, "新的组名");
+```
+
+### 删除分组
+
+```php
+$group->delete($groupId);
+```
+example:
+
+```php
+$group->delete($groupId);
+```
+
+### 移动单个用户到指定分组
+
+```php
+$group->moveUser($openId, $groupId);
+```
+example:
+
+```php
+$group->moveUser($openId, $groupId);
+```
+
+### 批量移动用户到指定分组
+
+```php
+$group->moveUsers(array $openIds, $groupId);
+```
+example:
+
+```php
+$openIds = [$openId1, $openId2, $openId3 ...];
+$group->moveUsers($openIds, $groupId);
+```
+
+关于用户与用户组管理请参考微信官方文档：http://mp.weixin.qq.com/wiki/ `用户管理` 章节。
