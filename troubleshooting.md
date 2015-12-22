@@ -12,7 +12,7 @@ title: 疑难解答
 
 ### curl: (60) SSL certificate problem: unable to get local issuer certificate
 
-这是 SSL 证书问题所致，在使用SDK调用微信支付等相关的操作时可能会遇到报 “SSL certificate problem: unable to get local issuer certificate” 的错误。
+这是 SSL 证书问题所致，在使用 SDK 调用微信支付等相关的操作时可能会遇到报 “SSL certificate problem: unable to get local issuer certificate” 的错误。
 
 微信公众平台提供的文档中建议对部分较敏感的操作接口使用 https 协议进行访问，例如微信支付和红包等接口中涉及到操作商户资金的一些操作。
 wecaht SDK 遵循了官方建议，所以在调用这些接口时，除了按照官方文档设置操作证书文件外，还需要保证服务器正确安装了 CA 证书。
