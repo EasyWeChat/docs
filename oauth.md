@@ -24,36 +24,36 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
      |        |                               |     Server    |
      |        |<-(F)--- Protected Resource ---|               |
      +--------+                               +---------------+
-                 OAuth 授权流程
+                      OAuth 授权流程
 ```
 > 摘自：[RFC 6749](https://datatracker.ietf.org/doc/rfc6749/?include_text=1)
 
 步骤解释：
 
-1.（A）用户打开客户端以后，客户端要求用户给予授权。
-1.（B）用户同意给予客户端授权。
-1.（C）客户端使用上一步获得的授权，向认证服务器申请令牌。
-1.（D）认证服务器对客户端进行认证以后，确认无误，同意发放令牌。
-1.（E）客户端使用令牌，向资源服务器申请获取资源。
-1.（F）资源服务器确认令牌无误，同意向客户端开放资源。
+    （A）用户打开客户端以后，客户端要求用户给予授权。
+    （B）用户同意给予客户端授权。
+    （C）客户端使用上一步获得的授权，向认证服务器申请令牌。
+    （D）认证服务器对客户端进行认证以后，确认无误，同意发放令牌。
+    （E）客户端使用令牌，向资源服务器申请获取资源。
+    （F）资源服务器确认令牌无误，同意向客户端开放资源。
 
-关于 OAuth 协议我们就简单了解到这里，如果还有不熟悉的同学，请 [Google 相关文档资料学习](https://www.google.com.hk/?gws_rd=ssl#safe=strict&q=OAuth2)
+关于 OAuth 协议我们就简单了解到这里，如果还有不熟悉的同学，请 [Google 相关资料](https://www.google.com.hk/?gws_rd=ssl#safe=strict&q=OAuth2)
 
 ## 微信 OAuth
 
-在微信里的 OAuth 其实有两种：[`公众平台网页授权获取用户信息`](http://mp.weixin.qq.com/wiki/9/01f711493b5a02f24b04365ac5d8fd95.html)、[`开放平台网页登录`](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=&lang=zh_CN)。
+在微信里的 OAuth 其实有两种：[公众平台网页授权获取用户信息](http://mp.weixin.qq.com/wiki/9/01f711493b5a02f24b04365ac5d8fd95.html)、[开放平台网页登录](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=&lang=zh_CN)。
 
 它们的区别有两处，授权地址不同，`scope` 不同。
 
-- 公众平台网页授权获取用户信息
+- **公众平台网页授权获取用户信息**
 
-  授权 URL: `https://api.weixin.qq.com/sns/authorize`
-  Scopes: `snsapi_base` 与 `snsapi_userinfo`
+  **授权 URL**: `https://api.weixin.qq.com/sns/authorize`
+  **Scopes**: `snsapi_base` 与 `snsapi_userinfo`
 
-- 开放平台网页登录
+- **开放平台网页登录**
 
-  授权 URL: `https://api.weixin.qq.com/sns/qrconnect`
-  Scopes: `snsapi_login`
+  **授权 URL**: `https://api.weixin.qq.com/sns/qrconnect`
+  **Scopes**: `snsapi_login`
 
 他们的逻辑都一样：
 
@@ -67,10 +67,11 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 8. 跳转到第 3 步写入的 `target_url` 页面（`/user/profile`）。
 
 > 看懵了？没事，使用 SDK，你不用管这么多。:smile:
-> 注意，上面的第3步：redirect_uri=callback.php实际上我们会在 `callback.php` 后面还会带上授权目标页面 `user/profile`，所以完整的 `redirect_uri` 应该是下面的这样的：`'redirect_uri='.urlencode('callback.php?target=user/profile')`
-> redirect_uri=callback.php%3Ftarget%3Duser%2Fprofile
+>
+> 注意，上面的第3步：redirect_uri=callback.php实际上我们会在 `callback.php` 后面还会带上授权目标页面 `user/profile`，所以完整的 `redirect_uri` 应该是下面的这样的PHP去拼出来：`'redirect_uri='.urlencode('callback.php?target=user/profile')`
+> 结果：redirect_uri=callback.php%3Ftarget%3Duser%2Fprofile
 
-## 页面组成
+## 逻辑组成
 
 从上面我们所描述的授权流程来看，我们至少有3个页面：
 
@@ -78,7 +79,9 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 2. **发起授权页**，此页面其实可以省略，可以做成一个中间件，全局检查未登录就发起授权。
 3. **授权回调页**，接收用户授权后的状态，并获取用户信息，写入用户会话状态（SESSION）。
 
-我们这里来举个例子，`oauth_callback` 是我们的授权回调URL, `user/profile` 是我们需要授权才能访问的页面，它的 PHP 代码如下：
+## 网页授权实例
+
+我们这里来用原生 PHP 写法举个例子，`oauth_callback` 是我们的授权回调URL, `user/profile` 是我们需要授权才能访问的页面，它的 PHP 代码如下：
 
 ```php
 // http://easywechat.org/user/profile
@@ -145,7 +148,7 @@ header('location:'. $targetUrl); // 跳转到 user/profile
 上面的例子呢都是基于 `$_SESSION` 来保持会话的，在微信客户端中，你可以结合 COOKIE 来存储，但是有效期平台不一样时间也不一样，好像 Android 的失效会快一些，不过基本也够用了。
 
 注意：
-  1. `$oauth->user();` 返回的是 [`Overtrue\Socialite\User`](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的消息](https://github.com/overtrue/socialite#user-interface)。
+  1. `$oauth->user();` 返回的是 [Overtrue\Socialite\User](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的信息](https://github.com/overtrue/socialite#user-interface)。
   2. 当 `scope` 为 `snsapi_base` 时 `$oauth->user();` 对象里只有 `openid`，没有其它信息。
 
 更多关于微信网页授权 API 请参考： http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html
