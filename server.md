@@ -57,6 +57,42 @@ $server->setMessageHandler(function ($message) {
 
 当然，因为这里 `setMessageHandler` 接收一个 [`callable`](http://php.net/manual/zh/language.types.callable.php) 的参数，所以你不一定要传入一个 Closure 闭包，你可以选择传入一个函数名，一个 `[$class, $method]` 或者 `Foo::bar` 这样的类型。
 
+## 请求消息的属性
+
+当你接收到用户发来的消息时，可能会提取消息中的相关属性，那么请参考：
+
+请求消息基本属性：
+
+    ToUserName    接收方帐号（该公众号 ID）
+    FromUserName  发送方帐号（代表用户的唯一标识）
+    CreateTime    消息创建时间（时间戳）
+    MsgId         消息 ID（64位整型）
+
+文本消息请求：
+
+    MsgType  text
+    Content  文本消息内容
+
+图片消息请求：
+
+    MsgType  image
+    PicUrl   图片链接
+
+地理位置消息请求：
+
+    MsgType     location
+    Location_X  地理位置纬度
+    Location_Y  地理位置经度
+    Scale       地图缩放大小
+    Label       地理位置信息
+
+链接消息请求：
+
+    MsgType      link
+    Title        消息标题
+    Description  消息描述
+    Url          消息链接
+
 ## 回复消息
 
 回复的消息可以为 `null`，此时 SDK 会返回给微信一个 "SUCCESS"，你也可以回复一个普通字符串，比如：`欢迎关注 overtrue.`，此时 SDK 会对它进行一个封装，产生一个 [`EasyWeChat\Message\Text`](https://github.com/EasyWeChat/message/blob/master/src/Text.php) 类型的消息并在最后的 `$server->serve();` 时生成对应的消息 XML 格式。
