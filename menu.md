@@ -5,7 +5,7 @@ title: 自定义菜单
 
 - 去除 `MenuItem` 类，创建菜单直接使用数组不再支持 `callback` 与 `MenuItem` 类似的繁杂的方式
 - `set()` 方法与 `addConditional()` 合并为一个方法 `add()`
-- `get()` 与 `current()` 合并为一个方法 `all()`
+- `get()` 改名为 `all()`
 - `delete()` 与 `deleteById()` 合并为 `destroy()`
 - 所有 API 的返回值（非调用失败情况）均为官方文档原样返回（Collection形式），不再取返回值中部分 `key` 返回。
   > 例如原来的 `get()` 方法，官方返回的数组为: `{ menu: [...]}`，SDK 取了其中的 `menu` 内容作为返回值，在 3.0 后将直接整体返回。
