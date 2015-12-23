@@ -1,207 +1,116 @@
 title: 自定义菜单
 ---
 
-本 SDK 由 `Overtrue\Wechat\Menu` 与 `Overtrue\Wechat\MenuItem` 提供微信菜单的管理服务。
+`3.0` 的菜单组件有所简化，相比 `2.x` 变化如下：
 
-自定义菜单功能的使用场景：你自己做了网站后台，想要管理某个公众号的菜单，在后台填写表单后，经由 SDK 请求微信的服务器完成菜单设定。
+- 去除 `MenuItem` 类，创建菜单直接使用数组不再支持 `callback` 与 `MenuItem` 类似的繁杂的方式
+- `set()` 方法与 `addConditional()` 合并为一个方法 `add()`
+- `get()` 与 `current()` 合并为一个方法 `all()`
+- `delete()` 与 `deleteById()` 合并为 `destroy()`
+- 所有 API 的返回值（非调用失败情况）均为官方文档原样返回（Collection形式），不再取返回值中部分 `key` 返回。
+  > 例如原来的 `get()` 方法，官方返回的数组为: `{ menu: [...]}`，SDK 取了其中的 `menu` 内容作为返回值，在 3.0 后将直接整体返回。
 
-## 概念
-
-#### 菜单项 `MenuItem`
-
-菜单的组成单位，分为一级与二级，一个微信菜单包含最多3个一级菜单项。一个一级菜单项可以包含最多5个二级菜单项。
-
-
-## 注意事项
-
-目前自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。一级菜单最多4个汉字，二级菜单最多7个汉字，多出来的部分将会以“...”代替。请注意，创建自定义菜单后，由于微信客户端缓存，需要24小时微信客户端才会展现出来。建议测试时可以尝试取消关注公众账号后再次关注，则可以看到创建后的效果。
-
-### 获取实例
+## 获取菜单模块实例
 
 ```php
 <?php
 
-use Overtrue\Wechat\Menu;
-use Overtrue\Wechat\MenuItem;
+// ... 前面部分省略
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
+$app = new Application($options);
 
-$menu = new Menu($appId, $secret);
+$menu = $app['menu'];
 ```
 
+## API 列表
 
-## API
+### 读取（查询）已设置菜单
 
-+ `array $menu->get();` 读取菜单
-+ `boolean $menu->set(array $menus);` 设置菜单，参数为一个包含最多三个一级菜单项的数组
-+ `boolean $menu->delete();` 删除菜单
-+ `new MenuItem($name, $type = null, $key = null)` 创建一个菜单项
-  - `$name` 菜单项名称，比如：`今日歌曲`
-  - `$type` 菜单项类型，比如：`view`,`click`等，更多请参考 http://mp.weixin.qq.com/wiki `自定义菜单` 章节。
-  - `$key`  菜单项的值，当 `$type` 为 `view` 时为目标 URL，其它为自定义 key。
-
-一个菜单项可以使用 `buttons` 方法传入一个菜单项数组创建二级菜单项:
-
-``
-
-> 注意：由于微信客户端缓存，需要24小时微信客户端才会展现出来。建议测试时可以尝试取消关注公众账号后再次关注，则可以看到创建后的效果。
-
-example:
+微信的菜单读取有两个不同的方式，一种叫 **[查询菜单](http://mp.weixin.qq.com/wiki/5/f287d1a5b78a35a8884326312ac3e4ed.html)**，在 SDK 中以 `all()` 方法来调用：
 
 ```php
-
-$button = new MenuItem("菜单");
-
-$menus = array(
-            new MenuItem("今日歌曲", 'click', 'V1001_TODAY_MUSIC'),
-            $button->buttons(array(
-                    new MenuItem('搜索', 'view', 'http://www.soso.com/'),
-                    new MenuItem('视频', 'view', 'http://v.qq.com/'),
-                    new MenuItem('赞一下我们', 'click', 'V1001_GOOD'),
-                )),
-        );
-
-try {
-  $menu->set($menus);// 请求微信服务器
-  echo '设置成功！';
-} catch (\Exception $e) {
-  echo '设置失败：' . $e->getMessage();
-}
-
+$menus = $menu->all();
 ```
 
-生成结果：
-
-```json
- {
-     "button":[
-     {
-          "type":"click",
-          "name":"今日歌曲",
-          "key":"V1001_TODAY_MUSIC"
-      },
-      {
-           "name":"菜单",
-           "sub_button":[
-           {
-               "type":"view",
-               "name":"搜索",
-               "url":"http://www.soso.com/"
-            },
-            {
-               "type":"view",
-               "name":"视频",
-               "url":"http://v.qq.com/"
-            },
-            {
-               "type":"click",
-               "name":"赞一下我们",
-               "key":"V1001_GOOD"
-            }]
-       }]
- }
-```
-
-### 创建子菜单
-
-`Overtrue\Wechat\MenuItem` 对象有一个方法 `buttons(array $items)` 指定**二级菜单**(子菜单)。
+另外一种叫 **[获取自定义菜单](http://mp.weixin.qq.com/wiki/14/293d0cb8de95e916d1216a33fcb81fd6.html)**，使用 `current()` 方法来调用：
 
 ```php
-$button = new MenuItem('菜单');
-$button->buttons(array(
-            new MenuItem('搜索', 'view', 'http://www.soso.com/'),
-            new MenuItem('视频', 'view', 'http://v.qq.com/'),
-            new MenuItem('赞一下我们', 'click', 'V1001_GOOD'),
-        ));
-
+$menus = $menu->current();
 ```
 
-以上就会构成以下样子的菜单：
+### 添加菜单
 
-```
-菜单
-    搜索
-    视频
-    赞一下我们
-```
-
-## Laravel 示例
-
-输入菜单数组（从你的网站后台表单创建）：
-```json
-[
-    {
-        "name":"博客",
-        "type":"view",
-        "key" :"http://overtrue.me"
-    },
-    {
-        "name": "更多",
-        "type": null,
-        "key": null,
-        "buttons":[
-            {
-                "name":"GitHub",
-                "type":"view",
-                "key" :"https://github.com/overtrue"
-            },
-            {
-                "name":"微博",
-                "type":"view",
-                "key" :"http://weibo.com/44294631"
-            }
-        ]
-    }
-]
-```
-
-控制器示例：
+#### 添加普通菜单
 
 ```php
-<?php
-
-use Overtrue\Wechat\Menu;
-use Overtrue\Wechat\MenuItem;
-
-class WechatController {
-     //...
-    public function setWechatMenu()
-    {
-        $appId  = 'wx3cf0f39249eb0e60';
-        $secret = 'f1c242f4f28f735d4687abb469072a29';
-
-        $menu = new Menu($appId, $secret);
-
-        $menus = Input::get('menus'); // menus 是你自己后台管理中心表单post过来的一个数组
-
-        $target = [];
-
-        // 构建你的菜单
-        foreach ($menus as $menu) {
-            // 创建一个菜单项
-            $item = new MenuItem($menu['name'], $menu['type'], $menu['key']);
-
-            // 子菜单
-            if (!empty($menu['buttons'])) {
-                $buttons = [];
-                foreach ($menu['buttons'] as $button) {
-                    $buttons[] = new MenuItem($button['name'], $button['type'], $button['key']);
-                }
-
-                $item->buttons($buttons);
-            }
-
-            $target[] = $item;
-        }
-
-        $menu->set($target); // 失败会抛出异常
-
-        return Redirect::back()->withMessage('菜单设置成功！');
-    }
-     //...
-}
-
+$buttons = [
+    [
+        "type" => "click",
+        "name" => "今日歌曲",
+        "key"  => "V1001_TODAY_MUSIC"
+    ],
+    [
+        "name"       => "菜单",
+        "sub_button" => [
+            [
+                "type" => "view",
+                "name" => "搜索",
+                "url"  => "http => //www.soso.com/"
+            ],
+            [
+                "type" => "view",
+                "name" => "视频",
+                "url"  => "http => //v.qq.com/"
+            ],
+            [
+                "type" => "click",
+                "name" => "赞一下我们",
+                "key" => "V1001_GOOD"
+            ],
+        ],
+    ],
+];
+$menu->add($buttons);
 ```
+
+以上将会创建一个普通菜单。
+
+#### 添加个性化菜单
+
+与创建普通菜单不同的是，需要在 `add()` 方法中将个性化匹配规则作为第二个参数传进去：
+
+```php
+$buttons = [
+    // ...
+];
+$matchRule = [
+    "group_id"             => "2",
+    "sex"                  => "1",
+    "country"              => "中国",
+    "province"             => "广东",
+    "city"                 => "广州",
+    "client_platform_type" => "2"
+];
+$menu->add($buttons, $matchRule);
+```
+
+### 删除菜单
+
+有两种删除方式，一种是**全部删除**，另外一种是**根据菜单 ID 来删除**(删除个性化菜单时用，ID 从查询接口获取)：
+
+```php
+$menu->destroy(); // 全部
+$menu->destroy($menuId);
+```
+
+### 测试个性化菜单
+
+```php
+$menus = $menu->test($userId);
+```
+
+> `$userId` 可以是粉丝的 OpenID，也可以是粉丝的微信号。
+
+返回 `$menus` 与指定的 `$userId` 匹配的菜单项。
 
 更多关于微信自定义菜单 API 请参考： http://mp.weixin.qq.com/wiki `自定义菜单` 章节。
