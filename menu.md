@@ -1,7 +1,7 @@
 title: 自定义菜单
 ---
 
-`3.0` 的菜单组件有所简化，相比 `2.x` 变化如下：
+3.0 的菜单组件有所简化，相比 2.x 版本变化如下：
 
 - 去除 `MenuItem` 类，创建菜单直接使用数组不再支持 `callback` 与 `MenuItem` 类似的繁杂的方式
 - `set()` 方法与 `addConditional()` 合并为一个方法 `add()`
@@ -26,7 +26,9 @@ $menu = $app['menu'];
 
 ### 读取（查询）已设置菜单
 
-微信的菜单读取有两个不同的方式，一种叫 **[查询菜单](http://mp.weixin.qq.com/wiki/5/f287d1a5b78a35a8884326312ac3e4ed.html)**，在 SDK 中以 `all()` 方法来调用：
+微信的菜单读取有两个不同的方式：
+
+一种叫 **[查询菜单](http://mp.weixin.qq.com/wiki/5/f287d1a5b78a35a8884326312ac3e4ed.html)**，在 SDK 中以 `all()` 方法来调用：
 
 ```php
 $menus = $menu->all();
