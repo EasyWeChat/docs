@@ -1,7 +1,7 @@
 title: 支付
 ---
 
-你在阅读本文之前确认你已经仔细阅读了：[微信支付|商户平台开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)。
+你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 商户平台开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)。
 
 ## 配置
 
