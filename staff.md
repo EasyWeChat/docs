@@ -12,12 +12,11 @@ title: 客服
 ```php
 <?php
 
-use Overtrue\Wechat\Staff;
+// ...
+$app = new Application($options);
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
+$staff = $app['staff'];
 
-$userService = new Staff($appId, $secret);
 ```
 
 ### API
@@ -28,7 +27,8 @@ $userService = new Staff($appId, $secret);
 + `$staff->update($email, $nickname, $password);` 修改客服帐号
 + `$staff->delete($email, $nickname, $password);` 删除客服帐号
 + `$staff->avatar($email, $avatarPath);` 设置客服帐号的头像
-+ `$staff->send($message)->to($openId);` 主动发送消息给用户
-+ `$staff->send($message)->by('account@test')->to($openId);` 指定客服发送消息
++ `$staff->message($message)->to($openId)->send();` 主动发送消息给用户
++ `$staff->message($message)->by('account@test')->to($openId)->send();` 指定客服发送消息
+
 
 关于更多客服接口信息请参考微信官方文档：http://mp.weixin.qq.com/wiki/9/6fff6f191ef92c126b043ada035cc935.html

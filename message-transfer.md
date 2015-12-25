@@ -6,10 +6,8 @@ title: 多客服消息转发
 
  ```php
 
-  use Overtrue\Wechat\Message;
-
   // 转发收到的消息给客服
-  $server->on('message', function($message) {
+  $server->setMessageHandler(function($message) {
       return Message::make('transfer');
   });
 
@@ -26,4 +24,4 @@ return Message::make('transfer')->account($account);
 return Message::make('transfer')->to($account);
 ```
 
-更多关于多客服消息转发：http://mp.weixin.qq.com/wiki/5/ae230189c9bd07a6b221f48619aeef35.html
+更多请参考 [微信官方文档](http://mp.weixin.qq.com/wiki/) **多客服消息转发** 章节

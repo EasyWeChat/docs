@@ -2,10 +2,10 @@ title: 升级日志
 ---
 
 # 2.1
-## [2.1.0-alpha](https://github.com/overtrue/wechat/tree/2.1.0-alpha)
 
-- [MOD] 调整SDK传参为 `array('app_id' => 'YOUR_APPID', 'secret' => 'YOUR_SECRET')` 形式.
-- :broken_heart: 不兼容2.0版本.
+- 新增支付
+- 新增红包
+- 新增群发
 
 # 2.0
 ## [2.0.20](https://github.com/overtrue/wechat/tree/2.0.20)

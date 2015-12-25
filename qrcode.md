@@ -1,8 +1,6 @@
 title: 二维码
 ---
 
-本 SDK 由 `Overtrue\Wechat\QRCode` 提供微信二维码创建与获取等服务。
-
 目前有2种类型的二维码：
 
 1. 临时二维码，是有过期时间的，最长可以设置为在二维码生成后的7天（即604800秒）后过期，但能够生成较多数量。临时二维码主要用于帐号绑定等不要求二维码永久保存的业务场景
@@ -13,12 +11,11 @@ title: 二维码
 ```php
 <?php
 
-use Overtrue\Wechat\QRCode;
+// ... 前面部分省略
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
+$app = new Application($options);
 
-$qrcode = new QRCode($appId, $secret);
+$qrcode = $app['qrcode'];
 ```
 
 
@@ -50,6 +47,7 @@ $result = $qrcode->forever(56);// 或者 $qrcode->forever("foo");
 $ticket = $result->ticket; // 或者 $result['ticket']
 $url = $result->url;
 ```
+
 下载二维码到本地：
 
 ```php

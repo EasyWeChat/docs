@@ -3,25 +3,21 @@ title: 语义理解
 
 微信开放平台语义理解接口调用（http请求）简单方便，用户无需掌握语义理解及相关技术，只需根据自己的产品特点，选择相应的服务即可搭建一套智能语义服务。
 
-本 SDK 由 `Overtrue\Wechat\Semantic` 提供微信语义理解服务。
-
 ### 获取实例
 
 ```php
 <?php
 
-use Overtrue\Wechat\Semantic;
+// ... 前面部分省略
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
+$app = new Application($options);
 
-$semantic = new Semantic($appId, $secret);
+$semantic = $app['semantic'];
 ```
-
 
 ## API
 
-+ `Bag query($keyword, array | string $categories, $other = array())` 语义理解:
++ `query($keyword, $categories, $other)` 语义理解:
 
   + `$keyword` 为关键字
   + `$categories` 需要使用的服务类型，数组或者多个用 “，” 隔开字符吕，不能为空;
@@ -79,4 +75,4 @@ $result = $semantic->query('查一下明天从北京到上海的南航机票', "
 }
 ```
 
-更多详细内容与协议说明，请查看微信官方文档：http://mp.weixin.qq.com/wiki/0/0ce78b3c9524811fee34aba3e33f3448.html
+更多详细内容与协议说明，请查看 [微信官方文档](http://mp.weixin.qq.com/wiki/)

@@ -8,13 +8,12 @@ title: JSSDK
 ```php
 <?php
 
-use Overtrue\Wechat\Js;
+//...
+$app = new Application($options);
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
-
-$js = new Js($appId, $secret);
+$js = $app['js'];
 ```
+
 ### API
 
 - `$js->config(array $APIs, $debug = false, $json = true);` 获取JSSDK的配置数组，默认返回 JSON 字符串，当 `$json` 为 `false` 时返回数组，你可以直接使用到网页中。
@@ -45,3 +44,5 @@ wx.config({
 });
 </script>
 ```
+
+更多 JSSDK 的使用请参考 [微信官方文档](http://mp.weixin.qq.com/wiki/) 中 **JSSDK章节**

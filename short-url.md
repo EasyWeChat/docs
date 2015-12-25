@@ -10,18 +10,15 @@ title: 短网址服务
 ```php
 <?php
 
-use Overtrue\Wechat\Url;
+// ...
+$app = new Application($options);
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
-
-$url = new Url($appId, $secret);
+$url = $app['url'];
 ```
-
 
 ## API
 
-+ `string short($url)` 长链接转短链接
++ `short($url)` 长链接转短链接
 
 example:
 

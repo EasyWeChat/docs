@@ -31,11 +31,11 @@ title: 贡献代码
 
 ### 注意
 
-TODO
+- 注释请使用英文
 
 ## 更新文档
 
-我们的文档也是开源的，基于 [Hexo](http://hexo.io)，源代码在 [EasyWeChat/site]。
+我们的文档也是开源的，基于 [Hexo](http://hexo.io)，源代码在 [EasyWeChat/site](https://github.com/EasyWeChat/site)。
 
 ### 流程
 
@@ -69,4 +69,3 @@ TODO
 当你在使用过程中遇到问题，请查阅 [疑难解答](troubleshooting.html) 或者在这里提问 [GitHub](https://github.com/overtrue/wechat/issues). 如果还是不能解决你的问题，请到 GitHub 联系我们。
 
 [overtrue/wechat]: https://github.com/overtrue/wechat
-[EasyWeChat/site]: https://github.com/EasyWeChat/site

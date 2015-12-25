@@ -12,45 +12,36 @@ title: 素材管理
 >       - 缩略图（thumb）：64KB，支持JPG格式
 
 >     2. `media_id` 是可复用的；
-
 >     3. 素材分为 `临时素材` 与 `永久素材`， 临时素材媒体文件在后台保存时间为3天，即 3 天后 `media_id` 失效；
-
 >     4. 新增的永久素材也可以在公众平台官网素材管理模块中看到；
-
 >     5. 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000；
-
-本 SDK 中上传素材通过 `Overtrue\Wechat\Media` 提供素材管理服务。
 
 ### 获取实例
 
 ```php
 <?php
 
-use Overtrue\Wechat\Media;
+$app = new Application($options);
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
-
-$media = new Media($appId, $secret);
+// 永久素材
+$material = $app['material'];
+// 临时素材
+$temporary = $app['material.temporary'];
 ```
 
-### API列表：
+### 永久素材 API：
 
-- `$media->image($path);`, 上传临时图片；
-- `$media->voice($path);`, 上传临时声音；
-- `$media->video($path, $title, $description);`, 上传临时视频；
-- `$media->thumb($path);`, 上传临时缩略图，用于视频封面或者音乐封面；
-- `$media->news(array $articles);`, 上传永久图文消息，图文没有临时；
-- `$media->updateNews($mediaId, array $article, $index);`, 修改永久图文消息，要更新的文章在图文消息中的位置（多图文消息时，此字段才有意义，单图片忽略此参数），第一篇为0；
-- `$media->forever()->image($path);` 上传永久图片；
-- `$media->forever()->voice($path);` 上传永久声音；
-- `$media->forever()->video($path);` 上传永久视频；
-- `$media->forever()->thumb($path);` 上传永久缩略图；
+- `$material->uploadImage($path);`, 上传图片；
+- `$material->uploadVoice($path);`, 上传声音；
+- `$material->uploadVideo($path, $title, $description);`, 上传视频；
+- `$material->uploadThumb($path);`, 上传缩略图，用于视频封面或者音乐封面；
+- `$material->uploadArticle(array $articles);`, 上传永久图文消息，图文没有临时；
+- `$material->updateArticle($mediaId, array $article, $index);`, 修改永久图文消息，要更新的文章在图文消息中的位置（多图文消息时，此字段才有意义，单图片忽略此参数），第一篇为0；
+- `$material->uploadArticleImage($path);` 上传永久文章内容图片；
+- `$material->get($mediaId);` 获取永久素材
 - `$media->lists($type, $offset, $count);` 获取永久素材列表，参考：[微信公众平台开发者文档：获取永久素材列表](http://mp.weixin.qq.com/wiki/12/2108cd7aafff7f388f41f37efa710204.html)
-- `$media->stats($type = null);` 获取素材计数，不指定 `$type` 则返回全部
+- `$media->stats($type);` 获取素材计数，不指定 `$type` 则返回全部
 - `$media->delete($mediaId);` 删除永久素材；
-- `$media->download($mediaId, $filename);` 下载临时素材到本地，`$filename` 为目标路径带文件名，例如：`$media->download($mediaId, __DIR__ . '/test.jpg');`；
-- `$media->forever()->download($mediaId, $filename);` 下载永久素材到本地；
 
 > 上传永久图文消息 `$articles` 结构为：
 
@@ -76,21 +67,15 @@ $media = new Media($appId, $secret);
     - content: 图文消息的具体内容，支持HTML标签，必须少于2万字符，小于1M，且此处会去除JS
     - content_source_url: 图文消息的原文地址，即点击“阅读原文”后的URL
 
-### 示例：
 
-创建图片消息：
+#### 临时素材 API
 
-```php
-<?php
-use Overtrue\Wechat\Media;
+- `$temporary->uploadImage($path);`, 上传图片；
+- `$temporary->uploadVoice($path);`, 上传声音；
+- `$temporary->uploadVideo($path, $title, $description);`, 上传视频；
+- `$temporary->uploadThumb($path);`, 上传缩略图，用于视频封面或者音乐封面；
+- `$media->getStream($mediaId);` 获取临时素材内容，比如图片、视频、声音等二进制流内容；
+- `$media->download($mediaId, $directory, $filename);` 下载临时素材到本地，`$directory` 为目标目录，`$filename` 为新的文件名，可以为空，默认使用 `$mediaId` 作为文件名。
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
 
-$media   = new Media($appId, $secret);
-$imageId = $media->image(__DIR__ . '/demo.jpg'); // 上传并返回媒体ID
-
-$message = Message::make('image')->media($imageId);
-```
-
-更多请参考官方文档：http://mp.weixin.qq.com/wiki/home/index.html `素材管理` 章节
+更多请参考 [微信官方文档](http://mp.weixin.qq.com/wiki/home/index.html) `素材管理` 章节

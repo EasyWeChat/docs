@@ -24,12 +24,10 @@ title: 模板消息
 ```php
 <?php
 
-use Overtrue\Wechat\Notice;
+// ...
+$app = new Application($options);
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
-
-$notice = new Notice($appId, $secret);
+$notice = $app['notice'];
 ```
 
 ### API
@@ -37,14 +35,21 @@ $notice = new Notice($appId, $secret);
 + `boolean setIndustry($industryId1, $industryId2)` 修改账号所属行业；
 + `array industries()` 返回所有支持的行业列表，用于做下拉选择行业可视化更新；
 + `string  addTemplate($shortId)` 添加模板并获取模板ID；
-+ `int send($to = null, $templateId = null, array $data = array(), $url = null, $color = '#FF0000')` 发送模板消息, 返回消息ID。
++ `int send($message)` 发送模板消息, 返回消息ID。
 
 非链接调用方法：
 
 ```php
-$messageId = $notice->send($to, $templateId, array $data, $url, $color);
+$messageId = $notice->send([
+        'touser' => 'user-openid',
+        'template_id' => 'template-id',
+        'url' => 'xxxxx',
+        'topcolor' => '#f7f7f7',
+        'data' => [
+            //...
+        ],
+    ]);
 ```
-
 
 链式调用方法:
 
@@ -127,4 +132,4 @@ $messageId = $notice->uses($templateId)->withUrl($url)->andData($data)->andRecei
         );
         ```
 
-关于模板消息的使用请参考：http://mp.weixin.qq.com/wiki/17/304c1885ea66dbedf7dc170d84999a9d.html
+关于模板消息的使用请参考 [微信官方文档](http://mp.weixin.qq.com/wiki/)
