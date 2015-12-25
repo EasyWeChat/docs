@@ -16,6 +16,7 @@ $options = [
     // payment
     'payment' => [
         'merchant_id'        => 'your-mch-id',
+        'key'                => 'key-for-signature',
         'cert_path'          => 'path/to/your/cert.pem',
         'key_path'           => 'path/to/your/key',
         // 'device_info'     => '013467007045764',
