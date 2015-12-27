@@ -3,6 +3,282 @@ title: 消息
 
 我把微信的 API 里的所有“消息”都按类型抽象出来了，也就是说，你不用区分它是回复消息还是主动推送消息，免去了你去手动拼装微信那帮 SB 那么恶心的 XML 以及乱七八糟命名不统一的 JSON 了，我替你承受这份苦，不要问是谁，我是雷锋他弟弟，雷管。
 
+在阅读以下内容时请忽略是**接收消息**还是**回复消息**，后面我会给你讲它们的区别。
+
+## 消息类型
+
+消息分为以下几种：`文本`、`图片`、`视频`、`声音`、`链接`、`坐标`、`图文`。所有的消息类都在 `EasyWeChat\Messages` 这个命名空间下， 下面我们来分开讲解：
+
+### 文本消息
+
+属性列表：
+
+```
+- content 文本内容
+```
+
+```php
+<?php
+
+use EasyWeChat\Messages\Text;
+
+$text = new Text(['content' => '您好！overtrue。']);
+
+// or
+$text = new Text();
+$text->content = '您好！overtrue。';
+
+// or
+$text = new Text();
+$text->setAttribute('content', '您好！overtrue。');
+```
+
+### 图片消息
+
+属性列表：
+
+```
+- media_id 媒体资源 ID
+```
+
+```php
+<?php
+
+use EasyWeChat\Messages\Image;
+
+$text = new Image(['media_id' => $mediaId]);
+
+// or
+$text = new Image();
+$text->media_id = $mediaId; // or $text->mediaId = $media;
+
+// or
+$text = new Image();
+$text->setAttribute('media_id', $mediaId);
+```
 
 
-关于更多素材管理请参考：[素材管理](素材管理)
+### 视频消息
+
+属性列表：
+
+```
+- title 标题
+- description 描述
+- media_id 媒体资源 ID
+- thumb_media_id 封面资源 ID
+```
+
+```php
+<?php
+
+use EasyWeChat\Messages\Video;
+
+$video = new Video([
+        'title' => $title,
+        'media_id' => $mediaId,
+        'description' => '...',
+        // ...
+    ]);
+
+// or
+$video = new Video();
+$video->media_id = $mediaId; // or $video->mediaId = $media;
+$video->description = 'video description...'; // or $video->description = $description;
+// ...
+
+// or
+$video = new Video();
+$video->setAttribute('media_id', $mediaId);
+// ...
+```
+
+### 声音消息
+
+属性列表：
+
+```
+- media_id 媒体资源 ID
+```
+
+```php
+<?php
+
+use EasyWeChat\Messages\Voice;
+
+$voice = new Voice(['media_id' => $mediaId]);
+
+// or
+$voice = new Voice();
+$voice->media_id = $mediaId; // or $voice->mediaId = $media;
+
+// or
+$voice = new Voice();
+$voice->setAttribute('media_id', $mediaId);
+```
+
+### 链接消息
+
+属性列表：
+
+```
+- title 标题
+- url 链接 URL
+- description 描述
+```
+
+```php
+<?php
+
+use EasyWeChat\Messages\Link;
+
+$link = new Link([
+        'title'       => $title,
+        'url'         => $url,
+        'description' => '...',
+        // ...
+    ]);
+
+// or
+$link = new Link();
+$link->title = 'EasyWeChat SDK'; // or $link->title = $title;
+$link->url = 'http://easywechat.org'; // or $link->url = $url;
+$link->description = 'link description...'; // or $link->description = $description;
+
+// or
+$link = new Link();
+$link->setAttribute('url', 'http://easywechat.org');
+// ...
+```
+
+### 坐标消息
+
+属性列表：
+
+```
+- lat 地理位置纬度
+- lon 地理位置经度
+- scale 地图缩放大小
+- label 地理位置信息
+```
+
+```php
+<?php
+
+use EasyWeChat\Messages\Location;
+
+$location = new Location([
+        'title'       => $title,
+        'url'         => $url,
+        'description' => '...',
+        // ...
+    ]);
+
+// or
+$location = new Location();
+$location->lat = 23.134521; // or $location->lat = $lat;
+$location->lon = 113.358803; // or $location->lon = $lon;
+$location->scale = 20; // or $location->scale = 20;
+$location->label = '北京市地震局...'; // or $link->label = $label;
+
+// or
+$location = new Location();
+$location->setAttribute('url', 'http://easywechat.org');
+// ...
+```
+
+### 图文消息
+
+图文消息有两个组成：`News` 与 `NewsItem`。
+
+属性列表：
+
+```
+- title 标题
+- description 描述
+- image 图片链接
+- url 链接 URL
+- author 作者
+- content 具体内容
+- thumb_media_id 图文消息的封面图片素材id（必须是永久mediaID）
+- digest 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空
+- source_url 是否显示封面，0 为 false，即不显示，1 为 true，即显示
+- show_cover_pic 是否显示封面，0 为 false，即不显示，1 为 true，即显示
+```
+
+```php
+<?php
+use EasyWeChat\Messages\News;
+use EasyWeChat\Messages\NewsItem;
+
+$item1 = new NewsItem([
+        'title'       => $title,
+        'description' => '...',
+        'url'         => $url,
+        'image'       => $image,
+        // ...
+    ]);
+$item2 = new NewsItem([
+        // ...
+    ]);
+$item3 = new NewsItem([
+        // ...
+    ]);
+$item4 = new NewsItem([
+        // ...
+    ]);
+
+$news = new News([$item1, $item2, $item3, $item4]);
+```
+
+以上呢，是所有微信支持的基本消息类型。
+
+> 需要注意的是，你不需要关心微信的消息字段叫啥，因为这里我们使用了更标准的命名，然后最终在中间做了转换，所以你不需要关注。
+
+## 在 SDK 中其它环境的用法
+
+### 在服务端回复消息
+
+在 [服务端] 一节中，我们讲了回复消息的写法：
+
+```php
+// ... 前面部分省略
+$app = new Application($options);
+$server = $app['server'];
+
+$server->setMessageHandler(function ($message) {
+    return "您好！欢迎关注我!";
+});
+
+$server->serve()->send();
+```
+
+上面 `return` 了一句普通的文本内容，这里只是为了方便大家，实际上最后会有一个隐式转换为 `Text` 类型的动作。
+
+如果你要回复其它类型的消息，就需要返回一个具体的实例了，比如回复一个图片类型的消息：
+
+```php
+use EasyWeChat\Messages\Image;
+// ...
+$server->setMessageHandler(function ($message) {
+    return new Image(['media_id' => '........']);
+});
+// ...
+```
+
+### 作为客服消息发送
+
+在客服消息里的使用也一样，都是直接传入消息实例即可：
+
+```php
+use EasyWeChat\Messages\Text;
+
+$message = new Text(['content' => 'Hello world!']);
+
+$result = $app['staff']->message($message)->to($openId)->send();
+//...
+```
+
+### 群发消息
+
+TODO
