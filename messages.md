@@ -168,9 +168,10 @@ $link->setAttribute('url', 'http://easywechat.org');
 use EasyWeChat\Messages\Location;
 
 $location = new Location([
-        'title'       => $title,
-        'url'         => $url,
-        'description' => '...',
+        'lat'       => 23.134521,
+        'lon'         => 113.358803,
+        'scale' => 20,
+        'label' => '北京市地震局...',
         // ...
     ]);
 
