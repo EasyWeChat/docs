@@ -7,7 +7,11 @@ title: 消息
 
 ## 消息类型
 
-消息分为以下几种：`文本`、`图片`、`视频`、`声音`、`链接`、`坐标`、`图文`。所有的消息类都在 `EasyWeChat\Messages` 这个命名空间下， 下面我们来分开讲解：
+消息分为以下几种：`文本`、`图片`、`视频`、`声音`、`链接`、`坐标`、`图文`、`文章`。
+
+> 注意：回复消息与客服消息里的图文类型为：**图文**，群发与素材中的图文为**文章**
+
+所有的消息类都在 `EasyWeChat\Message` 这个命名空间下， 下面我们来分开讲解：
 
 ### 文本消息
 
@@ -156,10 +160,11 @@ $link->setAttribute('url', 'http://easywechat.org');
 属性列表：
 
 ```
-- lat 地理位置纬度
-- lon 地理位置经度
+- latitude 地理位置纬度
+- longitude 地理位置经度
 - scale 地图缩放大小
 - label 地理位置信息
+- precision 精度
 ```
 
 ```php
@@ -168,8 +173,8 @@ $link->setAttribute('url', 'http://easywechat.org');
 use EasyWeChat\Message\Location;
 
 $location = new Location([
-        'lat'       => 23.134521,
-        'lon'         => 113.358803,
+        'latitude'       => 23.134521,
+        'longitude'         => 113.358803,
         'scale' => 20,
         'label' => '北京市地震局...',
         // ...
@@ -177,8 +182,8 @@ $location = new Location([
 
 // or
 $location = new Location();
-$location->lat = 23.134521; // or $location->lat = $lat;
-$location->lon = 113.358803; // or $location->lon = $lon;
+$location->latitude = 23.134521; // or $location->lat = $lat;
+$location->longitude = 113.358803; // or $location->lon = $lon;
 $location->scale = 20; // or $location->scale = 20;
 $location->label = '北京市地震局...'; // or $link->label = $label;
 
@@ -190,8 +195,6 @@ $location->setAttribute('url', 'http://easywechat.org');
 
 ### 图文消息
 
-图文消息有两个组成：`News` 与 `NewsItem`。
-
 属性列表：
 
 ```
@@ -199,37 +202,59 @@ $location->setAttribute('url', 'http://easywechat.org');
 - description 描述
 - image 图片链接
 - url 链接 URL
-- author 作者
-- content 具体内容
-- thumb_media_id 图文消息的封面图片素材id（必须是永久mediaID）
-- digest 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空
-- source_url 是否显示封面，0 为 false，即不显示，1 为 true，即显示
-- show_cover_pic 是否显示封面，0 为 false，即不显示，1 为 true，即显示
 ```
 
 ```php
 <?php
 use EasyWeChat\Message\News;
-use EasyWeChat\Message\NewsItem;
 
-$item1 = new NewsItem([
+$news = new News([
         'title'       => $title,
         'description' => '...',
         'url'         => $url,
         'image'       => $image,
         // ...
     ]);
-$item2 = new NewsItem([
-        // ...
-    ]);
-$item3 = new NewsItem([
-        // ...
-    ]);
-$item4 = new NewsItem([
+
+// or
+$news = new News();
+$news->title = 'EasyWeChat';
+$news->description = '微信 SDK ...';
+// ...
+
+```
+
+### 文章消息
+
+属性列表：
+
+```
+- title 标题
+- author 作者
+- content 具体内容
+- thumb_media_id 图文消息的封面图片素材id（必须是永久mediaID）
+- digest 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空
+- source_url 来源 URL
+- show_cover 是否显示封面，0 为 false，即不显示，1 为 true，即显示
+```
+
+```php
+<?php
+use EasyWeChat\Message\Article;
+
+$article = new Article([
+        'title'   => 'EasyWeChat',
+        'author'  => 'overtrue',
+        'content' => 'EasyWeChat 是一个开源的微信 SDK，它... ...',
         // ...
     ]);
 
-$news = new News([$item1, $item2, $item3, $item4]);
+// or
+$article = new Article();
+$article->title   = 'EasyWeChat';
+$article->author  = 'overtrue';
+$article->content = '微信 SDK ...';
+// ...
 ```
 
 以上呢，是所有微信支持的基本消息类型。
