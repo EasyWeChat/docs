@@ -20,7 +20,7 @@ title: 消息
 ```php
 <?php
 
-use EasyWeChat\Messages\Text;
+use EasyWeChat\Message\Text;
 
 $text = new Text(['content' => '您好！overtrue。']);
 
@@ -44,7 +44,7 @@ $text->setAttribute('content', '您好！overtrue。');
 ```php
 <?php
 
-use EasyWeChat\Messages\Image;
+use EasyWeChat\Message\Image;
 
 $text = new Image(['media_id' => $mediaId]);
 
@@ -72,7 +72,7 @@ $text->setAttribute('media_id', $mediaId);
 ```php
 <?php
 
-use EasyWeChat\Messages\Video;
+use EasyWeChat\Message\Video;
 
 $video = new Video([
         'title' => $title,
@@ -104,7 +104,7 @@ $video->setAttribute('media_id', $mediaId);
 ```php
 <?php
 
-use EasyWeChat\Messages\Voice;
+use EasyWeChat\Message\Voice;
 
 $voice = new Voice(['media_id' => $mediaId]);
 
@@ -130,7 +130,7 @@ $voice->setAttribute('media_id', $mediaId);
 ```php
 <?php
 
-use EasyWeChat\Messages\Link;
+use EasyWeChat\Message\Link;
 
 $link = new Link([
         'title'       => $title,
@@ -165,7 +165,7 @@ $link->setAttribute('url', 'http://easywechat.org');
 ```php
 <?php
 
-use EasyWeChat\Messages\Location;
+use EasyWeChat\Message\Location;
 
 $location = new Location([
         'lat'       => 23.134521,
@@ -209,8 +209,8 @@ $location->setAttribute('url', 'http://easywechat.org');
 
 ```php
 <?php
-use EasyWeChat\Messages\News;
-use EasyWeChat\Messages\NewsItem;
+use EasyWeChat\Message\News;
+use EasyWeChat\Message\NewsItem;
 
 $item1 = new NewsItem([
         'title'       => $title,
@@ -259,7 +259,7 @@ $server->serve()->send();
 如果你要回复其它类型的消息，就需要返回一个具体的实例了，比如回复一个图片类型的消息：
 
 ```php
-use EasyWeChat\Messages\Image;
+use EasyWeChat\Message\Image;
 // ...
 $server->setMessageHandler(function ($message) {
     return new Image(['media_id' => '........']);
@@ -272,7 +272,7 @@ $server->setMessageHandler(function ($message) {
 在客服消息里的使用也一样，都是直接传入消息实例即可：
 
 ```php
-use EasyWeChat\Messages\Text;
+use EasyWeChat\Message\Text;
 
 $message = new Text(['content' => 'Hello world!']);
 
