@@ -34,7 +34,7 @@ title: 快速开始
 
 include __DIR__ . '/vendor/autoload.php'; // 引入 composer 入口文件
 
-use Overtrue\WeChat\Application;
+use EasyWechat\Foundation\Application;
 
 $options = [
     'debug'  => true,
@@ -73,7 +73,7 @@ $server->serve()->send();
 include __DIR__ . '/vendor/autoload.php';
 
 // 引入我们的主项目的入口类。
-use Overtrue\WeChat\Application;
+use EasyWechat\Foundation\Application;
 
 // 一些配置
 $options = [...];
@@ -132,7 +132,7 @@ $server->serve()->send();
 
 ## 总结
 
-1. 所有的服务都通过主入口 `Overtrue\WeChat\Application` 类来获取：
+1. 所有的服务都通过主入口 `EasyWechat\Foundation\Application` 类来获取：
 
  ```php
  $app = new Application($options);
