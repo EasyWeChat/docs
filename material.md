@@ -16,7 +16,7 @@ title: 素材管理
 >     4. 新增的永久素材也可以在公众平台官网素材管理模块中看到；
 >     5. 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000；
 
-### 获取实例
+## 获取实例
 
 ```php
 <?php
@@ -29,9 +29,9 @@ $material = $app['material'];
 $temporary = $app['material.temporary'];
 ```
 
-### 永久素材 API：
+## 永久素材 API：
 
-#### 上传图片:
+### 上传图片:
 
 ```php
 $result = $material->uploadImage("/path/to/your/image.jpg");
@@ -44,7 +44,7 @@ var_dump($result);
 
 > `url` 只有上传图片素材有返回值。
 
-#### 上传声音
+### 上传声音
 
 语音**大小不超过 5M**，**长度不超过 60 秒**，支持 `mp3/wma/wav/amr` 格式。
 
@@ -56,7 +56,7 @@ $mediaId = $result->media_id;
 // }
 ```
 
-#### 上传视频
+### 上传视频
 
 ```php
 $result = $material->uploadVideo("/path/to/your/video.mp4", "视频标题", "视频描述");
@@ -66,7 +66,7 @@ $mediaId = $result->media_id;
 // }
 ```
 
-#### 上传缩略图
+### 上传缩略图
 
 用于视频封面或者音乐封面。
 
@@ -78,7 +78,7 @@ $mediaId = $result->media_id;
 // }
 ```
 
-#### 上传永久图文消息
+### 上传永久图文消息
 
 图文消息没有临时一说。
 
@@ -96,7 +96,7 @@ $material->uploadArticle($article);
 $material->uploadArticle([$article, $article2, ...]);
 ```
 
-#### 修改永久图文消息
+### 修改永久图文消息
 
 有三个参数：
 
@@ -121,7 +121,7 @@ $result = $material->updateArticle($mediaId, new Article(...), 1); // 第 2 篇
 ```
 
 
-#### 上传永久文章内容图片
+### 上传永久文章内容图片
 
 ```php
 $result = $material->uploadArticleImage($path);
@@ -131,7 +131,7 @@ $mediaId = $result->media_id;
 // }
 ```
 
-#### 获取永久素材
+### 获取永久素材
 
 ```php
 $resource = $material->get($mediaId);
@@ -174,7 +174,7 @@ $image = $material->get($mediaId);
 file_put_contents('/foo/abc.jpg', $image);
 ```
 
-#### 获取永久素材列表
+### 获取永久素材列表
 
 参考：[微信公众平台开发者文档：获取永久素材列表](http://mp.weixin.qq.com/wiki/12/2108cd7aafff7f388f41f37efa710204.html)
 
@@ -239,7 +239,7 @@ $lists = $material->lists('image', 0, 10);
 ```
 
 
-#### 获取素材计数
+### 获取素材计数
 
 ```php
 $stats = $media->stats();
@@ -252,14 +252,14 @@ $stats = $media->stats();
 // }
 ```
 
-#### 删除永久素材；
+### 删除永久素材；
 
 ```php
 $media->delete($mediaId);
 ```
 
 
-### 临时素材 API
+## 临时素材 API
 
 上传的临时多媒体文件有格式和大小限制，如下：
 
@@ -268,14 +268,53 @@ $media->delete($mediaId);
 - 视频（video）：10MB，支持 `MP4` 格式
 - 缩略图（thumb）：64KB，支持 `JPG` 格式
 
-- `$temporary->uploadImage($path);`, 上传图片；
-- `$temporary->uploadVoice($path);`, 上传声音；
-- `$temporary->uploadVideo($path, $title, $description);`, 上传视频；
-- `$temporary->uploadThumb($path);`, 上传缩略图，用于视频封面或者音乐封面；
-- `$media->getStream($mediaId);` 获取临时素材内容，比如图片、视频、声音等二进制流内容；
-- `$media->download($mediaId, $directory, $filename);` 下载临时素材到本地，
-    - `$directory` 为目标目录，
-    - `$filename` 为新的文件名，可以为空，默认使用 `$mediaId` 作为文件名。
+### 上传图片
+
+```php
+$temporary->uploadImage($path);
+```
+
+### 上传声音
+
+```php
+$temporary->uploadVoice($path);
+```
+
+### 上传视频
+
+```php
+$temporary->uploadVideo($path, $title, $description);
+```
+
+### 上传缩略图
+
+用于视频封面或者音乐封面。
+
+```php
+$temporary->uploadThumb($path);
+```
+
+### 获取临时素材内容
+
+比如图片、视频、声音等二进制流内容。
+
+```php
+$content = $media->getStream($mediaId);
+file_put_contents('/tmp/abc.jpg', $content);
+```
+
+### 下载临时素材到本地
+
+其实就是上一个 API 的封装。
+
+```php
+$media->download($mediaId, "/tmp/", "abc.jpg");
+```
+
+参数说明：
+
+  - `$directory` 为目标目录，
+  - `$filename` 为新的文件名，可以为空，默认使用 `$mediaId` 作为文件名。
 
 
 更多请参考 [微信官方文档](http://mp.weixin.qq.com/wiki/home/index.html) `素材管理` 章节
