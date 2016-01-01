@@ -129,7 +129,7 @@ $user = $app['oauth']->user();
 // http://easywechat.org/user/profile
 <?php
 
-use EasyWechat\Foundation\Application;
+use EasyWeChat\Foundation\Application;
 
 $config = [
   // ...
@@ -163,7 +163,7 @@ $user = $_SESSION['wechat_user'];
 // http://easywechat.org/callback
 <?php
 
-use EasyWechat\Foundation\Application;
+use EasyWeChat\Foundation\Application;
 
 $config = [
   // ...

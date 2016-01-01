@@ -10,7 +10,7 @@ title: 支付
 ```php
 <?php
 
-use EasyWechat\Foundation\Application;
+use EasyWeChat\Foundation\Application;
 
 $options = [
     // payment
