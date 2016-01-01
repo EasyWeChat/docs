@@ -21,12 +21,28 @@ $broadcast = $app['broadcast'];
 
 ```php
 $broadcast->send($messageType, $message);
+
+// 别名方式
+$broadcast->sendText($message);
+$broadcast->sendNews($message);
+$broadcast->sendVoice($message);
+$broadcast->sendImage($message);
+$broadcast->sendVideo($message);
+$broadcast->sendCard($message);
 ```
 
 ### 群发消息给指定组
 
 ```php
 $broadcast->send($messageType, $message, $groupId);
+
+// 别名方式
+$broadcast->sendText($message, $groupId);
+$broadcast->sendNews($message, $groupId);
+$broadcast->sendVoice($message, $groupId);
+$broadcast->sendImage($message, $groupId);
+$broadcast->sendVideo($message, $groupId);
+$broadcast->sendCard($message, $groupId);
 ```
 
 ### 群发消息给指定用户
@@ -35,18 +51,42 @@ $broadcast->send($messageType, $message, $groupId);
 
 ```php
 $broadcast->send($messageType, $message, array($openId1, $openId2));
+
+// 别名方式
+$broadcast->sendText($message, array($openId1, $openId2));
+$broadcast->sendNews($message, array($openId1, $openId2));
+$broadcast->sendVoice($message, array($openId1, $openId2));
+$broadcast->sendImage($message, array($openId1, $openId2));
+$broadcast->sendVideo($message, array($openId1, $openId2));
+$broadcast->sendCard($message, array($openId1, $openId2));
 ```
 
 ### 发送预览群发消息给指定的 `openId` 用户
 
 ```php
 $broadcast->preview($messageType, $message, $openId);
+
+// 别名方式
+$broadcast->previewText($message, $openId);
+$broadcast->previewNews($message, $openId);
+$broadcast->previewVoice($message, $openId);
+$broadcast->previewImage($message, $openId);
+$broadcast->previewVideo($message, $openId);
+$broadcast->previewCard($message, $openId);
 ```
 
 ### 发送预览群发消息给指定的微信号用户
 
 ```php
-$broadcast->preview($messageType, $message, $wxname, Broadcast::PREVIEW_BY_WXH);
+$broadcast->previewByName($messageType, $message, $wxname);
+
+// 别名方式
+$broadcast->previewTextByName($message, $wxname);
+$broadcast->previewNewsByName($message, $wxname);
+$broadcast->previewVoiceByName($message, $wxname);
+$broadcast->previewImageByName($message, $wxname);
+$broadcast->previewVideoByName($message, $wxname);
+$broadcast->previewCardByName($message, $wxname);
 ```
 
 ### 删除群发消息
