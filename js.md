@@ -1,9 +1,7 @@
 title: JSSDK
 ---
 
-本 SDK 同样由 `Overtrue\Wechat\Js` 提供了 JSSDK 相关的功能。
-
-### 获取实例
+## 获取实例
 
 ```php
 <?php
@@ -14,7 +12,7 @@ $app = new Application($options);
 $js = $app['js'];
 ```
 
-### API
+## API
 
 - `$js->config(array $APIs, $debug = false, $json = true);` 获取JSSDK的配置数组，默认返回 JSON 字符串，当 `$json` 为 `false` 时返回数组，你可以直接使用到网页中。
 - `$js->setUrl($url)` 设置当前URL，如果不想用默认读取的URL，可以使用此方法手动设置，通常不需要。

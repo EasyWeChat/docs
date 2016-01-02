@@ -111,7 +111,7 @@ OK, 有了上面的代码，那么请你按 **[微信官方的接入指引](http
 
 那服务端验证通过了，我们就来试一下接收消息吧。
 
-> 在刚刚上面代码最后一行 `$server->serve()->send();` 前面，我们调用 `$server` 的 `setMessageHandler()` 方法来注册一个消息处理函数，这里用到了 **[PHP闭包](http://php.net/manual/zh/functions.anonymous.php)** 的知识，如果你不熟悉赶紧补课去。
+> 在刚刚上面代码最后一行 `$server->serve()->send();` 前面，我们调用 `$server` 的 `setMessageHandler()` 方法来注册一个消息处理函数，这里用到了 **[PHP 闭包](http://php.net/manual/zh/functions.anonymous.php)** 的知识，如果你不熟悉赶紧补课去。
 
 ```php
 // ...
@@ -165,11 +165,11 @@ $server->serve()->send();
  //...
  ```
 
- 还有这些方便的操作：检查是否存在某个属性 `$user->has('email')`、元素个数`$user->count()`，还有返回数组 `$user->toArray()` ，生成 JSON `$user->toJSON()` 等。
+ 还有这些方便的操作：检查是否存在某个属性 `$user->has('email')`、元素个数 `$user->count()`，还有返回数组 `$user->toArray()` ，生成 JSON `$user->toJSON()` 等。
 
 
  ## 最后
 
- 希望你在使用本 SDK 的时候能忘记微信官方给你的痛苦，同时如果你发现 SDK 的不足，欢迎提交 PR 或者给我[提建议&报告问题](https://github.com/overtrue/wechat/issues)。
+ 希望你在使用本 SDK 的时候能忘记微信官方给你的痛苦，同时如果你发现 SDK 的不足，欢迎提交 PR 或者给我[提建议 & 报告问题](https://github.com/overtrue/wechat/issues)。
 
  祝你生活愉快！

@@ -1,19 +1,16 @@
 title: 卡券
 ---
 
-本 SDK 由 `Overtrue\Wechat\Card` 提供微信卡券等服务。
-
-### 获取实例
+## 获取实例
 
 ```php
 <?php
 
-use Overtrue\Wechat\Card;
+// ... 前面部分省略
 
-$appId  = 'wx3cf0f39249eb0e60';
-$secret = 'f1c242f4f28f735d4687abb469072a29';
+$app = new Application($options);
 
-$card = new Card($appId, $secret);
+$group = $app['card'];
 ```
 
 

@@ -3,6 +3,8 @@ title: 用户组
 
 用户组的使用就非常简单了，基本的增删改查。
 
+## 获取实例
+
 ```php
 <?php
 
@@ -13,11 +15,14 @@ $app = new Application($options);
 $group = $app['user.group'];
 ```
 
+## API
+
 ### 获取所有分组
 
 ```php
 $group->lists();
 ```
+
 example:
 
 ```php
@@ -47,6 +52,7 @@ var_dump($groups->groups[0]['name']) // “未分组”
 ```php
 $group->create($name);
 ```
+
 example:
 
 ```php
@@ -58,6 +64,7 @@ $group->create($name);
 ```php
 $group->update($groupId, $name);
 ```
+
 example:
 
 ```php
@@ -69,6 +76,7 @@ $group->update($groupId, "新的组名");
 ```php
 $group->delete($groupId);
 ```
+
 example:
 
 ```php
@@ -80,6 +88,7 @@ $group->delete($groupId);
 ```php
 $group->moveUser($openId, $groupId);
 ```
+
 example:
 
 ```php
@@ -91,6 +100,7 @@ $group->moveUser($openId, $groupId);
 ```php
 $group->moveUsers(array $openIds, $groupId);
 ```
+
 example:
 
 ```php

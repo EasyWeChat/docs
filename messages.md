@@ -307,4 +307,4 @@ $result = $app['staff']->message($message)->to($openId)->send();
 
 ### 群发消息
 
-TODO
+请参考：[群发消息](docs/broadcast.html)
