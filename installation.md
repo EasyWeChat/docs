@@ -8,7 +8,7 @@ title: 安装
 - [PHP mcrypt 扩展](http://php.net/manual/en/book.mcrypt.php) 当启用加密消息时必选
 
 
-[Laravel 5 拓展包: overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat)
+Laravel 5 拓展包: [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat)
 
 ## 安装
 

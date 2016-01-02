@@ -13,7 +13,7 @@ title: 贡献代码
 
 ### 流程
 
-1. Fork [overtrue/wechat] 到本地.
+1. Fork [overtrue/wechat](https://github.com/overtrue/wechat) 到本地.
 2. 创建新的分支：
 
     {% code %}
@@ -35,34 +35,21 @@ title: 贡献代码
 
 ## 更新文档
 
-我们的文档也是开源的，基于 [Hexo](http://hexo.io)，源代码在 [EasyWeChat/site](https://github.com/EasyWeChat/site)。
+我们的文档也是开源的，源代码在 [EasyWeChat/docs](https://github.com/EasyWeChat/docs)。
 
 ### 流程
 
-1. Fork [EasyWeChat/site]
-2. Clone 到你的电脑并且安装依赖包：
+1. Fork [EasyWeChat/docs](https://github.com/EasyWeChat/docs)
+2. Clone 到你的电脑：
 
     {% code %}
     $ git clone https://github.com/<username>/site.git
-    $ cd site
-    $ npm install
+    $ cd docs
     {% endcode %}
 
-3. 编辑文档，同时你可以开启本地服务器实时预览：
-
-    {% code %}
-    $ hexo server
-    {% endcode %}
-
+3. 创建新的分支，编辑文档
 4. Push 到你的分支。
 5. 创建 Pull Request 并描述你完成的功能或者做出的修改。
-
-### 多语言
-
-1. 添加一个语言目录到 `source` 目录下. (小写目录名称)
-2. 复制 `source` 下的所有文件到到你新建的语言目录下。
-3. 编辑 `source/_data/language.yml`，添加你的语言。
-4. 复制 `en.yml` 到 `themes/easywechat/languages` 并且改名 (全部小写).
 
 ## 报告 Bug
 

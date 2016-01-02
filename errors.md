@@ -1,7 +1,7 @@
 title: 错误处理
 ---
 
-所有的错误均使用异常抛出，异常类名为 `Overtrue\Wechat\Exception`, 你可以使用常规的异常处理方法来处理本 SDK 所有的异常：
+所有的错误均使用异常抛出，异常类名为 `EasyWeChat\Core\Exception`, 你可以使用常规的异常处理方法来处理本 SDK 所有的异常：
 
 ```php
 $app->setExceptionHandler(function($exception){
