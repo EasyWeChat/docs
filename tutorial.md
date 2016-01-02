@@ -100,7 +100,7 @@ $response = $server->serve();
 echo $response;
 ```
 
-OK, 有了上面的代码，那么请你按**[微信官方的接入指引](http://mp.weixin.qq.com/wiki/17/2d4265491f12608cd170a95559800f2d.html)** 操作，并相应修改上面的 `$options` 的配置。
+OK, 有了上面的代码，那么请你按 **[微信官方的接入指引](http://mp.weixin.qq.com/wiki/17/2d4265491f12608cd170a95559800f2d.html)** 操作，并相应修改上面的 `$options` 的配置。
 
 > URL 就是我们的 `http://easywechat.org/server.php`，这里我是举例哦，你可不要填写我的域名。
 
@@ -111,7 +111,7 @@ OK, 有了上面的代码，那么请你按**[微信官方的接入指引](http:
 
 那服务端验证通过了，我们就来试一下接收消息吧。
 
-> 在刚刚上面代码最后一行 `$server->serve()->send();` 前面，我们调用 `$server` 的 `setMessageHandler()` 方法来注册一个消息处理函数，这里用到了**[PHP闭包](http://php.net/manual/zh/functions.anonymous.php)**的知识，如果你不熟悉赶紧补课去。
+> 在刚刚上面代码最后一行 `$server->serve()->send();` 前面，我们调用 `$server` 的 `setMessageHandler()` 方法来注册一个消息处理函数，这里用到了 **[PHP闭包](http://php.net/manual/zh/functions.anonymous.php)** 的知识，如果你不熟悉赶紧补课去。
 
 ```php
 // ...
