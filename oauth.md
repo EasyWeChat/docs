@@ -92,8 +92,7 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 ### 发起授权
 
 ```php
-$response = $app['oauth']->with($目标页面URL)
-                          ->scope(['snsapi_userinfo'])
+$response = $app['oauth']->scope(['snsapi_userinfo'])
                           ->redirect();
 ```
 
@@ -145,7 +144,10 @@ $oauth = $app['oauth'];
 
 // 未登录
 if (empty($_SESSION['wechat_user'])) {
-  return $oauth->with(['target_url' => 'user/profile'])->redirect();
+
+  $_SESSION['target_url'] = 'user/profile';
+
+  return $oauth->redirect();
   // 这里不一定是rturn，如果你的框架action不是返回内容的话你就得使用
   // $oauth->with(['target_url' => 'user/profile'])->redirect()->send();
 }
@@ -182,7 +184,7 @@ $user = $oauth->user();
 
 $_SESSION['wechat_user'] = $user->toArray();
 
-$targetUrl = empty($_GET['target_url']) ? '/' : $_GET['target_url'];
+$targetUrl = empty($_SESSION['target_url']) ? '/' : $_SESSION['target_url'];
 
 header('location:'. $targetUrl); // 跳转到 user/profile
 ```
