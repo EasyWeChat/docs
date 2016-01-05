@@ -3,7 +3,7 @@ title: 路线图
 
 ## 3.0
 
-- [x] 新的 EastWeChat 开发组织
+- [x] 新的 EasyWeChat 开发组织
 - [x] 新的 SDK 命名空间：`EasyWeChat`
 - [x] 国际化路线
 - [x] 完善的文档
