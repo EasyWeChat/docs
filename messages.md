@@ -266,7 +266,7 @@ $article->content = '微信 SDK ...';
 
 属性就一个：`media_id`。
 
-在构造时有两处参数：
+在构造时有两个参数：
 
 - `$type` 素材类型，目前只支持：`mpnews`、 `mpvideo`、`voice`、`image` 等。
 - `$mediaId` 素材 ID，从接口查询或者上传后得到。
