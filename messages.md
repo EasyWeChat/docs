@@ -9,6 +9,8 @@ title: 消息
 
 消息分为以下几种：`文本`、`图片`、`视频`、`声音`、`链接`、`坐标`、`图文`、`文章`。
 
+另外还有一种特殊的消息类型：**素材消息**，用于群发或者客服时发送已有素材用。
+
 > 注意：回复消息与客服消息里的图文类型为：**图文**，群发与素材中的图文为**文章**
 
 所有的消息类都在 `EasyWeChat\Message` 这个命名空间下， 下面我们来分开讲解：
@@ -255,6 +257,25 @@ $article->title   = 'EasyWeChat';
 $article->author  = 'overtrue';
 $article->content = '微信 SDK ...';
 // ...
+```
+
+
+### 素材消息
+
+素材消息用于群发与客服消息时使用。
+
+属性就一个：`media_id`。
+
+在构造时有两处参数：
+
+- `$type` 素材类型，目前只支持：`mpnews`、 `mpvideo`、`voice`、`image` 等。
+- `$mediaId` 素材 ID，从接口查询或者上传后得到。
+
+
+```php
+use EasyWeChat\Message\Material;
+
+$material = new Material('mpnews', $mediaId);
 ```
 
 以上呢，是所有微信支持的基本消息类型。
