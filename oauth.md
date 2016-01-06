@@ -148,8 +148,8 @@ if (empty($_SESSION['wechat_user'])) {
   $_SESSION['target_url'] = 'user/profile';
 
   return $oauth->redirect();
-  // 这里不一定是rturn，如果你的框架action不是返回内容的话你就得使用
-  // $oauth->with(['target_url' => 'user/profile'])->redirect()->send();
+  // 这里不一定是return，如果你的框架action不是返回内容的话你就得使用
+  // $oauth->redirect()->send();
 }
 
 // 已经登录过
