@@ -118,7 +118,9 @@ $user = $app['oauth']->user();
 
 返回的 `$user` 是 [Overtrue\Socialite\User](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的信息](https://github.com/overtrue/socialite#user-interface)。
 
-当 `scope` 为 `snsapi_base` 时 `$oauth->user();` 对象里只有 `openid`，没有其它信息。
+> :pray: 注意：`$user` 里没有 `openid`， `$user->id` 便是 `openid`.
+
+当 `scope` 为 `snsapi_base` 时 `$oauth->user();` 对象里只有 `id`，没有其它信息。
 
 ## 网页授权实例
 
