@@ -7,8 +7,8 @@ title: 缓存
 
 你可以参考[doctrine/cache官方文档](http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/reference/caching.html)来替换掉应用中默认的缓存配置：
 
-// 以 redis 为例
-// 先安装 redis 拓展：https://github.com/phpredis/phpredis
+> 以 redis 为例
+> 请先安装 redis 拓展：https://github.com/phpredis/phpredis
 
 ```php
 
