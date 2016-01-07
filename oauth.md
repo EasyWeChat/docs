@@ -162,18 +162,13 @@ $user = $_SESSION['wechat_user'];
 授权回调页：
 
 ```php
-// http://easywechat.org/callback
+// http://easywechat.org/oauth_callback
 <?php
 
 use EasyWeChat\Foundation\Application;
 
 $config = [
   // ...
-  'oauth' => [
-      'scopes'   => ['snsapi_userinfo'],
-      'callback' => '/oauth_callback',
-  ],
-  // ..
 ];
 
 $app = new Application($config);
