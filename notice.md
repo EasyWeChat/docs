@@ -70,7 +70,22 @@ $messageId = $notice->to($userOpenId)->color('#ff0000')->url($url)->withTemplate
 // ... ...
 ```
 
-example:
+## 示例:
+
+### 模板
+
+```
+{{ first.DATA }}
+
+商品明细：
+
+名称：{{ name.DATA }}
+价格：{{ price.DATA }}
+
+{{ remark.DATA }}
+```
+
+发送模板消息：
 
 ```php
 $userId = 'OPENID';
@@ -78,17 +93,20 @@ $templateId = 'ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY';
 $url = 'http://overtrue.me';
 $color = '#FF0000';
 $data = array(
-         "first"    => "恭喜你购买成功！",
-         "keynote1" => "巧克力",
-         "keynote2" => "39.8元",
-         "keynote3" => "2014年9月16日",
-         "remark"   => "欢迎再次购买！",
+         "first"  => "恭喜你购买成功！",
+         "name"   => "巧克力",
+         "price"  => "39.8元",
+         "remark" => "欢迎再次购买！",
         );
 
 $messageId = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($userId)->send();
 ```
 
-### 模板数据
+结果：
+
+![notice-demo](http://7u2jwa.com1.z0.glb.clouddn.com/QQ20160111-0@2x.png)
+
+## 模板数据
 
 为了方便大家开发，我们拓展支持以下格式的模板数据，其它格式的数据可能会导致接口调用失败：
 
