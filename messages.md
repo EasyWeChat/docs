@@ -7,7 +7,7 @@ title: 消息
 
 ## 消息类型
 
-消息分为以下几种：`文本`、`图片`、`视频`、`声音`、`链接`、`坐标`、`图文`、`文章`。
+消息分为以下几种：`文本`、`图片`、`视频`、`声音`、`链接`、`坐标`、`图文`、`文章` 和一种特殊的 `原始消息`。
 
 另外还有一种特殊的消息类型：**素材消息**，用于群发或者客服时发送已有素材用。
 
@@ -282,7 +282,42 @@ $material = new Material('mpnews', $mediaId);
 
 > 需要注意的是，你不需要关心微信的消息字段叫啥，因为这里我们使用了更标准的命名，然后最终在中间做了转换，所以你不需要关注。
 
-## 在 SDK 中的用法
+### 原始消息
+
+原始消息是一种特殊的消息，它的场景是：**你不想使用其它消息类型，你想自己手动拼消息**。比如，回复消息时，你想自己拼 XML，那么你就直接用它就可以了：
+
+```php
+use EasyWeChat\Message\Raw;
+
+$message = new Raw('<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
+<FromUserName><![CDATA[fromUser]]></FromUserName>
+<CreateTime>12345678</CreateTime>
+<MsgType><![CDATA[image]]></MsgType>
+<Image>
+<MediaId><![CDATA[media_id]]></MediaId>
+</Image>
+</xml>');
+```
+
+比如，你要用于客服消息(客服消息是JSON结构)：
+
+```php
+use EasyWeChat\Message\Raw;
+
+$message = new Raw('{
+    "touser":"OPENID",
+    "msgtype":"text",
+    "text":
+    {
+         "content":"Hello World"
+    }
+}');
+```
+
+总之，就是直接写微信接口要求的格式内容就好，此类型消息在 SDK 中不存在转换行为，所以请注意不要写错格式。
+
+## 在 SDK 中使用消息
 
 ### 在服务端回复消息
 
@@ -313,6 +348,26 @@ $server->setMessageHandler(function ($message) {
 // ...
 ```
 
+#### 回复多图文消息
+
+多图文消息其实就是单图文消息的一个数组而已了：
+
+```php
+use EasyWeChat\Message\News;
+
+// ...
+$server->setMessageHandler(function ($message) {
+    $news1 = new News(...);
+    $news2 = new News(...);
+    $news3 = new News(...);
+    $news4 = new News(...);
+
+    return [$news1, $news2, $news3, $news4];
+});
+// ...
+```
+
+
 ### 作为客服消息发送
 
 在客服消息里的使用也一样，都是直接传入消息实例即可：
@@ -324,6 +379,19 @@ $message = new Text(['content' => 'Hello world!']);
 
 $result = $app['staff']->message($message)->to($openId)->send();
 //...
+```
+
+#### 发送多图文消息
+
+多图文消息其实就是单图文消息的一个数组而已了：
+
+```php
+$news1 = new News(...);
+$news2 = new News(...);
+$news3 = new News(...);
+$news4 = new News(...);
+
+$app['staff']->message([$news1, $news2, $news3, $news4])->to($openId)->send();
 ```
 
 ### 群发消息
