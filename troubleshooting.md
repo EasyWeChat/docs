@@ -30,8 +30,25 @@ wecaht SDK 遵循了官方建议，所以在调用这些接口时，除了按照
   ```
   > 注意证书文件路径以自己实际情况为准。
 
+  其它修改 HTTP 类源文件的方式是不允许的。
 
-其它修改 HTTP 类源文件的方式是不允许的。
+### cURL error 56: SSLRead() return error -9806
+
+目前在 OSX 下，发现使用 HomeBrew 装的 PHP 7.0 有这个问题，解决方案是重新 brew 安装 PHP：
+
+```shell
+$ brew install homebrew/php/php70 --with-homebrew-openssl --with-homebrew-curl --without-snmp -vvv
+```
+
+验证：
+
+```shell
+$ php -i | grep 'OpenSSL support'
+
+OpenSSL support => enabled
+OpenSSL support => enabled
+```
+
 
 ### 支付失败！当前页面的 URL 未注册
 
