@@ -7,7 +7,7 @@ title: 短网址服务
 
 ```php
 <?php
-
+use EasyWeChat\Foundation\Application;
 // ...
 $app = new Application($options);
 

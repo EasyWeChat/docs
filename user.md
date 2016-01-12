@@ -7,8 +7,9 @@ title: 用户
 
 ```php
 <?php
+use EasyWeChat\Foundation\Application;
 
-// ... 前面部分省略
+// ...
 
 $app = new Application($options);
 

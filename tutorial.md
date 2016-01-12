@@ -45,7 +45,7 @@ $options = [
     // 'aes_key' => null, // 可选
 
     'log' => [
-        'level' => \Monolog\Logger::DEBUG,
+        'level' => 'debug',
         'file'  => '/tmp/easywechat.log',
     ],
 

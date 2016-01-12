@@ -7,7 +7,7 @@ title: 群发
 
 ```php
 <?php
-
+use EasyWeChat\Foundation\Application;
 // ...
 $app = new Application($options);
 

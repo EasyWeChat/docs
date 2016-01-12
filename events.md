@@ -7,7 +7,9 @@ title: 事件
 
 ```php
 <?php
-// ... 前面部分省略
+use EasyWeChat\Foundation\Application;
+
+// ...
 
 $app = new Application($options);
 

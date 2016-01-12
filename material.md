@@ -20,6 +20,7 @@ title: 素材管理
 
 ```php
 <?php
+use EasyWeChat\Foundation\Application;
 
 $app = new Application($options);
 

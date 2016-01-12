@@ -11,7 +11,11 @@ title: 数据统计与分析
 
 ```php
 <?php
+
+use EasyWeChat\Foundation\Application;
+
 //...
+
 $app = new Application($options);
 $stats = $app['stats'];
 ```

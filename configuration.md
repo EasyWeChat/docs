@@ -4,6 +4,8 @@ title: 配置
 在前面我们已经讲过，初始化 SDK 的时候方法就是创建一个 `EasyWeChat\Foundation\Application` 实例：
 
 ```php
+use EasyWeChat\Foundation\Application;
+
 $options = [
    // ...
 ];
@@ -36,11 +38,11 @@ return [
      * 日志配置
      *
      * level: 记录的级别,\Monolog\Logger 常量，可选为：
-     *         DEBUG/INFO/NOTICE/WARNING/ERROR/CRITICAL/ALERT/EMERGENCY
+     *         debug/info/notice/warning/error/critical/alert/emergency
      * file：日志文件位置，要求可写权限
      */
     'log' => [
-        'level' => \Monolog\Logger::DEBUG,
+        'level' => 'debug',
         'file'  => '/tmp/easywechat.log',
     ],
 

@@ -10,8 +10,9 @@ title: 二维码
 
 ```php
 <?php
+use EasyWeChat\Foundation\Application;
 
-// ... 前面部分省略
+// ...
 
 $app = new Application($options);
 

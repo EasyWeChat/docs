@@ -7,7 +7,7 @@ title: 客服
 
 ```php
 <?php
-
+use EasyWeChat\Foundation\Application;
 // ...
 $app = new Application($options);
 
