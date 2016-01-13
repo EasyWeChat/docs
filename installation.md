@@ -7,7 +7,7 @@ title: 安装
 - [PHP cURL 扩展](http://php.net/manual/en/book.curl.php)
 - [PHP OpenSSL 扩展](http://php.net/manual/en/book.openssl.php)
 - [PHP mcrypt 扩展](http://php.net/manual/en/book.mcrypt.php) 当启用加密消息时必选
-- [PHP finfo 拓展](http://php.net/manual/en/book.fileinfo.php) 素材管理模块需要用到
+- [PHP fileinfo 拓展](http://php.net/manual/en/book.fileinfo.php) 素材管理模块需要用到
 
 
 Laravel 5 拓展包: [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat)
