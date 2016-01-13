@@ -100,7 +100,7 @@ return $response;// 或者 $response->send()
 
 4. `handleNotify` 返回值 `$response` 是一个 Response 对象，如果你要直接输出，使用 `$response->send()`, 在一些框架里不是输出而是返回：`return $response`。
 
-通常我们的处理逻辑大概是下面这样：
+通常我们的处理逻辑大概是下面这样（**以下只是伪代码**）：
 
 ```php
 $response = $app['payment']->handleNotify(function($notify, $successful){
