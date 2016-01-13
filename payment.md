@@ -74,7 +74,69 @@ $prepareId = $result->prepay_id;
 
 ## 支付结果通知
 
-TODO
+在用户成功支付后，微信服务器会向该 **订单中设置的回调URL** 发起一个 POST 请求，请求的内容为一个 XML。里面包含了所有的详细信息，具体请参考：
+[支付结果通用通知](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_7)
+
+在本 SDK 中处理回调真的再简单不过了，请求验证你就不用管了，SDK 已经为你做好了，你只需要关注业务即可：
+
+```php
+$response = $app['payment']->handleNotify(function($notify, $successful){
+    // 你的逻辑
+    return true; // 或者错误消息
+});
+
+return $response;// 或者 $response->send()
+```
+
+这里需要注意的有几个点：
+
+1. `handleNotify` 只接收一个 [`callable`](http://php.net/manual/zh/language.types.callable.php) 参数，通常用一个匿名函数即可。
+2. 该匿名函数接收两个参数，这两个参数分别为：
+
+    - `$notify` 为封装了通知信息的 Collection 对象，前面已经讲过这里就不赘述了，你可以以对象或者数组形式来读取通知内容，比如：`$notify->total_fee` 或者 `$notify['total_fee']`。
+    - `$successful` 这个参数其实就是判断 **用户是否付款成功了**（result_code == 'SUCCESS'）
+
+3. 该函数返回值就是告诉微信 **“我是否处理完成”**，如果你返回一个 `false` 或者一个具体的错误消息，那么微信会在稍后再次继续通知你，直到你明确的告诉它：“我已经处理完成了”，在函数里 `return true;` 代表处理完成。
+
+4. `handleNotify` 返回值 `$response` 是一个 Response 对象，如果你要直接输出，使用 `$response->send()`, 在一些框架里不是输出而是返回：`return $response`。
+
+通常我们的处理逻辑大概是下面这样：
+
+```php
+$response = $app['payment']->handleNotify(function($notify, $successful){
+    // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
+    $order = 查询订单($notify->transaction_id);
+
+    if (!$order) { // 如果订单不存在
+        return 'Order not exist.'; // 告诉微信，我已经处理完了，订单没找到，别再通知我了
+    }
+
+    // 如果订单存在
+    // 检查订单是否已经更新过支付状态
+    if ($order->paid_at) { // 假设订单字段“支付时间”不为空代表已经支付
+        return true; // 已经支付成功了就不再更新了
+    }
+
+    // 用户是否支付成功
+    if ($successful) {
+        // 不是已经支付状态则修改为已经支付状态
+        $order->paid_at = time(); // 更新支付时间为当前时间
+        $order->status = 'paid';
+    } else { // 用户支付失败
+        $order->status = 'paid_fail';
+    }
+
+    $order->save(); // 保存订单
+
+    return true; // 返回处理完成
+});
+
+return $response;
+```
+
+> 注意：请把 “支付成功与否” 与 “是否处理完成” 分开，它俩没有必然关系。
+> 比如：微信通知你用户支付完成，但是支付失败了(result_code 为 'FAIL')，你应该**更新你的订单为支付失败**，但是要**告诉微信处理完成**。
+
 
 ## 撤销订单API
 
