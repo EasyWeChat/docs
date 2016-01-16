@@ -52,5 +52,9 @@ $url = $result->url;
 下载二维码到本地：
 
 ```php
-$qrcode->download($ticket, __DIR__ . '/code.jpg');
+$url = $qrcode->url($ticket);
+
+$content = file_get_contents($url); // 得到二进制图片内容
+
+file_put_contents(__DIR__ . '/code.jpg', $content); // 写入文件
 ```
