@@ -30,7 +30,7 @@ $qrcode = $app['qrcode'];
 
 example:
 
-创建临时二维码:
+### 创建临时二维码:
 
 ```php
 $result = $qrcode->temporary(56, 6 * 24 * 3600);
@@ -40,7 +40,7 @@ $expireSeconds = $result->expire_seconds; // 有效秒数
 $url = $result->url; // 二维码图片解析后的地址，开发者可根据该地址自行生成需要的二维码图片
 ```
 
-创建永久二维码:
+### 创建永久二维码:
 
 ```php
 $result = $qrcode->forever(56);// 或者 $qrcode->forever("foo");
@@ -49,7 +49,7 @@ $ticket = $result->ticket; // 或者 $result['ticket']
 $url = $result->url;
 ```
 
-下载二维码到本地：
+### 下载二维码到本地：
 
 ```php
 $url = $qrcode->url($ticket);
