@@ -23,7 +23,7 @@ EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https:
 
 ### 友情提示
 
-当你在使用过程中遇到问题，请查阅 [疑难解答](troubleshooting.html) 或者在这里提问 [GitHub](https://github.com/overtrue/wechat/issues)。
+当你在使用过程中遇到问题，请查阅 [疑难解答](./troubleshooting.html) 或者在这里提问 [GitHub](https://github.com/overtrue/wechat/issues)。
 
 ### 打赏支持
 
