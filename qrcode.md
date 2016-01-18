@@ -25,12 +25,9 @@ $qrcode = $app['qrcode'];
 + `Bag temporary($sceneId, $expireSeconds = null)` 创建临时二维码；
 + `Bag forever($sceneValue)` 创建永久二维码
 + `Bag card(array $card)` 创建卡券二维码
-+ `string show($ticket)` 获取二维码网址，用法： `<img src="<?php $qrcode->show($qrTicket); ?>">`；
-+ `void download($ticket, $filename)` 下载二维码到本地，`$filename` 为带文件名的目标路径；
++ `string url($ticket)` 获取二维码网址，用法： `<img src="<?php $qrcode->show($qrTicket); ?>">`；
 
-example:
-
-### 创建临时二维码:
+### 创建临时二维码
 
 ```php
 $result = $qrcode->temporary(56, 6 * 24 * 3600);
@@ -40,7 +37,7 @@ $expireSeconds = $result->expire_seconds; // 有效秒数
 $url = $result->url; // 二维码图片解析后的地址，开发者可根据该地址自行生成需要的二维码图片
 ```
 
-### 创建永久二维码:
+### 创建永久二维码
 
 ```php
 $result = $qrcode->forever(56);// 或者 $qrcode->forever("foo");
@@ -49,7 +46,19 @@ $ticket = $result->ticket; // 或者 $result['ticket']
 $url = $result->url;
 ```
 
-### 下载二维码到本地：
+### 获取二维码网址
+
+```php
+$url = $qrcode->url($ticket);
+```
+
+### 创建卡券二维码
+
+```php
+$qrcode->card($card);
+```
+
+### 获取二维码内容
 
 ```php
 $url = $qrcode->url($ticket);
