@@ -100,3 +100,16 @@ OpenSSL support => enabled
 
 > 请开发者理解服务器 TOKEN 验证原理（官方文档有说明）并谨记服务器验证时使用 GET 方式访问，而公众平台向你的服务器发送消息/数据则使用 POST 方式，所以服务器验证成功之后，在某些启用了 CSRF 验证的框架里，接收消息时可能还会遇到 CSRF 相关的问题，请根据自己项目实际情况进行排查。
 > 另外有的朋友的 Laravel 里使用了 laravel-debugbar，这个组件的原理是在页面输出时在后面添加 HTML 来实现的，所以它会改变我们返回给微信的内容，此时要么卸载，要么禁用掉它。
+
+
+### Maximum function nesting level of '100' reached, aborting!
+
+在使用了 Xdebug 的环境下可能出现这个问题。这是由于 Xdebug 限制函数嵌套的最大层级数（默认为100），当嵌套次数达到该值便会触发 Xdebug 跳出嵌套并报此错误。
+
+为避免这个问题，**可以将 Xdebug 的 max_nesting_level 参数适当设置大一些**，通常设置为200就可以了（当然可根据自己实际情况设置为更大的值）。
+
+如下，修改 php.ini 配置文件后，重启 Apache 或 php-fpm 服务即可。
+
+```
+xdebug.max_nesting_level=200
+```
