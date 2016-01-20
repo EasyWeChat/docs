@@ -37,6 +37,6 @@ $response = $server->serve();
 echo $response;
 ```
 
-更多请参考：[服务端](server.html)
+更多请参考：[服务端](docs/server.html)
 
 关于事件类型请参考微信官方文档：http://mp.weixin.qq.com/wiki/2/5baf56ce4947d35003b86a9805634b1e.html
