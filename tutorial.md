@@ -46,7 +46,7 @@ $options = [
 
     'log' => [
         'level' => 'debug',
-        'file'  => '/tmp/easywechat.log',
+        'file'  => '/tmp/easywechat.log', // XXX: 绝对路径！！！！
     ],
 
     //...

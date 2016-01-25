@@ -39,7 +39,7 @@ return [
      *
      * level: 记录的级别,\Monolog\Logger 常量，可选为：
      *         debug/info/notice/warning/error/critical/alert/emergency
-     * file：日志文件位置，要求可写权限
+     * file：日志文件位置(绝对路径!!!)，要求可写权限
      */
     'log' => [
         'level' => 'debug',
