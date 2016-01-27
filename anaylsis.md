@@ -17,7 +17,7 @@ use EasyWeChat\Foundation\Application;
 //...
 
 $app = new Application($options);
-$stats = $app['stats'];
+$stats = $app->stats;
 ```
 
 ## API

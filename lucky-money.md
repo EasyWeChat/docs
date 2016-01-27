@@ -25,7 +25,7 @@ $options = [
 
 $app = new Application($options);
 
-$luckyMoney = $app['lucky_money'];
+$luckyMoney = $app->lucky_money;
 ```
 
 ## 发送红包

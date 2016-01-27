@@ -20,7 +20,7 @@ use EasyWeChat\Foundation\Application;
 
 $app = new Application($options);
 
-$menu = $app['menu'];
+$menu = $app->menu;
 ```
 
 ## API 列表

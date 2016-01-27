@@ -13,7 +13,7 @@ use EasyWeChat\Foundation\Application;
 
 $app = new Application($options);
 
-$userService = $app['user'];
+$userService = $app->user;
 ```
 
 ## API 列表

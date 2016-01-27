@@ -10,7 +10,7 @@ use EasyWeChat\Foundation\Application;
 
 $app = new Application($options);
 
-$group = $app['card'];
+$group = $app->card;
 ```
 
 

@@ -13,7 +13,7 @@ use EasyWeChat\Foundation\Application;
 
 $app = new Application($options);
 
-$group = $app['user.group'];
+$group = $app->user_group; // $user['user_group'] 
 ```
 
 ## API

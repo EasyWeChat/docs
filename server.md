@@ -20,7 +20,7 @@ use EasyWeChat\Foundation\Application;
 $app = new Application($options);
 
 // 从项目实例中得到服务端应用实例。
-$server = $app['server'];
+$server = $app->server;
 
 $server->setMessageHandler(function ($message) {
     return "您好！欢迎关注我!";

@@ -28,7 +28,7 @@ $options = [
 
 $app = new Application($options);
 
-$payment = $app['payment'];
+$payment = $app->payment;
 ```
 
 ## 创建订单
@@ -80,7 +80,7 @@ $prepareId = $result->prepay_id;
 在本 SDK 中处理回调真的再简单不过了，请求验证你就不用管了，SDK 已经为你做好了，你只需要关注业务即可：
 
 ```php
-$response = $app['payment']->handleNotify(function($notify, $successful){
+$response = $app->payment->handleNotify(function($notify, $successful){
     // 你的逻辑
     return true; // 或者错误消息
 });
@@ -103,7 +103,7 @@ return $response;// 或者 $response->send()
 通常我们的处理逻辑大概是下面这样（**以下只是伪代码**）：
 
 ```php
-$response = $app['payment']->handleNotify(function($notify, $successful){
+$response = $app->payment->handleNotify(function($notify, $successful){
     // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
     $order = 查询订单($notify->transaction_id);
 

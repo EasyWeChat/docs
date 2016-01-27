@@ -25,7 +25,7 @@ use EasyWeChat\Foundation\Application;
 // ...
 $app = new Application($options);
 
-$notice = $app['notice'];
+$notice = $app->notice;
 ```
 
 ### API

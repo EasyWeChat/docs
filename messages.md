@@ -326,7 +326,7 @@ $message = new Raw('{
 ```php
 // ... 前面部分省略
 $app = new Application($options);
-$server = $app['server'];
+$server = $app->server;
 
 $server->setMessageHandler(function ($message) {
     return "您好！欢迎关注我!";
@@ -377,7 +377,7 @@ use EasyWeChat\Message\Text;
 
 $message = new Text(['content' => 'Hello world!']);
 
-$result = $app['staff']->message($message)->to($openId)->send();
+$result = $app->staff->message($message)->to($openId)->send();
 //...
 ```
 
@@ -391,7 +391,7 @@ $news2 = new News(...);
 $news3 = new News(...);
 $news4 = new News(...);
 
-$app['staff']->message([$news1, $news2, $news3, $news4])->to($openId)->send();
+$app->staff->message([$news1, $news2, $news3, $news4])->to($openId)->send();
 ```
 
 ### 群发消息

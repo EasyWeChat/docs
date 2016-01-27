@@ -25,9 +25,9 @@ use EasyWeChat\Foundation\Application;
 $app = new Application($options);
 
 // 永久素材
-$material = $app['material'];
+$material = $app->material;
 // 临时素材
-$temporary = $app['material.temporary'];
+$temporary = $app->material_temporary;
 ```
 
 ## 永久素材 API：

@@ -22,7 +22,7 @@ $redis->connect('redis_host', 6379);
 
 $cacheDriver->setRedis($redis);
 
-$app['cache'] = $cacheDriver;
+$app->cache = $cacheDriver;
 ```
 
 ### Laravel 中使用
@@ -36,7 +36,7 @@ use Doctrine\Common\Cache\PredisCache;
 $predis = app('redis')->connection();// connection($name), $name 默认为 `default`
 $cacheDriver = new PredisCache($predis);
 
-$app['cache'] = $cacheDriver;
+$app->cache = $cacheDriver;
 ```
 
 > 上面提到的 `app('redis')->connection($name)`, 这里的 `$name` 是 laravel 项目中配置文件 `database.php` 中 `redis` 配置名 `default`：https://github.com/laravel/laravel/blob/master/config/database.php#L118

@@ -54,11 +54,8 @@ $options = [
 
 $app = new Application($options);
 
-// 得到服务端实例
-$server = $app['server'];
-
 // 将响应输出
-$server->serve()->send();
+$app->server->serve()->send();
 
 ```
 
@@ -81,22 +78,19 @@ $options = [...];
 // 使用配置来初始化一个项目。
 $app = new Application($options);
 
-// 从项目实例中得到服务端应用实例。
-$server = $app['server'];
-
-$server->serve()->send();
+$app->server->serve()->send();
 ```
 
 最后这一行我有必要详细讲一下：
 
 
->1. 我们的 `$server->serve()` 就是执行服务端业务了，那么它的返回值呢，是一个 `Symfony\Component\HttpFoundation\Response` 实例。
->2. 我这里是直接调用了它的 `send()` 方法，它就是直接输出了，我们在一些框架就不能直接输出了，那你就直接拿到 Response 实例后做相应的操作即可，比如 Laravel 里你就可以直接 `return $server->serve();`
+>1. 我们的 `$app->server->serve()` 就是执行服务端业务了，那么它的返回值呢，是一个 `Symfony\Component\HttpFoundation\Response` 实例。
+>2. 我这里是直接调用了它的 `send()` 方法，它就是直接输出了，我们在一些框架就不能直接输出了，那你就直接拿到 Response 实例后做相应的操作即可，比如 Laravel 里你就可以直接 `return $app->server->serve();`
 
 所以上面这行代码就相当于：
 
 ```php
-$response = $server->serve();
+$response = $app->server->serve();
 echo $response;
 ```
 
@@ -111,7 +105,7 @@ OK, 有了上面的代码，那么请你按 **[微信官方的接入指引](http
 
 那服务端验证通过了，我们就来试一下接收消息吧。
 
-> 在刚刚上面代码最后一行 `$server->serve()->send();` 前面，我们调用 `$server` 的 `setMessageHandler()` 方法来注册一个消息处理函数，这里用到了 **[PHP 闭包](http://php.net/manual/zh/functions.anonymous.php)** 的知识，如果你不熟悉赶紧补课去。
+> 在刚刚上面代码最后一行 `$app->server->serve()->send();` 前面，我们调用 `$app->server` 的 `setMessageHandler()` 方法来注册一个消息处理函数，这里用到了 **[PHP 闭包](http://php.net/manual/zh/functions.anonymous.php)** 的知识，如果你不熟悉赶紧补课去。
 
 ```php
 // ...
@@ -120,7 +114,7 @@ $server->setMessageHandler(function ($message) {
     return "您好！欢迎关注我!";
 });
 
-$server->serve()->send();
+$app->server->serve()->send();
 
 ```
 
@@ -138,9 +132,9 @@ $server->serve()->send();
  $app = new Application($options);
 
  // services...
- $server = $app['server'];
- $user   = $app['user'];
- $oauth  = $app['oauth'];
+ $server = $app->server;
+ $user   = $app->user;
+ $oauth  = $app->oauth;
 
  // ... js/menu/staff/material/qrcode/notice/stats...
 
@@ -153,7 +147,7 @@ $server->serve()->send();
  有啥好处呢？它让我们操作起返回值来更方便，比如：
 
  ```php
- $userService = $app['user']; // 用户API
+ $userService = $app->user; // 用户API
 
  $user = $userService->get($openId);
 

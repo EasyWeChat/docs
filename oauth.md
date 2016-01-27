@@ -92,7 +92,7 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 ### 发起授权
 
 ```php
-$response = $app['oauth']->scope(['snsapi_userinfo'])
+$response = $app->oauth->scope(['snsapi_userinfo'])
                           ->redirect();
 ```
 
@@ -113,7 +113,7 @@ echo $response; // 或者  $response->send(); exit();
 ### 获取已授权用户
 
 ```php
-$user = $app['oauth']->user();
+$user = $app->oauth->user();
 ```
 
 返回的 `$user` 是 [Overtrue\Socialite\User](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的信息](https://github.com/overtrue/socialite#user-interface)。
@@ -142,7 +142,7 @@ $config = [
 ];
 
 $app = new Application($config);
-$oauth = $app['oauth'];
+$oauth = $app->oauth;
 
 // 未登录
 if (empty($_SESSION['wechat_user'])) {
@@ -174,7 +174,7 @@ $config = [
 ];
 
 $app = new Application($config);
-$oauth = $app['oauth'];
+$oauth = $app->oauth;
 
 // 获取 OAuth 授权结果用户信息
 $user = $oauth->user();

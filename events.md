@@ -13,7 +13,7 @@ use EasyWeChat\Foundation\Application;
 
 $app = new Application($options);
 
-$server = $app['server'];
+$server = $app->server;
 
 $server->setMessageHandler(function($message){
     // 注意，这里的 $message 不仅仅是用户发来的消息，也可能是事件

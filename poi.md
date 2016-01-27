@@ -11,7 +11,7 @@ use EasyWeChat\Foundation\Application;
 
 $app = new Application($options);
 
-$poi = $app['poi'];
+$poi = $app->poi;
 ```
 
 ## 创建门店

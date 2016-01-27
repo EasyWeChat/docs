@@ -11,7 +11,7 @@ use EasyWeChat\Foundation\Application;
 // ...
 $app = new Application($options);
 
-$url = $app['url'];
+$url = $app->url;
 ```
 
 ## API

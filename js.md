@@ -9,7 +9,7 @@ use EasyWeChat\Foundation\Application;
 //...
 $app = new Application($options);
 
-$js = $app['js'];
+$js = $app->js;
 ```
 
 ## API

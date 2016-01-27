@@ -12,7 +12,7 @@ title: 语义理解
 
 $app = new Application($options);
 
-$semantic = $app['semantic'];
+$semantic = $app->semantic;
 ```
 
 ## API

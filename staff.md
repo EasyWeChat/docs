@@ -11,7 +11,7 @@ use EasyWeChat\Foundation\Application;
 // ...
 $app = new Application($options);
 
-$staff = $app['staff'];
+$staff = $app->staff;
 ```
 
 ## API
