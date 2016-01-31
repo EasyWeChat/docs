@@ -46,7 +46,7 @@ $luckyMoneyData = [
     'wishing'          => '祝福语',
     'client_ip'        => 192.168.0.1,  //可不传，不传则由 SDK 取当前客户端 IP
     'act_name'         => '测试活动',
-    'remark'           => ’测试备注,
+    'remark'           => '测试备注',
     // ...
 ];
 
