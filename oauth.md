@@ -114,11 +114,19 @@ echo $response; // 或者  $response->send(); exit();
 
 ```php
 $user = $app->oauth->user();
+// $user 可以用的方法:
+// $user->getId();  // 对应微信的 OPENID
+// $user->getNickname(); // 对应微信的 nickname
+// $user->getName(); // 对应微信的 nickname
+// $user->getAvatar(); // 头像网址
+// $user->getOriginal(); // 原始API返回的结果
+// $user->getToken(); // access_token， 比如用于地址共享时使用
 ```
 
 返回的 `$user` 是 [Overtrue\Socialite\User](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的信息](https://github.com/overtrue/socialite#user-interface)。
 
 > :pray: 注意：`$user` 里没有 `openid`， `$user->id` 便是 `openid`.
+> 如果你想拿微信返回给你的原样的全部信息，请使用：$user->getOriginal();
 
 当 `scope` 为 `snsapi_base` 时 `$oauth->user();` 对象里只有 `id`，没有其它信息。
 
