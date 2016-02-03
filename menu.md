@@ -58,12 +58,12 @@ $buttons = [
             [
                 "type" => "view",
                 "name" => "搜索",
-                "url"  => "http => //www.soso.com/"
+                "url"  => "http://www.soso.com/"
             ],
             [
                 "type" => "view",
                 "name" => "视频",
-                "url"  => "http => //v.qq.com/"
+                "url"  => "http://v.qq.com/"
             ],
             [
                 "type" => "click",
