@@ -37,7 +37,7 @@ return [
     /**
      * 日志配置
      *
-     * level: 记录的级别,\Monolog\Logger 常量，可选为：
+     * level: 日志级别, 可选为：
      *         debug/info/notice/warning/error/critical/alert/emergency
      * file：日志文件位置(绝对路径!!!)，要求可写权限
      */
@@ -57,6 +57,18 @@ return [
         'callback' => '/examples/oauth_callback.php',
     ],
 
-    // more...
+    /**
+     * 微信支付
+     */
+    'payment' => [
+        'merchant_id'        => 'your-mch-id',
+        'key'                => 'key-for-signature',
+        'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
+        'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+        // 'device_info'     => '013467007045764',
+        // 'sub_app_id'      => '',
+        // 'sub_merchant_id' => '',
+        // ...
+    ],
 ];
 ```

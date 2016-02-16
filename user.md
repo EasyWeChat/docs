@@ -22,12 +22,21 @@ $userService = $app->user;
 
 ```php
 $userService->get($openId);
+$userService->batchGet($openIds);
 ```
+
+获取单个：
 
 ```php
 $user = $userService->get($openId);
 
 echo $user->nickname; // or $user['nickname']
+```
+
+获取多个：
+
+```php
+$users = $userService->batchGet([$openId1, $openId2, ...]);
 ```
 
 ### 获取用户列表
