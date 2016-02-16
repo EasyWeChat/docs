@@ -25,7 +25,7 @@ $qrcode = $app->qrcode;
 + `Bag temporary($sceneId, $expireSeconds = null)` 创建临时二维码；
 + `Bag forever($sceneValue)` 创建永久二维码
 + `Bag card(array $card)` 创建卡券二维码
-+ `string url($ticket)` 获取二维码网址，用法： `<img src="<?php $qrcode->show($qrTicket); ?>">`；
++ `string url($ticket)` 获取二维码网址，用法： `<img src="<?php $qrcode->url($qrTicket); ?>">`；
 
 ### 创建临时二维码
 
