@@ -257,4 +257,20 @@ $shortUrl = $payment->urlShorten('http://easywechat.org');
 ```
 
 ## 授权码查询OPENID接口
-TODO
+
+```php
+$response = $payment->authCodeToOpenId($authCode);
+$response->openid;
+```
+
+## 生成支付 JS 配置
+
+```php
+$json = $payment->configForPayment($prepayId);
+```
+
+## 生成共享收货地址 JS 配置
+
+```php
+$json = $payment->configForShareAddress($app->access_token);
+```
