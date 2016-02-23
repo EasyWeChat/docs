@@ -92,7 +92,7 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 ### 发起授权
 
 ```php
-$response = $app->oauth->scope(['snsapi_userinfo'])
+$response = $app->oauth->scopes(['snsapi_userinfo'])
                           ->redirect();
 ```
 
