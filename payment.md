@@ -274,3 +274,11 @@ $json = $payment->configForPayment($prepayId);
 ```php
 $json = $payment->configForShareAddress($app->access_token);
 ```
+
+## 生成 APP 支付配置
+
+```php
+$config = $payment->configForAppPayment($prepayId);
+```
+
+`$config` 为数组格式，你可以用 API 返回给客户端
