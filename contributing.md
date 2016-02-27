@@ -29,9 +29,7 @@ title: 贡献代码
 
 5. 创建 Pull Request 并描述你完成的功能或者做出的修改。
 
-### 注意
-
-- 注释请使用英文
+> 注意：注释请使用英文
 
 ## 更新文档
 
@@ -53,6 +51,6 @@ title: 贡献代码
 
 ## 报告 Bug
 
-当你在使用过程中遇到问题，请查阅 [疑难解答](troubleshooting.html) 或者在这里提问 [GitHub](https://github.com/overtrue/wechat/issues). 如果还是不能解决你的问题，请到 GitHub 联系我们。
+当你在使用过程中遇到问题，请查阅 [疑难解答](http://easywechat.org/docs/troubleshooting.html) 或者在这里提问 [GitHub](https://github.com/overtrue/wechat/issues). 如果还是不能解决你的问题，请到 GitHub 联系我们。
 
 [overtrue/wechat]: https://github.com/overtrue/wechat
