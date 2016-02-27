@@ -72,3 +72,15 @@ return [
     ],
 ];
 ```
+
+## 日志文件
+
+配置文件里的`/tmp/...`是绝对路径
+
+如果在 windows 下，去把它改成`C:\foo\bar`的形式，
+如查是 Linux ，你已经懂了……
+
+如查需要按日独立存储，可以配置成`'file'  => storage_path('/tmp/easywechat/easywechat_'.date('Ymd').'.log'),`
+
+其它同理……
+
