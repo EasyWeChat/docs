@@ -6,9 +6,10 @@ title: 多客服消息转发
 
 ```php
 
+
   // 转发收到的消息给客服
   $server->setMessageHandler(function($message) {
-      return Message::make('transfer');
+      return new \EasyWeChat\Message\Transfer();
   });
 
   $result = $server->serve();
@@ -19,9 +20,12 @@ title: 多客服消息转发
 当然，你也可以指定转发给某一个客服：
 
 ```php
-return Message::make('transfer')->account($account);
-// 或者
-return Message::make('transfer')->to($account);
+$server->setMessageHandler(function($message) {
+    $transfer = new \EasyWeChat\Message\Transfer();
+    $transfer->account($account);// 或者 $transfer->to($account);
+    
+    return $transfer;
+});
 ```
 
 更多请参考 [微信官方文档](http://mp.weixin.qq.com/wiki/) **多客服消息转发** 章节

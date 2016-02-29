@@ -125,75 +125,11 @@ $voice->setAttribute('media_id', $mediaId);
 
 ### 链接消息
 
-属性列表：
-
-```
-- title 标题
-- url 链接 URL
-- description 描述
-```
-
-```php
-<?php
-
-use EasyWeChat\Message\Link;
-
-$link = new Link([
-        'title'       => $title,
-        'url'         => $url,
-        'description' => '...',
-        // ...
-    ]);
-
-// or
-$link = new Link();
-$link->title = 'EasyWeChat SDK'; // or $link->title = $title;
-$link->url = 'http://easywechat.org'; // or $link->url = $url;
-$link->description = 'link description...'; // or $link->description = $description;
-
-// or
-$link = new Link();
-$link->setAttribute('url', 'http://easywechat.org');
-// ...
-```
+> 微信目前不支持回复链接消息
 
 ### 坐标消息
 
-属性列表：
-
-```
-- latitude 地理位置纬度
-- longitude 地理位置经度
-- scale 地图缩放大小
-- label 地理位置信息
-- precision 精度
-```
-
-```php
-<?php
-
-use EasyWeChat\Message\Location;
-
-$location = new Location([
-        'latitude'       => 23.134521,
-        'longitude'         => 113.358803,
-        'scale' => 20,
-        'label' => '北京市地震局...',
-        // ...
-    ]);
-
-// or
-$location = new Location();
-$location->latitude = 23.134521; // or $location->lat = $lat;
-$location->longitude = 113.358803; // or $location->lon = $lon;
-$location->scale = 20; // or $location->scale = 20;
-$location->label = '北京市地震局...'; // or $link->label = $label;
-
-// or
-$location = new Location();
-$location->setAttribute('url', 'http://easywechat.org');
-// ...
-```
+> 微信目前不支持回复坐标消息
 
 ### 图文消息
 
