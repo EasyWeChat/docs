@@ -1,7 +1,7 @@
 title: 企业支付
 ---
 
-你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 现金红包文档 ](https://pay.weixin.qq.com/wiki/doc/api/cash_coupon.php?chapter=13_1)。
+你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 企业付款文档 ](https://pay.weixin.qq.com/wiki/doc/api/mch_pay.php?chapter=14_1)。
 
 ## 配置
 
