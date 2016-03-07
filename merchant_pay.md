@@ -38,11 +38,11 @@ $merchantMoney = $app->merchant_pay;
 <?php
 
     $merchantMoneyData = [
-            'partner_trade_no' => str_random(8),
-            'openid' => 'ogsWRv68KexdBbDR7K9DuDK0sukY',
+            'partner_trade_no' => str_random(16), //随机字符串作为订单号，跟红包和支付一个概念。
+            'openid' => $openid, //收款人的openid
             'check_name' => 'NO_CHECK',  //文档中三分钟校验实名的方法NO_CHECK OPTION_CHECK FORCE_CHECK
             're_user_name'=>'张三',     //OPTION_CHECK FORCE_CHECK 校验实名的时候必须提交
-            'amount' => 100,  //单位为分，不小于300
+            'amount' => 100,  //单位为分
             'desc' => '企业付款',
             'spbill_create_ip' => '192.168.0.1',  //发起交易的IP地址
         ];
