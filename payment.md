@@ -13,12 +13,17 @@ title: 支付
 use EasyWeChat\Foundation\Application;
 
 $options = [
+    // 前面的appid什么的也得保留哦
+    'app_id' => 'xxxx',
+    // ...
+    
     // payment
     'payment' => [
         'merchant_id'        => 'your-mch-id',
         'key'                => 'key-for-signature',
         'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
         'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+        'notify_url'         => '默认的订单回调地址',       // 你也可以在下单时单独设置来想覆盖它
         // 'device_info'     => '013467007045764',
         // 'sub_app_id'      => '',
         // 'sub_merchant_id' => '',
@@ -43,7 +48,7 @@ $attributes = [
     'detail'           => 'iPad mini 16G 白色',
     'out_trade_no'     => '1217752501201407033233368018',
     'total_fee'        => 5388,
-    'notify_url'       => 'http://xxx.com/order-notify', // 支付结果通知网址
+    'notify_url'       => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
     // ...
 ];
 
@@ -93,7 +98,7 @@ return $response;// 或者 $response->send()
 1. `handleNotify` 只接收一个 [`callable`](http://php.net/manual/zh/language.types.callable.php) 参数，通常用一个匿名函数即可。
 2. 该匿名函数接收两个参数，这两个参数分别为：
 
-    - `$notify` 为封装了通知信息的 Collection 对象，前面已经讲过这里就不赘述了，你可以以对象或者数组形式来读取通知内容，比如：`$notify->total_fee` 或者 `$notify['total_fee']`。
+    - `$notify` 为封装了通知信息的 `EasyWeChat\Support\Collection` 对象，前面已经讲过这里就不赘述了，你可以以对象或者数组形式来读取通知内容，比如：`$notify->total_fee` 或者 `$notify['total_fee']`。
     - `$successful` 这个参数其实就是判断 **用户是否付款成功了**（result_code == 'SUCCESS'）
 
 3. 该函数返回值就是告诉微信 **“我是否处理完成”**，如果你返回一个 `false` 或者一个具体的错误消息，那么微信会在稍后再次继续通知你，直到你明确的告诉它：“我已经处理完成了”，在函数里 `return true;` 代表处理完成。
