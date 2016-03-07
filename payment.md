@@ -159,7 +159,7 @@ $payment->reverse($orderNo);
 ```php
 
 $orderNo = "微信的订单号（transaction_id）";
-$payment->reverseByTranscationId($orderNo);
+$payment->reverseByTransactionId($orderNo);
 ```
 
 
@@ -184,7 +184,7 @@ $payment->query($orderNo);
 ```php
 
 $orderNo = "微信的订单号（transaction_id）";
-$payment->queryByTranscationId($orderNo);
+$payment->queryByTransactionId($orderNo);
 ```
 
 ## 关闭订单
@@ -220,7 +220,7 @@ $result = $payment->refund($orderNo, 100, 80, 1900000109); // 总金额 100， �
 ```php
 $result = $payment->queryRefund($outTradeNo);
 // or
-$result = $payment->queryRefundByTranscationId($transactionId);
+$result = $payment->queryRefundByTransactionId($transactionId);
 // or
 $result = $payment->queryRefundByRefundNo($outRefundNo);
 // or
