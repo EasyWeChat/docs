@@ -206,12 +206,14 @@ $payment->close($orderNo);
 > 2、微信支付退款支持单笔交易分多次退款，多次退款需要提交原支付订单的商户订单号和设置不同的退款单号。一笔退款失败后重新提交，要采用原来的退款单号。总退款金额不能超过用户实际支付金额。
 
 ```php
-$result = $payment->refund($orderNo, 100); // 总金额 100， 退款 100，操作员：商户号
+$result = $payment->refund($orderNo, $refundNo, 100); // 总金额 100 退款 100，操作员：商户号
 // or
-$result = $payment->refund($orderNo, 100, 80); // 总金额 100， 退款 80，操作员：商户号
+$result = $payment->refund($orderNo, $refundNo, 100, 80); // 总金额 100， 退款 80，操作员：商户号
 // or
-$result = $payment->refund($orderNo, 100, 80, 1900000109); // 总金额 100， 退款 80，操作员：1900000109
+$result = $payment->refund($orderNo, $refundNo, 100, 80, 1900000109); // 总金额 100， 退款 80，操作员：1900000109
 ```
+
+> $refundNo 为商户退款单号，自己生成用于自己识别即可。
 
 ## 查询退款
 
