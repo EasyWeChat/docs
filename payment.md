@@ -16,7 +16,7 @@ $options = [
     // 前面的appid什么的也得保留哦
     'app_id' => 'xxxx',
     // ...
-    
+
     // payment
     'payment' => [
         'merchant_id'        => 'your-mch-id',
@@ -235,6 +235,10 @@ $result = $payment->queryRefundByRefundId($refundId);
 $bill = $payment->downloadBill('20140603'); // type: ALL
 // or
 $bill = $payment->downloadBill('20140603', 'SUCCESS'); // type: SUCCESS
+// bill 为 csv 格式的内容
+
+// 保存为文件
+file_put_contents('YOUR/PATH/TO/bill-20140603.csv', $bill);
 ```
 
 第二个参数为类型：
