@@ -46,6 +46,15 @@ $server->setMessageHandler(function ($message) {
         case 'voice':
             # 语音消息...
             break;
+        case 'video':
+            # 视频消息...
+            break;
+        case 'location':
+            # 坐标消息...
+            break;
+        case 'link':
+            # 链接消息...
+            break;
         // ... 其它消息
         default:
             # code...
@@ -62,24 +71,50 @@ $server->setMessageHandler(function ($message) {
 
 当你接收到用户发来的消息时，可能会提取消息中的相关属性，那么请参考：
 
-请求消息基本属性：
+请求消息基本属性(以下所有消息都有的基本忏悔)：
 
     ToUserName    接收方帐号（该公众号 ID）
-    FromUserName  发送方帐号（代表用户的唯一标识）
+    FromUserName  发送方帐号（OpenID, 代表用户的唯一标识）
     CreateTime    消息创建时间（时间戳）
     MsgId         消息 ID（64位整型）
 
-文本消息请求：
+### 文本消息请求：
 
     MsgType  text
     Content  文本消息内容
 
-图片消息请求：
+### 图片消息请求：
 
     MsgType  image
     PicUrl   图片链接
 
-地理位置消息请求：
+### 语音专有属性：
+
+    MsgType        voice
+    MediaId        语音消息媒体id，可以调用多媒体文件下载接口拉取数据。
+    Format         语音格式，如 amr，speex 等
+    Recongnition * 开通语音识别后才有
+
+    > 请注意，开通语音识别后，用户每次发送语音给公众号时，微信会在推送的语音消息XML数据包中，增加一个 `Recongnition` 字段
+
+### 视频专有属性：
+
+    MsgType       video
+    MediaId       视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
+    ThumbMediaId  视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
+
+### 小视专有属性：
+
+    MsgType     shortvideo
+    MediaId     视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
+    ThumbMediaId    视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
+
+### 事件消息专有属性：
+
+    MsgType event
+    Event   事件类型 （如：subscribe(订阅)、unsubscribe(取消订阅) ...）
+
+### 地理位置消息请求：
 
     MsgType     location
     Location_X  地理位置纬度
@@ -87,7 +122,7 @@ $server->setMessageHandler(function ($message) {
     Scale       地图缩放大小
     Label       地理位置信息
 
-链接消息请求：
+### 链接消息请求：
 
     MsgType      link
     Title        消息标题
