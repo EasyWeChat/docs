@@ -78,17 +78,17 @@ $server->setMessageHandler(function ($message) {
     CreateTime    消息创建时间（时间戳）
     MsgId         消息 ID（64位整型）
 
-### 文本消息请求：
+### 文本：
 
     MsgType  text
     Content  文本消息内容
 
-### 图片消息请求：
+### 图片：
 
     MsgType  image
     PicUrl   图片链接
 
-### 语音专有属性：
+### 语音：
 
     MsgType        voice
     MediaId        语音消息媒体id，可以调用多媒体文件下载接口拉取数据。
@@ -97,24 +97,24 @@ $server->setMessageHandler(function ($message) {
 
     > 请注意，开通语音识别后，用户每次发送语音给公众号时，微信会在推送的语音消息XML数据包中，增加一个 `Recongnition` 字段
 
-### 视频专有属性：
+### 视频：
 
     MsgType       video
     MediaId       视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
     ThumbMediaId  视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
 
-### 小视专有属性：
+### 小视频：
 
     MsgType     shortvideo
     MediaId     视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
     ThumbMediaId    视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
 
-### 事件消息专有属性：
+### 事件：
 
     MsgType event
     Event   事件类型 （如：subscribe(订阅)、unsubscribe(取消订阅) ...）
 
-### 地理位置消息请求：
+### 地理位置：
 
     MsgType     location
     Location_X  地理位置纬度
@@ -122,7 +122,7 @@ $server->setMessageHandler(function ($message) {
     Scale       地图缩放大小
     Label       地理位置信息
 
-### 链接消息请求：
+### 链接：
 
     MsgType      link
     Title        消息标题
