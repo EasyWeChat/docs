@@ -74,7 +74,7 @@ $result = $payment->pay($order);
 
 ```php
 $result = $payment->prepare($order);
-$prepareId = $result->prepay_id;
+$prepayId = $result->prepay_id;
 ```
 
 ## 支付结果通知
