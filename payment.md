@@ -298,8 +298,9 @@ if (empty($_GET['code'])) {
 }
 // 授权回来
 $oauthUser = $app->oauth->user();
-$token = $user->getAccessToken();
-$jsConfig = $payment->configForShareAddress($token);
+$token = $oauthuser->getAccessToken();
+$access_token = $token->access_token;
+$editAddress = $payment->configForShareAddress($access_token);
 
 // 拿着这个生成好的配置 jsConfig 去订单页（或者直接显示订单页）写js
 // ...
