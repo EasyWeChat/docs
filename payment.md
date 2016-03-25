@@ -282,8 +282,27 @@ $json = $payment->configForPayment($prepayId);
 
 ## 生成共享收货地址 JS 配置
 
+1. 发起 OAuth 授权：
+
 ```php
-$json = $payment->configForShareAddress($app->access_token);
+use EasyWeChat\Support\Url as UrlHelper;
+
+// 检查当前不是微信 oauth 的回调，则跳过去授权
+// 注意，授权回调地址为当前页
+if (empty($_GET['code'])) {
+    $currentUrl = UrlHelper::current(); // 获取当前页 URL
+    $response = $app->oauth->scopes(['snsapi_base'])->redirect($currentUrl);
+
+    return $response; // or echo $response;
+
+}
+// 授权回来
+$oauthUser = $app->oauth->user();
+$token = $user->getAccessToken();
+$json = $payment->configForShareAddress($token);
+
+// 拿着这个生成好的配置json去订单页（或者直接显示订单页）写js
+// ...
 ```
 
 ## 生成 APP 支付配置
