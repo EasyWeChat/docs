@@ -16,12 +16,12 @@ $url = $app->url;
 
 ## API
 
-+ `short($url)` 长链接转短链接
++ `shorten($url)` 长链接转短链接
 
 example:
 
 ```php
-$shortUrl = $url->short('http://overtrue.me/open-source');
+$shortUrl = $url->shorten('http://overtrue.me/open-source');
 //
 ```
 
