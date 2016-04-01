@@ -113,13 +113,16 @@ $server->setMessageHandler(function ($message) {
 
     MsgType     event
     Event       事件类型 （如：subscribe(订阅)、unsubscribe(取消订阅) ...， CLICK 等）
+
     # 扫描带参数二维码事件
     EventKey    事件KEY值，比如：qrscene_123123，qrscene_为前缀，后面为二维码的参数值
     Ticket      二维码的 ticket，可用来换取二维码图片
+
     # 上报地理位置事件
     Latitude    23.137466   地理位置纬度
     Longitude   113.352425  地理位置经度
     Precision   119.385040  地理位置精度
+
     # 自定义菜单事件
     EventKey    事件KEY值，与自定义菜单接口中KEY值对应，如：CUSTOM_KEY_001, www.qq.com
 
