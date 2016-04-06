@@ -71,7 +71,7 @@ $server->setMessageHandler(function ($message) {
 
 当你接收到用户发来的消息时，可能会提取消息中的相关属性，那么请参考：
 
-请求消息基本属性(以下所有消息都有的基本忏悔)：
+请求消息基本属性(以下所有消息都有的基本属性)：
 
     ToUserName    接收方帐号（该公众号 ID）
     FromUserName  发送方帐号（OpenID, 代表用户的唯一标识）
