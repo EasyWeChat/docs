@@ -110,7 +110,7 @@ OK, 有了上面的代码，那么请你按 **[微信官方的接入指引](http
 ```php
 // ...
 
-$server->setMessageHandler(function ($message) {
+$app->server->serve()->setMessageHandler(function ($message) {
     return "您好！欢迎关注我!";
 });
 
