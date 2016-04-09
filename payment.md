@@ -298,7 +298,7 @@ if (empty($_GET['code'])) {
 }
 // 授权回来
 $oauthUser = $app->oauth->user();
-$token = $user->getAccessToken();
+$token = $oauthUser->getAccessToken();
 $configForPickAddress = $payment->configForShareAddress($token);
 
 // 拿着这个生成好的配置 $configForPickAddress 去订单页（或者直接显示订单页）写 js 调用了
