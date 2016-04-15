@@ -34,7 +34,7 @@ $token = $accessToken->getToken(); // token 字符串
 
 你也可以自定义 token 的缓存方式，把一个实现了 `Doctrine\Common\Cache\Cache` 缓存接口的实例作为 AccessToken 构造函数的第三个参数传入即可：
 
-本项目使用 [doctrine/cache](https://github.com/doctrine/cache) 来完成缓存工作，它支持基本目前所有的缓存引擎。
+本项目使用 [doctrine/cache](https://github.com/doctrine/cache) 来完成缓存工作，它支持几乎目前所有的缓存引擎。
 
 以 Redis 为例：
 
