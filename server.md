@@ -147,4 +147,8 @@ $server->setMessageHandler(function ($message) {
 
 如果你想返回一个自己手动拼的原生 XML 格式消息，请返回一个 [`EasyWeChat\Message\Raw`](https://github.com/EasyWeChat/message/blob/master/src/Raw.php) 实例即可。
 
+## 消息转发给客服系统
+
+参见：[多客服消息转发](message-transfer.html)
+
 关于消息的使用，请参考 [`消息`](docs/messages.html) 章节。
