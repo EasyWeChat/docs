@@ -276,9 +276,51 @@ $response->openid;
 
 ## 生成支付 JS 配置
 
-```php
-$json = $payment->configForPayment($prepayId);
-```
+有两种发起支付的方式：[WeixinJSBridge](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6), [JSSDK](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115&token=&lang=zh_CN)
+
+1. WeixinJSBridge:
+
+    ```php
+    $json = $payment->configForPayment($prepayId); // 返回 json 字符串，如果想返回数组，传第二个参数 true
+    ```
+
+    javascript:
+
+    ```js
+    ...
+    WeixinJSBridge.invoke(
+           'getBrandWCPayRequest', <?= $json ?>,
+           function(res){
+               if(res.err_msg == "get_brand_wcpay_request：ok" ) {
+                    // 使用以上方式判断前端返回,微信团队郑重提示：
+                    // res.err_msg将在用户支付成功后返回
+                    // ok，但并不保证它绝对可靠。
+               }
+           }
+       );
+    ...
+    ```
+
+2. JSSDK:
+
+    ```php
+    $config = $payment->configForJSSDKPayment($prepayId); // 返回数组
+    ```
+
+    javascript:
+
+    ```js
+    wx.chooseWXPay({
+        timestamp: <?= $config['timestamp'] ?>,
+        nonceStr: '<?= $config['nonceStr'] ?>',
+        package: '<?= $config['package'] ?>',
+        signType: '<?= $config['signType'] ?>',
+        paySign: '<?= $config['paySign'] ?>', // 支付签名
+        success: function (res) {
+            // 支付成功后的回调函数
+        }
+    });
+    ```
 
 ## 生成共享收货地址 JS 配置
 
