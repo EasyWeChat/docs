@@ -279,6 +279,7 @@ $response->openid;
 ```php
 $json = $payment->configForPayment($prepayId);
 ```
+> 注意：输出到h5页面里的配置要处理下json ,其中 timestamp 必须是小写!!!! 原样输出是 timeStamp 这个坑有点大，微信支付文档好坑.
 
 ## 生成共享收货地址 JS 配置
 
