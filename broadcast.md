@@ -17,18 +17,35 @@ $broadcast = $app->broadcast;
 
 ## API
 
+> 注意
+
+下面提到的 `$messageType` 、`$message` 可以是：
+
+- `$messageType = Broadcast::MSG_TYPE_NEWS;` 图文消息类型，所对应的 `$message` 为 media_id
+- `$messageType = Broadcast::MSG_TYPE_TEXT;` 文本消息类型，所对应的 `$message` 为一个文本字符串
+- `$messageType = Broadcast::MSG_TYPE_VOICE;` 语音消息类型，所对应的 `$message` 为 media_id
+- `$messageType = Broadcast::MSG_TYPE_IMAGE;` 图片消息类型，所对应的 `$message` 为 media_id
+- `$messageType = Broadcast::MSG_TYPE_CARD;` 卡券消息类型，所对应的 `$message` 为 card_id
+- `$messageType = Broadcast::MSG_TYPE_VIDEO;` 视频消息为两种情况：
+    - 视频消息类型，群发视频消息给**组或预览群发视频消息**给用户时所对应的 `$message` 为`media_id`
+    - 群发视频消息**给指定用户**时所对应的 `$message` 为一个数组 `['MEDIA_ID', 'TITLE', 'DESCRIPTION']`
+
+
 ### 群发消息给所有粉丝
 
 ```php
 $broadcast->send($messageType, $message);
 
 // 别名方式
-$broadcast->sendText($message);
-$broadcast->sendNews($message);
-$broadcast->sendVoice($message);
-$broadcast->sendImage($message);
+$broadcast->sendText("大家好！欢迎使用 EasyWeChat。");
+$broadcast->sendNews($mediaId);
+$broadcast->sendVoice($mediaId);
+$broadcast->sendImage($mediaId);
+//视频：
+// - 群发给组用户，或者预览群发视频时 $message 为 media_id
+// - 群发给指定用户时为数组：[$media_Id, $title, $description]
 $broadcast->sendVideo($message);
-$broadcast->sendCard($message);
+$broadcast->sendCard($cardId);
 ```
 
 ### 群发消息给指定组
@@ -37,12 +54,12 @@ $broadcast->sendCard($message);
 $broadcast->send($messageType, $message, $groupId);
 
 // 别名方式
-$broadcast->sendText($message, $groupId);
-$broadcast->sendNews($message, $groupId);
-$broadcast->sendVoice($message, $groupId);
-$broadcast->sendImage($message, $groupId);
+$broadcast->sendText($text, $groupId);
+$broadcast->sendNews($mediaId, $groupId);
+$broadcast->sendVoice($mediaId, $groupId);
+$broadcast->sendImage($mediaId, $groupId);
 $broadcast->sendVideo($message, $groupId);
-$broadcast->sendCard($message, $groupId);
+$broadcast->sendCard($cardId, $groupId);
 ```
 
 ### 群发消息给指定用户
@@ -53,12 +70,12 @@ $broadcast->sendCard($message, $groupId);
 $broadcast->send($messageType, $message, [$openId1, $openId2]);
 
 // 别名方式
-$broadcast->sendText($message, [$openId1, $openId2]);
-$broadcast->sendNews($message, [$openId1, $openId2]);
-$broadcast->sendVoice($message, [$openId1, $openId2]);
-$broadcast->sendImage($message, [$openId1, $openId2]);
+$broadcast->sendText($text, [$openId1, $openId2]);
+$broadcast->sendNews($mediaId, [$openId1, $openId2]);
+$broadcast->sendVoice($mediaId, [$openId1, $openId2]);
+$broadcast->sendImage($mediaId, [$openId1, $openId2]);
 $broadcast->sendVideo($message, [$openId1, $openId2]);
-$broadcast->sendCard($message, [$openId1, $openId2]);
+$broadcast->sendCard($cardId, [$openId1, $openId2]);
 ```
 
 ### 发送预览群发消息给指定的 `openId` 用户
@@ -67,12 +84,12 @@ $broadcast->sendCard($message, [$openId1, $openId2]);
 $broadcast->preview($messageType, $message, $openId);
 
 // 别名方式
-$broadcast->previewText($message, $openId);
-$broadcast->previewNews($message, $openId);
-$broadcast->previewVoice($message, $openId);
-$broadcast->previewImage($message, $openId);
+$broadcast->previewText($text, $openId);
+$broadcast->previewNews($mediaId, $openId);
+$broadcast->previewVoice($mediaId, $openId);
+$broadcast->previewImage($mediaId, $openId);
 $broadcast->previewVideo($message, $openId);
-$broadcast->previewCard($message, $openId);
+$broadcast->previewCard($cardId, $openId);
 ```
 
 ### 发送预览群发消息给指定的微信号用户
@@ -81,12 +98,12 @@ $broadcast->previewCard($message, $openId);
 $broadcast->previewByName($messageType, $message, $wxname);
 
 // 别名方式
-$broadcast->previewTextByName($message, $wxname);
-$broadcast->previewNewsByName($message, $wxname);
-$broadcast->previewVoiceByName($message, $wxname);
-$broadcast->previewImageByName($message, $wxname);
+$broadcast->previewTextByName($text, $wxname);
+$broadcast->previewNewsByName($mediaId, $wxname);
+$broadcast->previewVoiceByName($mediaId, $wxname);
+$broadcast->previewImageByName($mediaId, $wxname);
 $broadcast->previewVideoByName($message, $wxname);
-$broadcast->previewCardByName($message, $wxname);
+$broadcast->previewCardByName($cardId, $wxname);
 ```
 
 ### 删除群发消息
@@ -100,15 +117,5 @@ $broadcast->delete($msgId);
 ```php
 $broadcast->status($msgId);
 ```
-
-上面提到的 `$messageType` 、`$message` 可以是：
-
-- `$messageType = Broadcast::MSG_TYPE_NEWS;` 图文消息类型，所对应的 `$message` 为 media_id
-- `$messageType = Broadcast::MSG_TYPE_TEXT;` 文本消息类型，所对应的 `$message` 为一个文本字符串
-- `$messageType = Broadcast::MSG_TYPE_VOICE;` 语音消息类型，所对应的 `$message` 为 media_id
-- `$messageType = Broadcast::MSG_TYPE_IMAGE;` 图片消息类型，所对应的 `$message` 为 media_id
-- `$messageType = Broadcast::MSG_TYPE_CARD;` 卡券消息类型，所对应的 `$message` 为 card_id
-- `$messageType = Broadcast::MSG_TYPE_VIDEO;` 视频消息类型，群发视频消息给组或预览群发视频消息给用户时所对应的 `$message` 为
-`media_id`，群发视频消息给指定用户时所对应的 `$message` 为一个数组 `['MEDIA_ID', 'TITLE', 'DESCRIPTION']`
 
 有关群发信息的更多细节请参考微信官方文档：http://mp.weixin.qq.com/wiki/15/5380a4e6f02f2ffdc7981a8ed7a40753.html
