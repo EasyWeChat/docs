@@ -11,8 +11,8 @@ title: 疑难解答
 
 # 一些服务器基本设施问题：
 
-- 时区不对， 使用命令 `date` 可以在服务器上查看当前时间，如果发现时区不对则需要修改时区：[Setting The Correct Timezone In CentOS And Ubuntu Servers With NTP](https://www.liberiangeek.net/2013/02/setting-the-correct-timezone-in-centos-and-ubuntu-servers-with-ntp/)
-- ...
+    - 时区不对， 使用命令 `date` 可以在服务器上查看当前时间，如果发现时区不对则需要修改时区：[Setting The Correct Timezone In CentOS And Ubuntu Servers With NTP](https://www.liberiangeek.net/2013/02/setting-the-correct-timezone-in-centos-and-ubuntu-servers-with-ntp/)
+    - ...
 
 
 ## curl: (60) SSL certificate problem: unable to get local issuer certificate
