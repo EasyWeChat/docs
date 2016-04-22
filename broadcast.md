@@ -17,18 +17,18 @@ $broadcast = $app->broadcast;
 
 ## API
 
-> 注意
+> 注意：
 
-下面提到的 `$messageType` 、`$message` 可以是：
+    下面提到的 `$messageType` 、`$message` 可以是：
 
-- `$messageType = Broadcast::MSG_TYPE_NEWS;` 图文消息类型，所对应的 `$message` 为 media_id
-- `$messageType = Broadcast::MSG_TYPE_TEXT;` 文本消息类型，所对应的 `$message` 为一个文本字符串
-- `$messageType = Broadcast::MSG_TYPE_VOICE;` 语音消息类型，所对应的 `$message` 为 media_id
-- `$messageType = Broadcast::MSG_TYPE_IMAGE;` 图片消息类型，所对应的 `$message` 为 media_id
-- `$messageType = Broadcast::MSG_TYPE_CARD;` 卡券消息类型，所对应的 `$message` 为 card_id
-- `$messageType = Broadcast::MSG_TYPE_VIDEO;` 视频消息为两种情况：
-    - 视频消息类型，群发视频消息给**组或预览群发视频消息**给用户时所对应的 `$message` 为`media_id`
-    - 群发视频消息**给指定用户**时所对应的 `$message` 为一个数组 `['MEDIA_ID', 'TITLE', 'DESCRIPTION']`
+    - `$messageType = Broadcast::MSG_TYPE_NEWS;` 图文消息类型，所对应的 `$message` 为 media_id
+    - `$messageType = Broadcast::MSG_TYPE_TEXT;` 文本消息类型，所对应的 `$message` 为一个文本字符串
+    - `$messageType = Broadcast::MSG_TYPE_VOICE;` 语音消息类型，所对应的 `$message` 为 media_id
+    - `$messageType = Broadcast::MSG_TYPE_IMAGE;` 图片消息类型，所对应的 `$message` 为 media_id
+    - `$messageType = Broadcast::MSG_TYPE_CARD;` 卡券消息类型，所对应的 `$message` 为 card_id
+    - `$messageType = Broadcast::MSG_TYPE_VIDEO;` 视频消息为两种情况：
+        - 视频消息类型，群发视频消息给**组或预览群发视频消息**给用户时所对应的 `$message` 为`media_id`
+        - 群发视频消息**给指定用户**时所对应的 `$message` 为一个数组 `['MEDIA_ID', 'TITLE', 'DESCRIPTION']`
 
 
 ### 群发消息给所有粉丝
