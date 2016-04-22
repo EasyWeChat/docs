@@ -74,7 +74,9 @@ $result = $payment->pay($order);
 
 ```php
 $result = $payment->prepare($order);
-$prepayId = $result->prepay_id;
+if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
+    $prepayId = $result->prepay_id;
+}
 ```
 
 ## 支付结果通知
