@@ -1,7 +1,7 @@
 title: 红包
 ---
 
-你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 现金红包文档 ](https://pay.weixin.qq.com/wiki/doc/api/cash_coupon.php?chapter=13_1)。
+你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 现金红包文档 ](https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_1)。
 
 ## 配置
 
