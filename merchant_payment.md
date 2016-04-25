@@ -1,7 +1,7 @@
 title: 企业支付
 ---
 
-你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 企业付款文档 ](https://pay.weixin.qq.com/wiki/doc/api/mch_pay.php?chapter=14_1)。
+你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 企业付款文档 ](https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_1)。
 
 ## 配置
 
@@ -40,7 +40,7 @@ $merchantPay = $app->merchant_pay;
 $merchantPayData = [
         'partner_trade_no' => str_random(16), //随机字符串作为订单号，跟红包和支付一个概念。
         'openid' => $openid, //收款人的openid
-        'check_name' => 'NO_CHECK',  //文档中三分钟校验实名的方法NO_CHECK OPTION_CHECK FORCE_CHECK
+        'check_name' => 'NO_CHECK',  //文档中有三种校验实名的方法 NO_CHECK OPTION_CHECK FORCE_CHECK
         're_user_name'=>'张三',     //OPTION_CHECK FORCE_CHECK 校验实名的时候必须提交
         'amount' => 100,  //单位为分
         'desc' => '企业付款',
