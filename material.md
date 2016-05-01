@@ -35,7 +35,7 @@ $temporary = $app->material_temporary;
 ### 上传图片:
 
 ```php
-$result = $material->uploadImage("/path/to/your/image.jpg"); // 请使用绝对路径！！！
+$result = $material->uploadImage("/path/to/your/image.jpg");  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
 var_dump($result);
 // {
 //    "media_id":MEDIA_ID,
@@ -50,7 +50,7 @@ var_dump($result);
 语音**大小不超过 5M**，**长度不超过 60 秒**，支持 `mp3/wma/wav/amr` 格式。
 
 ```php
-$result = $material->uploadVoice("/path/to/your/voice.mp3");// 请使用绝对路径！！！
+$result = $material->uploadVoice("/path/to/your/voice.mp3"); // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
 $mediaId = $result->media_id;
 // {
 //    "media_id":MEDIA_ID,
@@ -60,7 +60,7 @@ $mediaId = $result->media_id;
 ### 上传视频
 
 ```php
-$result = $material->uploadVideo("/path/to/your/video.mp4", "视频标题", "视频描述");// 请使用绝对路径！！！
+$result = $material->uploadVideo("/path/to/your/video.mp4", "视频标题", "视频描述"); // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
 $mediaId = $result->media_id;
 // {
 //    "media_id":MEDIA_ID,
@@ -72,7 +72,7 @@ $mediaId = $result->media_id;
 用于视频封面或者音乐封面。
 
 ```php
-$result = $material->uploadThumb("/path/to/your/thumb.jpg");// 请使用绝对路径！！！
+$result = $material->uploadThumb("/path/to/your/thumb.jpg"); // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
 $mediaId = $result->media_id;
 // {
 //    "media_id":MEDIA_ID,
@@ -301,7 +301,7 @@ $temporary->uploadThumb($path);
 
 ```php
 $content = $media->getStream($mediaId);
-file_put_contents('/tmp/abc.jpg', $content);// 请使用绝对路径！！！
+file_put_contents('/tmp/abc.jpg', $content);// 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
 ```
 
 ### 下载临时素材到本地
