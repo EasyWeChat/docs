@@ -13,7 +13,7 @@ use EasyWeChat\Foundation\Application;
 
 $app = new Application($options);
 
-$group = $app->user_group; // $user['user_group'] 
+$group = $app->user_group; // $user['user_group']
 ```
 
 ## API
@@ -109,4 +109,4 @@ $openIds = [$openId1, $openId2, $openId3 ...];
 $group->moveUsers($openIds, $groupId);
 ```
 
-关于用户与用户组管理请参考微信官方文档：http://mp.weixin.qq.com/wiki/ `用户管理` 章节。
+关于用户管理请参考微信官方文档：http://mp.weixin.qq.com/wiki/ `用户管理` 章节。

@@ -91,4 +91,9 @@ example:
 $userGroupId = $userService->group($openId);
 ```
 
-关于用户与用户组管理请参考微信官方文档：http://mp.weixin.qq.com/wiki/ `用户管理` 章节。
+## 其它
+
+- [用户标签](user-tag.html)
+- [用户分组](user-group.html)
+
+关于用户管理请参考微信官方文档：http://mp.weixin.qq.com/wiki/ `用户管理` 章节。
