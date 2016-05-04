@@ -44,6 +44,7 @@ $payment = $app->payment;
 use EasyWeChat\Payment\Order;
 
 $attributes = [
+    'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
     'body'             => 'iPad mini 16G 白色',
     'detail'           => 'iPad mini 16G 白色',
     'out_trade_no'     => '1217752501201407033233368018',
