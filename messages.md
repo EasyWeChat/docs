@@ -257,7 +257,7 @@ $message = new Raw('{
 
 ### 在服务端回复消息
 
-在 [服务端](server.html) 一节中，我们讲了回复消息的写法：
+在 [服务端](zh-cn/docs/server.html) 一节中，我们讲了回复消息的写法：
 
 ```php
 // ... 前面部分省略
@@ -332,8 +332,8 @@ $app->staff->message([$news1, $news2, $news3, $news4])->to($openId)->send();
 
 ### 群发消息
 
-请参考：[群发消息](docs/broadcast.html)
+请参考：[群发消息](zh-cn/docs/broadcast.html)
 
 ## 消息转发给客服系统
 
-参见：[多客服消息转发](message-transfer.html)
+参见：[多客服消息转发](zh-cn/docs/message-transfer.html)
