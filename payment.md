@@ -284,7 +284,7 @@ $response->openid;
 1. WeixinJSBridge:
 
     ```php
-    $json = $payment->configForPayment($prepayId); // 返回 json 字符串，如果想返回数组，传第二个参数 true
+    $json = $payment->configForPayment($prepayId); // 返回 json 字符串，如果想返回数组，传第二个参数 false
     ```
 
     javascript:
