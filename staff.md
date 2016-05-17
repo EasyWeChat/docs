@@ -58,11 +58,13 @@ $staff->avatar($email, $avatarPath);
 $staff->message($message)->to($openId)->send();
 ```
 
+> `$message` 为消息对象，请参考：[消息](messages.html)
+
 ### 指定客服发送消息
 
 ```php
 $staff->message($message)->by('account@test')->to($openId)->send();
 ```
-
+> `$message` 为消息对象，请参考：[消息](messages.html)
 
 关于更多客服接口信息请参考微信官方文档：http://mp.weixin.qq.com/wiki/9/6fff6f191ef92c126b043ada035cc935.html

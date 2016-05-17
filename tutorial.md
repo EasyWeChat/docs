@@ -54,8 +54,10 @@ $options = [
 
 $app = new Application($options);
 
+$response = $app->server->serve();
+
 // 将响应输出
-$app->server->serve()->send();
+return $response; //其它框架：$response->send();
 
 ```
 
@@ -78,7 +80,10 @@ $options = [...];
 // 使用配置来初始化一个项目。
 $app = new Application($options);
 
-$app->server->serve()->send();
+$response = $app->server->serve();
+
+// 将响应输出
+return $response; //其它框架：$response->send();
 ```
 
 最后这一行我有必要详细讲一下：
@@ -87,12 +92,6 @@ $app->server->serve()->send();
 >1. 我们的 `$app->server->serve()` 就是执行服务端业务了，那么它的返回值呢，是一个 `Symfony\Component\HttpFoundation\Response` 实例。
 >2. 我这里是直接调用了它的 `send()` 方法，它就是直接输出了，我们在一些框架就不能直接输出了，那你就直接拿到 Response 实例后做相应的操作即可，比如 Laravel 里你就可以直接 `return $app->server->serve();`
 
-所以上面这行代码就相当于：
-
-```php
-$response = $app->server->serve();
-echo $response;
-```
 
 OK, 有了上面的代码，那么请你按 **[微信官方的接入指引](http://mp.weixin.qq.com/wiki/17/2d4265491f12608cd170a95559800f2d.html)** 操作，并相应修改上面的 `$options` 的配置。
 
@@ -114,7 +113,10 @@ $server->setMessageHandler(function ($message) {
     return "您好！欢迎关注我!";
 });
 
-$app->server->serve()->send();
+$response = $app->server->serve();
+
+// 将响应输出
+return $response; //其它框架：$response->send();
 
 ```
 

@@ -26,7 +26,9 @@ $server->setMessageHandler(function ($message) {
     return "您好！欢迎关注我!";
 });
 
-$server->serve()->send();
+$response = $server->serve();
+
+return $response; //其它框架：$response->send();
 ```
 
 这里我们使用 `setMessageHandler` 传入了一个 **闭包（[Closure](http://php.net/manual/en/class.closure.php)）**，该闭包接收一个参数 `$message` 为消息对象（Collection），这里需要注意的时，与 2.0 不同，2.0 当中我们对消息与事件做了区分，还对消息进行了分类（按 MsgType）。在 3.0 后，所有的消息包括事件都会使用 `setMessageHandler` 来处理，也就是说你可能需要在里面进行一些判断，例如：

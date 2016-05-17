@@ -34,7 +34,7 @@ $server->setMessageHandler(function($message){
 
 $response = $server->serve();
 
-echo $response;
+return $response; //其它框架：$response->send();
 ```
 
 更多请参考：[服务端](docs/server.html)
