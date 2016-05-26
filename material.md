@@ -243,7 +243,7 @@ $lists = $material->lists('image', 0, 10);
 ### 获取素材计数
 
 ```php
-$stats = $media->stats();
+$stats = $material->stats();
 
 // {
 //   "voice_count":COUNT,
@@ -256,7 +256,7 @@ $stats = $media->stats();
 ### 删除永久素材；
 
 ```php
-$media->delete($mediaId);
+$material->delete($mediaId);
 ```
 
 
@@ -300,7 +300,7 @@ $temporary->uploadThumb($path);
 比如图片、视频、声音等二进制流内容。
 
 ```php
-$content = $media->getStream($mediaId);
+$content = $temporary->getStream($mediaId);
 file_put_contents('/tmp/abc.jpg', $content);// 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
 ```
 
@@ -309,7 +309,7 @@ file_put_contents('/tmp/abc.jpg', $content);// 请使用绝对路径写法！除
 其实就是上一个 API 的封装。
 
 ```php
-$media->download($mediaId, "/tmp/", "abc.jpg");
+$temporary->download($mediaId, "/tmp/", "abc.jpg");
 ```
 
 参数说明：
