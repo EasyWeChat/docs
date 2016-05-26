@@ -357,3 +357,13 @@ $config = $payment->configForAppPayment($prepayId);
 ```
 
 `$config` 为数组格式，你可以用 API 返回给客户端
+
+# 二维码生成工具推荐
+
+你也许需要生成二维码，那么以下这些供参考：
+
+- https://github.com/endroid/QrCode
+- https://github.com/Bacon/BaconQrCode
+- https://github.com/SimpleSoftwareIO/simple-qrcode (Bacon/BaconQrCode 的 Laravel 版本)
+- https://github.com/aferrandini/PHPQRCode
+
