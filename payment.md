@@ -69,6 +69,8 @@ $order = new Order($attributes);
 $result = $payment->pay($order);
 ```
 
+> 也许你需要生成二维码图片，参考页面底部相关的包推荐
+
 ## 统一下单
 
 [公众号支付](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1)、[扫码支付](https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_1)、[APP 支付](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=9_1) 都统一使用此接口完成订单的创建。
