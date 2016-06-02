@@ -20,6 +20,14 @@ $token = $accessToken->getToken(); // token 字符串
 $token = $accessToken->getToken(true); // 强制重新从微信服务器获取 token.
 ```
 
+## 修改 `$app` 的 Access Token
+
+```php
+$app['access_token'] = $newAccessToken; // 生成方式见“生成自定义 Access Token”
+```
+
+## 生成自定义 Access Token
+
 如果你想生成自定义 `appId` 的 Access Token 实例，它的构造方法如下：
 
 ```php
