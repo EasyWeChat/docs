@@ -34,8 +34,10 @@ $server->setMessageHandler(function($message){
 
 $response = $server->serve();
 
-return $response; //其它框架：$response->send();
+$response->send(); //Laravel：$response->send();
 ```
+
+> 注意：`$response` 是一个对象，不要直接 echo.
 
 更多请参考：[服务端](docs/server.html)
 

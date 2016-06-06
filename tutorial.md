@@ -116,9 +116,11 @@ $server->setMessageHandler(function ($message) {
 $response = $app->server->serve();
 
 // 将响应输出
-return $response; //其它框架：$response->send();
+$response->send(); // Laravel 里请使用：return $response;
 
 ```
+
+> 注意：send() 方法里已经包含 echo 了，请不要再加 echo 在前面。
 
 好吧，打开你的微信客户端，向你的公众号发送任意一条消息，你应该会收到回复：`您好！欢迎关注我!`。
 
