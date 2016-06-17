@@ -42,6 +42,7 @@ $options = [
     'secret' => 'you-secret',
     'token'  => 'easywechat',
 
+
     // 'aes_key' => null, // 可选
 
     'log' => [
@@ -60,6 +61,8 @@ $response = $app->server->serve();
 return $response; //其它框架：$response->send();
 
 ```
+
+> :heart: 安全模式下请一定要填写 `aes_key`
 
 一个服务端带验证功能的代码已经完成，当然没有对消息做处理，别着急，后面我们再讲。
 
@@ -98,6 +101,8 @@ OK, 有了上面的代码，那么请你按 **[微信官方的接入指引](http
 > URL 就是我们的 `http://easywechat.org/server.php`，这里我是举例哦，你可不要填写我的域名。
 
 这样，点击提交验证就OK了。
+
+> :heart: 请一定要将微信后台的开发者模式 “**启用**” ！！！！！！看到红色 “**停用**” 才真正的是启用了。
 
 
 ## 接收 & 回复用户消息

@@ -32,7 +32,7 @@ return [
     'app_id'  => 'your-app-id',         // AppID
     'secret'  => 'your-app-secret',     // AppSecret
     'token'   => 'your-token',          // Token
-    'aes_key' => '',                    // EncodingAESKey
+    'aes_key' => '',                    // EncodingAESKey，安全模式下请一定要填写！！！
 
     /**
      * 日志配置
@@ -82,6 +82,8 @@ return [
     ],
 ];
 ```
+
+> :heart: 安全模式下请一定要填写 `aes_key`
 
 ## 日志文件
 
