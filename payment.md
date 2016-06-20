@@ -95,7 +95,7 @@ $response = $app->payment->handleNotify(function($notify, $successful){
     return true; // 或者错误消息
 });
 
-return $response;// 或者 $response->send()
+$response->send(); // Laravel 里请使用：return $response;
 ```
 
 这里需要注意的有几个点：

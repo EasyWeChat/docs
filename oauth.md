@@ -107,7 +107,7 @@ return $response;
 在有的框架中是直接 `echo` 或者 `$this->display()` 这种的时候，你就直接：
 
 ```php
-echo $response; // 或者  $response->send(); exit();
+$response->send(); // Laravel 里请使用：return $response;
 ```
 
 ### 获取已授权用户
