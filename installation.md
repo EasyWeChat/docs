@@ -16,5 +16,5 @@ Laravel 5 拓展包: [overtrue/laravel-wechat](https://github.com/overtrue/larav
 使用 [composer](http://getcomposer.org/):
 
 ```shell
-$ composer require overtrue/wechat:~3.0 -vvv
+$ composer require overtrue/wechat:~3.1 -vvv
 ```
