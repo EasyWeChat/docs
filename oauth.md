@@ -104,7 +104,7 @@ $response = $app->oauth->scopes(['snsapi_userinfo'])
 return $response;
 ```
 
-在有的框架中是直接 `echo` 或者 `$this->display()` 这种的时候，你就直接：
+在有的框架 (比如yii2) 中是直接 `echo` 或者 `$this->display()` 这种的时候，你就直接：
 
 ```php
 $response->send(); // Laravel 里请使用：return $response;
@@ -132,7 +132,7 @@ $user = $app->oauth->user();
 
 ## 网页授权实例
 
-我们这里来用原生 PHP 写法举个例子，`oauth_callback` 是我们的授权回调URL, `user/profile` 是我们需要授权才能访问的页面，它的 PHP 代码如下：
+我们这里来用原生 PHP 写法举个例子，`oauth_callback` 是我们的授权回调URL (未urlencode编码的URL), `user/profile` 是我们需要授权才能访问的页面，它的 PHP 代码如下：
 
 ```php
 // http://easywechat.org/user/profile
