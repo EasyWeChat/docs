@@ -38,6 +38,13 @@ $notice = new Notice($appId, $secret);
 + `int send($to = null, $templateId = null, array $data = array(), $url = null, $color = '#FF0000')`
 
   > send a template message and returned the message ID;
++ `array getPrivateTemplates()`
+
+  > Fetching all of template list;
++ `array deletePrivateTemplate($templateId)`
+
+  > Delete template by templateId;
+  
 
 ### None-Chained Method usage:
 
