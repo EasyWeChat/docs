@@ -22,7 +22,16 @@ $redis->connect('redis_host', 6379);
 
 $cacheDriver->setRedis($redis);
 
-$app->cache = $cacheDriver;
+$options = [
+    'debug'  => false,
+    'app_id' => $wechatInfo['app_id'],
+    'secret' => $wechatInfo['app_secret'],
+    'token'  => $wechatInfo['token'],
+    'aes_key' => $wechatInfo['aes_key'], // 可选
+    'cache'   => $cache,
+];
+
+$wechatApp = new Application($options);
 ```
 
 ### Laravel 中使用
