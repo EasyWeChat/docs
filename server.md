@@ -60,7 +60,7 @@ $server->setMessageHandler(function ($message) {
 
 某些情况，我们需要直接使用$message参数，那么怎么在setMessageHandler闭包外调用呢？
 
-    $message=Guard::getMessage();
+    $message = Guard::getMessage();
     
     
 
