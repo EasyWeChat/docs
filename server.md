@@ -73,6 +73,12 @@ $server->setMessageHandler(function ($message) {
 
 > :heart: 注意，默认没有验证是否为微信的请求，部署上线建议关掉 debug 模式。
 
+某些情况，我们需要直接使用 `$message` 参数，那么怎么在 `setMessageHandler` 闭包外调用呢？
+
+```php
+    $message = $server->getMessage();
+```
+
 ## 请求消息的属性
 
 当你接收到用户发来的消息时，可能会提取消息中的相关属性，那么请参考：
