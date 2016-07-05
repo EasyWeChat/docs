@@ -58,6 +58,12 @@ $server->setMessageHandler(function ($message) {
 
 当然，因为这里 `setMessageHandler` 接收一个 [`callable`](http://php.net/manual/zh/language.types.callable.php) 的参数，所以你不一定要传入一个 Closure 闭包，你可以选择传入一个函数名，一个 `[$class, $method]` 或者 `Foo::bar` 这样的类型。
 
+某些情况，我们需要直接使用$message参数，那么怎么在setMessageHandler闭包外调用呢？
+
+    $message=Guard::getMessage();
+    
+    
+
 ## 请求消息的属性
 
 当你接收到用户发来的消息时，可能会提取消息中的相关属性，那么请参考：
