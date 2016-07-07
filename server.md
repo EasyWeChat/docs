@@ -163,4 +163,4 @@ $server->setMessageHandler(function ($message) {
 
 参见：[多客服消息转发](message-transfer.html)
 
-关于消息的使用，请参考 [`消息`](docs/messages.html) 章节。
+关于消息的使用，请参考 [`消息`](messages.html) 章节。
