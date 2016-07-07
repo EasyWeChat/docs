@@ -93,7 +93,6 @@ $luckyMoneyData = [
     'total_num'        => 3,  //不小于3
     'total_amount'     => 300,  //单位为分，不小于300
     'wishing'          => '祝福语',
-    'client_ip'        => '192.168.0.1',  //可不传，不传则由 SDK 取当前客户端 IP
     'act_name'         => '测试活动',
     'remark'           => '测试备注',
     'amt_type'         => 'ALL_RAND',  //可不传
