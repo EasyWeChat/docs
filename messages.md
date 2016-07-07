@@ -332,7 +332,7 @@ $app->staff->message([$news1, $news2, $news3, $news4])->to($openId)->send();
 
 ### 群发消息
 
-请参考：[群发消息](docs/broadcast.html)
+请参考：[群发消息](broadcast.html)
 
 ## 消息转发给客服系统
 
