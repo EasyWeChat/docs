@@ -39,6 +39,6 @@ $response->send(); // Laravel 里请使用：return $response;
 
 > 注意：`$response` 是一个对象，不要直接 echo.
 
-更多请参考：[服务端](docs/server.html)
+更多请参考：[服务端](server.html)
 
-关于事件类型请参考微信官方文档：http://mp.weixin.qq.com/wiki/2/5baf56ce4947d35003b86a9805634b1e.html
+关于事件类型请参考微信官方文档：http://mp.weixin.qq.com/wiki/
