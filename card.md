@@ -41,9 +41,9 @@ $result = $card->getColors();
 $card->create($cardType, $baseInfo, $especial);
 ```
 
-- cardType 是要添加卡券的类型
-- baseInfo 为卡券的基本数据
-- especial 是扩展字段
+- `cardType` string - 是要添加卡券的类型
+- `baseInfo` array  - 为卡券的基本数据
+- `especial` array  - 是扩展字段
 
 example:
 
@@ -111,7 +111,7 @@ example:
 $card->QRCode($cards);
 ```
 
-- cards 卡券相关信息
+- `cards` array - 卡券相关信息
 
 example:
 
@@ -176,13 +176,13 @@ array(4) {
 
 ### ticket 换取二维码图片
 
-获取二维码ticket后，开发者可用ticket换取二维码图片。
+获取二维码 ticket 后，开发者可用 ticket 换取二维码图片。
 
 ```php
 $card->showQRCode($ticket);
 ```
 
-- ticket  获取的二维码ticket，凭借此ticket可以在有效时间内换取二维码。
+- `ticket` string  - 获取的二维码 ticket，凭借此 ticket 可以在有效时间内换取二维码。
 
 example:
 
@@ -190,7 +190,6 @@ example:
 $ticket = 'gQFF8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL01VTzN0T0hsS1BwUlBBYUszbVN5AAIEughxVwMEAKd2AA==';
 $result = $card->showQRCode($ticket);
 ```
-
 
 
 ### ticket 换取二维码链接
@@ -205,17 +204,6 @@ example:
 $ticket = 'gQFF8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL01VTzN0T0hsS1BwUlBBYUszbVN5AAIEughxVwMEAKd2AA==';
 $card->getQRCodeUrl($ticket);
 ```
-
-
-
-### 获取卡券APITicket
-
-```php
-$card->getAPITicket(true);  //参数为是否强制刷新，默认为false
-```
-
-- APITicket 是用于调用微信卡券JS API的临时票据，有效期为7200 秒，通过access_token 来获取
-
 
 ### JSAPI 卡券批量下发到用户
 
@@ -245,14 +233,14 @@ wx.addCard({
 开发者需调用该接口创建货架链接，用于卡券投放。创建货架时需填写投放路径的场景字段。
 
 ```php
-$card->createLandingPage($banner, $pageTitle, $canShare, $scene, $cardList);
+$card->createLandingPage($banner, $pageTitle, $canShare, $scene, $cards);
 ```
 
-- banner 是页面的banner图;
-- pageTitle 页面的title
-- canShare 管页面是不是可以分享，true或false
-- scene  投放页面的场景值，具体值请参考下面的example
-- cardList  卡券列表，每个元素有两个字段
+- `banner` string -页面的 banner 图;
+- `pageTitle` string - 页面的 title
+- `canShare` bool - 页面是不是可以分享，true 或 false
+- `scene`  string - 投放页面的场景值，具体值请参考下面的 example
+- `cards`  array - 卡券列表，每个元素有两个字段
 
 example:
 
@@ -288,8 +276,8 @@ $result = $card->createLandingPage($banner, $pageTitle, $canShare, $scene, $card
 $card->deposit($card_id, $code);
 ```
 
-- cardId 要导入code的卡券ID
-- code  要导入微信卡券后台的自定义code，最多100个
+- `cardId` string - 要导入code的卡券ID
+- `code` string - 要导入微信卡券后台的自定义 code，最多100个
 
 example:
 
@@ -361,22 +349,24 @@ $result = $card->getHtml($cardId);
 同时支持“openid”、“username”两种字段设置白名单，总数上限为10个。
 
 ```php
-$card->setTestWhitelist($openid, $username);
+$card->setTestWhitelist($openids); // 使用 openid
+$card->setTestWhitelistByUsername($usernames); // 使用 username
 ```
 
-- openid  测试的openid列表
-- username  测试的微信号列表
+- `openids` array - 测试的openid列表
+- `usernames` array  - 测试的微信号列表
 
 example:
 
 ```php
-$openid   = [];
-$username = ['tianye0327'];
+// by openid
+$openids   = [$openId, $openId2, $openid3...];
+$result = $card->setTestWhitelist($openids);
 
-$result = $card->setTestWhitelist($openid, $username);
+// by username
+$usernames = ['tianye0327', 'iovertrue'];
+$result = $card->setTestWhitelistByUsername($usernames);
 ```
-
-
 
 ### 查询Code接口
 
@@ -474,9 +464,9 @@ $result = $card->getCard($cardId);
 $card->lists($offset, $count, $statusList);
 ```
 
-- offset 查询卡列表的起始偏移量，从0开始
-- count 需要查询的卡片的数量
-- statusList  支持开发者拉出指定状态的卡券列表，详见example
+- `offset` int - 查询卡列表的起始偏移量，从0开始
+- `count` int - 需要查询的卡片的数量
+- `statusList` -  支持开发者拉出指定状态的卡券列表，详见example
 
 example:
 
@@ -504,7 +494,7 @@ $result = $card->lists($offset, $count, $statusList);
 $card->update($cardId, $type, $baseInfo);
 ```
 
-- type  卡券类型
+- `type` string - 卡券类型
 
 example:
 
@@ -536,7 +526,7 @@ $result = $card->update($cardId, $type, $baseInfo);
 $card->setPayCell($cardId, $isOpen);
 ```
 
-- isOpen  是否开启买单功能，填true/false，不填默认true
+- `isOpen` string - 是否开启买单功能，填 true/false，不填默认 true
 
 example:
 
@@ -556,8 +546,8 @@ $card->increaseStock($cardId, $amount); // 增加库存
 $card->reductStock($cardId, $amount); // 减少库存
 ```
 
-- cardId 卡券 ID
-- amount  修改多少库存
+- `cardId` string - 卡券 ID
+- `amount` int - 修改多少库存
 
 example:
 
@@ -574,7 +564,7 @@ $result = $card->increaseStock($cardId, 100);
 $card->updateCode($code, $newCode, $cardId);
 ```
 
-- newCode  变更后的有效Code码
+- `newCode` string - 变更后的有效Code码
 
 example:
 
@@ -624,10 +614,10 @@ $result = $card->disable($code, $cardId);
 ### 会员卡接口激活
 
 ```php
-$result = $card->activate($activate);
+$result = $card->activate($info);
 ```
 
-- activate  需要激活的会员卡信息
+- `info` - 需要激活的会员卡信息
 
 example:
 
@@ -655,8 +645,8 @@ $result = $card->activate($activate);
 $card->activateUserForm($cardId, $requiredForm, $optionalForm);
 ```
 
-- requiredForm  会员卡激活时的必填选项
-- optionalForm  会员卡激活时的选填项
+- `requiredForm` array - 会员卡激活时的必填选项
+- `optionalForm` array - 会员卡激活时的选填项
 
 example:
 
@@ -705,7 +695,7 @@ $result = $card->getMemberCardUser($cardId, $code);
 $card->updateMemberCardUser($updateUser);
 ```
 
-- updateUser  可以更新的会员信息
+- `updateUser` array - 可以更新的会员信息
 
 example:
 
@@ -733,14 +723,14 @@ $result = $card->updateMemberCardUser($updateUser);
 $card->craeteSubMerchant($brandName, $logoUrl, $protocol, $endTime, $primaryCategoryId, $secondaryCategoryId, $agreementMediaId, $operatorMediaId, $appId); 
 ```
 
-- `brand_name`  子商户名称（12个汉字内），该名称将在制券时填入并显示在卡券页面上
-- `logo_url`  子商户 logo，可通过上传 logo 接口获取。该 logo 将在制券时填入并显示在卡券页面上
-- `protocol`  授权函ID，即通过上传临时素材接口上传授权函后获得的 meida_id
-- `primary_category_id`  一级类目id,可以通过本文档中接口查询
-- `secondary_category_id`  二级类目id，可以通过本文档中接口查询
-- `agreement_media_id`  营业执照或个体工商户营业执照彩照或扫描件
-- `operator_mediaid`  营业执照内登记的经营者身份证彩照或扫描件
-- `app_id`  子商户的公众号 app_id，配置后子商户卡券券面上的 app_id 为该 app_id, app_id 须经过认证
+- `brand_name` string - 子商户名称（12个汉字内），该名称将在制券时填入并显示在卡券页面上
+- `logo_url`  string - 子商户 logo，可通过上传 logo 接口获取。该 logo 将在制券时填入并显示在卡券页面上
+- `protocol`  string - 授权函ID，即通过上传临时素材接口上传授权函后获得的 meida_id
+- `primary_category_id`  int - 一级类目id,可以通过本文档中接口查询
+- `secondary_category_id` int - 二级类目id，可以通过本文档中接口查询
+- `agreement_media_id`  string - 营业执照或个体工商户营业执照彩照或扫描件
+- `operator_media_id`  string - 营业执照内登记的经营者身份证彩照或扫描件
+- `app_id`  string - 子商户的公众号 app_id，配置后子商户卡券券面上的 app_id 为该 app_id, app_id 须经过认证
 
 example:
 
@@ -766,8 +756,8 @@ $result = $card->createSubMerchant($info);
 $card->updateSubMerchant($merchantId, $info);
 ```
 
-- `$merchantId` 子商户 ID
-- `$info` 参数与创建子商户参数一样
+- `$merchantId` int - 子商户 ID
+- `$info` array - 参数与创建子商户参数一样
 
 example:
 
@@ -790,4 +780,4 @@ example:
 $result = $card->getCategories();
 ```
 
-关于卡券接口的使用请参阅官方文档：http://mp.weixin.qq.com/wiki/9/d8a5f3b102915f30516d79b44fe665ed.html
+关于卡券接口的使用请参阅官方文档：http://mp.weixin.qq.com/wiki/
