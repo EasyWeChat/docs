@@ -1,5 +1,7 @@
 title: 卡券
 
+> added 3.1.1
+
 ## 获取实例
 
 ```php
@@ -12,7 +14,6 @@ $app = new Application($options);
 
 $card = $app->card;
 ```
-
 
 
 ## API列表
@@ -47,7 +48,7 @@ example:
 
 ```php
 <?php
-  
+
 	$cardType = 'GROUPON';
 
     $baseInfo = [
@@ -215,29 +216,28 @@ $card->getAPITicket(true);  //参数为是否强制刷新，默认为false
 - APITicket 是用于调用微信卡券JS API的临时票据，有效期为7200 秒，通过access_token 来获取
 
 
+### JSAPI 卡券批量下发到用户
 
-### JSAPI 卡券Package
-
-微信卡券：JSAPI 卡券Package - 基础参数没有附带任何值 - 再生产环境中需要根据实际情况进行修改。
-
-```php
-$card->wxCardPackage($cardList);
-```
-
-- cardList  测试的卡券列表
-
-example:
+微信卡券：JSAPI 卡券
 
 ```php
-$cardList = [
+$cards = [
     ['card_id' => 'pdkJ9uLRSbnB3UFEjZAgUxAJrjeY', 'outer_id' => 2],
     ['card_id' => 'pdkJ9uJ37aU-tyRj4_grs8S45k1c', 'outer_id' => 3],
 ];
-
-$result = $card->wxCardPackage($cardList);
+$json = $card->jsConfigForAssign($cards); // 返回 json 格式
 ```
 
+返回 json，在模板里的用法：
 
+```html
+wx.addCard({
+    cardList: <?= $json ?>, // 需要打开的卡券列表
+    success: function (res) {
+        var cardList = res.cardList; // 添加的卡券列表信息
+    }
+});
+```
 
 ### 创建货架接口
 
@@ -551,22 +551,20 @@ $result = $card->setPayCell($cardId, $isOpen);
 ### 修改库存接口
 
 ```php
-$card->modifyStock($cardId, $stock, $value);
+$card->increaseStock($cardId, $amount); // 增加库存
+$card->reductStock($cardId, $amount); // 减少库存
 ```
 
-- stock  操作 increase(增加) reduce(减少)
-- value  修改多少库存，支持不填或填0
+- cardId 卡券 ID
+- amount  修改多少库存
 
 example:
 
 ```php
 $cardId = 'pdkJ9uLRSbnB3UFEjZAgUxAJrjeY';
-$stock   = 'increase'; //increase 增加   reduce 减少
-$value   = 100;
 
-$result = $card->modifyStock($cardId, $stock, $value);
+$result = $card->increaseStock($cardId, 100);
 ```
-
 
 
 ### 更改Code接口
@@ -731,46 +729,64 @@ $result = $card->updateMemberCardUser($updateUser);
 ### 添加子商户
 
 ```php
-$card->subMerchant($brandName, $logoUrl, $protocol, $endTime, $primaryCategoryId, $secondaryCategoryId, $agreementMediaId, $operatorMediaId, $appId); 
+$card->craeteSubMerchant($brandName, $logoUrl, $protocol, $endTime, $primaryCategoryId, $secondaryCategoryId, $agreementMediaId, $operatorMediaId, $appId); 
 ```
 
-- brandName  子商户名称（12个汉字内），该名称将在制券时填入并显示在卡券页面上
-- logoUrl  子商户logo，可通过上传logo接口获取。该logo将在制券时填入并显示在卡券页面上
-- protocol  授权函ID，即通过上传临时素材接口上传授权函后获得的meida_id
-- primaryCategoryId  一级类目id,可以通过本文档中接口查询
-- secondaryCategoryId  二级类目id，可以通过本文档中接口查询
-- agreementMediaId  营业执照或个体工商户营业执照彩照或扫描件
-- operatorMediaId  营业执照内登记的经营者身份证彩照或扫描件
-- appId  子商户的公众号app_id，配置后子商户卡券券面上的app_id为该app_id。app_id须经过认证
+- `brand_name`  子商户名称（12个汉字内），该名称将在制券时填入并显示在卡券页面上
+- `logo_url`  子商户 logo，可通过上传 logo 接口获取。该 logo 将在制券时填入并显示在卡券页面上
+- `protocol`  授权函ID，即通过上传临时素材接口上传授权函后获得的 meida_id
+- `primary_category_id`  一级类目id,可以通过本文档中接口查询
+- `secondary_category_id`  二级类目id，可以通过本文档中接口查询
+- `agreement_media_id`  营业执照或个体工商户营业执照彩照或扫描件
+- `operator_mediaid`  营业执照内登记的经营者身份证彩照或扫描件
+- `app_id`  子商户的公众号 app_id，配置后子商户卡券券面上的 app_id 为该 app_id, app_id 须经过认证
 
 example:
 
 ```php
-$brandName            = 'aaaaaa';
-$appId                = '';
-$logoUrl              = 'http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFNjakmxibMLGWpXrEXB33367o7zHN0CwngnQY7zb7g/0';
-$protocol              = 'qIqwTfzAdJ_1-VJFT0fIV53DSY4sZY2WyhkzZzbV498Qgdp-K5HJtZihbHLS0Ys0';
-$agreementMediaId    = '';
-$operatorMediaId     = '';
-$endTime              = 1438990559;
-$primaryCategoryId   = 1;
-$secondaryCategoryId = 101;
+$info = [
+    'brand_name' => 'overtrue',
+    'logo_url' => 'http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFNjakmxibMLGWpXrEXB33367o7zHN0CwngnQY7zb7g/0',
+    'protocol' => 'qIqwTfzAdJ_1-VJFT0fIV53DSY4sZY2WyhkzZzbV498Qgdp-K5HJtZihbHLS0Ys0',
+    'end_time' => '1438990559',
+    'primary_category_id' => 1,
+    'secondary_category_id' => 101,
+    'agreement_media_id' => '',
+    'operator_media_id' => '',
+    'app_id' => '',
+];
 
-$result = $card->subMerchant($brandName, $logoUrl, $protocol, $endTime, $primaryCategoryId, $secondaryCategoryId, $agreementMediaId, $operatorMediaId, $appId); 
+$result = $card->createSubMerchant($info);
 ```
 
+### 更新子商户
 
+```php
+$card->updateSubMerchant($merchantId, $info);
+```
+
+- `$merchantId` 子商户 ID
+- `$info` 参数与创建子商户参数一样
+
+example:
+
+```php
+$info = [
+  //...
+];
+$result = $card->updateSubMerchant('12', $info);
+```
 
 ### 卡券开放类目查询接口
 
 ```php
-$card->getApplyProtocol();
+$card->getCategories();
 ```
 
 example:
 
 ```php
-$result = $card->getApplyProtocol();
+$result = $card->getCategories();
 ```
 
 关于卡券接口的使用请参阅官方文档：http://mp.weixin.qq.com/wiki/9/d8a5f3b102915f30516d79b44fe665ed.html
