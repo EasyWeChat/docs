@@ -124,12 +124,14 @@ $result = $material->updateArticle($mediaId, new Article(...), 1); // 第 2 篇
 
 ### 上传永久文章内容图片
 
+返回值中 url 就是上传图片的 URL，可用于后续群发中，放置到图文消息中。
+
 ```php
 $result = $material->uploadArticleImage($path);
-$mediaId = $result->media_id;
-// {
-//    "media_id":MEDIA_ID,
-// }
+$url = $result->url;
+//{
+//    "url":  "http://mmbiz.qpic.cn/mmbiz/gLO17UPS6FS2xsypf378iaNhWacZ1G1UplZYWEYfwvuU6Ont96b1roYsCNFwaRrSaKTPCUdBK9DgEHicsKwWCBRQ/0"
+//}
 ```
 
 ### 获取永久素材
