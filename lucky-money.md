@@ -50,9 +50,9 @@ $luckyMoneyData = [
     // ...
 ];
 
-$result = $luckyMoney->send($luckyMoneyData， \EasyWeChat\Payment\LuckyMoney\API::TYPE_NORMAL);
+$result = $luckyMoney->send($luckyMoneyData, \EasyWeChat\Payment\LuckyMoney\API::TYPE_NORMAL);
 或
-$result = $luckyMoney->send($luckyMoneyData， \EasyWeChat\Payment\LuckyMoney\API::TYPE_GROUP);
+$result = $luckyMoney->send($luckyMoneyData, \EasyWeChat\Payment\LuckyMoney\API::TYPE_GROUP);
 
 ```
 
