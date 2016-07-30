@@ -96,6 +96,17 @@ $response = $app->oauth->scopes(['snsapi_userinfo'])
                           ->redirect();
 ```
 
+当你的应用是分布式架构且没有会话保持的情况下，你需要自行设置请求对象以实现会话共享。比如在 [Laravel](http://laravel.com) 框架中支持Session储存在Redis中，那么需要这样：
+
+```php
+$response = $app->oauth->scopes(['snsapi_userinfo'])
+                          ->setRequest($request)
+                          ->redirect();
+                          
+//回调后获取user时也要设置$request对象                          
+//$user = $app->oauth->setRequest($request)->user(); 
+```
+
 它的返回值 `$response` 是一个 [Symfony\Component\HttpFoundation\RedirectResponse](http://api.symfony.com/3.0/Symfony/Component/HttpFoundation/RedirectResponse.html) 实例。
 
 你可以选择在框架中做一些正确的响应，比如在 [Laravel](http://laravel.com) 框架中控制器方法是要求返回响应值的，那么你就直接:
