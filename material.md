@@ -34,6 +34,8 @@ $temporary = $app->material_temporary;
 
 ### 上传图片:
 
+> 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
+
 ```php
 $result = $material->uploadImage("/path/to/your/image.jpg");  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
 var_dump($result);
@@ -123,6 +125,8 @@ $result = $material->updateArticle($mediaId, new Article(...), 1); // 第 2 篇
 
 
 ### 上传永久文章内容图片
+
+> 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
 
 返回值中 url 就是上传图片的 URL，可用于后续群发中，放置到图文消息中。
 
@@ -272,6 +276,8 @@ $material->delete($mediaId);
 - 缩略图（thumb）：64KB，支持 `JPG` 格式
 
 ### 上传图片
+
+> 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
 
 ```php
 $temporary->uploadImage($path);
