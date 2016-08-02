@@ -105,7 +105,7 @@ $server->setMessageHandler(function ($message) {
     $message->MsgType        voice
     $message->MediaId        语音消息媒体id，可以调用多媒体文件下载接口拉取数据。
     $message->Format         语音格式，如 amr，speex 等
-    $message->Recongnition * 开通语音识别后才有
+    $message->Recognition * 开通语音识别后才有
 
     > 请注意，开通语音识别后，用户每次发送语音给公众号时，微信会在推送的语音消息XML数据包中，增加一个 `Recongnition` 字段
 
