@@ -28,7 +28,7 @@ $options = [
     'secret' => $wechatInfo['app_secret'],
     'token'  => $wechatInfo['token'],
     'aes_key' => $wechatInfo['aes_key'], // 可选
-    'cache'   => $cache,
+    'cache'   => $cacheDriver,
 ];
 
 $wechatApp = new Application($options);
