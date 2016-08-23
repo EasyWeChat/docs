@@ -15,7 +15,7 @@ EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https:
 
 ### 加入我们
 
-<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=b4dcf3ec51a7e8c3c3a746cf450ce59895e5c4ec4fbcb0f80c2cd97c3c6e63e9"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="EasyWeChat SDK 交流群" title="EasyWeChat SDK 交流群"></a>
+<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=b4dcf3ec51a7e8c3c3a746cf450ce59895e5c4ec4fbcb0f80c2cd97c3c6e63e9"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="EasyWeChat SDK 交流群" title="EasyWeChat SDK 交流群"></a> ID: 319502940
 
 你有以下两种方式加入到我们中来，为广大开发者提供更优质的免费开源的服务：
 
