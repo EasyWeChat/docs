@@ -50,3 +50,69 @@ $app->cache = $cacheDriver;
 
 > 上面提到的 `app('redis')->connection($name)`, 这里的 `$name` 是 laravel 项目中配置文件 `database.php` 中 `redis` 配置名 `default`：https://github.com/laravel/laravel/blob/master/config/database.php#L118
 > 如果你使用的其它连接，对应传名称就好了。
+
+
+## 使用自定义的缓存方式
+
+如果你发现 doctrine 提供的几十种缓存方式都满足不了你的需求的话，那么你可以自己建立一个类来完成缓存操作，前提这个类得实现接口：[Doctrine\Common\Cache\Cache](https://github.com/doctrine/cache/blob/master/lib/Doctrine/Common/Cache/Cache.php)
+
+该接口有以下方法需要实现：
+
+```php
+   public function fetch($id);    // 读取缓存
+   public function contains($id);  // 检查是否存在缓存
+   public function save($id, $data, $lifeTime = 0);   // 设置缓存
+   public function delete($id);  // 删除缓存
+   public function getStats(); // 获取状态
+```
+
+下面为一个示例：
+
+```php
+<?php
+
+use Doctrine\Common\Cache\Cache as CacheInterface;
+
+class MyCacheDriver implements CacheInterface
+{
+    public function fetch($id)
+    {
+        // 你自己从你想实现的存储方式读取并返回
+    }
+
+    public function contains($id)
+    {
+        // 同理 返回存在与否 bool 值
+    }
+
+    public function save($id, $data, $lifeTime = 0)
+    {
+        // 用你的方式存储该缓存内容即可
+    }
+
+    public function delete($id)
+    {
+        // 删除并返回 bool 值
+    }
+
+    public function getStats()
+    {
+        // 这个你可以不用实现，返回 null 即可
+    }
+}
+```
+
+然后实例化你的缓存类并在 EasyWeChat 里使用它：
+
+```php
+$myCacheDriver = new MyCacheDriver();
+
+$config = [
+    //...
+    'cache'   => $myCacheDriver,
+];
+
+$wechatApp = new Application($options);
+```
+
+OK，这样就完成了自定义缓存的操作。

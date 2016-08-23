@@ -8,7 +8,7 @@ title: 模板消息
     1. 所有服务号都可以在功能->添加功能插件处看到申请模板消息功能的入口，但只有认证后的服务号才可以申请模板消息的使用权限并获得该权限；
     2. 需要选择公众账号服务所处的2个行业，每月可更改1次所选行业；
     3. 在所选择行业的模板库中选用已有的模板进行调用；
-    4. 每个账号可以同时使用15个模板。
+    4. 每个账号可以同时使用多个模板。
     5. 当前每个模板的日调用上限为 10 万次【2014年11月18日将接口调用频率从默认的日1万次提升为日10万次，可在MP登录后的开发者中心查看】。
 
 关于接口文档，请注意：
@@ -101,7 +101,14 @@ $data = array(
          "remark" => "欢迎再次购买！",
         );
 
-$messageId = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($userId)->send();
+$result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($userId)->send();
+var_dump($result);
+
+// {
+//      "errcode":0,
+//      "errmsg":"ok",
+//      "msgid":200228332
+//  }
 ```
 
 结果：
