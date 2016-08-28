@@ -36,7 +36,7 @@ $stats = $app->stats;
 + `array userShareSummary($from, $to)` 获取图文分享转发数据, 最大时间跨度：**7**;
 + `array userShareHourly($from, $to)` 获取图文分享转发分时数据, 最大时间跨度：**1**;
 + `array upstreamMesssageSummary($from, $to)` 获取消息发送概况数据, 最大时间跨度：**7**;
-+ `array upstreamMesssageHourly($from, $to)` 获取消息分送分时数据, 最大时间跨度：**1**;
++ `array upstreamMesssageHourly($from, $to)` 获取消息发送分时数据, 最大时间跨度：**1**;
 + `array upstreamMesssageWeekly($from, $to)` 获取消息发送周数据, 最大时间跨度：**30**;
 + `array upstreamMesssageMonthly($from, $to)` 获取消息发送月数据, 最大时间跨度：**30**;
 + `array upstreamMesssageDistSummary($from, $to)` 获取消息发送分布数据, 最大时间跨度：**15**;
