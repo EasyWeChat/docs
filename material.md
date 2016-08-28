@@ -326,4 +326,4 @@ $temporary->download($mediaId, "/tmp/", "abc.jpg");
   - `$filename` 为新的文件名，可以为空，默认使用 `$mediaId` 作为文件名。
 
 
-更多请参考 [微信官方文档](http://mp.weixin.qq.com/wiki/home/index.html) `素材管理` 章节
+更多请参考 [微信官方文档](http://mp.weixin.qq.com/wiki) `素材管理` 章节

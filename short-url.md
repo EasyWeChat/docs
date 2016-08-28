@@ -25,4 +25,4 @@ $shortUrl = $url->shorten('http://overtrue.me/open-source');
 //
 ```
 
-微信官方文档：http://mp.weixin.qq.com/wiki/10/165c9b15eddcfbd8699ac12b0bd89ae6.html
+微信官方文档：http://mp.weixin.qq.com/wiki/

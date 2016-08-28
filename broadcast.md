@@ -118,4 +118,4 @@ $broadcast->delete($msgId);
 $broadcast->status($msgId);
 ```
 
-有关群发信息的更多细节请参考微信官方文档：http://mp.weixin.qq.com/wiki/15/5380a4e6f02f2ffdc7981a8ed7a40753.html
+有关群发信息的更多细节请参考微信官方文档：http://mp.weixin.qq.com/wiki/

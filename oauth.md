@@ -102,9 +102,9 @@ $response = $app->oauth->scopes(['snsapi_userinfo'])
 $response = $app->oauth->scopes(['snsapi_userinfo'])
                           ->setRequest($request)
                           ->redirect();
-                          
-//回调后获取user时也要设置$request对象                          
-//$user = $app->oauth->setRequest($request)->user(); 
+
+//回调后获取user时也要设置$request对象
+//$user = $app->oauth->setRequest($request)->user();
 ```
 
 它的返回值 `$response` 是一个 [Symfony\Component\HttpFoundation\RedirectResponse](http://api.symfony.com/3.0/Symfony/Component/HttpFoundation/RedirectResponse.html) 实例。
@@ -208,5 +208,5 @@ header('location:'. $targetUrl); // 跳转到 user/profile
 上面的例子呢都是基于 `$_SESSION` 来保持会话的，在微信客户端中，你可以结合 COOKIE 来存储，但是有效期平台不一样时间也不一样，好像 Android 的失效会快一些，不过基本也够用了。
 
 
-更多关于微信网页授权 API 请参考： http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html
+更多关于微信网页授权 API 请参考： http://mp.weixin.qq.com/wiki/
 更多开放平台网页登录请参考：https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=&lang=zh_CN
