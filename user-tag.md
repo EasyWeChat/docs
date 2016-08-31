@@ -97,7 +97,8 @@ $userTags = $tag->userTags($openId);
 ### 获取标签下粉丝列表
 
 ```php
-$tag->usersOfTag($tagId);
+$tag->usersOfTag($tagId, $nextOpenId = ''); 
+// $nextOpenId：第一个拉取的OPENID，不填默认从头开始拉取
 
 // {
 //   "count":2,//这次获取的粉丝数量
