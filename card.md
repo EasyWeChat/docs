@@ -391,7 +391,11 @@ $result = $card->getCode($code, $checkConsume, $cardId);
 ### 核销Code接口
 
 ```php
-$card->consume($cardId, $code);
+$card->consume($code);
+
+// 或者指定 cardId
+
+$card->consume($code, $cardId);
 ```
 
 example:
@@ -400,7 +404,11 @@ example:
 $cardId = 'pdkJ9uDmhkLj6l5bm3cq9iteQBck';
 $code    = '789248558333';
 
-$result = $card->consume($cardId, $code);
+$result = $card->consume($code);
+
+//或
+
+$result = $card->consume($code, $cardId);
 ```
 
 
