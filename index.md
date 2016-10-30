@@ -17,6 +17,8 @@ EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https:
 
 <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=b4dcf3ec51a7e8c3c3a746cf450ce59895e5c4ec4fbcb0f80c2cd97c3c6e63e9"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="EasyWeChat SDK 交流群" title="EasyWeChat SDK 交流群"></a> ID: 319502940
 
+> 为了避免广告及不看文档用户，加群需要付费，所以请使用 能支持群费的客户端。不喜勿加，谢谢！
+
 你有以下两种方式加入到我们中来，为广大开发者提供更优质的免费开源的服务：
 
 - **贡献代码**：我们 3.0 的代码都在 [overtrue/wechat](https://github.com/overtrue/wechat) ，你可以提交 PR 到任何一个项目，当然，前提是代码质量必须是 OK 的。
