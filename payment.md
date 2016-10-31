@@ -3,6 +3,8 @@ title: 支付
 
 你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 商户平台开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)。
 
+网友贡献的教程：[小能手马闯set 发布在 Laravel-China 的文章《基于 Laravel5.1 LTS 版的微信开发》](https://laravel-china.org/topics/3146)
+
 ## 配置
 
 配置在前面的例子中已经提到过了，支付的相关配置如下：
