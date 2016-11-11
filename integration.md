@@ -7,13 +7,13 @@ EasyWeChat 是一个通用的 Composer 包，所以不需要对框架单独做�
 - [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat)
 
 
-## Symfony 
+## Symfony
 
 - [lilocon/WechatBundle](https://github.com/lilocon/WechatBundle)
 
 ## Yii
 
-TODO
+- [max-wen/yii2-easy-wechat](https://github.com/max-wen/yii2-easy-wechat)
 
 ## CI
 
