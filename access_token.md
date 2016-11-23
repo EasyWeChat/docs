@@ -23,22 +23,18 @@ $token = $accessToken->getToken(true); // 强制重新从微信服务器获取 t
 ## 修改 `$app` 的 Access Token
 
 ```php
-$app['access_token'] = $newAccessToken; // 生成方式见“生成自定义 Access Token”
+$app['access_token']->setToken($newAccessToken, $expires);
 ```
 
-## 生成自定义 Access Token
-
-如果你想生成自定义 `appId` 的 Access Token 实例，它的构造方法如下：
+例如：
 
 ```php
-use EasyWeChat\Core\AccessToken;
-
-$appId = 'YOUR APPID';
-$secret = 'YOUR SECRET';
-
-$accessToken = new AccessToken($appId, $secret);
-$token = $accessToken->getToken(); // token 字符串
+$app['access_token']->setToken('ccfdec35bd7ba359f6101c2da321d675');
+// 或者指定过期时间
+$app['access_token']->setToken('ccfdec35bd7ba359f6101c2da321d675', 3600);  // 单位：秒
 ```
+
+## 设置 AccessToken 的缓存
 
 你也可以自定义 token 的缓存方式，把一个实现了 `Doctrine\Common\Cache\Cache` 缓存接口的实例作为 AccessToken 构造函数的第三个参数传入即可：
 
@@ -58,7 +54,6 @@ $redis->connect('redis_host', 6379);
 
 $cache->setRedis($redis);
 
-$accessToken = new AccessToken($appId, $secret, $cache);
-$token = $accessToken->getToken(); // token 字符串
+$app->access_token->setCache($cache);
 ```
 
