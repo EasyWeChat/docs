@@ -74,41 +74,34 @@ This is due to your app used **web authorization** without properly configuring 
 
 ## [JSAPI] config: invalid url domain
 
-在使用 JS-SDK 进行开发时，每个页面都需要调用 wx.config() 方法配置 JSPAI 参数。如果没有正确配置 **JSAPI 安全域名**并且开启了调试模式，此时就报此错误。遇到这个问题时，开发者需要登录微信公众平台，进入【公众号设置】->【功能设置】页面，将项目所使用的域名添加至 **【JSAPI 安全域名】**列表中。
+This is related to the JSAPI parameter in the `wx.config()` method of the JS-SDK. You'll see this error when **JSAPI 安全域名 (Safe Domain Names)** is not correctly configured, AND debug mode on.
 
-1. 一个公众号同时最多可绑定**三个**安全域名，并且这些域名必须为通过 **ICP 备案**的**一级或一级以上**的有效域名。
+The solution is go to WeChat Public Platform, and add your domain name to the list of **【JSAPI 安全域名】(JSAPI Safe Domain Names)** in 【公众号设置】->【功能设置】(Official Account Options -> Functionality).
 
-2. JSAPI 安全域名每个月**限修改三次**，修改任何一个都算，所以，请谨慎操作。
+1. WeChat supports 3 safe domain names at most, all of which must have ICP license numbers. They can be top level or any lower level domains.
+2. You can edit the JSAPI Safe Domain Names 3 times per month. Please be cautious.
+3. If you need to call the Payment API by JSAPI on some web page, the URL must be under the **Safe Domain Names** list, while still in the **Payment Authorization Directories** list.
 
-3. 如果需要使用 JSAPI 调起支付功能，则支付目录必须也在所配置的**安全域名之下**，并且需要将支付目录添加至**支付授权目录**。
+## Token validation failure / No response after sending messages to your official account
 
-## token验证失败、向公众号发送消息无任何反应
+The most usual two types of mistakes are as follows:
 
-相信对接公众号一般是微信开发者进行开发过程中最先进行的工作，而在这看似简单的配置操作中，也可能会掉坑里。
-最常见的两种情况就如下：
+1. Please make sure you have **enabled** the development mode. Even with a validated token, doesn't mean it's enabled. You can tell that the development mode is actually enabled by seeing the red **停用 (Disable)**.
+2. If you see **Token 验证失败 (Failed to validate token)** when clicking the Save button, you'll need to find out from all basic causes, e.g. server URL / token not configured, or network issues.
+3. If no response given from your official account after you've sent messages to it, even the logs on your server is white as snow about those messages, please try disable and enable the **服务器配置 (Server Config)** multiple times. This is a gambling game.
+4. Use the [online debug tool](http://mp.weixin.qq.com/debug/). When you see the green **请求成功 (Request Succeeded)** then your code is alright. Go through the above three steps for better luck.
+5. **Local developing tools such as ngrok usually produces large network latency for WeChat server to process. Try using a hosted machine for better network conditions.**
 
-1. 确认你 “**启用**” 了开发模式， token 验证通过不代表启用，保存后也不代表启用。看到红色 “**停用**” 才真正的是启用了。
-
-2. 配置好URL(服务器地址)以及Token(令牌)后，点击保存时提示**token验证失败**，出现这种情况的原因有多种，其中之一便是网络不稳定，所以**可尝试多次保存**，若始终无法通过再排查其它可能因素。
-
-3. 配置保存成功之后，向公众号发送消息无任何反应，自己的消息处理程序也没有被调用的记录（无对应日志）。这种情况下如果你尝试**反复停用和启用服务器配置**，可能突然间惊奇地了现，问题莫名其妙的解决了。
-
-4. 使用在线调试工具的消息接口，http://mp.weixin.qq.com/debug/， 只要返回绿色的“**请求成功**”，就代表你的代码没有问题，请**重复上面第4项**再测试。
-
-5. **如果你在用什么本地开发工具，或者什么 ngrok 代理到本机这样的开发方式，那么失败就很正常了，微信服务器到你机器的网络延迟太大（还是用服务器开发吧）。**
-
-> 请开发者理解服务器 TOKEN 验证原理（官方文档有说明）并谨记服务器验证时使用 GET 方式访问，而公众平台向你的服务器发送消息/数据则使用 POST 方式，所以服务器验证成功之后，在某些启用了 CSRF 验证的框架里，接收消息时可能还会遇到 CSRF 相关的问题，请根据自己项目实际情况进行排查。
-> 另外有的朋友的 Laravel 里使用了 laravel-debugbar，这个组件的原理是在页面输出时在后面添加 HTML 来实现的，所以它会改变我们返回给微信的内容，此时要么卸载，要么禁用掉它。
-
+> You should understand WeChat's token authorization mechanism, which can be referred to as an OAuth implementation. Use `GET` method while authorizing, and `POST` for business logics (most of the time). As the WeChat server may request your server with `POST` method, it may cause CSRF problems for certain frameworks.
+> If you have `Laravel-debugbar` enabled in your project, please disable it, as this component alters the content that replies to the WeChat server, making it impossible to resolve.
 
 ## Maximum function nesting level of '100' reached, aborting!
 
-在使用了 Xdebug 的环境下可能出现这个问题。这是由于 Xdebug 限制函数嵌套的最大层级数（默认为100），当嵌套次数达到该值便会触发 Xdebug 跳出嵌套并报此错误。
+The Xdebug has a limitation of 100 nesting levels at most (by default).
 
-为避免这个问题，**可以将 Xdebug 的 max_nesting_level 参数适当设置大一些**，通常设置为200就可以了（当然可根据自己实际情况设置为更大的值）。
+To solve this, please find the `max_nesting_level` option in Xdebug's config, and change the value to a bigger number. 200 should be OK.
 
-如下，修改 php.ini 配置文件后，重启 Apache 或 php-fpm 服务即可。
-
+For example, you can use the config below. Do an Apache or PHP-FPM service restart to apply the change.
 ```
 xdebug.max_nesting_level=200
 ```
