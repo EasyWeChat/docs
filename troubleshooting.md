@@ -1,6 +1,8 @@
 title: Troubleshooting
 ---
 
+### Troubleshooting
+
 We gathered some most frequently met problems and their solutions. Some may fit your speific situations, while some will not. If you found any of these answers not working for your occasion, please open an issue.
 
 We do hope this page could offer you the help you need, and narrow the gap of development for WeChat, to make it even enjoyable.
