@@ -93,6 +93,7 @@ The most usual two types of mistakes are as follows:
 5. **Local developing tools such as ngrok usually produces large network latency for WeChat server to process. Try using a hosted machine for better network conditions.**
 
 > You should understand WeChat's token authorization mechanism, which can be referred to as an OAuth implementation. Use `GET` method while authorizing, and `POST` for business logics (most of the time). As the WeChat server may request your server with `POST` method, it may cause CSRF problems for certain frameworks.
+
 > If you have `Laravel-debugbar` enabled in your project, please disable it, as this component alters the content that replies to the WeChat server, making it impossible to resolve.
 
 ## Maximum function nesting level of '100' reached, aborting!
