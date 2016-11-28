@@ -16,30 +16,30 @@ This is the problem with SSL certificates. While working with WeChat Payment fun
 
 WeChat Public Platform suggests that developers should use HTTPS to access the API, e.g. WeChat Payment, or the [Red Packet](http://blog.wechat.com/2016/01/27/we-chat-about-wechat-5-red-packets-wechats-secret-weapon-in-payments/) that involves financial assets operations. WeChat SDK follows this suggestion, so please make sure your server has the proper CA certificates configured, and make changes to your code according to the official documentations.
 
-1. 下载 CA 证书
+1. Download the CA certificate
 
-  你可以从 http://curl.haxx.se/ca/cacert.pem 下载 或者 使用[微信官方提供的证书](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=4_3)中的 CA 证书 `rootca.pem` 也是同样的效果。
+  You can use the certificates from http://curl.haxx.se/ca/cacert.pem, or the [WeChat official site](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=4_3) (look for the `rootca.pem` download).
 
-2. 在 `php.ini` 中配置 CA 证书
+2. Configure your CA certificate in `php.ini`
 
-  只需要将上面下载好的 CA 证书放置到您的服务器上某个位置，然后修改 `php.ini` 的 `curl.cainfo` 为该路径（**绝对路径！**），重启 `php-fpm` 服务即可。
+  Save the aforementioned CA file to your server, then open `php.ini` and find `curl.cainfo`, change the value to the **absolute path** to the CA file. Save `php.ini` and restart `php-fpm`.
 
   ```
   curl.cainfo = /path/to/downloaded/cacert.pem
   ```
-  > 注意证书文件**路径为绝对路径**！以自己实际情况为准。
+  > Note: use **absolute path** which suits your own situation.
 
-  其它修改 HTTP 类源文件的方式是不允许的。
+  It is now allowed to modify the source files in HTTP class in other ways.
 
 ## cURL error 56: SSLRead() return error -9806
 
-目前在 OSX 下，发现使用 HomeBrew 装的 PHP 7.0 有这个问题，解决方案是重新 brew 安装 PHP：
+This is due to some issues with the homebrew version of PHP 7.0 on macOS. The solution is simply reinstall PHP with brew.
 
 ```shell
 $ brew install homebrew/php/php70 --with-homebrew-openssl --with-homebrew-curl --without-snmp -vvv
 ```
 
-验证：
+Check:
 
 ```shell
 $ php -i | grep 'OpenSSL support'
@@ -49,37 +49,31 @@ OpenSSL support => enabled
 ```
 
 
-## 支付失败！当前页面的 URL 未注册
+## 支付失败！当前页面的 URL 未注册 (Payment failed! Current URL is not registered)
 
-这是由于微信支付授权目录未正确配置引起的。此时开发者应该登录微信公众平台，进入**【微信支付】->【开发设置】**进行设置。
+This is a common mistake on the developer side. You need to configure the authorized directory in WeChat Plubic Platform. The options are located in **【微信支付】->【开发设置】(WeChat Payment -> Development Config)**.
 
-1. 公众号可添加3个支付授权目录，满足不同应用使用同一个公众号进行支付的业务需求。
+Note: 
 
-2. 正确的**【支付授权目录】**应以 `http://` 或 `https://` 开头，并以正斜杠 `/` 结尾，授权目录所包含的域名**必须经过 ICP 备案**。
+1. WeChat supports 3 authorized directories at most, which may be helpful for your multiple apps based on a single official account.
+2. The correct format for **【支付授权目录】(authorized directory)** must start with `http://` or `https://`, and end with a slash `/`. Plus, the domain name must have an ICP license number.
+3. The authorized directory should contain a **two-level or three-level directory** if needed.
+4. All pages that actually send payment requests **must be under the path of your authorized directories**.
+5. Additionally, if you need to test your payment functionality, you need to add your test WeChat account into the whitelist. Otherwise you may encounter some errors.
 
-3. 支付授权目录需**细化至二级或三级目录**。
+> You may want to learn some basic terms about web app development beforehand, e.g. **page**, **directory**, **URL** and **domain names** etc. Skip this info if you're experienced. :smile:
 
-4. 所有**实际调起微信支付请求的页面都必须要所配置的支付授权目录之下**。
+## redirect_url 参数错误 (redirect_url params error)
 
-5. 在开发过程中，也可以使用测试授权目录进行开发测试，此时还**应该将参与测试的个人微信号添加到测试白名单中**，否则将出现对应的错误提示……
+This is due to your app used **web authorization** without properly configuring the **【网页授权域名】(web authorization domain name)**. Please login to [WeChat Public Platform](https://mp.weixin.qq.com/), and find the **网页授权获取用户基本信息 (Web Authorization to obtain basic user information)** options under **【开发】->【接口权限】(Development -> API Permissions)**.
 
-> 配置前请先理解**页面**、**目录**、**URL **以及**域名**等几个基本概念，并对自己所使用的框架的路由机制有一个大致了解。这样你才会知道自己正在配置的参数是个啥玩意儿，有什么卵用…… :smile:
-
-
-## redirect_url 参数错误
-
-这是由于程序使用了**网页授权**而公众号没有正确配置**【网页授权域名】**所致。此时你需要登录[微信公众平台](https://mp.weixin.qq.com/)，在【开发】->【接口权限】页面找到**网页授权获取用户基本信息**进行配置并保存。
-
-1. 网页授权域名应该为通过 ICP 备案的有效域名，否则保存时无法通过安全监测。
-
-2. 网页授权域名即程序完成授权获得授权  code 后跳转到的页面的域名，一般情况下为你的业务域名。
-
-3. 网页授权域名配置成功后会立即生效。
-
-4. 公众号的网页授权域名只可配置一个，请合理规划你的业务，否则你会发现……授权域名不够用哈。
-
+1. The domain name must have an ICP license number. Or it could not be saved.
+2. The **web authorization domain name** means the url to redirect to after you got the authorization **code**. In most occasions, it is your business domain name.
+3. It will take effect immediately after you have saved the domain name.
+4. WeChat supports only 1 web authorization domain name. So you may need some extra work planning your web app.
 
 ## [JSAPI] config: invalid url domain
+
 在使用 JS-SDK 进行开发时，每个页面都需要调用 wx.config() 方法配置 JSPAI 参数。如果没有正确配置 **JSAPI 安全域名**并且开启了调试模式，此时就报此错误。遇到这个问题时，开发者需要登录微信公众平台，进入【公众号设置】->【功能设置】页面，将项目所使用的域名添加至 **【JSAPI 安全域名】**列表中。
 
 1. 一个公众号同时最多可绑定**三个**安全域名，并且这些域名必须为通过 **ICP 备案**的**一级或一级以上**的有效域名。
