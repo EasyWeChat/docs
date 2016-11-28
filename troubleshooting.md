@@ -49,9 +49,9 @@ OpenSSL support => enabled
 ```
 
 
-## 支付失败！当前页面的 URL 未注册 (Payment failed! Current URL is not registered)
+## Payment failed! Current URL is not registered (支付失败！当前页面的 URL 未注册)
 
-This is a common mistake on the developer side. You need to configure the authorized directory in WeChat Plubic Platform. The options are located in **【微信支付】->【开发设置】(WeChat Payment -> Development Config)**.
+This is a common mistake on the developer side. You need to configure the authorized directory in WeChat Plubic Platform. The options are located in **微信支付 -> 开发设置 (WeChat Payment -> Development Config)**.
 
 Note: 
 
@@ -63,9 +63,9 @@ Note:
 
 > You may want to learn some basic terms about web app development beforehand, e.g. **page**, **directory**, **URL** and **domain names** etc. Skip this info if you're experienced. :smile:
 
-## redirect_url 参数错误 (redirect_url params error)
+## Redirect_url params error (redirect_url 参数错误)
 
-This is due to your app used **web authorization** without properly configuring the **【网页授权域名】(web authorization domain name)**. Please login to [WeChat Public Platform](https://mp.weixin.qq.com/), and find the **网页授权获取用户基本信息 (Web Authorization to obtain basic user information)** options under **【开发】->【接口权限】(Development -> API Permissions)**.
+This is due to your app used **web authorization** without properly configuring the **网页授权域名 (web authorization domain name)**. Please login to [WeChat Public Platform](https://mp.weixin.qq.com/), and find the **网页授权获取用户基本信息 (Web Authorization to obtain basic user information)** options under **开发 -> 接口权限 (Development -> API Permissions)**.
 
 1. The domain name must have an ICP license number. Or it could not be saved.
 2. The **web authorization domain name** means the url to redirect to after you got the authorization **code**. In most occasions, it is your business domain name.
@@ -76,7 +76,7 @@ This is due to your app used **web authorization** without properly configuring 
 
 This is related to the JSAPI parameter in the `wx.config()` method of the JS-SDK. You'll see this error when **JSAPI 安全域名 (Safe Domain Names)** is not correctly configured, AND debug mode on.
 
-The solution is go to WeChat Public Platform, and add your domain name to the list of **【JSAPI 安全域名】(JSAPI Safe Domain Names)** in 【公众号设置】->【功能设置】(Official Account Options -> Functionality).
+The solution is go to WeChat Public Platform, and add your domain name to the list of **JSAPI 安全域名 (JSAPI Safe Domain Names)** in **公众号设置 -> 功能设置 (Official Account Options -> Functionality)**.
 
 1. WeChat supports 3 safe domain names at most, all of which must have ICP license numbers. They can be top level or any lower level domains.
 2. You can edit the JSAPI Safe Domain Names 3 times per month. Please be cautious.
