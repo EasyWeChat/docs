@@ -39,7 +39,7 @@ $payment = $app->payment;
 ```
 
 ## 创建订单
-
+- 正常模式
 ```php
 <?php
 
@@ -59,6 +59,28 @@ $attributes = [
 $order = new Order($attributes);
 
 ```
+
+- 子服务商模式
+```php
+<?php
+
+use EasyWeChat\Payment\Order;
+
+$attributes = [
+    'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
+    'body'             => 'iPad mini 16G 白色',
+    'detail'           => 'iPad mini 16G 白色',
+    'out_trade_no'     => '1217752501201407033233368018',
+    'total_fee'        => 5388,
+    'notify_url'       => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+    'sub_openid'        => '当前用户的 openid', // 如果传入sub_openid, 请在实例化Application时, 同时传入$sub_app_id, $sub_merchant_id
+    // ...
+];
+
+$order = new Order($attributes);
+
+```
+
 
 通知url必须为直接可访问的url，不能携带参数。示例：notify_url：“https://pay.weixin.qq.com/wxpay/pay.action”
 
