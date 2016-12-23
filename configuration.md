@@ -39,7 +39,7 @@ return [
      *
      * level: 日志级别, 可选为：
      *         debug/info/notice/warning/error/critical/alert/emergency
-     * permission：日志文件权限(可选)，默认为null
+     * permission：日志文件权限(可选)，默认为null（若为null值,monolog会取0644）
      * file：日志文件位置(绝对路径!!!)，要求可写权限
      */
     'log' => [
