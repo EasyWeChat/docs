@@ -14,8 +14,8 @@ $app = new Application($options);
 
 /** 
 * 如果想要在Application实例化完成之后, 修改某一个options的值, 
-* 比如服务商+子商户支付回调场景, 所有子商户订单支付信息都是通过唯一一个服务商的oauthcallback地址进来的, 
-* 当每一个子商户支付设置回调url的的时候, 在回调url带上自己的merchant_id方便处理, 如:
+* 比如服务商+子商户支付回调场景, 所有子商户订单支付信息都是通过同一个服务商的$option 配置进来的, 
+* 当oauth在微信端验证完成之后, 可以通过动态设置merchant_id来区分具体是哪个子商户
 */
 $app['config']->set('oauth.callback','wechat/oauthcallback/'. $sub_merchant_id->id);
 ```
