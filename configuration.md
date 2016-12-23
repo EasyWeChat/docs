@@ -39,11 +39,13 @@ return [
      *
      * level: 日志级别, 可选为：
      *         debug/info/notice/warning/error/critical/alert/emergency
-     * file：日志文件位置(绝对路径!!!)，要求可写权限
+     * permission：日志文件权限(可选)，默认为null（若为null值,monolog会取0644）
+     * file：日志文件位置(绝对路径!!!)，要求可写权限
      */
     'log' => [
-        'level' => 'debug',
-        'file'  => '/tmp/easywechat.log',
+        'level'      => 'debug',
+        'permission' => 0777,
+        'file'       => '/tmp/easywechat.log',
     ],
 
     /**
