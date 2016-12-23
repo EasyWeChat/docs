@@ -11,6 +11,13 @@ $options = [
 ];
 
 $app = new Application($options);
+
+/** 
+* 如果想要在Application实例化完成之后, 修改某一个options的值, 
+* 比如服务商+子商户支付回调场景, 所有子商户订单支付信息都是通过同一个服务商的$option 配置进来的, 
+* 当oauth在微信端验证完成之后, 可以通过动态设置merchant_id来区分具体是哪个子商户
+*/
+$app['config']->set('oauth.callback','wechat/oauthcallback/'. $sub_merchant_id->id);
 ```
 
 那么配置的具体选项有哪些，下面是一个完整的列表：
