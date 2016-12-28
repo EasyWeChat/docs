@@ -4,7 +4,7 @@ title: 微信开放平台
 ### 实例化
 
 ```php
-
+<?php
 use EasyWeChat\Foundation\Application;
 
 $options = [
