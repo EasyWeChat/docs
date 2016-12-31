@@ -87,12 +87,13 @@ $buttons = [
     // ...
 ];
 $matchRule = [
-    "group_id"             => "2",
-    "sex"                  => "1",
-    "country"              => "中国",
-    "province"             => "广东",
-    "city"                 => "广州",
-    "client_platform_type" => "2"
+    "tag_id":"2",
+    "sex":"1",
+    "country":"中国",
+    "province":"广东",
+    "city":"广州",
+    "client_platform_type":"2",
+    "language":"zh_CN"
 ];
 $menu->add($buttons, $matchRule);
 ```
