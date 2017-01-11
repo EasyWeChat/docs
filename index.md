@@ -17,7 +17,10 @@ EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https:
 
 <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=b4dcf3ec51a7e8c3c3a746cf450ce59895e5c4ec4fbcb0f80c2cd97c3c6e63e9"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="EasyWeChat SDK 交流群" title="EasyWeChat SDK 交流群"></a> ID: 319502940
 
-> 为了避免广告及不看文档用户，加群需要付费，所以请使用 能支持群费的客户端。不喜勿加，谢谢！
+> 为了避免广告及不看文档用户，加群需要付费，所以请使用 能支持群费的客户端。
+> 另外：付费加群不代表我们有责任在群里回答你的问题，所以请认真阅读微信官方文档与 SDK 使用文档再使用，否则提的低级问题不会有人理你
+> 不喜勿加，谢谢！
+> 除非你发现了明确的 Bug，否则不要在群里 @ 我，否则直接 T 人（当然了，不退群费）:pray:
 
 你有以下两种方式加入到我们中来，为广大开发者提供更优质的免费开源的服务：
 
