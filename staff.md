@@ -106,7 +106,7 @@ $session->close('test1@test', 'OPENID');
 ### 获取客户会话状态
 
 ```php
-$session->close('OPENID');
+$session->get('OPENID');
 ```
 
 ### 获取客服会话列表
