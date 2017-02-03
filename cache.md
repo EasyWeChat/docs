@@ -50,7 +50,7 @@ $app->cache = $cacheDriver;
 
 > 上面提到的 `app('redis')->connection($name)`, 这里的 `$name` 是 laravel 项目中配置文件 `database.php` 中 `redis` 配置名 `default`：https://github.com/laravel/laravel/blob/master/config/database.php#L118
 > 如果你使用的其它连接，对应传名称就好了。
-
+> 如果你在使用Laravel 5.4，应将`$predis = app('redis')->connection();`修改为：`$predis = app('redis')->connection()->client();`
 
 ## 使用自定义的缓存方式
 
