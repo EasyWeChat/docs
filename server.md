@@ -39,29 +39,29 @@ $response->send(); // Laravel 里请使用：return $response;
 $server->setMessageHandler(function ($message) {
     switch ($message->MsgType) {
         case 'event':
-            # 事件消息...
+            return '收到事件消息';
             break;
         case 'text':
-            # 文字消息...
+            return '收到文字消息';
             break;
         case 'image':
-            # 图片消息...
+            return '收到图片消息';
             break;
         case 'voice':
-            # 语音消息...
+            return '收到语音消息';
             break;
         case 'video':
-            # 视频消息...
+            return '收到视频消息';
             break;
         case 'location':
-            # 坐标消息...
+            return '收到坐标消息';
             break;
         case 'link':
-            # 链接消息...
+            return '收到链接消息';
             break;
         // ... 其它消息
         default:
-            # code...
+            return '收到其它消息';
             break;
     }
 
