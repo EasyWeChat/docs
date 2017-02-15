@@ -64,7 +64,7 @@ $messageId = $notice->send($to, $templateId, array $data, $url);
   all of above are both supported `withXXX` and or `andXXX` method chain
 
 ```php
-$messageId = $notice->uses($templateId)->andUrl($url)->data($data)->send();
+$messageId = $notice->to($userOpenId)->uses($templateId)->andUrl($url)->data($data)->send();
 // or
 $messageId = $notice->to($userOpenId)->url($url)->template($templateId)->andData($data)->send();
 // or
