@@ -44,7 +44,6 @@ $messageId = $notice->send([
         'touser' => 'user-openid',
         'template_id' => 'template-id',
         'url' => 'xxxxx',
-        'topcolor' => '#f7f7f7',
         'data' => [
             //...
         ],
@@ -55,20 +54,19 @@ $messageId = $notice->send([
 
     设置模板ID：template / templateId / uses
     设置接收者openId: to / receiver
-    设置模板头部颜色：color / topColor
     设置详情链接：url / link / linkTo
     设置模板数据：data / with
 
     以上方法都支持 `withXXX` 与 `andXXX` 形式链式调用
 
 ```php
-$messageId = $notice->uses($templateId)->andUrl($url)->withColor($color)->data($data)->send();
+$messageId = $notice->to($userOpenId)->uses($templateId)->andUrl($url)->data($data)->send();
 // 或者
 $messageId = $notice->to($userOpenId)->url($url)->template($templateId)->andData($data)->send();
 // 或者
 $messageId = $notice->withTo($userOpenId)->withUrl($url)->withTemplate($templateId)->withData($data)->send();
 // 或者
-$messageId = $notice->to($userOpenId)->color('#ff0000')->url($url)->withTemplateId($templateId)->send();
+$messageId = $notice->to($userOpenId)->url($url)->withTemplateId($templateId)->send();
 // ... ...
 ```
 
@@ -93,7 +91,6 @@ $messageId = $notice->to($userOpenId)->color('#ff0000')->url($url)->withTemplate
 $userId = 'OPENID';
 $templateId = 'ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY';
 $url = 'http://overtrue.me';
-$color = '#FF0000';
 $data = array(
          "first"  => "恭喜你购买成功！",
          "name"   => "巧克力",
