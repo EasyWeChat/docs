@@ -49,7 +49,7 @@ $notice = new Notice($appId, $secret);
 ### None-Chained Method usage:
 
 ```php
-$messageId = $notice->send($to, $templateId, array $data, $url, $color);
+$messageId = $notice->send($to, $templateId, array $data, $url);
 ```
 
 
@@ -57,7 +57,6 @@ $messageId = $notice->send($to, $templateId, array $data, $url, $color);
 
   1. setter the template ID: template / templateId / uses
   2. setter the receiver openId: to / receiver
-  3. setter the temlate header color: color / topColor
   4. setter the detail page URL: url / link / linkTo
   5. setter the template data: data / with
   6. send
@@ -65,13 +64,13 @@ $messageId = $notice->send($to, $templateId, array $data, $url, $color);
   all of above are both supported `withXXX` and or `andXXX` method chain
 
 ```php
-$messageId = $notice->uses($templateId)->andUrl($url)->withColor($color)->data($data)->send();
+$messageId = $notice->to($userOpenId)->uses($templateId)->andUrl($url)->data($data)->send();
 // or
 $messageId = $notice->to($userOpenId)->url($url)->template($templateId)->andData($data)->send();
 // or
 $messageId = $notice->withTo($userOpenId)->withUrl($url)->withTemplate($templateId)->withData($data)->send();
 // or
-$messageId = $notice->to($userOpenId)->color('#ff0000')->url($url)->withTemplateId($templateId)->send();
+$messageId = $notice->to($userOpenId)->url($url)->withTemplateId($templateId)->send();
 // ... ...
 ```
 
@@ -81,7 +80,6 @@ $messageId = $notice->to($userOpenId)->color('#ff0000')->url($url)->withTemplate
 $userId     = 'OPENID';
 $templateId = 'ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY';
 $url        = 'http://overtrue.me';
-$color      = '#FF0000';
 $data = array(
         "first"    => "CHECKOUTED",
         "keynote1" => "Chocolates",
