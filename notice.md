@@ -60,7 +60,7 @@ $messageId = $notice->send([
     以上方法都支持 `withXXX` 与 `andXXX` 形式链式调用
 
 ```php
-$messageId = $notice->uses($templateId)->andUrl($url)->data($data)->send();
+$messageId = $notice->to($userOpenId)->uses($templateId)->andUrl($url)->data($data)->send();
 // 或者
 $messageId = $notice->to($userOpenId)->url($url)->template($templateId)->andData($data)->send();
 // 或者
