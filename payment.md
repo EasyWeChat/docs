@@ -236,7 +236,7 @@ $payment->close($orderNo);
 > 2、微信支付退款支持单笔交易分多次退款，多次退款需要提交原支付订单的商户订单号和设置不同的退款单号。一笔退款失败后重新提交，要采用原来的退款单号。总退款金额不能超过用户实际支付金额。
 
 ```php
-$payment->refund(订单号，退款单号，总金额，退款金额，操作员，退款单号类型(out_refund_no/transaction_id)，退款账户(REFUND_SOURCE_UNSETTLED_FUNDS/REFUND_SOURCE_RECHARGE_FUNDS))
+$payment->refund(订单号，退款单号，总金额，退款金额，操作员，退款单号类型(out_trade_no/transaction_id)，退款账户(REFUND_SOURCE_UNSETTLED_FUNDS/REFUND_SOURCE_RECHARGE_FUNDS))
 ```
 
 参考：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_4
@@ -251,9 +251,9 @@ $result = $payment->refund($orderNo, $refundNo, 100, 80); // 总金额 100， �
 // or
 $result = $payment->refund($orderNo, $refundNo, 100, 80, 1900000109); // 总金额 100， 退款 80，操作员：1900000109
 // or
-$result = $payment->refund($orderNo, $refundNo, 100, 80, 1900000109, 'out_refund_no'); // 总金额 100， 退款 80，操作员：1900000109, 退款单号：使用商户订单号退款
+$result = $payment->refund($orderNo, $refundNo, 100, 80, 1900000109, 'out_trade_no'); // 总金额 100， 退款 80，操作员：1900000109, 退款单号：使用商户订单号退款
 // or
-$result = $payment->refund($orderNo, $refundNo, 100, 80, 1900000109, 'out_refund_no', 'REFUND_SOURCE_RECHARGE_FUNDS'); // 总金额 100， 退款 80，操作员：1900000109, 退款单号：使用商户订单号退款, 退款账户：可用余额退款
+$result = $payment->refund($orderNo, $refundNo, 100, 80, 1900000109, 'out_trade_no', 'REFUND_SOURCE_RECHARGE_FUNDS'); // 总金额 100， 退款 80，操作员：1900000109, 退款单号：使用商户订单号退款, 退款账户：可用余额退款
 
 # 2. 使用 TransactionId 退款
 $result = $payment->refundByTransactionId($transactionId, $refundNo, 100); // 总金额 100 退款 100，操作员：商户号
