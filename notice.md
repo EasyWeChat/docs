@@ -33,7 +33,7 @@ $notice = $app->notice;
 + `boolean setIndustry($industryId1, $industryId2)` 修改账号所属行业；
 + `array getIndustry()` 返回所有支持的行业列表，用于做下拉选择行业可视化更新；
 + `string  addTemplate($shortId)` 添加模板并获取模板ID；
-+ `int send($message)` 发送模板消息, 返回消息ID；
++ `collection send($message)` 发送模板消息, 返回消息ID；
 + `array  getPrivateTemplates()` 获取所有模板列表；
 + `array  deletePrivateTemplate($templateId)` 删除指定ID的模板。
 
