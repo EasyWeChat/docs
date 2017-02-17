@@ -284,9 +284,9 @@ $result = $payment->queryRefundByRefundId($refundId);
 ## 下载对账单
 
 ```php
-$bill = $payment->downloadBill('20140603'); // type: ALL
+$bill = $payment->downloadBill('20140603')->getContents(); // type: ALL
 // or
-$bill = $payment->downloadBill('20140603', 'SUCCESS'); // type: SUCCESS
+$bill = $payment->downloadBill('20140603', 'SUCCESS')->getContents(); // type: SUCCESS
 // bill 为 csv 格式的内容
 
 // 保存为文件
