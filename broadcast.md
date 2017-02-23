@@ -64,7 +64,7 @@ $broadcast->sendCard($cardId, $groupId);
 
 ### 群发消息给指定用户
 
-可以是一个用户，也可以是多个用户，但必须是数组。
+至少两个用户的openid，必须是数组。
 
 ```php
 $broadcast->send($messageType, $message, [$openId1, $openId2]);
