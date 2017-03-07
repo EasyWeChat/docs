@@ -93,9 +93,36 @@ SDK 默认处理：删除 `authorizer_access_token` 和 `authorizer_refresh_toke
 
 注：需要在URL路由中写上触发代码，并且注册路由后需要等待微信服务器推送 `component_verify_ticket`，才能进行后续操作，否则报"Component verify ticket does not exists."
 
+### 调用 API
+
+#### 替换 Access Token
+
+第三方必须使用 `authorizer_access_token` 而不是原来的 `access_token` 来调用 API。
+
+替换原来的 access token:
+
+```php
+$app = new Application($options);
+$app->access_token = $app->open_platform->authorizer_token;
+```
+
+#### 设置授权方的 App Id
+
+开发者必须设置授权方来调用 API。
+
+```php
+$app = new Application($options);
+
+// 加载授权方信息，比如 $authorizer = Authorizer::find($id);
+$authorizerAppId = $authorizer->app_id;
+
+$app->open_platform->authorization->setAuthorizerAppId($authorizerAppId);
+```
+
 ### 授权 API
 
 #### 获取预授权网址
+
 ```php
 $open_platform->pre_auth
     ->setRedirectUri('http://domain.com/callback')
@@ -105,7 +132,8 @@ $open_platform->pre_auth
 
 用户授权后会带上 `code` 跳转到 `$redirect_uri`。
 
-##### 使用授权码换取公众号的接口调用凭据和授权信息
+#### 使用授权码换取公众号的接口调用凭据和授权信息
+
 ```php
 $authorizer = $open_platform->authorizer;
 
@@ -113,27 +141,26 @@ $authorizer = $open_platform->authorizer;
 $authorizer->getAuthInfo($authorization_code);
 ```
 
-##### 获取授权方的公众号帐号基本信息
+#### 获取授权方的公众号帐号基本信息
+
 ```php
 $authorizer = $open_platform->authorizer;
 
 $authorizer->getAuthorizerInfo($authorizer_appid);
-
 ```
 
-##### 获取授权方的选项设置信息
+#### 获取授权方的选项设置信息
+
 ```php
 $authorizer = $open_platform->authorizer;
 
 $authorizer->getAuthorizerOption($authorizer_appid, $option_name);
-
 ```
 
-##### 设置授权方的选项信息
+#### 设置授权方的选项信息
+
 ```php
 $authorizer = $open_platform->authorizer;
 
 $authorizer->setAuthorizerOption($authorizer_appid, $option_name, $option_value);
-
 ```
-
