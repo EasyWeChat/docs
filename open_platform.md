@@ -40,7 +40,7 @@ $open_platform->server->serve();
 
 // Custom handling.
 $open_platform->server->setMessageHandler(function($event) {
-    // Event type constants are defined in class 
+    // Event type constants are defined in class
     // \EasyWeChat\OpenPlatform\Guard.
     switch ($event->InfoType) {
         case 'authorized':
@@ -69,10 +69,10 @@ By default for these 2 events, SDK retrieves all info of the authorizer and then
 
 ```php
 // Custom handling.
-// The $event variable contains both the original event message 
+// The $event variable contains both the original event message
 // and the full authorizer info.
 $open_platform->server->setMessageHandler(function($event) {
-    // Event type constants are defined in class 
+    // Event type constants are defined in class
     // \EasyWeChat\OpenPlatform\Guard.
     switch ($event->InfoType) {
         case 'authorized':
@@ -96,47 +96,74 @@ Once the open platform is pass the audit from WeChat, WeChat server will send a 
 
 Note, developers have to call the code in the route / controller, this `component_verify_ticket` is required, or nothing can be done, will throw exception "Component verify ticket does not exists."
 
+### Calling API
+
+Before starting to work with the APIs, make sure following has be done.
+
+#### Replace Access Token
+
+Open platform must use `authorizer_access_token` instead of the original `access_token`, to call the API.
+
+To replace the original access token:
+
+```php
+$app = new Application($options);
+$app->access_token = $app->open_platform->authorizer_token;
+```
+
+#### Set Authorizer App Id
+
+Developer has to set the authorizer to call the API.
+
+```php
+$app = new Application($options);
+
+// Loads the authorizer info, e.g. $authorizer = Authorizer::find($id);
+$authorizerAppId = $authorizer->app_id;
+
+$app->open_platform->authorization->setAuthorizerAppId($authorizerAppId);
+```
+
 ### Authorization API
 
 #### Get Authorization URL
+
 ```php
 $open_platform->pre_auth
     ->setRedirectUri('http://domain.com/callback')
     ->getAuthLink();
-
 ```
 
 用户授权后会带上 `code` 跳转到 `$redirect_uri`。
 
-##### Get Authorization Info
+#### Get Authorization Info
+
 ```php
 $authorizer = $open_platform->authorizer;
 
 $authorizer->getAuthInfo($authorization_code);
 ```
 
-##### Get Authorizer Info
+#### Get Authorizer Info
+
 ```php
 $authorizer = $open_platform->authorizer;
 
 $authorizer->getAuthorizerInfo($authorizer_appid);
-
 ```
 
-##### Get Authorizer Option
+#### Get Authorizer Option
+
 ```php
 $authorizer = $open_platform->authorizer;
 
 $authorizer->getAuthorizerOption($authorizer_appid, $option_name);
-
 ```
 
-##### Set Authorizer Option
+#### Set Authorizer Option
+
 ```php
 $authorizer = $open_platform->authorizer;
 
 $authorizer->setAuthorizerOption($authorizer_appid, $option_name, $option_value);
-
 ```
-
-
