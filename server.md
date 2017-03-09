@@ -78,6 +78,7 @@ $server->setMessageHandler(function ($message) {
 ```php
     $message = $server->getMessage();
 ```
+> 注意：`$message` 是一个数组类型的数据，使用的时候这样使用：`$message['ToUserName']`
 
 ## 请求消息的属性
 
