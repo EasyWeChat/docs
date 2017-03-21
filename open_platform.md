@@ -138,7 +138,8 @@ $open_platform->pre_auth
 $authorizer = $open_platform->authorizer;
 
 // 使用授权码换取公众号的接口调用凭据和授权信息
-$authorizer->getAuthInfo($authorization_code);
+// Optional: $authorization_code 不传值时会自动获取 URL 中 auth_code 值
+$authorizer->getAuthorizationInfo($authorization_code = null);
 ```
 
 #### 获取授权方的公众号帐号基本信息
