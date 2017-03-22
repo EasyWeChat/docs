@@ -19,7 +19,7 @@ $options = [
     ];
 
 $app = new Application($options);
-$open_platform = $app->open_platform;
+$openPlatform = $app->open_platform;
 ```
 
 ### 监听微信服务器推送事件
@@ -36,10 +36,10 @@ $open_platform = $app->open_platform;
 
 ```php
 // 默认处理方式
-$open_platform->server->serve();
+$openPlatform->server->serve();
 
 // 自定义处理
-$open_platform->server->setMessageHandler(function($event) {
+$openPlatform->server->setMessageHandler(function($event) {
     // 事件类型常量定义在 \EasyWeChat\OpenPlatform\Guard 类里
     switch ($event->InfoType) {
         case 'authorized':
@@ -52,10 +52,10 @@ $open_platform->server->setMessageHandler(function($event) {
             // ...
     }
 });
-$open_platform->server->serve();
+$openPlatform->server->serve();
 
 // 或者
-$open_platform->server->listen(function ($event) {
+$openPlatform->server->listen(function ($event) {
     switch ($event->InfoType) {
         // ...
     }
@@ -69,7 +69,7 @@ $open_platform->server->listen(function ($event) {
 ```php
 // 自定义处理
 // 其中 $event 变量里有微信推送事件本身的信息，也有授权方所有的信息。
-$open_platform->server->setMessageHandler(function($event) {
+$openPlatform->server->setMessageHandler(function($event) {
     // 事件类型常量定义在 \EasyWeChat\OpenPlatform\Guard 类里
     switch ($event->InfoType) {
         case 'authorized':
@@ -124,43 +124,44 @@ $app->open_platform->authorization->setAuthorizerAppId($authorizerAppId);
 #### 获取预授权网址
 
 ```php
-$open_platform->pre_auth
+$openPlatform->pre_auth
     ->setRedirectUri('http://domain.com/callback')
     ->getAuthLink();
 
 ```
 
-用户授权后会带上 `code` 跳转到 `$redirect_uri`。
+用户授权后会带上 `code` 跳转到 `$redirectUri`。
 
 #### 使用授权码换取公众号的接口调用凭据和授权信息
 
 ```php
-$authorizer = $open_platform->authorizer;
+$authorizer = $openPlatform->authorizer;
 
 // 使用授权码换取公众号的接口调用凭据和授权信息
-$authorizer->getAuthInfo($authorization_code);
+// Optional: $authorizationCode 不传值时会自动获取 URL 中 auth_code 值
+$authorizer->getAuthorizationInfo($authorizationCode = null);
 ```
 
 #### 获取授权方的公众号帐号基本信息
 
 ```php
-$authorizer = $open_platform->authorizer;
+$authorizer = $openPlatform->authorizer;
 
-$authorizer->getAuthorizerInfo($authorizer_appid);
+$authorizer->getAuthorizerInfo($authorizerAppId);
 ```
 
 #### 获取授权方的选项设置信息
 
 ```php
-$authorizer = $open_platform->authorizer;
+$authorizer = $openPlatform->authorizer;
 
-$authorizer->getAuthorizerOption($authorizer_appid, $option_name);
+$authorizer->getAuthorizerOption($authorizerAppId, $optionName);
 ```
 
 #### 设置授权方的选项信息
 
 ```php
-$authorizer = $open_platform->authorizer;
+$authorizer = $openPlatform->authorizer;
 
-$authorizer->setAuthorizerOption($authorizer_appid, $option_name, $option_value);
+$authorizer->setAuthorizerOption($authorizerAppId, $optionName, $optionValue);
 ```
