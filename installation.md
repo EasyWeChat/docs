@@ -3,7 +3,7 @@ title: 安装
 
 ## 环境要求
 
-- PHP >= 5.5.9 (其实你不必惊讶，PHP 7 的时代了)
+- PHP >= 5.5.9
 - [PHP cURL 扩展](http://php.net/manual/en/book.curl.php)
 - [PHP OpenSSL 扩展](http://php.net/manual/en/book.openssl.php)
 - [PHP fileinfo 拓展](http://php.net/manual/en/book.fileinfo.php) 素材管理模块需要用到
