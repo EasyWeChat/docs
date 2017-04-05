@@ -91,6 +91,42 @@ example:
 $userGroupId = $userService->group($openId);
 ```
 
+### 获取公众号的黑名单列表
+
+```php
+$userService->blacklist($beginOpenId = null);
+```
+
+example:
+
+```php
+$blacklist = $userService->blacklist();
+```
+
+## 拉黑用户
+
+```php
+$userService->batchBlock(array $openidList);
+```
+
+example:
+
+```php
+$userService->batchBlock(['openid1', 'openid2', 'openid3', '...']);
+```
+
+## 取消拉黑用户
+
+```php
+$userService->batchUnblock(array $openidList);
+```
+
+example:
+
+```php
+$userService->batchUnblock(['openid1', 'openid2', 'openid3', '...']);
+```
+
 ## 其它
 
 - [用户标签](user-tag.html)
