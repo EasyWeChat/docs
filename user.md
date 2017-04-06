@@ -103,7 +103,7 @@ example:
 $blacklist = $userService->blacklist();
 ```
 
-## 拉黑用户
+### 拉黑用户
 
 ```php
 $userService->batchBlock(array $openidList);
@@ -115,7 +115,7 @@ example:
 $userService->batchBlock(['openid1', 'openid2', 'openid3', '...']);
 ```
 
-## 取消拉黑用户
+### 取消拉黑用户
 
 ```php
 $userService->batchUnblock(array $openidList);
