@@ -551,7 +551,7 @@ $result = $card->setPayCell($cardId, $isOpen);
 
 ```php
 $card->increaseStock($cardId, $amount); // 增加库存
-$card->reductStock($cardId, $amount); // 减少库存
+$card->reduceStock($cardId, $amount); // 减少库存
 ```
 
 - `cardId` string - 卡券 ID
