@@ -1,7 +1,7 @@
 title: WeChat Open Platform
 ---
 
-### Instantiation
+## Instantiation
 
 ```php
 <?php
@@ -19,151 +19,103 @@ $options = [
     ];
 
 $app = new Application($options);
-$open_platform = $app->open_platform;
+$openPlatform = $app->open_platform;
 ```
 
-### Listening to Authorization Events
+## Authorization Events from WeChat
 
 The open platform sends 4 events: `authorized`, `updateauthorized`, `unauthorized` and `component_verify_ticket`.
 
-By default, SDK handles as following:
+> Once the open platform is pass the audit from WeChat, WeChat server will send a `component_verify_ticket` to developer's server every 10 minutes. SDK, by default, caches `component_verify_ticket`.
 
-- `authorized` / `updateauthorized`: Retrieves all info of the authorizer and then caches  `authorizer_access_token` and `authorizer_refresh_token`, the authorizer info needs to be handled by developer.
-- `unauthorized`: deletes `authorizer_access_token` and `authorizer_refresh_token` from cache.
-- `component_verify_ticket`: caches `component_veirfy_ticket`.
+> SDK will caches `component_veirfy_ticket`.
+> The rest of the events needs to be handled by developers.
 
-It allows custom handlers of course, but above default handling will always run first, as for trouble-free of caching tokens.
+- Note, developers have to call the code in the route / controller, this `component_verify_ticket` is required, or nothing can be done, will throw exception "Component verify ticket does not exists."
+
+Example:
 
 ```php
-// Default handling.
-$open_platform->server->serve();
+use EasyWeChat\OpenPlatform\Guard;
 
-// Custom handling.
-$open_platform->server->setMessageHandler(function($event) {
-    // Event type constants are defined in class
-    // \EasyWeChat\OpenPlatform\Guard.
+$server = $openPlatform->server;
+
+$server->setMessageHandler(function($event) use ($openPlatform) {
+    // Constants are defined in \EasyWeChat\OpenPlatform\Guard
     switch ($event->InfoType) {
-        case 'authorized':
-            // ...
-        case 'unauthorized':
-            // ...
-        case 'updateauthorized':
-            // ...
-        case 'component_verify_ticket':
-            // ...
+        case Guard::EVENT_AUTHORIZED: // Authorized success
+            $authorizationInfo = $openPlatform->getAuthorizationInfo($event->AuthorizationCode);
+            // Some database operations...
+        case Guard::EVENT_UNAUTHORIZED: // Authorized update
+            // Some database operations...
+        case Guard::EVENT_UPDATE_AUTHORIZED: // Authorized cancel
+            // Some database operations...
     }
 });
-$open_platform->server->serve();
 
-// OR
-$open_platform->server->listen(function ($event) {
-    switch ($event->InfoType) {
-        // ...
-    }
-});
+$response = $server->serve();
+
+$response->send(); // Laravel：return $response;
 ```
 
-#### Authorized，Update Authorized
 
-By default for these 2 events, SDK retrieves all info of the authorizer and then caches  `authorizer_access_token` and `authorizer_refresh_token`, the authorizer info is the original data returned by WeChat API, these data needs to be handled by developer, e.g. saving to database.
+## PreAuthorization
+
+### PreAuthorization Code
+
+Example:
 
 ```php
-// Custom handling.
-// The $event variable contains both the original event message
-// and the full authorizer info.
-$open_platform->server->setMessageHandler(function($event) {
-    // Event type constants are defined in class
-    // \EasyWeChat\OpenPlatform\Guard.
-    switch ($event->InfoType) {
-        case 'authorized':
-            // Authorization info, mainly about tokens and scopes.
-            $info1 = $event->authorization_info;
-            // Authorizer info, mainly about the account info.
-            $info2 = $event->authorizer_info;
-    }
-});
+$openPlatform->pre_auth->getCode();
 ```
 
-So far there is no different handling these 2 events.
+### PreAuthorization URL
 
-#### Unauthorized
-
-By default, SDK deletes `authorizer_access_token` 和 `authorizer_refresh_token` from cache. Developers may remove the records in database using custom handler.
-
-#### Push component_verify_ticket
-
-Once the open platform is pass the audit from WeChat, WeChat server will send a `component_verify_ticket` to developer's server every 10 minutes. SDK, by default, caches `component_verify_ticket`.
-
-Note, developers have to call the code in the route / controller, this `component_verify_ticket` is required, or nothing can be done, will throw exception "Component verify ticket does not exists."
-
-### Calling API
-
-Before starting to work with the APIs, make sure following has be done.
-
-#### Replace Access Token
-
-Open platform must use `authorizer_access_token` instead of the original `access_token`, to call the API.
-
-To replace the original access token:
+Example:
 
 ```php
-$app = new Application($options);
-$app->access_token = $app->open_platform->authorizer_token;
+// Redirectly
+$response = $openPlatform->pre_auth->redirect('https://your-domain.com/callback');
+
+// Get the redirect url
+$response->getTargetUrl();
+
+```
+It will bring back to `https://your-domain.com/callback?auth_code=xxxxxxx` when the user is authorized.
+
+## API List
+
+### Get authorizer credentials and authorization infomation
+
+```php
+$openPlatform->getAuthorizationInfo($authorizationCode = null);
 ```
 
-#### Set Authorizer App Id
-
-Developer has to set the authorizer to call the API.
+### Get authorizer infomation
 
 ```php
-$app = new Application($options);
-
-// Loads the authorizer info, e.g. $authorizer = Authorizer::find($id);
-$authorizerAppId = $authorizer->app_id;
-
-$app->open_platform->authorization->setAuthorizerAppId($authorizerAppId);
+$openPlatform->getAuthorizerInfo($authorizerAppId);
 ```
 
-### Authorization API
-
-#### Get Authorization URL
+### Get authorizer option
 
 ```php
-$open_platform->pre_auth
-    ->setRedirectUri('http://domain.com/callback')
-    ->getAuthLink();
+$openPlatform->getAuthorizerOption($authorizerAppId, $optionName);
 ```
 
-用户授权后会带上 `code` 跳转到 `$redirect_uri`。
-
-#### Get Authorization Info
+### Set authorizer option
 
 ```php
-$authorizer = $open_platform->authorizer;
-
-$authorizer->getAuthInfo($authorization_code);
+$openPlatform->setAuthorizerOption($authorizerAppId, $optionName, $optionValue);
 ```
 
-#### Get Authorizer Info
+## Calling Authorizer API
+
+It will be obtained an instance of `\EasyWeChat\Foundation\Application`.
+
+> When the API is called, the SDK will automatically obtain and refresh the `AuthorizerAccessToken` expires.
+> Developers do not need to handle with the authorizer credentials `AuthorizerAccessToken`.
 
 ```php
-$authorizer = $open_platform->authorizer;
-
-$authorizer->getAuthorizerInfo($authorizer_appid);
-```
-
-#### Get Authorizer Option
-
-```php
-$authorizer = $open_platform->authorizer;
-
-$authorizer->getAuthorizerOption($authorizer_appid, $option_name);
-```
-
-#### Set Authorizer Option
-
-```php
-$authorizer = $open_platform->authorizer;
-
-$authorizer->setAuthorizerOption($authorizer_appid, $option_name, $option_value);
+$app = $openPlatform->createAuthorizer($authorizerAppId, $authorizerRefreshToken);
 ```
