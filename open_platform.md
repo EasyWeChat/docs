@@ -123,6 +123,6 @@ $openPlatform->setAuthorizerOption($authorizerAppId, $optionName, $optionValue);
 
 ```php
 // 传递 AuthorizerAppId 和 AuthorizerRefreshToken（注意不是 AuthorizerAccessToken）即可。
-$app = $openPlatform->createAuthorizer($authorizerAppId, $authorizerRefreshToken);
+$app = $openPlatform->createAuthorizerApplication($authorizerAppId, $authorizerRefreshToken);
 // 调用方式与普通调用一致。
 ```
