@@ -120,6 +120,7 @@ $openPlatform->setAuthorizerOption($authorizerAppId, $optionName, $optionValue);
 通过该方法会获得一个 `\EasyWeChat\Foundation\Application` 实例。
 > 当调用授权方 API 后，SDK 内部会自动获取和刷新 `AuthorizerAccessToken` 有效期。
 > 所以开发者无需处理授权方公众号的接口调用凭据 `AuthorizerAccessToken`。
+
 ```php
 // 传递 AuthorizerAppId 和 AuthorizerRefreshToken（注意不是 AuthorizerAccessToken）即可。
 $app = $openPlatform->createAuthorizer($authorizerAppId, $authorizerRefreshToken);
