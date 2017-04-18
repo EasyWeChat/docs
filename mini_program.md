@@ -1,4 +1,4 @@
-title: 小程序 TODO
+title: 小程序
 ---
 
 ## 实例化
@@ -36,6 +36,47 @@ $miniProgram->sns->getSessionKey($code);
 
 > 详见[模版消息](https://easywechat.org/zh-cn/docs/notice.html)
 
-## 小程序客服消息
+## 客服
 
-### 进入事件
+### 发送客服消息
+
+发送文本消息
+
+```php
+$miniProgram->staff->message($message)->to($openId)->send();
+```
+
+> $message 为文本消息对象，请参考：[文本消息](https://easywechat.org/zh-cn/docs/messages.html#文本消息)
+
+发送图片消息
+
+```php
+$miniProgram->staff->message($message)->to($openId)->send();
+```
+
+> $message 为图片消息对象，请参考：[图片消息](https://easywechat.org/zh-cn/docs/messages.html#图片消息)
+
+
+## 临时素材接口
+
+> 详见[临时素材-API](https://easywechat.org/zh-cn/docs/material.html#临时素材-API)
+
+## 数据分析
+
+### API
+
+- `summaryTrend($from, $to)` 概况趋势，限定查询1天数据，即 `$from` 要与 `$to` 相同；
+- `dailyVisitTrend($from, $to)` 访问日趋势，限定查询1天数据，即 `$from` 要与 `$to` 相同；
+- `weeklyVisitTrend($from, $to)` 访问周趋势， `$from` 为周一日期， `$to` 为周日日期；
+- `monthlyVisitTrend($from, $to)` 访问月趋势， `$from` 为月初日期， `$to` 为月末日期；
+- `visitDistribution($from, $to)` 访问分布，限定查询1天数据，即 `$from` 要与 `$to` 相同；
+- `dailyRetainInfo($from, $to)` 访问日留存，限定查询1天数据，即 `$from` 要与 `$to` 相同；
+- `weeklyRetainInfo($from, $to)` 访问周留存， `$from` 为周一日期， `$to` 为周日日期；
+- `montylyRetainInfo($from, $to)` 访问月留存， `$from` 为月初日期， `$to` 为月末日期；
+- `visitPage($from, $to)` 访问页面，限定查询1天数据，即 `$from` 要与 `$to` 相同；
+
+### 代码示例
+
+```php
+$miniProgram->stats->summaryTrend('20170313', '20170313');
+```
