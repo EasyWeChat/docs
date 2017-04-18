@@ -407,7 +407,7 @@ $config = $payment->configForAppPayment($prepayId);
 
 `$config` 为数组格式，你可以用 API 返回给客户端
 
-# 二维码生成工具推荐
+## 二维码生成工具推荐
 
 你也许需要生成二维码，那么以下这些供参考：
 
