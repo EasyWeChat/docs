@@ -14,7 +14,7 @@ title: 多客服消息转发
 
   $result = $server->serve();
 
-  echo $result;
+  $result->send();
 ```
 
 当然，你也可以指定转发给某一个客服：
