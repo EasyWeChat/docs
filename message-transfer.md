@@ -12,9 +12,9 @@ title: 多客服消息转发
       return new \EasyWeChat\Message\Transfer();
   });
 
-  $result = $server->serve();
+  $response = $server->serve();
 
-  $result->send();
+  $response->send(); // Laravel 里请使用：return $response;
 ```
 
 当然，你也可以指定转发给某一个客服：
