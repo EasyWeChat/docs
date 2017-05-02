@@ -51,9 +51,9 @@ $server->setMessageHandler(function($event) use ($openPlatform) {
         case Guard::EVENT_AUTHORIZED: // 授权成功
             $authorizationInfo = $openPlatform->getAuthorizationInfo($event->AuthorizationCode);
             // 保存数据库操作等...
-        case Guard::EVENT_UNAUTHORIZED: // 更新授权
+        case Guard::EVENT_UPDATE_AUTHORIZED: // 更新授权
             // 更新数据库操作等...
-        case Guard::EVENT_UPDATE_AUTHORIZED: // 授权取消
+        case Guard::EVENT_UNAUTHORIZED: // 授权取消
             // 更新数据库操作等...
     }
 });
