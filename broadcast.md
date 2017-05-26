@@ -48,18 +48,20 @@ $broadcast->sendVideo($message);
 $broadcast->sendCard($cardId);
 ```
 
-### 群发消息给指定组
+### 群发消息给指定组/标签
+
+`$targetId` 为 `组ID` 或 `标签ID`。
 
 ```php
-$broadcast->send($messageType, $message, $groupId);
+$broadcast->send($messageType, $message, $targetId);
 
 // 别名方式
-$broadcast->sendText($text, $groupId);
-$broadcast->sendNews($mediaId, $groupId);
-$broadcast->sendVoice($mediaId, $groupId);
-$broadcast->sendImage($mediaId, $groupId);
-$broadcast->sendVideo($message, $groupId);
-$broadcast->sendCard($cardId, $groupId);
+$broadcast->sendText($text, $targetId);
+$broadcast->sendNews($mediaId, $targetId);
+$broadcast->sendVoice($mediaId, $targetId);
+$broadcast->sendImage($mediaId, $targetId);
+$broadcast->sendVideo($message, $targetId);
+$broadcast->sendCard($cardId, $targetId);
 ```
 
 ### 群发消息给指定用户
