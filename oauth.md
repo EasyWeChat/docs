@@ -188,12 +188,17 @@ $user = $_SESSION['wechat_user'];
 
 use EasyWeChat\Foundation\Application;
 
+// 注意：如果是 scope 为 snsapi_login 时，这里不是使用公众号的 appid，也不是使用开放平台第三方平台的 appid，而是微信开放平台网站应用里的 appid和secret，这个地方很容易搞混让人抓狂的！
 $config = [
-  // ...
+    'app_id' => 'APPID',
+    'secret' => 'SECRET',
 ];
 
 $app = new Application($config);
 $oauth = $app->oauth;
+
+// 获取 OAuth 的 access_token，$code 为前面从微信授权后跳转回来带上的参数 code，对应的是微信的 https://api.weixin.qq.com/sns/oauth2/access_token 接口
+$accessToken = $app->oauth->getAccessToken($code);
 
 // 获取 OAuth 授权结果用户信息
 $user = $oauth->user();
