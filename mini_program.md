@@ -30,36 +30,11 @@ $miniProgram = $app->mini_program;
 $miniProgram->sns->getSessionKey($code);
 ```
 
-## 模版消息
-
-### 发送模版消息
-
-> 详见[模版消息](https://easywechat.org/zh-cn/docs/notice.html)
-
-## 客服
-
-### 发送客服消息
-
-发送文本消息
+## 加密数据解密
 
 ```php
-$miniProgram->staff->message($message)->to($openId)->send();
+$miniProgram->encryptor->decryptData($encryptedData);
 ```
-
-> $message 为文本消息对象，请参考：[文本消息](https://easywechat.org/zh-cn/docs/messages.html#文本消息)
-
-发送图片消息
-
-```php
-$miniProgram->staff->message($message)->to($openId)->send();
-```
-
-> $message 为图片消息对象，请参考：[图片消息](https://easywechat.org/zh-cn/docs/messages.html#图片消息)
-
-
-## 临时素材接口
-
-> 详见[临时素材-API](https://easywechat.org/zh-cn/docs/material.html#临时素材-API)
 
 ## 数据分析
 
