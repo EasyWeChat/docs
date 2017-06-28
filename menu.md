@@ -78,6 +78,27 @@ $menu->add($buttons);
 
 以上将会创建一个普通菜单。
 
+#### 添加小程序菜单
+
+```php
+$buttons = [
+    [
+        "type" => "miniprogram",
+        // 菜单名称
+        "name" => "一键呼叫",
+        // 对应小程序的appid
+        "appid" =>  "wxxxxxxxxxxxxxx",
+        // 小程序路径
+        "pagepath" =>  "pages/call/phone"
+        // 备用网页url
+        "url" =>  "http://xxx.xxx/xxx",
+    ]
+];
+$menu->add($buttons);
+```
+
+以上将会创建一个小程序菜单。
+
 #### 添加个性化菜单
 
 与创建普通菜单不同的是，需要在 `add()` 方法中将个性化匹配规则作为第二个参数传进去：
