@@ -33,7 +33,7 @@ $miniProgram->sns->getSessionKey($code);
 ## 加密数据解密
 
 ```php
-$miniProgram->encryptor->decryptData($encryptedData);
+$miniProgram->encryptor->decryptData($sessionKey, $iv, $encryptedData);
 ```
 
 ## 数据分析
