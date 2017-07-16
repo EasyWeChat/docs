@@ -10,10 +10,11 @@ use EasyWeChat\Foundation\Application;
 $options = [
     // ...
     'mini_program' => [
-        'app_id'   => 'component-app-id',
-        'secret'   => 'component-app-secret',
-        'token'    => 'component-token',
-        'aes_key'  => 'component-aes-key'
+        'app_id'   => 'your-app-id',
+        'secret'   => 'your-app-secret',
+        // token 和 aes_key 开启消息推送后可见
+        'token'    => 'your-token',
+        'aes_key'  => 'your-aes-key'
         ],
     // ...
     ];
