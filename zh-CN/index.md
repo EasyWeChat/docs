@@ -1,4 +1,4 @@
-title: EasyWeChat
+# EasyWeChat
 ---
 
 ## EasyWeChat 是什么？

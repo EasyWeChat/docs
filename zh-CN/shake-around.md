@@ -1,4 +1,4 @@
-title: 摇一摇周边
+# 摇一摇周边
 ---
 
 摇一摇周边是微信在线下的全新功能, 为线下商户提供近距离连接用户的能力, 并支持线下商户向周边用户提供个性化营销、互动及信息推荐等服务。
@@ -17,9 +17,9 @@ $shakearound = $app->shakearound;
 
 ## API
 
-> 特别提醒：  
-1、下述所有的接口调用的方法参数都要严格按照方法参数前的类型传入相应类型的实参，否则可能会得到非预期的结果。  
-2、涉及需要传入设备id（$deviceIdentifier）的参数时，该参数是一个以 `device_id` 或包含 `uuid` `major` `minor` 为key的关联数组。  
+> 特别提醒：
+1、下述所有的接口调用的方法参数都要严格按照方法参数前的类型传入相应类型的实参，否则可能会得到非预期的结果。
+2、涉及需要传入设备id（$deviceIdentifier）的参数时，该参数是一个以 `device_id` 或包含 `uuid` `major` `minor` 为key的关联数组。
 3、涉及需要传入设备id列表（$deviceIdentifiers）的参数时，该参数是一个二维数组，第一层为索引类型，第二层为关联类型（$deviceIdentifier）。
 
 ```php
@@ -53,7 +53,7 @@ $shakearound = $app->shakearound;
 
 ### 开通摇一摇周边
 
-> 提示：  
+> 提示：
 若不是做 [公众号第三方平台](https://open.weixin.qq.com/cgi-bin/frame?t=home/wx_plugin_tmpl&lang=zh_CN) 开发，建议直接在微信管理后台申请开通摇一摇周边功能。
 
 #### 申请开通
@@ -66,15 +66,15 @@ $shakearound = $app->shakearound;
 
 参数
 
-> $name 联系人姓名，不超过20汉字或40个英文字母  
-$tel 联系人电话  
-$email 联系人邮箱  
-$industryId 平台定义的行业代号，具体请查看链接 [行业代号](http://3gimg.qq.com/shake_nearby/Qualificationdocuments.html)  
-$certUrls 相关资质文件的图片url，图片需先上传至微信侧服务器，用“素材管理-上传图片素材”接口上传图片，返回的图片URL再配置在此处；当不需要资质文件时，请传入空数组  
+> $name 联系人姓名，不超过20汉字或40个英文字母
+$tel 联系人电话
+$email 联系人邮箱
+$industryId 平台定义的行业代号，具体请查看链接 [行业代号](http://3gimg.qq.com/shake_nearby/Qualificationdocuments.html)
+$certUrls 相关资质文件的图片url，图片需先上传至微信侧服务器，用“素材管理-上传图片素材”接口上传图片，返回的图片URL再配置在此处；当不需要资质文件时，请传入空数组
 $reason 可选，申请理由，不超过250汉字或500个英文字母
 
-> 注意：  
-1、相关资质文件的图片是使用本页面下方的素材管理的接口上传的，切勿和另一个 [素材管理](material.html) 接口混淆。  
+> 注意：
+1、相关资质文件的图片是使用本页面下方的素材管理的接口上传的，切勿和另一个 [素材管理](material.html) 接口混淆。
 2、行业代码请务必传入**字符串**类型的实参，否则以数字0开头的行业代码将会被当成八进制数处理（将转换为十进制数），这可能不是期望的。
 
 示例
@@ -85,7 +85,7 @@ $result = $shakearound->register('zhang_san', '13512345678', 'weixin123@qq.com',
 /* 返回结果
 {
    "data": {
-       
+
    },
    "errcode": 0,
    "errmsg": "success."
@@ -138,7 +138,7 @@ var_dump($result->data['audit_comment']) // test
 
 参数
 
-> $ticket 摇周边业务的ticket，可在摇到的URL中得到，ticket生效时间为30分钟，每一次摇都会重新生成新的ticket  
+> $ticket 摇周边业务的ticket，可在摇到的URL中得到，ticket生效时间为30分钟，每一次摇都会重新生成新的ticket
 $needPoi 可选，是否需要返回门店poi_id，传1则返回，否则不返回
 
 示例
@@ -174,11 +174,11 @@ var_dump($result->data['beacon_info']['distance']) // 55.00620700469034
 申请配置设备所需的UUID、Major、Minor。申请成功后返回批次ID，可用返回的批次ID通过“查询设备ID申请状态”接口查询目前申请的审核状态。
 一个公众账号最多可申请100000个设备ID，如需申请的设备ID数超过最大限额，请邮件至zhoubian@tencent.com，邮件格式如下：
 
-> 标题：申请提升设备ID额度  
-内容：  
-1、公众账号名称及appid（wx开头的字符串，在mp平台可查看）  
-2、用途  
-3、预估需要多少设备ID  
+> 标题：申请提升设备ID额度
+内容：
+1、公众账号名称及appid（wx开头的字符串，在mp平台可查看）
+2、用途
+3、预估需要多少设备ID
 
 方法
 
@@ -186,9 +186,9 @@ var_dump($result->data['beacon_info']['distance']) // 55.00620700469034
 
 参数
 
-> $quantity 申请的设备ID的数量，单次新增设备超过500个，需走人工审核流程  
-$reason 申请理由，不超过100个汉字或200个英文字母  
-$comment 可选，备注，不超过15个汉字或30个英文字母  
+> $quantity 申请的设备ID的数量，单次新增设备超过500个，需走人工审核流程
+$reason 申请理由，不超过100个汉字或200个英文字母
+$comment 可选，备注，不超过15个汉字或30个英文字母
 $poiId 可选，设备关联的门店ID，关联门店后，在门店1KM的范围内有优先摇出信息的机会
 
 示例
@@ -252,7 +252,7 @@ var_dump($result->data['audit_status']) // 1
 
 参数
 
-> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先  
+> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先
 $comment 设备的备注信息，不超过15个汉字或30个英文字母
 
 示例
@@ -267,7 +267,7 @@ $result = $shakearound->device()->update(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6E
 
 /* 返回结果
 {
-    "data": {    
+    "data": {
     },
     "errcode": 0,
     "errmsg": "success."
@@ -289,9 +289,9 @@ var_dump($result->errcode) // 0
 
 参数
 
-> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先  
-$poiId 设备关联的门店ID，关联门店后，在门店1KM的范围内有优先摇出信息的机会。当值为0时，将清除设备已关联的门店ID  
-$type 可选，为1时，关联的门店和设备归属于同一公众账号；为2时，关联的门店为其他公众账号的门店  
+> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先
+$poiId 设备关联的门店ID，关联门店后，在门店1KM的范围内有优先摇出信息的机会。当值为0时，将清除设备已关联的门店ID
+$type 可选，为1时，关联的门店和设备归属于同一公众账号；为2时，关联的门店为其他公众账号的门店
 $poiAppid 可选，当$type为1时该参数为必填
 
 示例
@@ -316,7 +316,7 @@ $result = $shakearound->device()->bindLocation(['uuid' => 'FDA50693-A4E2-4FB1-AF
 
 /* 返回结果
 {
-    "data": {    
+    "data": {
     },
     "errcode": 0,
     "errmsg": "success."
@@ -400,7 +400,7 @@ var_dump($result->data['total_count']) // 151
 
 参数
 
-> $lastSeen 前一次查询列表末尾的设备编号device_id，第一次查询last_seen为0  
+> $lastSeen 前一次查询列表末尾的设备编号device_id，第一次查询last_seen为0
 $count 待查询的设备数量，不能超过50个
 
 示例
@@ -419,8 +419,8 @@ $result = $shakearound->device()->pagination(10097, 3);
 
 参数
 
-> $applyId 批次ID，申请设备ID时所返回的批次ID  
-$lastSeen 前一次查询列表末尾的设备编号device_id，第一次查询lastSeen为0  
+> $applyId 批次ID，申请设备ID时所返回的批次ID
+$lastSeen 前一次查询列表末尾的设备编号device_id，第一次查询lastSeen为0
 $count 待查询的设备数量，不能超过50个
 
 示例
@@ -437,7 +437,7 @@ $result = $shakearound->device()->fetchByApplyId(1231, 10097, 3);
 
 新增摇一摇出来的页面信息，包括在摇一摇页面出现的主标题、副标题、图片和点击进去的超链接。其中，图片必须为用素材管理接口上传至微信侧服务器后返回的链接。
 
-> 注意：  
+> 注意：
 图片是使用本页面下方的素材管理的接口上传的，切勿和另一个 [素材管理](material.html) 接口混淆。
 
 方法
@@ -446,10 +446,10 @@ $result = $shakearound->device()->fetchByApplyId(1231, 10097, 3);
 
 参数
 
-> $title 在摇一摇页面展示的主标题，不超过6个汉字或12个英文字母  
-$description 在摇一摇页面展示的副标题，不超过7个汉字或14个英文字母  
+> $title 在摇一摇页面展示的主标题，不超过6个汉字或12个英文字母
+$description 在摇一摇页面展示的副标题，不超过7个汉字或14个英文字母
 $pageUrl 点击进去的超链接
-$iconUrl 在摇一摇页面展示的图片。图片需先上传至微信侧服务器，用“素材管理-上传图片素材”接口上传图片，返回的图片URL再配置在此处  
+$iconUrl 在摇一摇页面展示的图片。图片需先上传至微信侧服务器，用“素材管理-上传图片素材”接口上传图片，返回的图片URL再配置在此处
 $comment 可选，页面的备注信息，不超过15个汉字或30个英文字母
 
 示例
@@ -479,11 +479,11 @@ var_dump($result->data['page_id']) // 28840
 
 参数
 
-> $pageId 摇周边页面唯一ID  
-$title 在摇一摇页面展示的主标题，不超过6个汉字或12个英文字母  
-$description 在摇一摇页面展示的副标题，不超过7个汉字或14个英文字母  
+> $pageId 摇周边页面唯一ID
+$title 在摇一摇页面展示的主标题，不超过6个汉字或12个英文字母
+$description 在摇一摇页面展示的副标题，不超过7个汉字或14个英文字母
 $pageUrl 点击进去的超链接
-$iconUrl 在摇一摇页面展示的图片。图片需先上传至微信侧服务器，用“素材管理-上传图片素材”接口上传图片，返回的图片URL再配置在此处  
+$iconUrl 在摇一摇页面展示的图片。图片需先上传至微信侧服务器，用“素材管理-上传图片素材”接口上传图片，返回的图片URL再配置在此处
 $comment 可选，页面的备注信息，不超过15个汉字或30个英文字母
 
 示例
@@ -560,7 +560,7 @@ var_dump($result->data['total_count']) // 2
 
 参数
 
-> $begin 页面列表的起始索引值  
+> $begin 页面列表的起始索引值
 $count 待查询的页面数量，不能超过50个
 
 示例
@@ -575,7 +575,7 @@ $result = $shakearound->page()->pagination(0,2);
 
 删除已有的页面，包括在摇一摇页面出现的主标题、副标题、图片和点击进去的超链接。
 
-> 注意：  
+> 注意：
 只有页面与设备没有关联关系时，才可被删除。
 
 方法
@@ -614,7 +614,7 @@ var_dump($result->errcode) // 0
 
 参数
 
-> $path 图片所在路径  
+> $path 图片所在路径
 $type 可选，值为icon或license
 
 示例
@@ -640,11 +640,11 @@ var_dump($result->data['pic_url']) // http://shp.qpic.cn/wechat_shakearound_pic/
 
 #### 配置设备与页面的关联关系
 
-配置完成后，在此设备的信号范围内，即可摇出关联的页面信息。  
+配置完成后，在此设备的信号范围内，即可摇出关联的页面信息。
 若设备配置多个页面，则随机出现页面信息。一个设备最多可配置30个关联页面。
 
-> 注意：  
-1、配置时传入该设备需要关联的页面的id列表，该设备原有的关联关系将被直接清除。  
+> 注意：
+1、配置时传入该设备需要关联的页面的id列表，该设备原有的关联关系将被直接清除。
 2、页面的id列表允许为空（**传入空数组**），当页面的id列表为空时则会清除该设备的所有关联关系。
 
 方法
@@ -653,7 +653,7 @@ var_dump($result->data['pic_url']) // http://shp.qpic.cn/wechat_shakearound_pic/
 
 参数
 
-> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先  
+> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先
 $pageIds 页面的id列表，索引数组
 
 示例
@@ -687,12 +687,12 @@ var_dump($result->errcode) // 0
 
 > $shakearound->relation()->getPageByDeviceId(array $deviceIdentifier [, boolean $raw = false])
 
-> 注意：  
+> 注意：
 该方法默认对返回的数据进行处理后返回一个包含页面id的索引数组。若要返回和 `getDeviceByPageId` 方法类似的数据，请传入 `true` 作为第二个参数。
 
 参数
 
-> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先  
+> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先
 $raw 可选，当为true时，返回值和getDeviceByPageId方法类似，否则返回页面的id列表（索引数组，无关联时为空数组）
 
 示例
@@ -719,8 +719,8 @@ var_dump($result) // [50054,50055]
 
 参数
 
-> $pageId 指定的页面id  
-$begin 关联关系列表的起始索引值  
+> $pageId 指定的页面id
+$begin 关联关系列表的起始索引值
 $count 待查询的关联关系数量，不能超过50个
 
 示例
@@ -759,15 +759,15 @@ var_dump($result->data['total_count']) // 2
 
 ### 摇一摇数据统计
 
-> 此接口无法获取当天的数据，最早只能获取前一天的数据。  
+> 此接口无法获取当天的数据，最早只能获取前一天的数据。
 由于系统在凌晨处理前一天的数据，太早调用此接口可能获取不到数据，建议在早上8：00之后调用此接口。
 
 #### 以设备为维度的数据统计
 
 查询单个设备进行摇周边操作的人数、次数，点击摇周边消息的人数、次数。
 
-> 注意：  
-查询的最长时间跨度为30天。只能查询最近90天的数据。  
+> 注意：
+查询的最长时间跨度为30天。只能查询最近90天的数据。
 
 方法
 
@@ -775,7 +775,7 @@ var_dump($result->data['total_count']) // 2
 
 参数
 
-> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先  
+> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先
 $beginDate 起始日期时间戳，最长时间跨度为30天，单位为秒
 $endDate 结束日期时间戳，最长时间跨度为30天，单位为秒
 
@@ -820,7 +820,7 @@ var_dump($result->data[0]['ftime']) // 1425052800
 
 > 只能查询最近90天内的数据，且一次只能查询一天。
 
-> 注意：  
+> 注意：
 对于摇周边人数、摇周边次数、点击摇周边消息的人数、点击摇周边消息的次数都为0的设备，不在结果列表中返回。
 
 方法
@@ -829,7 +829,7 @@ var_dump($result->data[0]['ftime']) // 1425052800
 
 参数
 
-> $timestamp 指定查询日期时间戳，单位为秒  
+> $timestamp 指定查询日期时间戳，单位为秒
 $pageIndex 指定查询的结果页序号，返回结果按摇周边人数降序排序，每50条记录为一页
 
 示例
@@ -860,8 +860,8 @@ $result = $shakearound->stats()->batchDeviceSummary(1435075200, 1);
                 "shake_uv": 2
                 "click_pv": 3
                 "click_uv": 4
-            } 
-        ], 
+            }
+        ],
     },
     "date":1435075200
     "total_count": 151
@@ -878,7 +878,7 @@ var_dump($result->total_count) // 151
 
 查询单个页面通过摇周边摇出来的人数、次数，点击摇周边页面的人数、次数
 
-> 注意：  
+> 注意：
 查询的最长时间跨度为30天。只能查询最近90天的数据。
 
 方法
@@ -887,7 +887,7 @@ var_dump($result->total_count) // 151
 
 参数
 
-> $pageId 指定页面的页面ID  
+> $pageId 指定页面的页面ID
 $beginDate 起始日期时间戳，最长时间跨度为30天，单位为秒
 $endDate 结束日期时间戳，最长时间跨度为30天，单位为秒
 
@@ -924,7 +924,7 @@ var_dump($result->data[1]['ftime']) // 1425139200
 
 查询指定时间商家帐号下的每个页面进行摇周边操作的人数、次数，点击摇周边消息的人数、次数。
 
-> 注意：  
+> 注意：
 对于摇周边人数、摇周边次数、点击摇周边消息的人数、点击摇周边消息的次数都为0的页面，不在结果列表中返回。
 
 方法
@@ -933,7 +933,7 @@ var_dump($result->data[1]['ftime']) // 1425139200
 
 参数
 
-> $timestamp 指定查询日期时间戳，单位为秒  
+> $timestamp 指定查询日期时间戳，单位为秒
 $pageIndex 指定查询的结果页序号，返回结果按摇周边人数降序排序，每50条记录为一页
 
 示例
@@ -1017,7 +1017,7 @@ var_dump($result->data['group_name']) // test
 
 参数
 
-> $groupId 分组唯一标识，全局唯一  
+> $groupId 分组唯一标识，全局唯一
 $name 分组名称，不超过100汉字或200个英文字母
 
 示例
@@ -1076,7 +1076,7 @@ var_dump($result->errcode) // 0
 
 参数
 
-> $begin 分组列表的起始索引值  
+> $begin 分组列表的起始索引值
 $count 待查询的分组数量，不能超过1000个
 
 示例
@@ -1117,8 +1117,8 @@ var_dump($result->data['total_count']) // 100
 
 参数
 
-> $groupId 分组唯一标识，全局唯一  
-$begin 分组里设备的起始索引值  
+> $groupId 分组唯一标识，全局唯一
+$begin 分组里设备的起始索引值
 $count 待查询的分组里设备的数量，不能超过1000个
 
 示例
@@ -1171,7 +1171,7 @@ var_dump($result->data['total_count']) // 100
 
 参数
 
-> $groupId 分组唯一标识，全局唯一  
+> $groupId 分组唯一标识，全局唯一
 $deviceIdentifiers 设备id列表
 
 示例
@@ -1212,7 +1212,7 @@ var_dump($result->errcode) // 0
 
 参数
 
-> $groupId 分组唯一标识，全局唯一  
+> $groupId 分组唯一标识，全局唯一
 $deviceIdentifiers 设备id列表
 
 示例
@@ -1247,13 +1247,13 @@ var_dump($result->errcode) // 0
 
 微信官方目前暂停了摇红包接口，该接口可能会有所调整，故而暂时不提供该接口的封装。
 
-> 官方公告详情请至： [关于摇红包接口暂停的公告](https://zb.weixin.qq.com/nearby/announce.xhtml?announceId=10047) 
+> 官方公告详情请至： [关于摇红包接口暂停的公告](https://zb.weixin.qq.com/nearby/announce.xhtml?announceId=10047)
 
 ### 摇一摇事件通知
 
 用户进入摇一摇界面，在“周边”页卡下摇一摇时，微信会把这个事件推送到开发者填写的URL（登录公众平台进入开发者中心设置）。推送内容包含摇一摇时“周边”页卡展示出来的页面所对应的设备信息，以及附近最多五个属于该公众账号的设备的信息。当摇出列表时，此事件不推送。
 
-> 摇一摇事件的事件类型：ShakearoundUserShake  
+> 摇一摇事件的事件类型：ShakearoundUserShake
 关于事件的处理请移步： [事件](events.html)
 
 ### 摇一摇周边错误码

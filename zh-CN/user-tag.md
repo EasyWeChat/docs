@@ -1,4 +1,4 @@
-title: 用户标签
+# 用户标签
 ---
 
 用户标签的使用就非常简单了，基本的增删改查。
@@ -97,7 +97,7 @@ $userTags = $tag->userTags($openId);
 ### 获取标签下粉丝列表
 
 ```php
-$tag->usersOfTag($tagId, $nextOpenId = ''); 
+$tag->usersOfTag($tagId, $nextOpenId = '');
 // $nextOpenId：第一个拉取的OPENID，不填默认从头开始拉取
 
 // {

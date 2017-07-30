@@ -1,4 +1,4 @@
-title: 缓存
+# 缓存
 ---
 
 本项目使用 [doctrine/cache](https://github.com/doctrine/cache) 来完成缓存工作，它支持基本目前所有的缓存引擎。

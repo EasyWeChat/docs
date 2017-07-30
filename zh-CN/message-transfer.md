@@ -1,4 +1,4 @@
-title: 多客服消息转发
+# 多客服消息转发
 ---
 
 
@@ -23,7 +23,7 @@ title: 多客服消息转发
 $server->setMessageHandler(function($message) {
     $transfer = new \EasyWeChat\Message\Transfer();
     $transfer->account($account);// 或者 $transfer->to($account);
-    
+
     return $transfer;
 });
 ```
