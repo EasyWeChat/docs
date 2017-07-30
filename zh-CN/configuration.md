@@ -1,5 +1,5 @@
 # 配置
----
+
 
 在前面我们已经讲过，初始化 SDK 的时候方法就是创建一个 `EasyWeChat\Foundation\Application` 实例：
 

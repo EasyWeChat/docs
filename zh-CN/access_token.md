@@ -1,5 +1,5 @@
 # Access Token
----
+
 
 SDK 中有一个 [Access Token](https://github.com/overtrue/wechat/blob/master/src/Core/AccessToken.php) 对象，它是一个全局使用的东西，请把它与 OAuth 中的 code 换取的 Access Token 区别开。
 
