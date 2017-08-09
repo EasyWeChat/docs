@@ -1,26 +1,28 @@
 # 配置
 
-
-在前面我们已经讲过，初始化 SDK 的时候方法就是创建一个 `EasyWeChat\Foundation\Application` 实例：
+常用的配置参数会比较少，因为除非你有特别的定制，否则基本上你需要关心的都已经是默认值就可以了：
 
 ```php
-use EasyWeChat\Foundation\Application;
+use EasyWeChat\Factory;
 
-$options = [
-   // ...
+$config = [
+    'debug' => true,
+    'app_id' => 'wx3cf0f39249eb0exx',
+    'secret' => 'f1c242f4f28f735d4687abb469072axx',
+
+    // 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名
+    'response_type' => 'array',
+
+    'log' => [
+        'level' => 'debug',
+        'file' => __DIR__.'/wechat.log',
+    ],
 ];
 
-$app = new Application($options);
-
-/**
-* 如果想要在Application实例化完成之后, 修改某一个options的值,
-* 比如服务商+子商户支付回调场景, 所有子商户订单支付信息都是通过同一个服务商的$option 配置进来的,
-* 当oauth在微信端验证完成之后, 可以通过动态设置merchant_id来区分具体是哪个子商户
-*/
-$app['config']->set('oauth.callback','wechat/oauthcallback/'. $sub_merchant_id->id);
+$app = Factory::officialAccount($config);
 ```
 
-那么配置的具体选项有哪些，下面是一个完整的列表：
+下面是一个完整的配置样例：
 
 ```php
 <?php
@@ -41,6 +43,12 @@ return [
     'token'   => 'your-token',          // Token
     'aes_key' => '',                    // EncodingAESKey，安全模式下请一定要填写！！！
 
+     /**
+      * 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名
+      * 使用自定义类名时，构造函数将会接收一个 `EasyWeChat\Kernel\Http\Response` 实例
+      */
+    'response_type' => 'array',
+
     /**
      * 日志配置
      *
@@ -56,6 +64,15 @@ return [
     ],
 
     /**
+     * 接口请求相关配置，超时时间等，具体可用参数请参考：
+     * http://docs.guzzlephp.org/en/stable/request-options.html
+     */
+    'http' => [
+        'timeout' => 5.0,
+        'base_uri' => 'https://api.weixin.qq.com/',
+    ],
+
+    /**
      * OAuth 配置
      *
      * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login
@@ -65,43 +82,45 @@ return [
         'scopes'   => ['snsapi_userinfo'],
         'callback' => '/examples/oauth_callback.php',
     ],
-
-    /**
-     * 微信支付
-     */
-    'payment' => [
-        'merchant_id'        => 'your-mch-id',
-        'key'                => 'key-for-signature',
-        'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
-        'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
-        // 'device_info'     => '013467007045764',
-        // 'sub_app_id'      => '',
-        // 'sub_merchant_id' => '',
-        // ...
-    ],
-
-    /**
-     * Guzzle 全局设置
-     *
-     * 更多请参考： http://docs.guzzlephp.org/en/latest/request-options.html
-     */
-    'guzzle' => [
-        'timeout' => 3.0, // 超时时间（秒）
-        //'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
-    ],
 ];
 ```
 
 > :heart: 安全模式下请一定要填写 `aes_key`
 
-## 日志文件
+## 日志配置
 
-配置文件里的`/tmp/...`是绝对路径
+日志有两种配置方式：
 
-如果在 windows 下，去把它改成`C:\foo\bar`的形式，
-如果是 Linux ，你已经懂了……
+### 文件式
 
-如果需要按日独立存储，可以配置成`'file'  => storage_path('/tmp/easywechat/easywechat_'.date('Ymd').'.log'),`
+```php
+'log' => [
+    'level'      => 'debug',
+    'permission' => 0777,
+    'file'       => '/tmp/easywechat.log',
+],
+```
 
-其它同理……
+配置文件里的 `/tmp/...` 是绝对路径
+
+如果在 windows 平台，需要把它改成 `C:\foo\bar` 的形式，
+
+如果需要按日独立存储，可以配置成 `'file'  => storage_path('/tmp/easywechat/easywechat_'.date('Ymd').'.log'),`
+
+### 自定义 Handler
+
+由于日志使用的是 [Monolog](https://github.com/Seldaek/monolog)，所以，除了默认的文件式日志外，你可以自定义日志处理器：
+
+```php
+use Monolog\Handler\RotatingFileHandler;
+
+$handler = new RotatingFileHandler('/path/to/wechat.log', 5, 'debug');
+
+...
+
+'log' => [
+    'level'   => 'debug',
+    'handler' => $handler,
+],
+```
 
