@@ -73,6 +73,7 @@ return [
      */
     'http' => [
         'retries' => 1,
+        'retry_delay' => 500,
         'timeout' => 5.0,
         'base_uri' => 'https://api.weixin.qq.com/',
     ],
