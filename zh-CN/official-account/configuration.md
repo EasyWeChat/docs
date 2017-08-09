@@ -66,8 +66,13 @@ return [
     /**
      * 接口请求相关配置，超时时间等，具体可用参数请参考：
      * http://docs.guzzlephp.org/en/stable/request-options.html
+     *
+     * - retries: 重试次数，默认 1，指定当 http 请求失败时重试的次数。
+     * - retry_delay: 重试延迟间隔（单位：ms），默认 500
+     * - log_template: 指定 HTTP 日志模板，请参考：https://github.com/guzzle/guzzle/blob/master/src/MessageFormatter.php
      */
     'http' => [
+        'retries' => 1,
         'timeout' => 5.0,
         'base_uri' => 'https://api.weixin.qq.com/',
     ],
