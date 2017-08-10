@@ -126,6 +126,3 @@ $app->customer_service_session->lists('test1@test');
 ```php
 $app->customer_service_session->waiting();
 ```
-
-
-关于更多客服接口信息请参考微信官方文档：http://mp.weixin.qq.com/wiki

@@ -52,6 +52,3 @@ var_dump($userSummary);
 + `array cardSummary(string $from, string $to, int $condSource = 0)` 获取普通卡券分析分时数据, 最大时间跨度：**1**;
 + `array freeCardSummary(string $from, string $to, int $condSource = 0, string $cardId = '')` 获取免费券分析分时数据, 最大时间跨度：**1**;
 + `array memberCardSummary(string $from, string $to, int $condSource = 0)` 获取会员卡分析分时数据, 最大时间跨度：**1**;
-
-
-更多详细内容与协议说明，请查看微信官方文档：http://mp.weixin.qq.com/wiki/ **数据统计** 章节

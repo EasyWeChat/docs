@@ -12,7 +12,8 @@
   - [短网址](/docs/{{version}}/{{lang}}/base-services/url)
 
 - ## 公众号
-  - [配置](/docs/{{version}}/{{lang}}/official-account/index)
+  - [配置](/docs/{{version}}/{{lang}}/official-account/configuration)
+  - [基础接口](/docs/{{version}}/{{lang}}/official-account/base)
   - [服务端](/docs/{{version}}/{{lang}}/official-account/server)
   - [消息](/docs/{{version}}/{{lang}}/official-account/messages)
   - [多客服消息转发](/docs/{{version}}/{{lang}}/official-account/message-transfer)
@@ -28,8 +29,8 @@
   - [卡券](/docs/{{version}}/{{lang}}/official-account/card)
   - [小店](/docs/{{version}}/{{lang}}/official-account/store)
   - [门店](/docs/{{version}}/{{lang}}/official-account/poi)
-  - [客服](/docs/{{version}}/{{lang}}/official-account/staff)
-  - [数据统计与分析](/docs/{{version}}/{{lang}}/official-account/anaylsis)
+  - [客服](/docs/{{version}}/{{lang}}/official-account/customer_service)
+  - [数据统计与分析](/docs/{{version}}/{{lang}}/official-account/data_cube)
   - [语义理解](/docs/{{version}}/{{lang}}/official-account/semantic)
   - [自动回复](/docs/{{version}}/{{lang}}/official-account/reply)
 
