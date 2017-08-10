@@ -3,42 +3,12 @@
 
 在微信里的图片，音乐，视频等等都需要先上传到微信服务器作为素材才可以在消息中使用。
 
-> 请注意：
-
->     1. 限制：
->       - 图片（image）: 1M，支持 bmp/png/jpeg/jpg/gif 格式
->       - 语音（voice）：2M，播放长度不超过 60s，支持 mp3/wma/wav/amr 格式
->       - 视频（video）：10MB，支持MP4格式
->       - 缩略图（thumb）：64KB，支持JPG格式
-
->     2. `media_id` 是可复用的；
->     3. 素材分为 `临时素材` 与 `永久素材`， 临时素材媒体文件在后台保存时间为3天，即 3 天后 `media_id` 失效；
->     4. 新增的永久素材也可以在公众平台官网素材管理模块中看到；
->     5. 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000；
-
-## 获取实例
-
-```php
-<?php
-use EasyWeChat\Foundation\Application;
-
-$app = new Application($options);
-
-// 永久素材
-$material = $app->material;
-// 临时素材
-$temporary = $app->material_temporary;
-```
-
-## 永久素材 API：
-
-### 上传图片:
+### 上传图片
 
 > 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
 
 ```php
-$result = $material->uploadImage("/path/to/your/image.jpg");  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-var_dump($result);
+$result = $app->material->uploadImage("/path/to/your/image.jpg");
 // {
 //    "media_id":MEDIA_ID,
 //    "url":URL
@@ -47,13 +17,12 @@ var_dump($result);
 
 > `url` 只有上传图片素材有返回值。
 
-### 上传声音
+### 上传语音
 
-语音**大小不超过 5M**，**长度不超过 60 秒**，支持 `mp3/wma/wav/amr` 格式。
+语音 **大小不超过 5M**，**长度不超过 60 秒**，支持 `mp3/wma/wav/amr` 格式。
 
 ```php
-$result = $material->uploadVoice("/path/to/your/voice.mp3"); // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-$mediaId = $result->media_id;
+$result = $app->material->uploadVoice("/path/to/your/voice.mp3");
 // {
 //    "media_id":MEDIA_ID,
 // }
@@ -62,8 +31,7 @@ $mediaId = $result->media_id;
 ### 上传视频
 
 ```php
-$result = $material->uploadVideo("/path/to/your/video.mp4", "视频标题", "视频描述"); // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-$mediaId = $result->media_id;
+$result = $app->material->uploadVideo("/path/to/your/video.mp4", "视频标题", "视频描述");
 // {
 //    "media_id":MEDIA_ID,
 // }
@@ -74,32 +42,30 @@ $mediaId = $result->media_id;
 用于视频封面或者音乐封面。
 
 ```php
-$result = $material->uploadThumb("/path/to/your/thumb.jpg"); // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-$mediaId = $result->media_id;
+$result = $app->material->uploadThumb("/path/to/your/thumb.jpg");
 // {
 //    "media_id":MEDIA_ID,
 // }
 ```
 
-### 上传永久图文消息
-
-图文消息没有临时一说。
+### 上传图文消息
 
 ```php
-use EasyWeChat\Message\Article;
+use EasyWeChat\Kernel\Messages\Article;
+
 // 上传单篇图文
 $article = new Article([
     'title' => 'xxx',
     'thumb_media_id' => $mediaId,
     //...
   ]);
-$material->uploadArticle($article);
+$app->material->uploadArticle($article);
 
 // 或者多篇图文
-$material->uploadArticle([$article, $article2, ...]);
+$app->material->uploadArticle([$article, $article2, ...]);
 ```
 
-### 修改永久图文消息
+### 修改图文消息
 
 有三个参数：
 
@@ -108,31 +74,27 @@ $material->uploadArticle([$article, $article2, ...]);
 - `$index` 要更新的文章在图文消息中的位置（多图文消息时，此字段才有意义，单图片忽略此参数），第一篇为 0；
 
 ```php
-$result = $material->updateArticle($mediaId, new Article(...));
-$mediaId = $result->media_id;
+$result = $app->material->updateArticle($mediaId, new Article(...));
 
 // or
 
-$result = $material->updateArticle($mediaId, [
-    'title'          => 'xxx',
+$result = $app->material->updateArticle($mediaId, [
+    'title' => 'xxx',
     'thumb_media_id' => 'xxx',
     // ...
   ]);
 
 // 指定更新多图文中的第 2 篇
-$result = $material->updateArticle($mediaId, new Article(...), 1); // 第 2 篇
+$result = $app->material->updateArticle($mediaId, new Article(...), 1); // 第 2 篇
 ```
 
 
-### 上传永久文章内容图片
-
-> 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
+### 上传图文消息图片
 
 返回值中 url 就是上传图片的 URL，可用于后续群发中，放置到图文消息中。
 
 ```php
-$result = $material->uploadArticleImage($path);
-$url = $result->url;
+$result = $app->material->uploadArticleImage($path);
 //{
 //    "url":  "http://mmbiz.qpic.cn/mmbiz/gLO17UPS6FS2xsypf378iaNhWacZ1G1UplZYWEYfwvuU6Ont96b1roYsCNFwaRrSaKTPCUdBK9DgEHicsKwWCBRQ/0"
 //}
@@ -141,7 +103,7 @@ $url = $result->url;
 ### 获取永久素材
 
 ```php
-$resource = $material->get($mediaId);
+$resource = $app->material->get($mediaId);
 ```
 
 如果请求的素材为图文消息，则响应如下：
@@ -174,29 +136,32 @@ $resource = $material->get($mediaId);
 }
 ```
 
-其他类型的素材消息，则响应的直接为素材的内容，开发者可以自行保存为文件。例如
+其他类型的素材消息，则响应为 `EasyWeChat\Kernel\Http\StreamResponse` 实例，开发者可以自行保存为文件。例如
 
 ```
-$image = $material->get($mediaId);
-file_put_contents('/foo/abc.jpg', $image);
+$stream = $app->material->get($mediaId);
+
+// 以内容 md5 为文件名
+$stream->save('保存目录');
+
+// 自定义文件名，不需要带后缀
+$stream->saveAs('保存目录', '文件名');
 ```
 
 ### 获取永久素材列表
-
-参考：[微信公众平台开发者文档：获取永久素材列表](http://mp.weixin.qq.com/wiki/12/2108cd7aafff7f388f41f37efa710204.html)
 
 - `$type`   素材的类型，图片（`image`）、视频（`video`）、语音 （`voice`）、图文（`news`）
 - `$offset` 从全部素材的该偏移位置开始返回，可选，默认 `0`，0 表示从第一个素材 返回
 - `$count`  返回素材的数量，可选，默认 `20`, 取值在 1 到 20 之间
 
 ```php
-$material->list($type, $offset, $count);
+$app->material->list($type, $offset, $count);
 ```
 
 示例：
 
 ```
-$list = $material->list('image', 0, 10);
+$list = $app->material->list('image', 0, 10);
 ```
 
 图片、语音、视频 等类型的返回如下
@@ -249,7 +214,7 @@ $list = $material->list('image', 0, 10);
 ### 获取素材计数
 
 ```php
-$stats = $material->stats();
+$stats = $app->material->stats();
 
 // {
 //   "voice_count":COUNT,
@@ -262,5 +227,5 @@ $stats = $material->stats();
 ### 删除永久素材；
 
 ```php
-$material->delete($mediaId);
+$app->material->delete($mediaId);
 ```
