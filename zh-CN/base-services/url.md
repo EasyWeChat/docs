@@ -17,7 +17,7 @@ $url = $app->url;
 
 + `shorten($url)` 长链接转短链接
 
-example:
+示例：
 
 ```php
 $shortUrl = $url->shorten('http://overtrue.me/open-source');

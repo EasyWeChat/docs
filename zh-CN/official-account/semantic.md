@@ -15,7 +15,7 @@
 
 > 注：单类别意图比较明确，识别的覆盖率比较大，所以如果只要使用特定某个类别，建议将 category 只设置为该类别。
 
-example:
+示例：
 
 ```php
 $result = $app->semantic->query('查一下明天从北京到上海的南航机票', "flight,hotel", array('city' => '北京', 'uid' => '123456'));

@@ -118,7 +118,7 @@ $app->customer_service_session->get('OPENID');
 ### 获取客服会话列表
 
 ```php
-$app->customer_service_session->lists('test1@test');
+$app->customer_service_session->list('test1@test');
 ```
 
 ### 获取未接入会话列表

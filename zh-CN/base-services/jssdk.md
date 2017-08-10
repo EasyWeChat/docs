@@ -14,7 +14,7 @@ $js = $app->js;
 - `$js->config(array $APIs, $debug = false, $beta = false, $json = true);` 获取JSSDK的配置数组，默认返回 JSON 字符串，当 `$json` 为 `false` 时返回数组，你可以直接使用到网页中。
 - `$js->setUrl($url)` 设置当前URL，如果不想用默认读取的URL，可以使用此方法手动设置，通常不需要。
 
-example:
+示例：
 
 我们可以生成js配置文件：
 

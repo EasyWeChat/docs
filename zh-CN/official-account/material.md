@@ -190,13 +190,13 @@ file_put_contents('/foo/abc.jpg', $image);
 - `$count`  返回素材的数量，可选，默认 `20`, 取值在 1 到 20 之间
 
 ```php
-$material->lists($type, $offset, $count);
+$material->list($type, $offset, $count);
 ```
 
-example:
+示例：
 
 ```
-$lists = $material->lists('image', 0, 10);
+$list = $material->list('image', 0, 10);
 ```
 
 图片、语音、视频 等类型的返回如下

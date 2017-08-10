@@ -25,7 +25,7 @@ $card = $app->card;
 $card->getColors();
 ```
 
-example:
+示例：
 
 ```php
 $result = $card->getColors();
@@ -45,7 +45,7 @@ $card->create($cardType, $baseInfo, $especial);
 - `baseInfo` array  - 为卡券的基本数据
 - `especial` array  - 是扩展字段
 
-example:
+示例：
 
 ```php
 <?php
@@ -113,7 +113,7 @@ $card->QRCode($cards);
 
 - `cards` array - 卡券相关信息
 
-example:
+示例：
 
 ```php
 //领取单张卡券
@@ -184,7 +184,7 @@ $card->showQRCode($ticket);
 
 - `ticket` string  - 获取的二维码 ticket，凭借此 ticket 可以在有效时间内换取二维码。
 
-example:
+示例：
 
 ```php
 $ticket = 'gQFF8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL01VTzN0T0hsS1BwUlBBYUszbVN5AAIEughxVwMEAKd2AA==';
@@ -198,7 +198,7 @@ $result = $card->showQRCode($ticket);
 $card->getQRCodeUrl($ticket);  //获取的二维码ticket
 ```
 
-example:
+示例：
 
 ```php
 $ticket = 'gQFF8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL01VTzN0T0hsS1BwUlBBYUszbVN5AAIEughxVwMEAKd2AA==';
@@ -242,7 +242,7 @@ $card->createLandingPage($banner, $pageTitle, $canShare, $scene, $cards);
 - `scene`  string - 投放页面的场景值，具体值请参考下面的 example
 - `cards`  array - 卡券列表，每个元素有两个字段
 
-example:
+示例：
 
 ```php
 $banner     = 'http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFN';
@@ -279,7 +279,7 @@ $card->deposit($card_id, $code);
 - `cardId` string - 要导入code的卡券ID
 - `code` string - 要导入微信卡券后台的自定义 code，最多100个
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
@@ -296,7 +296,7 @@ $result = $card->deposit($cardId, $code);
 $card->getDepositedCount($cardId);  //要导入code的卡券ID
 ```
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
@@ -314,7 +314,7 @@ $result = $card->getDepositedCount($cardId);
 $card->checkCode($cardId, $code);
 ```
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
@@ -334,7 +334,7 @@ $result = $card->checkCode($cardId, $code);
 $card->getHtml($cardId);
 ```
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
@@ -356,7 +356,7 @@ $card->setTestWhitelistByUsername($usernames); // 使用 username
 - `openids` array - 测试的openid列表
 - `usernames` array  - 测试的微信号列表
 
-example:
+示例：
 
 ```php
 // by openid
@@ -376,7 +376,7 @@ $card->getCode($code, $checkConsume, $cardId);
 
 - checkConsume  是否校验code核销状态，true和false
 
-example:
+示例：
 
 ```php
 $code          = '736052543512';
@@ -398,7 +398,7 @@ $card->consume($code);
 $card->consume($code, $cardId);
 ```
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uDmhkLj6l5bm3cq9iteQBck';
@@ -419,7 +419,7 @@ $result = $card->consume($code, $cardId);
 $card->decryptCode($encryptedCode);
 ```
 
-example:
+示例：
 
 ```php
 $encryptedCode = 'XXIzTtMqCxwOaawoE91+VJdsFmv7b8g0VZIZkqf4GWA60Fzpc8ksZ/5ZZ0DVkXdE';
@@ -437,7 +437,7 @@ $result = $card->decryptCode($encryptedCode);
 $card->getUserCards($openid, $cardId);
 ```
 
-example:
+示例：
 
 ```php
 $openid  = 'odkJ9uDUz26RY-7DN1mxkznfo9xU';
@@ -456,7 +456,7 @@ $result = $card->getUserCards($openid, $cardId);
 $card->getCard($cardId);
 ```
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uLRSbnB3UFEjZAgUxAJrjeY';
@@ -469,14 +469,14 @@ $result = $card->getCard($cardId);
 ### 批量查询卡列表
 
 ```php
-$card->lists($offset, $count, $statusList);
+$card->list($offset, $count, $statusList);
 ```
 
 - `offset` int - 查询卡列表的起始偏移量，从0开始
 - `count` int - 需要查询的卡片的数量
 - `statusList` -  支持开发者拉出指定状态的卡券列表，详见example
 
-example:
+示例：
 
 ```php
 $offset      = 0;
@@ -489,7 +489,7 @@ $count       = 10;
 //CARD_STATUS_DISPATCH，在公众平台投放过的卡券；
 $statusList = 'CARD_STATUS_VERIFY_OK';
 
-$result = $card->lists($offset, $count, $statusList);
+$result = $card->list($offset, $count, $statusList);
 ```
 
 
@@ -504,7 +504,7 @@ $card->update($cardId, $type, $baseInfo);
 
 - `type` string - 卡券类型
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uCzKWebwgNjxosee0ZuO3Os';
@@ -536,7 +536,7 @@ $card->setPayCell($cardId, $isOpen);
 
 - `isOpen` string - 是否开启买单功能，填 true/false，不填默认 true
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uH7u11R-Tu1kilbaW_zDFow';
@@ -557,7 +557,7 @@ $card->reductStock($cardId, $amount); // 减少库存
 - `cardId` string - 卡券 ID
 - `amount` int - 修改多少库存
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uLRSbnB3UFEjZAgUxAJrjeY';
@@ -574,7 +574,7 @@ $card->updateCode($code, $newCode, $cardId);
 
 - `newCode` string - 变更后的有效Code码
 
-example:
+示例：
 
 ```php
 $code     = '148246271394';
@@ -592,7 +592,7 @@ $result = $card->updateCode($code, $newCode, $cardId);
 $card->delete($cardId);
 ```
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uItT7iUpBp4GjZp8Cae0Vig';
@@ -608,7 +608,7 @@ $result = $card->delete($cardId);
 $card->disable($code, $cardId);
 ```
 
-example:
+示例：
 
 ```php
 $code    = '736052543512';
@@ -627,7 +627,7 @@ $result = $card->activate($info);
 
 - `info` - 需要激活的会员卡信息
 
-example:
+示例：
 
 ```php
 $activate = [
@@ -656,7 +656,7 @@ $card->activateUserForm($cardId, $requiredForm, $optionalForm);
 - `requiredForm` array - 会员卡激活时的必填选项
 - `optionalForm` array - 会员卡激活时的选填项
 
-example:
+示例：
 
 ```php
 $cardId = 'pdkJ9uJYAyfLXsUCwI2LdH2Pn1AU';
@@ -696,7 +696,7 @@ $result = $card->activateUserForm($cardId, $requiredForm, $optionalForm);
 $card->getMemberCardUser($cardId, $code);
 ```
 
-example:
+示例：
 
 ```php
 $cardId = 'pbLatjtZ7v1BG_ZnTjbW85GYc_E8';
@@ -715,7 +715,7 @@ $card->updateMemberCardUser($updateUser);
 
 - `updateUser` array - 可以更新的会员信息
 
-example:
+示例：
 
 ```php
 $updateUser = [
@@ -750,7 +750,7 @@ $card->craeteSubMerchant($brandName, $logoUrl, $protocol, $endTime, $primaryCate
 - `operator_media_id`  string - 营业执照内登记的经营者身份证彩照或扫描件
 - `app_id`  string - 子商户的公众号 app_id，配置后子商户卡券券面上的 app_id 为该 app_id, app_id 须经过认证
 
-example:
+示例：
 
 ```php
 $info = [
@@ -777,7 +777,7 @@ $card->updateSubMerchant($merchantId, $info);
 - `$merchantId` int - 子商户 ID
 - `$info` array - 参数与创建子商户参数一样
 
-example:
+示例：
 
 ```php
 $info = [
@@ -792,7 +792,7 @@ $result = $card->updateSubMerchant('12', $info);
 $card->getCategories();
 ```
 
-example:
+示例：
 
 ```php
 $result = $card->getCategories();

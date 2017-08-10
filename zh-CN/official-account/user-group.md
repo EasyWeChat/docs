@@ -21,13 +21,13 @@ $group = $app->user_group; // $user['user_group']
 ### 获取所有分组
 
 ```php
-$group->lists();
+$group->list();
 ```
 
-example:
+示例：
 
 ```php
-$groups = $group->lists();
+$groups = $group->list();
 
 // {
 //     "groups": [
@@ -54,7 +54,7 @@ var_dump($groups->groups[0]['name']) // “未分组”
 $group->create($name);
 ```
 
-example:
+示例：
 
 ```php
 $group->create($name);
@@ -66,7 +66,7 @@ $group->create($name);
 $group->update($groupId, $name);
 ```
 
-example:
+示例：
 
 ```php
 $group->update($groupId, "新的组名");
@@ -78,7 +78,7 @@ $group->update($groupId, "新的组名");
 $group->delete($groupId);
 ```
 
-example:
+示例：
 
 ```php
 $group->delete($groupId);
@@ -90,7 +90,7 @@ $group->delete($groupId);
 $group->moveUser($openId, $groupId);
 ```
 
-example:
+示例：
 
 ```php
 $group->moveUser($openId, $groupId);
@@ -102,7 +102,7 @@ $group->moveUser($openId, $groupId);
 $group->moveUsers(array $openIds, $groupId);
 ```
 
-example:
+示例：
 
 ```php
 $openIds = [$openId1, $openId2, $openId3 ...];

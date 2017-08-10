@@ -24,7 +24,7 @@ $poi->create($baseInfo);
 
 - `$baseInfo` 为门店的基本信息数组
 
-example:
+示例：
 
 ```php
 <?php
@@ -65,7 +65,7 @@ $poi->get($poiId);
 ```
 - `$poiId` 为门店ID
 
-example:
+示例：
 
 ```php
 $info = $poi->get(271262077);
@@ -77,7 +77,7 @@ var_dump($info->toArray());// array('business_name' => '麦当劳', 'branch_name
 ## 获取门店列表
 
 ```php
-$poi->lists($begin, $limit);// begin:0, limit:10
+$poi->list($begin, $limit);// begin:0, limit:10
 ```
 
 - `$begin` 就是查询起点，`MySQL` 里的 `offset`；
@@ -85,10 +85,10 @@ $poi->lists($begin, $limit);// begin:0, limit:10
 
 > 两参数均可选
 
-example:
+示例：
 
 ```php
-$pois = $poi->lists(0, 2);// 取2条记录
+$pois = $poi->list(0, 2);// 取2条记录
 //
 //[
 //  {
@@ -120,7 +120,7 @@ $poi->update($poiId, $data);
 - `$poiId` 为门店ID
 - `$data` 需要更新的部分数据，**若有填写内容则为覆盖更新,若无内容则视为不 修改,维持原有内容。photo_list 字段为全列表覆盖,若需要增加图片,需将之前图片同样放入 list 中,在其后增加新增图片。如:已有 A、B、C 三张图片,又要增加 D、E 两张图,则需要调 用该接口,photo_list 传入 A、B、C、D、E 五张图片的链接。**
 
-example:
+示例：
 
 ```php
 $data = array(
@@ -138,7 +138,7 @@ $res = $poi->update(271262077, $data); //true or exception
 $poi->delete($poiId);
 ```
 
-example:
+示例：
 
 ```php
 $poi->delete(271262077);// true or exception

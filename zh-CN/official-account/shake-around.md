@@ -1072,7 +1072,7 @@ var_dump($result->errcode) // 0
 
 方法
 
-> $shakearound->group()->lists(int $begin, int $count)
+> $shakearound->group()->list(int $begin, int $count)
 
 参数
 
@@ -1082,7 +1082,7 @@ $count 待查询的分组数量，不能超过1000个
 示例
 
 ```php
-$result = $shakearound->group()->lists(0, 2);
+$result = $shakearound->group()->list(0, 2);
 
 /* 返回结果
 {

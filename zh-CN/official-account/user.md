@@ -1,99 +1,76 @@
 # 用户
 
-
 用户信息的获取是微信开发中比较常用的一个功能了，以下所有的用户信息的获取与更新，都是**基于微信的 `openid` 的，并且是已关注当前账号的**，其它情况可能无法正常使用。
 
-## 获取实例
-
-```php
-<?php
-use EasyWeChat\Foundation\Application;
-
-// ...
-
-$app = new Application($options);
-
-$userService = $app->user;
-```
-
-## API 列表
-
-### 获取用户信息
-
-```php
-$userService->get($openId);
-$userService->batchGet($openIds);
-```
+## 获取用户信息
 
 获取单个：
 
 ```php
-$user = $userService->get($openId);
-
-echo $user->nickname; // or $user['nickname']
+$user = $app->user->get($openId);
 ```
 
 获取多个：
 
 ```php
-$users = $userService->batchGet([$openId1, $openId2, ...]);
+$users = $app->user->select([$openId1, $openId2, ...]);
 ```
 
-### 获取用户列表
+## 获取用户列表
 
 ```php
-$userService->lists($nextOpenId = null);  // $nextOpenId 可选
+$app->user->list($nextOpenId = null);  // $nextOpenId 可选
 ```
 
- example:
+示例：
 
- ```php
- $users = $userService->lists();
+```php
+ $users = $app->user->list();
 
- // result
+// result
  {
   "total": 2,
   "count": 2,
   "data": {
     "openid": [
-      "",
       "OPENID1",
       "OPENID2"
     ]
   },
   "next_openid": "NEXT_OPENID"
 }
-
-$users->total; // 2
- ```
-
-### 修改用户备注
-
-```php
-$userService->remark($openId, $remark); // 成功返回boolean
 ```
 
-example:
+## 修改用户备注
 
 ```php
-$userService->remark($openId, "僵尸粉");
+$app->user->remark($openId, $remark); // 成功返回boolean
 ```
 
-### 获取用户所属用户组ID
+示例：
 
 ```php
-$userService->group($openId);
+$app->user->remark($openId, "僵尸粉");
 ```
 
-example:
+## 拉黑用户
 
 ```php
-$userGroupId = $userService->group($openId);
+$app->user->block('openidxxxxx');
+// 或者多个用户
+$app->user->block(['openid1', 'openid2', 'openid3', ...]);
 ```
 
-## 其它
+## 取消拉黑用户
 
-- [用户标签](user-tag.html)
-- [用户分组](user-group.html)
+```php
+$app->user->unblock('openidxxxxx');
+// 或者多个用户
+$app->user->unblock(['openid1', 'openid2', 'openid3', ...]);
+```
 
-关于用户管理请参考微信官方文档：http://mp.weixin.qq.com/wiki/ `用户管理` 章节。
+## 获取黑名单
+
+```php
+$app->user->blacklist($beginOpenid = null); // $beginOpenid 可选
+```
