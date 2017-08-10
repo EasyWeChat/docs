@@ -1,25 +1,11 @@
 # 门店
 
-
-## 获取实例
-
-```php
-<?php
-use EasyWeChat\Foundation\Application;
-
-// ...
-
-$app = new Application($options);
-
-$poi = $app->poi;
-```
-
 ## 创建门店
 
-用 POI 接口新建门店时所使用的图片 url 必须为微信自己域名的 url,因此需要先用上传图片接 口上传图片并获取 url,再创建门店。上传的图片限制文件大小限制 1MB,支持 JPG 格式，图片接口请参考：[TODO](/)
+用 POI 接口新建门店时所使用的图片 url 必须为微信自己域名的 url,因此需要先用上传图片接 口上传图片并获取 url,再创建门店。上传的图片限制文件大小限制 1MB,支持 JPG 格式，图片接口请参考：[临时素材](media)
 
 ```php
-$poi->create($baseInfo);
+$app->poi->create($baseInfo);
 ```
 
 - `$baseInfo` 为门店的基本信息数组
@@ -53,31 +39,28 @@ $info = array(
          "avg_price"       => 35,
     );
 
-$result = $poi->create($info); // true or exception
+$result = $app->poi->create($info); // true or exception
 ```
 
-> 注意：新创建的门店在审核通过后,会以事件形式推送给商户填写的回调URL
+> 注意：新创建的门店在审核通过后,会以事件形式推送给商户填写的回调 URL
 
 ## 获取指定门店信息
 
 ```php
-$poi->get($poiId);
+$app->poi->get($poiId);
 ```
 - `$poiId` 为门店ID
 
 示例：
 
 ```php
-$info = $poi->get(271262077);
-var_dump($info->business_name); // 麦当劳
-var_dump($info->introduction); // 麦当劳是全球大型跨国连锁餐厅...
-var_dump($info->toArray());// array('business_name' => '麦当劳', 'branch_name' => '艺苑路店', ...);
+$info = $app->poi->get(271262077);
 ```
 
 ## 获取门店列表
 
 ```php
-$poi->list($begin, $limit);// begin:0, limit:10
+$app->poi->list($begin, $limit);// begin:0, limit:10
 ```
 
 - `$begin` 就是查询起点，`MySQL` 里的 `offset`；
@@ -88,7 +71,7 @@ $poi->list($begin, $limit);// begin:0, limit:10
 示例：
 
 ```php
-$pois = $poi->list(0, 2);// 取2条记录
+$pois = $app->poi->list(0, 2);// 取2条记录
 //
 //[
 //  {
@@ -114,7 +97,7 @@ $pois = $poi->list(0, 2);// 取2条记录
 商户可以通过该接口,修改门店的服务信息,包括:图片列表、营业时间、推荐、特色服务、简 介、人均价格、电话 7 个字段。目前基础字段包括(名称、坐标、地址等不可修改)。
 
 ```php
-$poi->update($poiId, $data);
+$app->poi->update($poiId, $data);
 ```
 
 - `$poiId` 为门店ID
@@ -129,26 +112,17 @@ $data = array(
          //...
         );
 
-$res = $poi->update(271262077, $data); //true or exception
+$res = $app->poi->update(271262077, $data); //true or exception
 ```
 
 ## 删除门店
 
 ```php
-$poi->delete($poiId);
+$app->poi->delete($poiId);
 ```
 
 示例：
 
 ```php
-$poi->delete(271262077);// true or exception
+$app->poi->delete(271262077);// true or exception
 ```
-
-## 错误码
-
-- `invalid categories` 分类不合法,必须严格按照附表的分类填写
-- `invalid photo url` 图片 url 不合法,必须使用接口 1 的图片上传 接口所获取的 url
-- `poi audit state must be approved` 门店状态必须未审核通过
-- `invalid poiid`   poi_id 不正确
-- `invalid args`  参数不正确,请检查 json 字段
-- `system error`  系统错误,请稍后重试
