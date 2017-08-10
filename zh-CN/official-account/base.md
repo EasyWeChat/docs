@@ -11,5 +11,5 @@ $app->base->clearQuota();
 ## 获取微信服务器 IP (或IP段)
 
 ```php
-$app->base->getWeChatServerIps();
+$app->base->getValidIps();
 ```

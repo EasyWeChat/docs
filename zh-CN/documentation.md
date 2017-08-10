@@ -19,7 +19,7 @@
   - [多客服消息转发](/docs/{{version}}/{{lang}}/official-account/message-transfer)
   - [事件](/docs/{{version}}/{{lang}}/official-account/events)
   - [群发消息](/docs/{{version}}/{{lang}}/official-account/broadcast)
-  - [模板消息](/docs/{{version}}/{{lang}}/official-account/notice)
+  - [模板消息](/docs/{{version}}/{{lang}}/official-account/template_message)
   - [用户](/docs/{{version}}/{{lang}}/official-account/user)
   - [用户标签](/docs/{{version}}/{{lang}}/official-account/user-tag)
   - [用户组](/docs/{{version}}/{{lang}}/official-account/user-group)
