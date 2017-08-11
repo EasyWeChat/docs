@@ -5,6 +5,8 @@
 ```php
 $config = [
     'corp_id' => 'xxxxxxxxxxxxxxxxx',
+
+    // 应用列表
     'agents' => [
         'contacts' => [
             'agent_id' => 100020,
