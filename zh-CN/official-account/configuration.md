@@ -6,7 +6,6 @@
 use EasyWeChat\Factory;
 
 $config = [
-    'debug' => true,
     'app_id' => 'wx3cf0f39249eb0exx',
     'secret' => 'f1c242f4f28f735d4687abb469072axx',
 
