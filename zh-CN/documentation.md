@@ -44,6 +44,14 @@
 - ## 开放平台
   - [配置](/docs/{{version}}/{{lang}}/open-platform/index)
 
+- ## 企业微信
+  - [配置](/docs/{{version}}/{{lang}}/wework/index)
+  - [服务端](/docs/{{version}}/{{lang}}/wework/server)
+  - [应用管理](/docs/{{version}}/{{lang}}/wework/agents)
+  - [通讯录](/docs/{{version}}/{{lang}}/wework/contacts)
+  - [自定义菜单](/docs/{{version}}/{{lang}}/wework/menu)
+  - [素材管理](/docs/{{version}}/{{lang}}/wework/media)
+
 - ## 自定义
   - [Access Token](/docs/{{version}}/{{lang}}/customize/access_token)
   - [缓存](/docs/{{version}}/{{lang}}/customize/cache)

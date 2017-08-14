@@ -18,10 +18,15 @@ $app->server->push(function ($message) {
 });
 
 // 在 laravel 中：
-return $app->server->serve();
+$response = $app->server->serve();
 
-// 其实需要直接输出响应的框架，或者原生 PHP 环境下
-$app->server->serve()->send();
+// $response 为 `Symfony\Component\HttpFoundation\Response` 实例
+// 对于需要直接输出响应的框架，或者原生 PHP 环境下
+$response->send();
+
+// 而 laravel 中直接返回即可：
+
+return $response;
 ```
 
 这里我们使用 `push` 传入了一个 **闭包（[Closure](http://php.net/manual/en/class.closure.php)）**，该闭包接收一个参数 `$message` 为消息对象（类型取决于你的配置中 `response_type`），你可以在全局消息处理器中对消息类型进行筛选：
