@@ -1,15 +1,14 @@
 - ## 开始使用
   - [概述](/docs/{{version}}/{{lang}}/index)
   - [安装](/docs/{{version}}/{{lang}}/installation)
-  - [配置](/docs/{{version}}/{{lang}}/configuration)
   - [在框架中使用](/docs/{{version}}/{{lang}}/integration)
   - [常见问题汇总](/docs/{{version}}/{{lang}}/troubleshooting)
 
 - ## 基础服务
-  - [JSSDK](/docs/{{version}}/{{lang}}/base-services/jssdk)
-  - [素材](/docs/{{version}}/{{lang}}/base-services/media)
-  - [二维码](/docs/{{version}}/{{lang}}/base-services/qrcode)
-  - [短网址](/docs/{{version}}/{{lang}}/base-services/url)
+  - [JSSDK](/docs/{{version}}/{{lang}}/basic-services/jssdk)
+  - [素材](/docs/{{version}}/{{lang}}/basic-services/media)
+  - [二维码](/docs/{{version}}/{{lang}}/basic-services/qrcode)
+  - [短网址](/docs/{{version}}/{{lang}}/basic-services/url)
 
 - ## 公众号
   - [入门](/docs/{{version}}/{{lang}}/official-account/index)
