@@ -41,6 +41,12 @@ $app->media->uploadThumb($path);
 
 ```php
 $app->media->uploadVideoForBroadcasting($path, $title, $description);
+
+//{
+//  "media_id": "rF4UdIMfYK3efUfyoddYRMU50zMiRmmt_l0kszupYh_SzrcW5Gaheq05p_lHuOTQ",
+//  "title": "TITLE",
+//  "description": "Description"
+//}
 ```
 
 ## 创建群发消息
@@ -49,6 +55,12 @@ $app->media->uploadVideoForBroadcasting($path, $title, $description);
 
 ```php
 $app->media->createVideoForBroadcasting($mediaId, $title, $description);
+
+//{
+//  "type":"video",
+//  "media_id":"IhdaAQXuvJtGzwwc0abfXnzeezfO0NgPK6AQYShD8RQYMTtfzbLdBIQkQziv2XJc",
+//  "created_at":1398848981
+//}
 ```
 
 ## 获取临时素材内容

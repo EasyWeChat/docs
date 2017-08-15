@@ -1,50 +1,67 @@
 # 群发
 
-
-微信的群发消息接口有各种乱七八糟的注意事项及限制，具体请阅读微信官方文档：http://mp.weixin.qq.com/wiki/15/5380a4e6f02f2ffdc7981a8ed7a40753.html
+微信的群发消息接口有各种乱七八糟的注意事项及限制，具体请阅读微信官方文档。
 
 ## 获取实例
 
 ```php
-<?php
-use EasyWeChat\Foundation\Application;
-// ...
-$app = new Application($options);
-
-$broadcast = $app->broadcast;
-
+$broadcast = $app->broadcasting;
 ```
 
-## API
+## 发送消息
 
-> 注意：
+以下所有方法均有第二个参数 `$to` 用于指定接收人，默认为全部用户。
 
-    下面提到的 `$messageType` 、`$message` 可以是：
-
-    - `$messageType = Broadcast::MSG_TYPE_NEWS;` 图文消息类型，所对应的 `$message` 为 media_id
-    - `$messageType = Broadcast::MSG_TYPE_TEXT;` 文本消息类型，所对应的 `$message` 为一个文本字符串
-    - `$messageType = Broadcast::MSG_TYPE_VOICE;` 语音消息类型，所对应的 `$message` 为 media_id
-    - `$messageType = Broadcast::MSG_TYPE_IMAGE;` 图片消息类型，所对应的 `$message` 为 media_id
-    - `$messageType = Broadcast::MSG_TYPE_CARD;` 卡券消息类型，所对应的 `$message` 为 card_id
-    - `$messageType = Broadcast::MSG_TYPE_VIDEO;` 视频消息为两种情况：
-        - 视频消息类型，群发视频消息给**组或预览群发视频消息**给用户时所对应的 `$message` 为`media_id`
-        - 群发视频消息**给指定用户**时所对应的 `$message` 为一个数组 `['MEDIA_ID', 'TITLE', 'DESCRIPTION']`
-
-
-### 群发消息给所有粉丝
+### 文本消息
 
 ```php
-$broadcast->send($messageType, $message);
-
-// 别名方式
 $broadcast->sendText("大家好！欢迎使用 EasyWeChat。");
+// 同时指定目标用户
+// 至少两个用户的 openid，必须是数组。
+$broadcast->sendText("大家好！欢迎使用 EasyWeChat。", [$openid1, $openid2]);
+```
+
+### 图文消息
+
+```php
 $broadcast->sendNews($mediaId);
-$broadcast->sendVoice($mediaId);
+```
+
+### 图片消息
+
+```php
 $broadcast->sendImage($mediaId);
-//视频：
-// - 群发给组用户，或者预览群发视频时 $message 为 media_id
-// - 群发给指定用户时为数组：[$media_Id, $title, $description]
-$broadcast->sendVideo($message);
+```
+
+### 语音消息
+
+```php
+$broadcast->sendVoice($mediaId);
+```
+
+### 视频消息
+
+用于群发的视频消息，需要先创建消息对象，
+
+```php
+// 1. 先上传视频素材用于群发：
+$video = '/path/to/video.mp4';
+$videoMedia = $app->media->uploadVideoForBroadcasting($video, '视频标题', '视频描述');
+
+// 结果如下：
+//{
+//  "type":"video",
+//  "media_id":"IhdaAQXuvJtGzwwc0abfXnzeezfO0NgPK6AQYShD8RQYMTtfzbLdBIQkQziv2XJc",
+//  "created_at":1398848981
+//}
+
+// 2. 使用上面得到的 media_id 群发视频消息
+$broadcast->sendVideo($videoMedia['media_id']);
+```
+
+### 卡券消息
+
+```php
 $broadcast->sendCard($cardId);
 ```
 
@@ -64,12 +81,9 @@ $broadcast->sendCard($cardId, $groupId);
 
 ### 群发消息给指定用户
 
-至少两个用户的openid，必须是数组。
+至少两个用户的 openid，必须是数组。
 
 ```php
-$broadcast->send($messageType, $message, [$openId1, $openId2]);
-
-// 别名方式
 $broadcast->sendText($text, [$openId1, $openId2]);
 $broadcast->sendNews($mediaId, [$openId1, $openId2]);
 $broadcast->sendVoice($mediaId, [$openId1, $openId2]);
@@ -81,9 +95,6 @@ $broadcast->sendCard($cardId, [$openId1, $openId2]);
 ### 发送预览群发消息给指定的 `openId` 用户
 
 ```php
-$broadcast->preview($messageType, $message, $openId);
-
-// 别名方式
 $broadcast->previewText($text, $openId);
 $broadcast->previewNews($mediaId, $openId);
 $broadcast->previewVoice($mediaId, $openId);
@@ -95,9 +106,6 @@ $broadcast->previewCard($cardId, $openId);
 ### 发送预览群发消息给指定的微信号用户
 
 ```php
-$broadcast->previewByName($messageType, $message, $wxname);
-
-// 别名方式
 $broadcast->previewTextByName($text, $wxname);
 $broadcast->previewNewsByName($mediaId, $wxname);
 $broadcast->previewVoiceByName($mediaId, $wxname);
@@ -117,5 +125,3 @@ $broadcast->delete($msgId);
 ```php
 $broadcast->status($msgId);
 ```
-
-有关群发信息的更多细节请参考微信官方文档：http://mp.weixin.qq.com/wiki/

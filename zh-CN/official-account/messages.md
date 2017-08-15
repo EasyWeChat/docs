@@ -12,7 +12,7 @@
 
 > 注意：回复消息与客服消息里的图文类型为：**图文**，群发与素材中的图文为**文章**
 
-所有的消息类都在 `EasyWeChat\Message` 这个命名空间下， 下面我们来分开讲解：
+所有的消息类都在 `EasyWeChat\Kernel\Messages` 这个命名空间下， 下面我们来分开讲解：
 
 ### 文本消息
 
@@ -23,11 +23,9 @@
 ```
 
 ```php
-<?php
+use EasyWeChat\Kernel\Messages\Text;
 
-use EasyWeChat\Message\Text;
-
-$text = new Text(['content' => '您好！overtrue。']);
+$text = new Text('您好！overtrue。');
 
 // or
 $text = new Text();
@@ -49,17 +47,9 @@ $text->setAttribute('content', '您好！overtrue。');
 ```php
 <?php
 
-use EasyWeChat\Message\Image;
+use EasyWeChat\Kernel\Messages\Image;
 
-$text = new Image(['media_id' => $mediaId]);
-
-// or
-$text = new Image();
-$text->media_id = $mediaId; // or $text->mediaId = $media;
-
-// or
-$text = new Image();
-$text->setAttribute('media_id', $mediaId);
+$image = new Image($mediaId);
 ```
 
 
@@ -75,27 +65,13 @@ $text->setAttribute('media_id', $mediaId);
 ```
 
 ```php
-<?php
 
-use EasyWeChat\Message\Video;
+use EasyWeChat\Kernel\Messages\Video;
 
-$video = new Video([
+$video = new Video($mediaId, [
         'title' => $title,
-        'media_id' => $mediaId,
         'description' => '...',
-        // ...
     ]);
-
-// or
-$video = new Video();
-$video->media_id = $mediaId; // or $video->mediaId = $media;
-$video->description = 'video description...'; // or $video->description = $description;
-// ...
-
-// or
-$video = new Video();
-$video->setAttribute('media_id', $mediaId);
-// ...
 ```
 
 ### 声音消息
@@ -107,19 +83,9 @@ $video->setAttribute('media_id', $mediaId);
 ```
 
 ```php
-<?php
+use EasyWeChat\Kernel\Messages\Voice;
 
-use EasyWeChat\Message\Voice;
-
-$voice = new Voice(['media_id' => $mediaId]);
-
-// or
-$voice = new Voice();
-$voice->media_id = $mediaId; // or $voice->mediaId = $media;
-
-// or
-$voice = new Voice();
-$voice->setAttribute('media_id', $mediaId);
+$voice = new Voice($mediaId);
 ```
 
 ### 链接消息
@@ -143,7 +109,7 @@ $voice->setAttribute('media_id', $mediaId);
 
 ```php
 <?php
-use EasyWeChat\Message\News;
+use EasyWeChat\Kernel\Messages\News;
 
 $news = new News([
         'title'       => $title,
@@ -177,7 +143,7 @@ $news->description = '微信 SDK ...';
 
 ```php
 <?php
-use EasyWeChat\Message\Article;
+use EasyWeChat\Kernel\Messages\Article;
 
 $article = new Article([
         'title'   => 'EasyWeChat',
@@ -208,9 +174,9 @@ $article->content = '微信 SDK ...';
 
 
 ```php
-use EasyWeChat\Message\Material;
+use EasyWeChat\Kernel\Messages\Media;
 
-$material = new Material('mpnews', $mediaId);
+$media = new Media($mediaId, 'mpnews');
 ```
 
 以上呢，是所有微信支持的基本消息类型。
@@ -222,7 +188,7 @@ $material = new Material('mpnews', $mediaId);
 原始消息是一种特殊的消息，它的场景是：**你不想使用其它消息类型，你想自己手动拼消息**。比如，回复消息时，你想自己拼 XML，那么你就直接用它就可以了：
 
 ```php
-use EasyWeChat\Message\Raw;
+use EasyWeChat\Kernel\Messages\Raw;
 
 $message = new Raw('<xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -238,7 +204,7 @@ $message = new Raw('<xml>
 比如，你要用于客服消息(客服消息是JSON结构)：
 
 ```php
-use EasyWeChat\Message\Raw;
+use EasyWeChat\Kernel\Messages\Raw;
 
 $message = new Raw('{
     "touser":"OPENID",
@@ -256,18 +222,15 @@ $message = new Raw('{
 
 ### 在服务端回复消息
 
-在 [服务端](server.html) 一节中，我们讲了回复消息的写法：
+在 [服务端](server) 一节中，我们讲了回复消息的写法：
 
 ```php
 // ... 前面部分省略
-$app = new Application($options);
-$server = $app->server;
-
-$server->setMessageHandler(function ($message) {
+$app->server->push(function ($message) {
     return "您好！欢迎关注我!";
 });
 
-$server->serve()->send();
+$response = $server->serve();
 ```
 
 上面 `return` 了一句普通的文本内容，这里只是为了方便大家，实际上最后会有一个隐式转换为 `Text` 类型的动作。
@@ -275,10 +238,10 @@ $server->serve()->send();
 如果你要回复其它类型的消息，就需要返回一个具体的实例了，比如回复一个图片类型的消息：
 
 ```php
-use EasyWeChat\Message\Image;
+use EasyWeChat\Kernel\Messages\Image;
 // ...
-$server->setMessageHandler(function ($message) {
-    return new Image(['media_id' => '........']);
+$app->server->push(function ($message) {
+    return new Image('media id');
 });
 // ...
 ```
@@ -288,10 +251,10 @@ $server->setMessageHandler(function ($message) {
 多图文消息其实就是单图文消息的一个数组而已了：
 
 ```php
-use EasyWeChat\Message\News;
+use EasyWeChat\Kernel\Messages\News;
 
 // ...
-$server->setMessageHandler(function ($message) {
+$app->server->push(function ($message) {
     $news1 = new News(...);
     $news2 = new News(...);
     $news3 = new News(...);
@@ -308,11 +271,11 @@ $server->setMessageHandler(function ($message) {
 在客服消息里的使用也一样，都是直接传入消息实例即可：
 
 ```php
-use EasyWeChat\Message\Text;
+use EasyWeChat\Kernel\Messages\Text;
 
 $message = new Text(['content' => 'Hello world!']);
 
-$result = $app->staff->message($message)->to($openId)->send();
+$result = $app->customer_service->message($message)->to($openId)->send();
 //...
 ```
 
@@ -326,7 +289,7 @@ $news2 = new News(...);
 $news3 = new News(...);
 $news4 = new News(...);
 
-$app->staff->message([$news1, $news2, $news3, $news4])->to($openId)->send();
+$app->customer_service->message([$news1, $news2, $news3, $news4])->to($openId)->send();
 ```
 
 ### 群发消息

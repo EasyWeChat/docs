@@ -12,6 +12,7 @@
   - [短网址](/docs/{{version}}/{{lang}}/base-services/url)
 
 - ## 公众号
+  - [入门](/docs/{{version}}/{{lang}}/official-account/index)
   - [配置](/docs/{{version}}/{{lang}}/official-account/configuration)
   - [基础接口](/docs/{{version}}/{{lang}}/official-account/base)
   - [服务端](/docs/{{version}}/{{lang}}/official-account/server)
@@ -21,7 +22,6 @@
   - [模板消息](/docs/{{version}}/{{lang}}/official-account/template_message)
   - [用户](/docs/{{version}}/{{lang}}/official-account/user)
   - [用户标签](/docs/{{version}}/{{lang}}/official-account/user-tag)
-  - [用户组](/docs/{{version}}/{{lang}}/official-account/user-group)
   - [网页授权](/docs/{{version}}/{{lang}}/official-account/oauth)
   - [素材管理](/docs/{{version}}/{{lang}}/official-account/material)
   - [菜单](/docs/{{version}}/{{lang}}/official-account/menu)
@@ -60,5 +60,3 @@
 - ## 其他
   - [问题解答](/docs/{{version}}/{{lang}}/troubleshooting)
   - [贡献](/docs/{{version}}/{{lang}}/contributing)
-  - [更新日志](/docs/{{version}}/{{lang}}/releases)
-  - [路线图](/docs/{{version}}/{{lang}}/roadmap)

@@ -6,16 +6,11 @@
 ## 获取实例
 
 ```php
-<?php
-use EasyWeChat\Foundation\Application;
-// ...
-$app = new Application($options);
-
 $shakearound = $app->shakearound;
 
 ```
 
-## API
+## 说明
 
 > 特别提醒：
 1、下述所有的接口调用的方法参数都要严格按照方法参数前的类型传入相应类型的实参，否则可能会得到非预期的结果。
@@ -23,7 +18,7 @@ $shakearound = $app->shakearound;
 3、涉及需要传入设备id列表（$deviceIdentifiers）的参数时，该参数是一个二维数组，第一层为索引类型，第二层为关联类型（$deviceIdentifier）。
 
 ```php
-// 参数$deviceIdentifier的实参形式：
+// 参数 $deviceIdentifier 的实参形式：
 ['device_id' => 10097]
 // 或
 [
@@ -51,125 +46,50 @@ $shakearound = $app->shakearound;
 ]
 ```
 
-### 开通摇一摇周边
+## 开通摇一摇周边
 
 > 提示：
 若不是做 [公众号第三方平台](https://open.weixin.qq.com/cgi-bin/frame?t=home/wx_plugin_tmpl&lang=zh_CN) 开发，建议直接在微信管理后台申请开通摇一摇周边功能。
 
-#### 申请开通
+### 申请开通
 
 申请开通摇一摇周边功能。成功提交申请请求后，工作人员会在三个工作日内完成审核。若审核不通过，可以重新提交申请请求。若是审核中，请耐心等待工作人员审核，在审核中状态不能再提交申请请求。
 
 方法
 
-> $shakearound->register(string $name, string $tel, string $email, string $industryId, array $certUrls [, $reason = ''])
-
-参数
-
-> $name 联系人姓名，不超过20汉字或40个英文字母
-$tel 联系人电话
-$email 联系人邮箱
-$industryId 平台定义的行业代号，具体请查看链接 [行业代号](http://3gimg.qq.com/shake_nearby/Qualificationdocuments.html)
-$certUrls 相关资质文件的图片url，图片需先上传至微信侧服务器，用“素材管理-上传图片素材”接口上传图片，返回的图片URL再配置在此处；当不需要资质文件时，请传入空数组
-$reason 可选，申请理由，不超过250汉字或500个英文字母
-
-> 注意：
-1、相关资质文件的图片是使用本页面下方的素材管理的接口上传的，切勿和另一个 [素材管理](material.html) 接口混淆。
-2、行业代码请务必传入**字符串**类型的实参，否则以数字0开头的行业代码将会被当成八进制数处理（将转换为十进制数），这可能不是期望的。
-
-示例
-
 ```php
-$result = $shakearound->register('zhang_san', '13512345678', 'weixin123@qq.com', '0118', [], 'test');
-
-/* 返回结果
-{
-   "data": {
-
-   },
-   "errcode": 0,
-   "errmsg": "success."
-}
-*/
-var_dump($result->data) // 空数组
-var_dump($result->errcode) // 0
-var_dump($result->errmsg) // success.
+$shakearound->register($data)
 ```
 
-#### 查询审核状态
+> 注意：
+1、相关资质文件的图片是使用本页面下方的素材管理的接口上传的，切勿和另一个 [素材管理](material) 接口混淆。
+2、行业代码请务必传入**字符串**类型的实参，否则以数字0开头的行业代码将会被当成八进制数处理（将转换为十进制数），这可能不是期望的。
+
+### 查询审核状态
 
 查询已经提交的开通摇一摇周边功能申请的审核状态。在申请提交后，工作人员会在三个工作日内完成审核。
 
 方法
 
-> $shakearound->getStatus()
-
-参数
-
-> 无
-
-示例
-
 ```php
-$result = $shakearound->getStatus();
-
-/* 返回结果
-{
-    "data": {
-        "apply_time": 1432026025,
-        "audit_comment": "test",
-        "audit_status": 1,
-        "audit_time": 0
-    },
-    "errcode": 0,
-    "errmsg": "success."
-}
-*/
-var_dump($result->data['audit_comment']) // test
+$shakearound->status()
 ```
 
-#### 获取摇一摇的设备及用户信息
+### 获取摇一摇的设备及用户信息
 
 获取设备信息，包括UUID、major、minor，以及距离、openID等信息。
 
 方法
 
-> $shakearound->getShakeInfo(string $ticket [, int $needPoi = null])
-
-参数
-
-> $ticket 摇周边业务的ticket，可在摇到的URL中得到，ticket生效时间为30分钟，每一次摇都会重新生成新的ticket
-$needPoi 可选，是否需要返回门店poi_id，传1则返回，否则不返回
-
-示例
-
 ```php
-$result = $shakearound->getShakeInfo('6ab3d8465166598a5f4e8c1b44f44645', 1);
-
-/* 返回结果
-{
-   "data": {
-       "page_id ": 14211,
-       "beacon_info": {
-           "distance": 55.00620700469034,
-           "major": 10001,
-           "minor": 19007,
-           "uuid": "FDA50693-A4E2-4FB1-AFCF-C6EB07647825"
-       },
-       "openid": "oVDmXjp7y8aG2AlBuRpMZTb1-cmA",
-       "poi_id":1234
-   },
-   "errcode": 0,
-   "errmsg": "success."
-}
-*/
-var_dump($result->data['page_id']) // 14211
-var_dump($result->data['beacon_info']['distance']) // 55.00620700469034
+$shakearound->user($ticket);
+// 或者需要返回门店poi_id
+$shakearound->user($ticket, true);
 ```
 
-### 设备管理
+## 设备管理
 
-#### 申请设备ID
+### 申请设备 ID
 
 申请配置设备所需的UUID、Major、Minor。申请成功后返回批次ID，可用返回的批次ID通过“查询设备ID申请状态”接口查询目前申请的审核状态。
 一个公众账号最多可申请100000个设备ID，如需申请的设备ID数超过最大限额，请邮件至zhoubian@tencent.com，邮件格式如下：
@@ -182,73 +102,29 @@ var_dump($result->data['beacon_info']['distance']) // 55.00620700469034
 
 方法
 
-> $shakearound->device()->apply(int $quantity, string $reason [, string $comment = '' [, int $poiId = null]])
-
-参数
-
-> $quantity 申请的设备ID的数量，单次新增设备超过500个，需走人工审核流程
-$reason 申请理由，不超过100个汉字或200个英文字母
-$comment 可选，备注，不超过15个汉字或30个英文字母
-$poiId 可选，设备关联的门店ID，关联门店后，在门店1KM的范围内有优先摇出信息的机会
-
-示例
-
 ```php
-$result = $shakearound->device()->apply(3, '测试', '测试专用', 1234);
-
-/* 返回结果
-{
-    "data": {
-        "apply_id": 123,
-        "audit_status": 1,
-        "audit_comment": "审核中"
-    },
-    "errcode": 0,
-    "errmsg": "success."
-}
-*/
-var_dump($result->data['apply_id']) // 123
+$shakearound->device->apply($data)
 ```
 
-#### 查询设备ID申请审核状态
+### 查询设备 ID 申请审核状态
 
 查询设备ID申请的审核状态。若单次申请的设备ID数量小于等于500个，系统会进行快速审核；若单次申请的设备ID数量大于500个，则在三个工作日内完成审核。
 
 方法
 
-> $shakearound->device()->getStatus(int $applyId)
-
-参数
-
-> $applyId 批次ID，申请设备ID时所返回的批次ID
-
-示例
-
 ```php
-$result = $shakearound->device()->getStatus(123);
-
-/* 返回结果
-{
-    "data": {
-        "apply_time": 1432026025,
-        "audit_comment": "test",
-        "audit_status": 1,
-        "audit_time": 0
-    },
-    "errcode": 0,
-    "errmsg": "success."
-}
-*/
-var_dump($result->data['audit_status']) // 1
+$shakearound->device->status($applyId) // $applyId 批次ID，申请设备ID时所返回的批次ID
 ```
 
-#### 编辑设备信息
+### 编辑设备信息
 
 > 仅能修改设备的备注信息。
 
 方法
 
-> $shakearound->device()->update(array $deviceIdentifier, string $comment)
+```php
+$shakearound->device->update(array $deviceIdentifier, string $comment)
+```
 
 参数
 
@@ -258,9 +134,9 @@ $comment 设备的备注信息，不超过15个汉字或30个英文字母
 示例
 
 ```php
-$result = $shakearound->device()->update(['device_id' => 10011], 'test');
+$result = $shakearound->device->update(['device_id' => 10011], 'test');
 // 或
-$result = $shakearound->device()->update(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+$result = $shakearound->device->update(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
                                           'major' => 1002,
                                           'minor' => 1223,
 ], 'test');
@@ -273,10 +149,10 @@ $result = $shakearound->device()->update(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6E
     "errmsg": "success."
 }
 */
-var_dump($result->errcode) // 0
+var_dump($result['errcode']) // 0
 ```
 
-#### 配置设备与门店/其他公众账号门店的关联关系
+### 配置设备与门店/其他公众账号门店的关联关系
 
 关联本公众账号门店时，支持创建门店后直接关联在设备上，无需为审核通过状态，摇周边后台自动更新门店的最新信息和状态。
 关联其他公众账号门店时，支持设备关联其他公众账号的门店，门店需为审核通过状态。
@@ -285,34 +161,41 @@ var_dump($result->errcode) // 0
 
 方法
 
-> $shakearound->device()->bindLocation(array $deviceIdentifier, $poiId [, $type = 1 [, $poiAppid = null]])
+```php
+$shakearound->device->bindPoi(array $deviceIdentifier, $poiId)
+
+//或者 绑定第三方
+$shakearound->device->bindThirdPoi(array $deviceIdentifier, $poiId, $poiAppId)
+```
 
 参数
 
-> $deviceIdentifier 设备id，设备编号device_id或UUID、major、minor的关联数组，若二者都填，则以设备编号为优先
-$poiId 设备关联的门店ID，关联门店后，在门店1KM的范围内有优先摇出信息的机会。当值为0时，将清除设备已关联的门店ID
-$type 可选，为1时，关联的门店和设备归属于同一公众账号；为2时，关联的门店为其他公众账号的门店
-$poiAppid 可选，当$type为1时该参数为必填
+> $deviceIdentifier 设备 id，设备编号 device_id 或 UUID、major、minor 的关联数组，若二者都填，则以设备编号为优先
+$poiId 设备关联的门店 ID，关联门店后，在门店 1KM 的范围内有优先摇出信息的机会。当值为0时，将清除设备已关联的门店 ID
+$poiAppId 关联门店所归属的公众账号的 APP ID
 
 示例
 
 ```php
 // 关联本公众账号门店
-$result = $shakearound->device()->bindLocation(['device_id' => 10011], 1231);
+$result = $shakearound->device->bindLocation(['device_id' => 10011], 1231);
 // 或
-$result = $shakearound->device()->bindLocation(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
-                                                'major' => 1002,
-                                                'minor' => 1223,
+$result = $shakearound->device->bindLocation([
+  'uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+  'major' => 1002,
+  'minor' => 1223,
 ], 1231);
 
 // 关联其他公众账号门店
-// wxappid为关联门店所归属的公众账号的APPID
-$result = $shakearound->device()->bindLocation(['device_id' => 10011], 1231, 2, 'wxappid');
+// wxappid 为关联门店所归属的公众账号的 APP ID
+$result = $shakearound->device->bindThirdPoi(['device_id' => 10011], 1231, 'wxappid');
+
 // 或
-$result = $shakearound->device()->bindLocation(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
-                                                'major' => 1002,
-                                                'minor' => 1223,
-], 1231, 2, 'wxappid');
+$result = $shakearound->device->bindThirdPoi([
+  'uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+  'major' => 1002,
+  'minor' => 1223,
+], 1231, 'wxappid');
 
 /* 返回结果
 {
@@ -322,18 +205,17 @@ $result = $shakearound->device()->bindLocation(['uuid' => 'FDA50693-A4E2-4FB1-AF
     "errmsg": "success."
 }
 */
-var_dump($result->errcode) // 0
 ```
 
-#### 查询设备列表
+## 查询设备列表
 
-查询已有的设备ID、UUID、Major、Minor、激活状态、备注信息、关联门店、关联页面等信息。
+查询已有的设备 ID、UUID、Major、Minor、激活状态、备注信息、关联门店、关联页面等信息。
 
-##### 根据设备id批量取回设备数据
+### 根据设备id批量取回设备数据
 
 方法
 
-> $shakearound->device()->fetchByIds(array $deviceIdentifiers)
+> $shakearound->device->listByIds(array $deviceIdentifiers)
 
 参数
 
@@ -342,18 +224,22 @@ var_dump($result->errcode) // 0
 示例
 
 ```php
-$result = $shakearound->device()->fetchByIds([
-                                                ['device_id' => 10097],
-                                                ['device_id' => 10098],
+$result = $shakearound->device->listByIds([
+  ['device_id' => 10097],
+  ['device_id' => 10098],
 ]);
 // 或
-$result = $shakearound->device()->fetchByIds([
-                                                ['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
-                                                 'major' => 10001,
-                                                 'minor' => 12102,],
-                                                ['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
-                                                 'major' => 10001,
-                                                 'minor' => 12103,]
+$result = $shakearound->device->listByIds([
+  [
+    'uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+   'major' => 10001,
+   'minor' => 12102,
+  ],
+  [
+    'uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+   'major' => 10001,
+   'minor' => 12103,
+  ]
 ]);
 
 /* 返回结果
@@ -388,61 +274,63 @@ $result = $shakearound->device()->fetchByIds([
     "errmsg": "success."
 }
 */
-var_dump($result->data['devices'][0][device_id]) // 10097
-var_dump($result->data['total_count']) // 151
 ```
 
-##### 分页批量取回设备数据
+### 分页批量取回设备数据
 
 方法
 
-> $shakearound->device()->pagination(int $lastSeen, int $count)
+```php
+$shakearound->device->list(int $lastId, int $count)
+```
 
 参数
 
-> $lastSeen 前一次查询列表末尾的设备编号device_id，第一次查询last_seen为0
+> $lastId 前一次查询列表末尾的设备编号 device_id，第一次查询 lastId 为 0
 $count 待查询的设备数量，不能超过50个
 
 示例
 
 ```php
-$result = $shakearound->device()->pagination(10097, 3);
+$result = $shakearound->device->list(10097, 3);
 
 // 返回结果同上
 ```
 
-##### 根据申请时的批次ID分页批量取回设备数据
+### 根据申请时的批次 ID 分页批量取回设备数据
 
 方法
 
-> $shakearound->device()->fetchByApplyId(int $applyId, int $lastSeen, int $count)
+> $shakearound->device->listByApplyId(int $applyId, int $lastId, int $count)
 
 参数
 
 > $applyId 批次ID，申请设备ID时所返回的批次ID
-$lastSeen 前一次查询列表末尾的设备编号device_id，第一次查询lastSeen为0
+$lastId 前一次查询列表末尾的设备编号device_id，第一次查询 lastId 为 0
 $count 待查询的设备数量，不能超过50个
 
 示例
 
 ```php
-$result = $shakearound->device()->fetchByApplyId(1231, 10097, 3);
+$result = $shakearound->device->listByApplyId(1231, 10097, 3);
 
 // 返回结果同上
 ```
 
-### 页面管理
+## 页面管理
 
-#### 新增页面
+### 新增页面
 
 新增摇一摇出来的页面信息，包括在摇一摇页面出现的主标题、副标题、图片和点击进去的超链接。其中，图片必须为用素材管理接口上传至微信侧服务器后返回的链接。
 
 > 注意：
-图片是使用本页面下方的素材管理的接口上传的，切勿和另一个 [素材管理](material.html) 接口混淆。
+图片是使用本页面下方的素材管理的接口上传的，切勿和另一个 [素材管理](material) 接口混淆。
 
 方法
 
-> $shakearound->page()->add(string $title, string $description, strig $pageUrl, string $iconUrl [, string $comment = ''])
+```php
+$shakearound->page->create($data)
+```
 
 参数
 
@@ -455,7 +343,7 @@ $comment 可选，页面的备注信息，不超过15个汉字或30个英文字�
 示例
 
 ```php
-$result = $shakearound->page()->add('主标题', '副标题', 'https://zb.weixin.qq.com', 'http://3gimg.qq.com/shake_nearby/dy/icon', 'test');
+$result = $shakearound->page->create($data);
 
 /* 返回结果
 {
@@ -466,51 +354,44 @@ $result = $shakearound->page()->add('主标题', '副标题', 'https://zb.weixin
    "errmsg": "success."
 }
 */
-var_dump($result->data['page_id']) // 28840
 ```
 
-#### 编辑页面信息
+### 编辑页面信息
 
 编辑摇一摇出来的页面信息，包括在摇一摇页面出现的主标题、副标题、图片和点击进去的超链接。
 
 方法
 
-> $shakearound->page()->update(int $pageId, string $title, string $description, string $pageUrl, string $iconUrl [, string $comment = ''])
+```php
+$shakearound->page->update(int $pageId, array $data)
+```
 
 参数
 
 > $pageId 摇周边页面唯一ID
-$title 在摇一摇页面展示的主标题，不超过6个汉字或12个英文字母
-$description 在摇一摇页面展示的副标题，不超过7个汉字或14个英文字母
-$pageUrl 点击进去的超链接
-$iconUrl 在摇一摇页面展示的图片。图片需先上传至微信侧服务器，用“素材管理-上传图片素材”接口上传图片，返回的图片URL再配置在此处
-$comment 可选，页面的备注信息，不超过15个汉字或30个英文字母
+$data 需要更新的信息
 
 示例
 
 ```php
-$result = $shakearound->page()->add(28840, '主标题', '副标题', 'https://zb.weixin.qq.com', 'http://3gimg.qq.com/shake_nearby/dy/icon', 'test');
-
-/* 返回结果
-{
-    "data": {
-    },
-    "errcode": 0,
-    "errmsg": "success."
-}
-*/
-var_dump($result->errcode) // 0
+$result = $shakearound->page->update(28840, [
+    'title' => '主标题',
+    'description' => '副标题',
+    //...
+]);
 ```
 
-#### 查询页面列表
+## 查询页面列表
 
 查询已有的页面，包括在摇一摇页面出现的主标题、副标题、图片和点击进去的超链接。
 
-##### 根据页面id批量取回页面数据
+### 根据页面id批量取回页面数据
 
 方法
 
-> $shakearound->page()->fetchByIds(array $pageIds)
+```php
+$shakearound->page->listByIds(array $pageIds)
+```
 
 参数
 
@@ -519,7 +400,7 @@ var_dump($result->errcode) // 0
 示例
 
 ```php
-$result = $shakearound->page()->fetchByIds([28840, 28842]);
+$result = $shakearound->page->listByIds([28840, 28842]);
 
 /* 返回结果
 {
@@ -548,15 +429,15 @@ $result = $shakearound->page()->fetchByIds([28840, 28842]);
    "errmsg": "success."
 }
 */
-var_dump($result->data['pages'][0]['title']) // 测试1
-var_dump($result->data['total_count']) // 2
 ```
 
-##### 分页批量取回页面数据
+### 分页批量取回页面数据
 
 方法
 
-> $shakearound->page()->pagination(int $begin, int $count)
+```php
+$shakearound->page->list(int $begin, int $count)
+```
 
 参数
 
@@ -566,12 +447,12 @@ $count 待查询的页面数量，不能超过50个
 示例
 
 ```php
-$result = $shakearound->page()->pagination(0,2);
+$result = $shakearound->page->list(0,2);
 
 // 返回结果同上
 ```
 
-#### 删除页面
+### 删除页面
 
 删除已有的页面，包括在摇一摇页面出现的主标题、副标题、图片和点击进去的超链接。
 
@@ -580,7 +461,9 @@ $result = $shakearound->page()->pagination(0,2);
 
 方法
 
-> $shakearound->page()->delete(int $pageId)
+```php
+$shakearound->page->delete(int $pageId)
+```
 
 参数
 
@@ -589,7 +472,7 @@ $result = $shakearound->page()->pagination(0,2);
 示例
 
 ```php
-$result = $shakearound->page()->delete(34567);
+$result = $shakearound->page->delete(34567);
 
 /* 返回结果
 {
@@ -599,7 +482,6 @@ $result = $shakearound->page()->delete(34567);
     "errmsg": "success."
 }
 */
-var_dump($result->errcode) // 0
 ```
 
 ### 素材管理
@@ -610,7 +492,7 @@ var_dump($result->errcode) // 0
 
 方法
 
-> $shakearound->material()->uploadImage(string $path [, string $type = 'icon'])
+> $shakearound->material->uploadImage(string $path [, string $type = 'icon'])
 
 参数
 
@@ -620,7 +502,7 @@ $type 可选，值为icon或license
 示例
 
 ```php
-$result = $shakearound->material()->uploadImage(__DIR__ . '/stubs/image.jpg');
+$result = $shakearound->material->uploadImage(__DIR__ . '/stubs/image.jpg');
 
 /* 返回结果
 {
@@ -631,14 +513,13 @@ $result = $shakearound->material()->uploadImage(__DIR__ . '/stubs/image.jpg');
     "errmsg": "success."
 }
 */
-var_dump($result->data['pic_url']) // http://shp.qpic.cn/wechat_shakearound_pic/0/1428377032e9dd2797018cad79186e03e8c5aec8dc/120
 ```
 
-### 管理设备与页面的关系
+## 管理设备与页面的关系
 
 通过接口申请的设备ID，需先配置页面，若未配置页面，则摇不出页面信息。
 
-#### 配置设备与页面的关联关系
+### 配置设备与页面的关联关系
 
 配置完成后，在此设备的信号范围内，即可摇出关联的页面信息。
 若设备配置多个页面，则随机出现页面信息。一个设备最多可配置30个关联页面。
@@ -649,7 +530,7 @@ var_dump($result->data['pic_url']) // http://shp.qpic.cn/wechat_shakearound_pic/
 
 方法
 
-> $shakearound->relation()->bindPage(array $deviceIdentifier, array $pageIds)
+> $shakearound->relation->bindPage(array $deviceIdentifier, array $pageIds)
 
 参数
 
@@ -659,9 +540,9 @@ $pageIds 页面的id列表，索引数组
 示例
 
 ```php
-$result = $shakearound->relation()->bindPage(['device_id' => 10011], [12345, 23456, 334567]);
+$result = $shakearound->relation->bindPage(['device_id' => 10011], [12345, 23456, 334567]);
 // 或
-$result = $shakearound->relation()->bindPage(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+$result = $shakearound->relation->bindPage(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
                                               'major' => 1002,
                                               'minor' => 1223,
 ], [12345, 23456, 334567]);
@@ -677,15 +558,15 @@ $result = $shakearound->relation()->bindPage(['uuid' => 'FDA50693-A4E2-4FB1-AFCF
 var_dump($result->errcode) // 0
 ```
 
-#### 查询设备与页面的关联关系
+### 查询设备与页面的关联关系
 
-##### 查询指定设备所关联的页面
+#### 查询指定设备所关联的页面
 
 根据设备ID或完整的UUID、Major、Minor查询该设备所关联的所有页面信息
 
 方法
 
-> $shakearound->relation()->getPageByDeviceId(array $deviceIdentifier [, boolean $raw = false])
+> $shakearound->relation->listByDeviceId(array $deviceIdentifier [, boolean $raw = false])
 
 > 注意：
 该方法默认对返回的数据进行处理后返回一个包含页面id的索引数组。若要返回和 `getDeviceByPageId` 方法类似的数据，请传入 `true` 作为第二个参数。
@@ -698,11 +579,12 @@ $raw 可选，当为true时，返回值和getDeviceByPageId方法类似，否则
 示例
 
 ```php
-$result = $shakearound->relation()->getPageByDeviceId(['device_id' => 10011]);
+$result = $shakearound->relation->listByDeviceId(['device_id' => 10011]);
 // 或
-$result = $shakearound->relation()->getPageByDeviceId(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
-                                                       'major' => 1002,
-                                                       'minor' => 1223,
+$result = $shakearound->relation->listByDeviceId([
+  'uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+  'major' => 1002,
+  'minor' => 1223,
 ]);
 
 // 返回结果
@@ -715,7 +597,7 @@ var_dump($result) // [50054,50055]
 
 方法
 
-> $shakearound->relation()->getDeviceByPageId(int $pageId, int $begin, int $count)
+> $shakearound->relation->listByPageId(int $pageId, int $begin, int $count)
 
 参数
 
@@ -726,7 +608,7 @@ $count 待查询的关联关系数量，不能超过50个
 示例
 
 ```php
-$result = $shakearound->relation()->getDeviceByPageId(50054, 0, 3);
+$result = $shakearound->relation->listByPageId(50054, 0, 3);
 
 /* 返回结果
 {
@@ -753,8 +635,6 @@ $result = $shakearound->relation()->getDeviceByPageId(50054, 0, 3);
   "errmsg": "success."
 }
 */
-var_dump($result->data['relations'][0]['device_id']) // 797994
-var_dump($result->data['total_count']) // 2
 ```
 
 ### 摇一摇数据统计
@@ -762,7 +642,7 @@ var_dump($result->data['total_count']) // 2
 > 此接口无法获取当天的数据，最早只能获取前一天的数据。
 由于系统在凌晨处理前一天的数据，太早调用此接口可能获取不到数据，建议在早上8：00之后调用此接口。
 
-#### 以设备为维度的数据统计
+### 以设备为维度的数据统计
 
 查询单个设备进行摇周边操作的人数、次数，点击摇周边消息的人数、次数。
 
@@ -771,7 +651,7 @@ var_dump($result->data['total_count']) // 2
 
 方法
 
-> $shakearound->stats()->deviceSummary(array $deviceIdentifier, int $beginDate, int $endDate)
+> $shakearound->stats->deviceSummary(array $deviceIdentifier, int $beginDate, int $endDate)
 
 参数
 
@@ -782,9 +662,9 @@ $endDate 结束日期时间戳，最长时间跨度为30天，单位为秒
 示例
 
 ```php
-$result = $shakearound->stats()->deviceSummary(['device_id' => 10011], 1425052800, 1425139200);
+$result = $shakearound->stats->deviceSummary(['device_id' => 10011], 1425052800, 1425139200);
 // 或
-$result = $shakearound->stats()->deviceSummary(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+$result = $shakearound->stats->deviceSummary(['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
                                                 'major' => 1002,
                                                 'minor' => 1223,
 ], 1425052800, 1425139200);
@@ -811,10 +691,9 @@ $result = $shakearound->stats()->deviceSummary(['uuid' => 'FDA50693-A4E2-4FB1-AF
    "errmsg": "success."
 }
 */
-var_dump($result->data[0]['ftime']) // 1425052800
 ```
 
-#### 批量查询设备统计数据
+### 批量查询设备统计数据
 
 查询指定时间商家帐号下的每个设备进行摇周边操作的人数、次数，点击摇周边消息的人数、次数。
 
@@ -825,7 +704,9 @@ var_dump($result->data[0]['ftime']) // 1425052800
 
 方法
 
-> $shakearound->stats()->batchDeviceSummary(int $timestamp, int $pageIndex)
+```php
+$shakearound->stats->devicesSummary(int $timestamp, int $pageIndex)
+```
 
 参数
 
@@ -835,7 +716,7 @@ $pageIndex 指定查询的结果页序号，返回结果按摇周边人数降序
 示例
 
 ```php
-$result = $shakearound->stats()->batchDeviceSummary(1435075200, 1);
+$result = $shakearound->stats->devicesSummary(1435075200, 1);
 
 /* 返回结果
 {
@@ -870,11 +751,9 @@ $result = $shakearound->stats()->batchDeviceSummary(1435075200, 1);
     "errmsg": "success."
 }
 */
-var_dump($result->data['devices'][0]['device_id']) // 10097
-var_dump($result->total_count) // 151
 ```
 
-#### 以页面为维度的数据统计
+### 以页面为维度的数据统计
 
 查询单个页面通过摇周边摇出来的人数、次数，点击摇周边页面的人数、次数
 
@@ -883,7 +762,9 @@ var_dump($result->total_count) // 151
 
 方法
 
-> $shakearound->stats()->pageSummary(int $pageId, int $beginDate, int $endDate);
+```php
+$shakearound->stats->pageSummary(int $pageId, int $beginDate, int $endDate);
+```
 
 参数
 
@@ -894,7 +775,7 @@ $endDate 结束日期时间戳，最长时间跨度为30天，单位为秒
 示例
 
 ```php
-$result = $shakearound->stats()->pageSummary(12345, 1425052800, 1425139200);
+$result = $shakearound->stats->pageSummary(12345, 1425052800, 1425139200);
 
 /* 返回结果
 {
@@ -918,9 +799,8 @@ $result = $shakearound->stats()->pageSummary(12345, 1425052800, 1425139200);
    "errmsg": "success."
 }
 */
-var_dump($result->data[1]['ftime']) // 1425139200
 ```
-#### 批量查询页面统计数据
+### 批量查询页面统计数据
 
 查询指定时间商家帐号下的每个页面进行摇周边操作的人数、次数，点击摇周边消息的人数、次数。
 
@@ -929,7 +809,9 @@ var_dump($result->data[1]['ftime']) // 1425139200
 
 方法
 
-> $shakearound->stats()->batchPageSummary(int $timestamp, int $pageIndex);
+```php
+$shakearound->stats->pagesSummary(int $timestamp, int $pageIndex);
+```
 
 参数
 
@@ -939,7 +821,7 @@ $pageIndex 指定查询的结果页序号，返回结果按摇周边人数降序
 示例
 
 ```php
-$result = $shakearound->stats()->batchPageSummary(1435075200, 1);
+$result = $shakearound->stats->pagesSummary(1435075200, 1);
 
 /* 返回结果
 {
@@ -968,21 +850,20 @@ $result = $shakearound->stats()->batchPageSummary(1435075200, 1);
     "errmsg": "success."
 }
 */
-var_dump($result->data['pages'][0]['click_uv']) // 3
-var_dump($result->total_count) // 151
 ```
 
-### 设备分组管理
+## 设备分组管理
 
 调用H5页面获取设备信息 JS API接口，需要先把设备分组，微信客户端只会返回已在分组中的设备信息。
 
-#### 新增分组
+### 新增分组
 
 新建设备分组，每个帐号下最多只有1000个分组。
 
 方法
 
-> $shakearound->group()->add(string $name)
+```php
+$shakearound->group->create(string $name)
 
 参数
 
@@ -991,7 +872,7 @@ var_dump($result->total_count) // 151
 示例
 
 ```php
-$result = $shakearound->group()->add('test');
+$result = $shakearound->group->create('test');
 
 /* 返回结果
 {
@@ -1003,17 +884,15 @@ $result = $shakearound->group()->add('test');
   "errmsg": "success."
 }
 */
-var_dump($result->data['group_id']) // 123
-var_dump($result->data['group_name']) // test
 ```
 
-#### 编辑分组信息
+### 编辑分组信息
 
 编辑设备分组信息，目前只能修改分组名。
 
 方法
 
-> $shakearound->group()->update(int $groupId, string $name)
+> $shakearound->group->update(int $groupId, string $name)
 
 参数
 
@@ -1023,7 +902,7 @@ $name 分组名称，不超过100汉字或200个英文字母
 示例
 
 ```php
-$result = $shakearound->group()->update(123, 'newName');
+$result = $shakearound->group->update(123, 'newName');
 
 /* 返回结果
 {
@@ -1033,18 +912,19 @@ $result = $shakearound->group()->update(123, 'newName');
     "errmsg": "success."
 }
 */
-var_dump($result->errcode) // 0
 ```
 
-#### 删除分组
+### 删除分组
 
 删除设备分组，若分组中还存在设备，则不能删除成功。需把设备移除以后，才能删除。
 
-> 在执行删除前，最好先使用 `getDetails` 方法查询分组详情，若分组内有设备，先使用 `removeDevice` 方法移除。
+> 在执行删除前，最好先使用 `get` 方法查询分组详情，若分组内有设备，先使用 `removeDevices` 方法移除。
 
 方法
 
-> $shakearound->group()->delete(int $groupId)
+```php
+$shakearound->group->delete(int $groupId)
+```
 
 参数
 
@@ -1053,7 +933,7 @@ var_dump($result->errcode) // 0
 示例
 
 ```php
-$result = $shakearound->group()->delete(123);
+$result = $shakearound->group->delete(123);
 
 /* 返回结果
 {
@@ -1063,16 +943,17 @@ $result = $shakearound->group()->delete(123);
     "errmsg": "success."
 }
 */
-var_dump($result->errcode) // 0
 ```
 
-#### 查询分组列表
+### 查询分组列表
 
 查询账号下所有的分组。
 
 方法
 
-> $shakearound->group()->list(int $begin, int $count)
+```php
+$shakearound->group->list(int $begin, int $count)
+```
 
 参数
 
@@ -1082,7 +963,7 @@ $count 待查询的分组数量，不能超过1000个
 示例
 
 ```php
-$result = $shakearound->group()->list(0, 2);
+$result = $shakearound->group->list(0, 2);
 
 /* 返回结果
 {
@@ -1103,17 +984,17 @@ $result = $shakearound->group()->list(0, 2);
     "errmsg": "success."
 }
 */
-var_dump($result->data['groups'][1]['group_name']) // test2
-var_dump($result->data['total_count']) // 100
 ```
 
-#### 查询分组详情
+### 查询分组详情
 
 查询分组详情，包括分组名，分组id，分组里的设备列表。
 
 方法
 
-> $shakearound->group()->getDetails(int $groupId, int $begin, int $count)
+```php
+$shakearound->group->get(int $groupId, int $begin, int $count)
+```
 
 参数
 
@@ -1124,7 +1005,7 @@ $count 待查询的分组里设备的数量，不能超过1000个
 示例
 
 ```php
-$result = $shakearound->group()->getDetails(123, 0, 2);
+$result = $shakearound->group->get(123, 0, 2);
 
 /* 返回结果
 {
@@ -1155,11 +1036,9 @@ $result = $shakearound->group()->getDetails(123, 0, 2);
     "errmsg": "success."
 }
 */
-var_dump($result->data['devices'][0]['comment']) // test device1
-var_dump($result->data['total_count']) // 100
 ```
 
-#### 添加设备到分组
+### 添加设备到分组
 
 添加设备到分组，每个分组能够持有的设备上限为10000，并且每次添加操作的添加上限为1000。
 
@@ -1167,7 +1046,7 @@ var_dump($result->data['total_count']) // 100
 
 方法
 
-> $shakearound->group()->addDevice(int $groupId, array $deviceIdentifiers)
+> $shakearound->group->addDevices(int $groupId, array $deviceIdentifiers)
 
 参数
 
@@ -1177,18 +1056,23 @@ $deviceIdentifiers 设备id列表
 示例
 
 ```php
-$result = $shakearound->group()->addDevice(123, [
-                                                    ['device_id' => 10097],
-                                                    ['device_id' => 10098],
+$result = $shakearound->group->addDevices(123, [
+  ['device_id' => 10097],
+  ['device_id' => 10098],
 ]);
+
 // 或
-$result = $shakearound->group()->addDevice(123, [
-                                                    ['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
-                                                    'major' => 10001,
-                                                    'minor' => 12102,],
-                                                    ['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
-                                                    'major' => 10001,
-                                                    'minor' => 12103,]
+$result = $shakearound->group->addDevices(123, [
+  [
+    'uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+    'major' => 10001,
+    'minor' => 12102,
+  ],
+  [
+    'uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+    'major' => 10001,
+    'minor' => 12103,
+  ]
 ]);
 
 /* 返回结果
@@ -1199,16 +1083,17 @@ $result = $shakearound->group()->addDevice(123, [
     "errmsg": "success."
 }
 */
-var_dump($result->errcode) // 0
 ```
 
-#### 从分组中移除设备
+### 从分组中移除设备
 
-从分组中移除设备，每次删除操作的上限为1000。
+从分组中移除设备，每次删除操作的上限为 1000。
 
 方法
 
-> $shakearound->group()->removeDevice(int $groupId, array $deviceIdentifiers)
+```php
+$shakearound->group->removeDevices(int $groupId, array $deviceIdentifiers)
+```
 
 参数
 
@@ -1218,46 +1103,30 @@ $deviceIdentifiers 设备id列表
 示例
 
 ```php
-$result = $shakearound->group()->removeDevice(123, [
-                                                    ['device_id' => 10097],
-                                                    ['device_id' => 10098],
+$result = $shakearound->group->removeDevices(123, [
+  ['device_id' => 10097],
+  ['device_id' => 10098],
 ]);
 // 或
-$result = $shakearound->group()->removeDevice(123, [
-                                                    ['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
-                                                    'major' => 10001,
-                                                    'minor' => 12102,],
-                                                    ['uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
-                                                    'major' => 10001,
-                                                    'minor' => 12103,]
+$result = $shakearound->group->removeDevices(123, [
+    [
+      'uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+      'major' => 10001,
+      'minor' => 12102,
+    ],
+    [
+      'uuid' => 'FDA50693-A4E2-4FB1-AFCF-C6EB07647825',
+      'major' => 10001,
+      'minor' => 12103,
+    ]
 ]);
-
-/* 返回结果
-{
-    "data": {
-    },
-    "errcode": 0,
-    "errmsg": "success."
-}
-*/
-var_dump($result->errcode) // 0
 ```
 
-### 摇一摇红包
-
-微信官方目前暂停了摇红包接口，该接口可能会有所调整，故而暂时不提供该接口的封装。
-
-> 官方公告详情请至： [关于摇红包接口暂停的公告](https://zb.weixin.qq.com/nearby/announce.xhtml?announceId=10047)
-
-### 摇一摇事件通知
+## 摇一摇事件通知
 
 用户进入摇一摇界面，在“周边”页卡下摇一摇时，微信会把这个事件推送到开发者填写的URL（登录公众平台进入开发者中心设置）。推送内容包含摇一摇时“周边”页卡展示出来的页面所对应的设备信息，以及附近最多五个属于该公众账号的设备的信息。当摇出列表时，此事件不推送。
 
 > 摇一摇事件的事件类型：ShakearoundUserShake
-关于事件的处理请移步： [事件](events.html)
 
-### 摇一摇周边错误码
+关于事件的处理请移步： [事件](events)
 
-> 摇周边错误码请移步： [错误码](https://mp.weixin.qq.com/wiki?action=doc&id=mp1443448163&t=0.17525333335674986)
-
-有关摇一摇周边接口信息的更多细节请参考微信官方文档相应条目： [微信官方文档](http://mp.weixin.qq.com/wiki/)

@@ -58,7 +58,7 @@ $records = $app->customer_service->messages('2015-06-07', '2015-06-21', 1, 20000
 $app->customer_service->message($message)->to($openId)->send();
 ```
 
-> `$message` 为消息对象或文本，请参考：[消息](messages.html)
+> `$message` 为消息对象或文本，请参考：[消息](messages)
 
 示例：
 
