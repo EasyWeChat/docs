@@ -4,27 +4,8 @@
 
 OAuth是一个关于授权（authorization）的开放网络标准，在全世界得到广泛应用，目前的版本是2.0版。
 
-```
+<img src="https://user-images.githubusercontent.com/1472352/29310178-5a7a91cc-81df-11e7-9468-b66e150bfba1.png" alt="" style="max-width: 500px">
 
-     +--+                               ++
-     |        |--(A)- Authorization Request ->|   Resource    |
-     |        |                               |     Owner     |
-     |        |<-(B)-- Authorization Grant |               |
-     |        |                               ++
-     |        |
-     |        |                               ++
-     |        |--(C)-- Authorization Grant -->| Authorization |
-     | Client |                               |     Server    |
-     |        |<-(D)-- Access Token -|               |
-     |        |                               ++
-     |        |
-     |        |                               ++
-     |        |--(E)-- Access Token >|    Resource   |
-     |        |                               |     Server    |
-     |        |<-(F) Protected Resource |               |
-     +--+                               ++
-                      OAuth 授权流程
-```
 > 摘自：[RFC 6749](https://datatracker.ietf.org/doc/rfc6749/?include_text=1)
 
 步骤解释：
@@ -148,7 +129,7 @@ $user = $app->oauth->user();
 // http://easywechat.org/user/profile
 <?php
 
-use EasyWeChat\Foundation\Application;
+use EasyWeChat\Factory;
 
 $config = [
   // ...
@@ -159,7 +140,7 @@ $config = [
   // ..
 ];
 
-$app = new Application($config);
+$app = Factory::officialAccount($config);
 $oauth = $app->oauth;
 
 // 未登录
@@ -185,13 +166,13 @@ $user = $_SESSION['wechat_user'];
 // http://easywechat.org/oauth_callback
 <?php
 
-use EasyWeChat\Foundation\Application;
+use EasyWeChat\Factory;
 
 $config = [
   // ...
 ];
 
-$app = new Application($config);
+$app = Factory::officialAccount($config);
 $oauth = $app->oauth;
 
 // 获取 OAuth 授权结果用户信息
@@ -205,7 +186,3 @@ header('location:'. $targetUrl); // 跳转到 user/profile
 ```
 
 上面的例子呢都是基于 `$_SESSION` 来保持会话的，在微信客户端中，你可以结合 COOKIE 来存储，但是有效期平台不一样时间也不一样，好像 Android 的失效会快一些，不过基本也够用了。
-
-
-更多关于微信网页授权 API 请参考： http://mp.weixin.qq.com/wiki/
-更多开放平台网页登录请参考：https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=&lang=zh_CN
