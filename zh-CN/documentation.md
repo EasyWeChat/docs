@@ -50,7 +50,7 @@
   - [通讯录](/docs/{{version}}/{{lang}}/wework/contacts)
   - [自定义菜单](/docs/{{version}}/{{lang}}/wework/menu)
   - [素材管理](/docs/{{version}}/{{lang}}/wework/media)
-  - [OA](/docs/{{version}}/{{lang}}/wework/media)
+  - [OA](/docs/{{version}}/{{lang}}/wework/oa)
 
 - ## 自定义
   - [Access Token](/docs/{{version}}/{{lang}}/customize/access_token)
