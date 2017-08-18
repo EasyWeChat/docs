@@ -7,7 +7,7 @@
 API:
 
 ```
-$miniProgram->app_code->getAppCode(string $path, int $width, bool $autoColor, array $lineColor);
+$miniProgram->app_code->get(string $path, int $width, bool $autoColor, array $lineColor);
 ```
 
 > 其中 $path 必填，其余参数可留空。
@@ -16,7 +16,7 @@ $miniProgram->app_code->getAppCode(string $path, int $width, bool $autoColor, ar
 示例代码：
 
 ```php
-$response = $miniProgram->app_code->getAppCode('path/to/page');
+$response = $miniProgram->app_code->get('path/to/page');
 
 // 保存小程序码到文件
 file_put_contents('/path/to/appcode.png', $response);
@@ -27,7 +27,7 @@ file_put_contents('/path/to/appcode.png', $response);
 API:
 
 ```
-$miniProgram->app_code->getAppCodeUnlimit(string $scene, string $page = null, int $width = null, bool $autoColor = null, array $lineColor = null);
+$miniProgram->app_code->getUnlimit(string $scene, string $page = null, int $width = null, bool $autoColor = null, array $lineColor = null);
 ```
 
 > 其中 $scene 必填，其余参数可留空。
@@ -35,7 +35,7 @@ $miniProgram->app_code->getAppCodeUnlimit(string $scene, string $page = null, in
 示例代码：
 
 ```php
-$response = $miniProgram->app_code->getAppCodeUnlimit('scene-value');
+$response = $miniProgram->app_code->getUnlimit('scene-value');
 
 // 保存小程序码到文件
 file_put_contents('/path/to/appcode.png', $response);
@@ -46,7 +46,7 @@ file_put_contents('/path/to/appcode.png', $response);
 API:
 
 ```
-$miniProgram->app_code->createQrCode(string $path, int $width = null);
+$miniProgram->app_code->qrcode(string $path, int $width = null);
 ```
 
 > 其中 $path 必填，其余参数可留空。
@@ -54,7 +54,7 @@ $miniProgram->app_code->createQrCode(string $path, int $width = null);
 示例代码：
 
 ```php
-$response = $miniProgram->app_code->createQrCode('/path/to/page');
+$response = $miniProgram->app_code->qrcode('/path/to/page');
 
 // 保存小程序码到文件
 file_put_contents('/path/to/appcode.png', $response);
