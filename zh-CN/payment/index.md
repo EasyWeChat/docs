@@ -3,82 +3,65 @@
 
 你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 商户平台开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)。
 
-网友贡献的教程：[小能手马闯set 发布在 Laravel-China 的文章《基于 Laravel5.1 LTS 版的微信开发》](https://laravel-china.org/topics/3146)
-
 ## 配置
 
 配置在前面的例子中已经提到过了，支付的相关配置如下：
 
 ```php
-<?php
-
-use EasyWeChat\Foundation\Application;
+use EasyWeChat\Factory;
 
 $options = [
     // 前面的appid什么的也得保留哦
-    'app_id' => 'xxxx',
+    'app_id'             => 'xxxx',
+    'merchant_id'        => 'your-mch-id',
+    'key'                => 'key-for-signature',
+    'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
+    'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+    'notify_url'         => '默认的订单回调地址',     // 你也可以在下单时单独设置来想覆盖它
+    // 'device_info'     => '013467007045764',
+    // 'sub_app_id'      => '',
+    // 'sub_merchant_id' => '',
     // ...
-
-    // payment
-    'payment' => [
-        'merchant_id'        => 'your-mch-id',
-        'key'                => 'key-for-signature',
-        'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
-        'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
-        'notify_url'         => '默认的订单回调地址',       // 你也可以在下单时单独设置来想覆盖它
-        // 'device_info'     => '013467007045764',
-        // 'sub_app_id'      => '',
-        // 'sub_merchant_id' => '',
-        // ...
-    ],
 ];
 
-$app = new Application($options);
-
-$payment = $app->payment;
+$payment = Factory::payment($options);
 ```
 
 ## 创建订单
 - 正常模式
 ```php
-<?php
-
 use EasyWeChat\Payment\Order;
 
 $attributes = [
-    'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
-    'body'             => 'iPad mini 16G 白色',
-    'detail'           => 'iPad mini 16G 白色',
-    'out_trade_no'     => '1217752501201407033233368018',
-    'total_fee'        => 5388, // 单位：分
-    'notify_url'       => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-    'openid'           => '当前用户的 openid', // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+    'trade_type'   => 'JSAPI', // JSAPI，NATIVE，APP...
+    'body'         => 'iPad mini 16G 白色',
+    'detail'       => 'iPad mini 16G 白色',
+    'out_trade_no' => '1217752501201407033233368018',
+    'total_fee'    => 5388, // 单位：分
+    'notify_url'   => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+    'openid'       => '当前用户的 openid', // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
     // ...
 ];
 
 $order = new Order($attributes);
-
 ```
 
 - 子服务商模式
 ```php
-<?php
-
 use EasyWeChat\Payment\Order;
 
 $attributes = [
-    'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
-    'body'             => 'iPad mini 16G 白色',
-    'detail'           => 'iPad mini 16G 白色',
-    'out_trade_no'     => '1217752501201407033233368018',
-    'total_fee'        => 5388, // 单位：分
-    'notify_url'       => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-    'sub_openid'        => '当前用户的 openid', // 如果传入sub_openid, 请在实例化Application时, 同时传入$sub_app_id, $sub_merchant_id
+    'trade_type'   => 'JSAPI', // JSAPI，NATIVE，APP...
+    'body'         => 'iPad mini 16G 白色',
+    'detail'       => 'iPad mini 16G 白色',
+    'out_trade_no' => '1217752501201407033233368018',
+    'total_fee'    => 5388, // 单位：分
+    'notify_url'   => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+    'sub_openid'   => '当前用户的 openid', // 如果传入sub_openid, 请在实例化Application时, 同时传入$sub_app_id, $sub_merchant_id
     // ...
 ];
 
 $order = new Order($attributes);
-
 ```
 
 
@@ -107,15 +90,27 @@ if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
 }
 ```
 
-## 支付结果通知
+## 支付及退款结果通知
 
 在用户成功支付后，微信服务器会向该 **订单中设置的回调URL** 发起一个 POST 请求，请求的内容为一个 XML。里面包含了所有的详细信息，具体请参考：
 [支付结果通用通知](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_7)
 
-在本 SDK 中处理回调真的再简单不过了，请求验证你就不用管了，SDK 已经为你做好了，你只需要关注业务即可：
+而对于用户的退款操作，在退款成功之后也会有一个异步回调通知。
+
+本 SDK 内预置了一个 trait，以方便开发者处理这些通知。
+
+以支付成功结果通知为例，具体用法如下：
+
+1. 在控制器方法中引用这个 trait
 
 ```php
-$response = $app->payment->handleNotify(function($notify, $successful){
+use EasyWeChat\Payment\Traits\HandleNotiry;
+```
+
+2. 使用相关的处理方法对业务进行处理并向微信服务器返回消息
+
+```php
+$response = $this->handleNotify(function($notify, $successful){
     // 你的逻辑
     return true; // 或者错误消息
 });
@@ -138,7 +133,7 @@ $response->send(); // Laravel 里请使用：return $response;
 通常我们的处理逻辑大概是下面这样（**以下只是伪代码**）：
 
 ```php
-$response = $app->payment->handleNotify(function($notify, $successful){
+$response = $this->handleNotify(function($notify, $successful){
     // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
     $order = 查询订单($notify->out_trade_no);
 
@@ -171,6 +166,8 @@ return $response;
 
 > 注意：请把 “支付成功与否” 与 “是否处理完成” 分开，它俩没有必然关系。
 > 比如：微信通知你用户支付完成，但是支付失败了(result_code 为 'FAIL')，你应该**更新你的订单为支付失败**，但是要**告诉微信处理完成**。
+
+处理扫码支付通知的方法名为 `handleScanNotify`，处理退款通知的方法名为 `handleRefundNotify`，请注意区分使用。
 
 
 ## 撤销订单API
@@ -212,7 +209,6 @@ $payment->query($orderNo);
 或者：
 
 ```php
-
 $orderNo = "微信的订单号（transaction_id）";
 $payment->queryByTransactionId($orderNo);
 ```
@@ -313,106 +309,9 @@ $payment->report($api, $timeConsuming, $resultCode, $returnCode, [
     ]);
 ```
 
-## 转换短链接
-
-```php
-$shortUrl = $payment->urlShorten('http://easywechat.org');
-```
-
 ## 授权码查询OPENID接口
 
 ```php
 $response = $payment->authCodeToOpenId($authCode);
 $response->openid;
 ```
-
-## 生成支付 JS 配置
-
-有两种发起支付的方式：[WeixinJSBridge](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6), [JSSDK](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115&token=&lang=zh_CN)
-
-1. WeixinJSBridge:
-
-    ```php
-    $json = $payment->configForPayment($prepayId); // 返回 json 字符串，如果想返回数组，传第二个参数 false
-    ```
-
-    javascript:
-
-    ```js
-    ...
-    WeixinJSBridge.invoke(
-           'getBrandWCPayRequest', <?= $json ?>,
-           function(res){
-               if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-                    // 使用以上方式判断前端返回,微信团队郑重提示：
-                    // res.err_msg将在用户支付成功后返回
-                    // ok，但并不保证它绝对可靠。
-               }
-           }
-       );
-    ...
-    ```
-
-2. JSSDK:
-
-    ```php
-    $config = $payment->configForJSSDKPayment($prepayId); // 返回数组
-    ```
-
-    javascript:
-
-    ```js
-    wx.chooseWXPay({
-        timestamp: <?= $config['timestamp'] ?>,
-        nonceStr: '<?= $config['nonceStr'] ?>',
-        package: '<?= $config['package'] ?>',
-        signType: '<?= $config['signType'] ?>',
-        paySign: '<?= $config['paySign'] ?>', // 支付签名
-        success: function (res) {
-            // 支付成功后的回调函数
-        }
-    });
-    ```
-
-## 生成共享收货地址 JS 配置
-
-1. 发起 OAuth 授权：
-
-```php
-use EasyWeChat\Support\Url as UrlHelper;
-
-// 检查当前不是微信 oauth 的回调，则跳过去授权
-// 注意，授权回调地址为当前页
-if (empty($_GET['code'])) {
-    $currentUrl = UrlHelper::current(); // 获取当前页 URL
-    $response = $app->oauth->scopes(['snsapi_base'])->redirect($currentUrl);
-
-    return $response; // or echo $response;
-
-}
-// 授权回来
-$oauthUser = $app->oauth->user();
-$token = $oauthUser->getAccessToken();
-$configForPickAddress = $payment->configForShareAddress($token);
-
-// 拿着这个生成好的配置 $configForPickAddress 去订单页（或者直接显示订单页）写 js 调用了
-// ...
-```
-
-## 生成 APP 支付配置
-
-```php
-$config = $payment->configForAppPayment($prepayId);
-```
-
-`$config` 为数组格式，你可以用 API 返回给客户端
-
-# 二维码生成工具推荐
-
-你也许需要生成二维码，那么以下这些供参考：
-
-- https://github.com/endroid/QrCode
-- https://github.com/Bacon/BaconQrCode
-- https://github.com/SimpleSoftwareIO/simple-qrcode (Bacon/BaconQrCode 的 Laravel 版本)
-- https://github.com/aferrandini/PHPQRCode
-
