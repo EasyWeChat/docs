@@ -1,31 +1,27 @@
 # 红包
 
 
-你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 现金红包文档 ](https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_1)。
+在阅读本文之前确认你已经仔细阅读了：[微信支付 | 现金红包文档 ](https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_1)。
 
 ## 配置
 
-与支付接口一样，红包接口也需要配置如下参数，需要特别注意的是，红包相关的全部接口**都需要使用 SSL 证书**，因此** cert_path 以及 cert_key 必须正确配置**。
+与支付接口一样，红包接口也需要配置如下参数，需要特别注意的是，红包相关的全部接口**都需要使用 SSL 证书**，因此**cert_path 以及 cert_key 必须正确配置**。
 
 ```php
-<?php
-
-use EasyWeChat\Foundation\Application;
+use EasyWeChat\Payment\Application;
 
 $options = [
-    // payment
-    'payment' => [
-        'merchant_id'        => 'your-mch-id',
-        'key'                => 'key-for-signature',
-        'cert_path'          => 'path/to/your/cert.pem',
-        'key_path'           => 'path/to/your/key',
-        // ...
-    ],
+    'app_id'      => 'you-app-id',
+    'merchant_id' => 'your-mch-id',
+    'key'         => 'key-for-signature',
+    'cert_path'   => 'path/to/your/cert.pem',
+    'key_path'    => 'path/to/your/key',
+    // ...
 ];
 
 $app = new Application($options);
 
-$luckyMoney = $app->lucky_money;
+$redpack = $app->redpack;
 ```
 
 ## 发送红包
@@ -37,25 +33,22 @@ $luckyMoney = $app->lucky_money;
 ### 通用发送接口
 
 ```php
-<?php
-
-$luckyMoneyData = [
-    'mch_billno'       => 'xy123456',
-    'send_name'        => '测试红包',
-    're_openid'        => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
-    'total_num'        => 1,  //普通红包固定为1，裂变红包不小于3
-    'total_amount'     => 100,  //单位为分，普通红包不小于100，裂变红包不小于300
-    'wishing'          => '祝福语',
-    'client_ip'        => '192.168.0.1',  //可不传，不传则由 SDK 取当前客户端 IP
-    'act_name'         => '测试活动',
-    'remark'           => '测试备注',
+$redpackData = [
+    'mch_billno'   => 'xy123456',
+    'send_name'    => '测试红包',
+    're_openid'    => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
+    'total_num'    => 1,  //普通红包固定为1，裂变红包不小于3
+    'total_amount' => 100,  //单位为分，普通红包不小于100，裂变红包不小于300
+    'wishing'      => '祝福语',
+    'client_ip'    => '192.168.0.1',  //可不传，不传则由 SDK 取当前客户端 IP
+    'act_name'     => '测试活动',
+    'remark'       => '测试备注',
     // ...
 ];
 
-$result = $luckyMoney->send($luckyMoneyData, \EasyWeChat\Payment\LuckyMoney\API::TYPE_NORMAL);
+$result = $redpack->send($redpackData, \EasyWeChat\Payment\LuckyMoney\API::TYPE_NORMAL);
 或
-$result = $luckyMoney->send($luckyMoneyData, \EasyWeChat\Payment\LuckyMoney\API::TYPE_GROUP);
-
+$result = $redpack->send($redpackData, \EasyWeChat\Payment\LuckyMoney\API::TYPE_GROUP);
 ```
 
 > 不同类型红包所传参数有所差别，请参考官方文档中参数列表。
@@ -64,45 +57,39 @@ $result = $luckyMoney->send($luckyMoneyData, \EasyWeChat\Payment\LuckyMoney\API:
 ### 发送普通红包接口
 
 ```php
-<?php
-
-$luckyMoneyData = [
-    'mch_billno'       => 'xy123456',
-    'send_name'        => '测试红包',
-    're_openid'        => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
-    'total_num'        => 1,  //固定为1，可不传
-    'total_amount'     => 100,  //单位为分，不小于100
-    'wishing'          => '祝福语',
-    'client_ip'        => '192.168.0.1',  //可不传，不传则由 SDK 取当前客户端 IP
-    'act_name'         => '测试活动',
-    'remark'           => '测试备注',
+$redpackData = [
+    'mch_billno'   => 'xy123456',
+    'send_name'    => '测试红包',
+    're_openid'    => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
+    'total_num'    => 1,  //固定为1，可不传
+    'total_amount' => 100,  //单位为分，不小于100
+    'wishing'      => '祝福语',
+    'client_ip'    => '192.168.0.1',  //可不传，不传则由 SDK 取当前客户端 IP
+    'act_name'     => '测试活动',
+    'remark'       => '测试备注',
     // ...
 ];
 
-$result = $luckyMoney->sendNormal($luckyMoneyData);
-
+$result = $redpack->sendNormal($redpackData);
 ```
 
 ### 发送裂变红包接口
 
 ```php
-<?php
-
-$luckyMoneyData = [
-    'mch_billno'       => 'xy123456',
-    'send_name'        => '测试红包',
-    're_openid'        => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
-    'total_num'        => 3,  //不小于3
-    'total_amount'     => 300,  //单位为分，不小于300
-    'wishing'          => '祝福语',
-    'act_name'         => '测试活动',
-    'remark'           => '测试备注',
-    'amt_type'         => 'ALL_RAND',  //可不传
+$redpackData = [
+    'mch_billno'   => 'xy123456',
+    'send_name'    => '测试红包',
+    're_openid'    => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
+    'total_num'    => 3,  //不小于3
+    'total_amount' => 300,  //单位为分，不小于300
+    'wishing'      => '祝福语',
+    'act_name'     => '测试活动',
+    'remark'       => '测试备注',
+    'amt_type'     => 'ALL_RAND',  //可不传
     // ...
 ];
 
-$result = $luckyMoney->sendGroup($luckyMoneyData);
-
+$result = $redpack->sendGroup($redpackData);
 ```
 
 ## 红包预下单接口
@@ -111,25 +98,22 @@ $result = $luckyMoney->sendGroup($luckyMoneyData);
 
 
 ```php
-<?php
-
-$luckyMoneyData = [
-    'hb_type'          => 'NORMAL',  //NORMAL 或 GROUP
-    'mch_billno'       => 'xy123456',
-    'send_name'        => '测试红包',
-    're_openid'        => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
-    'total_num'        => 1,  //普通红包固定为1，裂变红包不小于3
-    'total_amount'     => 100,  //单位为分，普通红包不小于100，裂变红包不小于300
-    'wishing'          => '祝福语',
-    'client_ip'        => '192.168.0.1',  //可不传，不传则由 SDK 取当前客户端 IP
-    'act_name'         => '测试活动',
-    'remark'           => '测试备注',
-    'amt_type'         => 'ALL_RAND',
+$redpackData = [
+    'hb_type'      => 'NORMAL',  //NORMAL 或 GROUP
+    'mch_billno'   => 'xy123456',
+    'send_name'    => '测试红包',
+    're_openid'    => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
+    'total_num'    => 1,  //普通红包固定为1，裂变红包不小于3
+    'total_amount' => 100,  //单位为分，普通红包不小于100，裂变红包不小于300
+    'wishing'      => '祝福语',
+    'client_ip'    => '192.168.0.1',  //可不传，不传则由 SDK 取当前客户端 IP
+    'act_name'     => '测试活动',
+    'remark'       => '测试备注',
+    'amt_type'     => 'ALL_RAND',
     // ...
 ];
 
-$result = $luckyMoney->prepare($luckyMoneyData);
-
+$result = $redpack->prepare($redpackData);
 ```
 
 ## 查询红包信息
@@ -138,5 +122,5 @@ $result = $luckyMoney->prepare($luckyMoneyData);
 
 ```php
 $mchBillNo = "商户系统内部的订单号（mch_billno）";
-$luckyMoney->query($mchBillNo);
+$redpack->query($mchBillNo);
 ```
