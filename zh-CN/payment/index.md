@@ -8,7 +8,7 @@
 配置在前面的例子中已经提到过了，支付的相关配置如下：
 
 ```php
-use EasyWeChat\Payment\Application;
+use EasyWeChat\Factory;
 
 $options = [
     // 前面的appid什么的也得保留哦
