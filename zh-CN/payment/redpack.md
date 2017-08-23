@@ -8,7 +8,7 @@
 与支付接口一样，红包接口也需要配置如下参数，需要特别注意的是，红包相关的全部接口**都需要使用 SSL 证书**，因此**cert_path 以及 cert_key 必须正确配置**。
 
 ```php
-use EasyWeChat\Payment\Application;
+use EasyWeChat\Factory;
 
 $options = [
     'app_id'      => 'you-app-id',
@@ -19,9 +19,9 @@ $options = [
     // ...
 ];
 
-$app = new Application($options);
+$payment = Factory::payment($options);
 
-$redpack = $app->redpack;
+$redpack = $payment->redpack;
 ```
 
 ## 发送红包

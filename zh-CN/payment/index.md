@@ -24,7 +24,7 @@ $options = [
     // ...
 ];
 
-$payment = new Application($options);
+$payment = Factory::payment($options);
 ```
 
 ## 创建订单
