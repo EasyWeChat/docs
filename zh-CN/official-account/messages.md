@@ -45,7 +45,6 @@ $text->setAttribute('content', '您好！overtrue。');
 ```
 
 ```php
-<?php
 
 use EasyWeChat\Kernel\Messages\Image;
 
@@ -98,7 +97,9 @@ $voice = new Voice($mediaId);
 
 ### 图文消息
 
-属性列表：
+图文消息分为 `NewsItem` 与 `News`，`NewsItem` 为图文内容条目。
+
+`NewsItem` 属性：
 
 ```
 - title 标题
@@ -108,26 +109,25 @@ $voice = new Voice($mediaId);
 ```
 
 ```php
-<?php
 use EasyWeChat\Kernel\Messages\News;
+use EasyWeChat\Kernel\Messages\NewsItem;
 
-$news = new News([
+$items = [
+    new NewsItem([
         'title'       => $title,
         'description' => '...',
         'url'         => $url,
         'image'       => $image,
         // ...
-    ]);
-
-// or
-$news = new News();
-$news->title = 'EasyWeChat';
-$news->description = '微信 SDK ...';
-// ...
-
+    ]),
+    new NewsItem([...]),
+    new NewsItem([...]),
+    // ...
+];
+$news = new News($items);
 ```
 
-### 文章消息
+### 文章
 
 属性列表：
 
@@ -142,7 +142,6 @@ $news->description = '微信 SDK ...';
 ```
 
 ```php
-<?php
 use EasyWeChat\Kernel\Messages\Article;
 
 $article = new Article([
@@ -241,7 +240,7 @@ $response = $server->serve();
 use EasyWeChat\Kernel\Messages\Image;
 // ...
 $app->server->push(function ($message) {
-    return new Image('media id');
+    return new Image('media-id');
 });
 // ...
 ```
@@ -252,15 +251,16 @@ $app->server->push(function ($message) {
 
 ```php
 use EasyWeChat\Kernel\Messages\News;
+use EasyWeChat\Kernel\Messages\NewsItem;
 
 // ...
 $app->server->push(function ($message) {
-    $news1 = new News(...);
-    $news2 = new News(...);
-    $news3 = new News(...);
-    $news4 = new News(...);
+    $news1 = new NewsItem(...);
+    $news2 = new NewsItem(...);
+    $news3 = new NewsItem(...);
+    $news4 = new NewsItem(...);
 
-    return [$news1, $news2, $news3, $news4];
+    return new News([$news1, $news2, $news3, $news4]);
 });
 // ...
 ```
@@ -284,10 +284,10 @@ $result = $app->customer_service->message($message)->to($openId)->send();
 多图文消息其实就是单图文消息的一个数组而已了：
 
 ```php
-$news1 = new News(...);
-$news2 = new News(...);
-$news3 = new News(...);
-$news4 = new News(...);
+$news1 = new NewsItem(...);
+$news2 = new NewsItem(...);
+$news3 = new NewsItem(...);
+$news4 = new NewsItem(...);
 
 $app->customer_service->message([$news1, $news2, $news3, $news4])->to($openId)->send();
 ```
