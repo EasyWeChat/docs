@@ -10,10 +10,11 @@ API:
 $miniProgram->app_code->get(string $path, array $optional = []);
 ```
 
-> 其中 $optional 为以下可选参数：
-> width Int - 默认 430 二维码的宽度
-> auto_color  默认 false  自动配置线条颜色，如果颜色依然是黑色，则说明不建议配置主色调
-> line_color  示例：{"r":"0","g":"0","b":"0"} auth_color 为 false 时生效，使用 rgb 设置颜色 例如 {"r":"xxx","g":"xxx","b":"xxx"}
+其中 `$optional` 为以下可选参数：
+
+- **width** Int - 默认 430 二维码的宽度
+- **auto_color**  默认 false  自动配置线条颜色，如果颜色依然是黑色，则说明不建议配置主色调
+- **line_color**  示例：`{"r":"0","g":"0","b":"0"}` `auth_color` 为 `false` 时生效，使用 rgb 设置颜色 例如 `{"r":"xxx","g":"xxx","b":"xxx"}`
 
 示例代码：
 
