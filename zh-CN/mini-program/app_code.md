@@ -28,7 +28,7 @@ $response = $miniProgram->app_code->get('path/to/page', [
 // $response 为 EasyWeChat\Kernel\Http\StreamResponse 实例
 
 // 保存小程序码到文件
-$filename = $response->saveAs('/path/to/directory');
+$filename = $response->save('/path/to/directory');
 // 或
 $filename = $response->saveAs('/path/to/directory', 'appcode.png');
 ```
@@ -53,7 +53,7 @@ $response = $miniProgram->app_code->getUnlimit('scene-value', [
 // $response 为 EasyWeChat\Kernel\Http\StreamResponse 实例
 
 // 保存小程序码到文件
-$filename = $response->saveAs('/path/to/directory');
+$filename = $response->save('/path/to/directory');
 // 或
 $filename = $response->saveAs('/path/to/directory', 'appcode.png');
 ```
@@ -76,7 +76,7 @@ $response = $miniProgram->app_code->qrcode('/path/to/page');
 // $response 为 EasyWeChat\Kernel\Http\StreamResponse 实例
 
 // 保存小程序码到文件
-$filename = $response->saveAs('/path/to/directory');
+$filename = $response->save('/path/to/directory');
 // 或
 $filename = $response->saveAs('/path/to/directory', 'appcode.png');
 ```
