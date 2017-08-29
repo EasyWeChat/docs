@@ -9,9 +9,9 @@
 
 我们期待这一版块为各位的开发带来便利，同时也希望各位本着开源、分享的精神对其进行补充和完善，将各种坑一一填小、填平，让微信开发变得不那么痛苦，甚至，变成一件快乐的事……
 
-# 一些服务器基本设施问题：
+## 一些服务器基本设施问题：
 
-- 时区不对， 使用命令 `date` 可以在服务器上查看当前时间，如果发现时区不对则需要修改时区：[Setting The Correct Timezone In CentOS And Ubuntu Servers With NTP](https://www.liberiangeek.net/2013/02/setting-the-correct-timezone-in-centos-and-ubuntu-servers-with-ntp/)
+- **时区不对**， 使用命令 `date` 可以在服务器上查看当前时间，如果发现时区不对则需要修改时区：[Setting The Correct Timezone In CentOS And Ubuntu Servers With NTP](https://www.liberiangeek.net/2013/02/setting-the-correct-timezone-in-centos-and-ubuntu-servers-with-ntp/)
     - ...
 
 

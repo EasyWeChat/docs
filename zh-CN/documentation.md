@@ -6,6 +6,7 @@
 
 - ## 公众号
   - [入门](/docs/{{version}}/{{lang}}/official-account/index)
+  - [快速开始](/docs/{{version}}/{{lang}}/official-account/tutorial)
   - [配置](/docs/{{version}}/{{lang}}/official-account/configuration)
   - [基础接口](/docs/{{version}}/{{lang}}/official-account/base)
   - [服务端](/docs/{{version}}/{{lang}}/official-account/server)
@@ -23,23 +24,31 @@
   - [素材管理](/docs/{{version}}/{{lang}}/official-account/material)
   - [菜单](/docs/{{version}}/{{lang}}/official-account/menu)
   - [卡券](/docs/{{version}}/{{lang}}/official-account/card)
-  - [小店](/docs/{{version}}/{{lang}}/official-account/store)
   - [门店](/docs/{{version}}/{{lang}}/official-account/poi)
   - [客服](/docs/{{version}}/{{lang}}/official-account/customer_service)
+  - [摇一摇周边](/docs/{{version}}/{{lang}}/official-account/shake-around)
   - [数据统计与分析](/docs/{{version}}/{{lang}}/official-account/data_cube)
   - [语义理解](/docs/{{version}}/{{lang}}/official-account/semantic)
   - [自动回复](/docs/{{version}}/{{lang}}/official-account/reply)
+  - [评论数据管理](/docs/{{version}}/{{lang}}/official-account/comment)
 
 - ## 微信支付
   - [配置](/docs/{{version}}/{{lang}}/payment/index)
-  - [企业支付](/docs/{{version}}/{{lang}}/payment/merchant_payment)
-  - [红包](/docs/{{version}}/{{lang}}/payment/lucky-money)
+  - [红包](/docs/{{version}}/{{lang}}/payment/redpack)
+  - [JSSDK](/docs/{{version}}/{{lang}}/payment/jssdk)
 
 - ## 小程序
   - [配置](/docs/{{version}}/{{lang}}/mini-program/index)
+  - [小程序码](/docs/{{version}}/{{lang}}/mini-program/app_code)
+  - [客服消息](/docs/{{version}}/{{lang}}/mini-program/customer_service)
+  - [数据统计与分析](/docs/{{version}}/{{lang}}/mini-program/data_cube)
+  - [SNS](/docs/{{version}}/{{lang}}/mini-program/sns)
 
 - ## 开放平台
   - [配置](/docs/{{version}}/{{lang}}/open-platform/index)
+  - [基础接口](/docs/{{version}}/{{lang}}/open-platform/base)
+  - [服务端](/docs/{{version}}/{{lang}}/open-platform/server)
+  - [代授权](/docs/{{version}}/{{lang}}/open-platform/authorizer-delegate)
 
 - ## 企业微信
   - [配置](/docs/{{version}}/{{lang}}/wework/index)
@@ -56,5 +65,5 @@
   - [缓存](/docs/{{version}}/{{lang}}/customize/cache)
 
 - ## 其他
-  - [问题解答](/docs/{{version}}/{{lang}}/troubleshooting)
-  - [贡献](/docs/{{version}}/{{lang}}/contributing)
+  - [常见问题](/docs/{{version}}/{{lang}}/troubleshooting)
+  - [参与贡献](/docs/{{version}}/{{lang}}/contributing)
