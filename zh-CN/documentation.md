@@ -4,12 +4,6 @@
   - [在框架中使用](/docs/{{version}}/{{lang}}/integration)
   - [常见问题汇总](/docs/{{version}}/{{lang}}/troubleshooting)
 
-- ## 基础服务
-  - [JSSDK](/docs/{{version}}/{{lang}}/basic-services/jssdk)
-  - [素材](/docs/{{version}}/{{lang}}/basic-services/media)
-  - [二维码](/docs/{{version}}/{{lang}}/basic-services/qrcode)
-  - [短网址](/docs/{{version}}/{{lang}}/basic-services/url)
-
 - ## 公众号
   - [入门](/docs/{{version}}/{{lang}}/official-account/index)
   - [配置](/docs/{{version}}/{{lang}}/official-account/configuration)
@@ -22,6 +16,10 @@
   - [用户](/docs/{{version}}/{{lang}}/official-account/user)
   - [用户标签](/docs/{{version}}/{{lang}}/official-account/user-tag)
   - [网页授权](/docs/{{version}}/{{lang}}/official-account/oauth)
+  - [JSSDK](/docs/{{version}}/{{lang}}/basic-services/jssdk)
+  - [临时素材](/docs/{{version}}/{{lang}}/basic-services/media)
+  - [二维码](/docs/{{version}}/{{lang}}/basic-services/qrcode)
+  - [短网址](/docs/{{version}}/{{lang}}/basic-services/url)
   - [素材管理](/docs/{{version}}/{{lang}}/official-account/material)
   - [菜单](/docs/{{version}}/{{lang}}/official-account/menu)
   - [卡券](/docs/{{version}}/{{lang}}/official-account/card)
@@ -51,6 +49,7 @@
   - [自定义菜单](/docs/{{version}}/{{lang}}/wework/menu)
   - [素材管理](/docs/{{version}}/{{lang}}/wework/media)
   - [OA](/docs/{{version}}/{{lang}}/wework/oa)
+  - [JSSDK](/docs/{{version}}/{{lang}}/basic-services/jssdk)
 
 - ## 自定义
   - [Access Token](/docs/{{version}}/{{lang}}/customize/access_token)
