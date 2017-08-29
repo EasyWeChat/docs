@@ -4,31 +4,23 @@
 ## 获取实例
 
 ```php
-<?php
-use EasyWeChat\Foundation\Application;
-
-// ...
-
-$app = new Application($options);
-
 $card = $app->card;
 ```
 
 
-## API列表
+## 通用功能
 
 ### 获取卡券颜色
 
 ```php
-$card->getColors();
+$card->colors();
 ```
 
-示例：
+### 卡券开放类目查询
 
 ```php
-$result = $card->getColors();
+$card->categories();
 ```
-
 
 
 ### 创建卡券
@@ -36,12 +28,10 @@ $result = $card->getColors();
 创建卡券接口是微信卡券的基础接口，用于创建一类新的卡券，获取card_id，创建成功并通过审核后，商家可以通过文档提供的其他接口将卡券下发给用户，每次成功领取，库存数量相应扣除。
 
 ```php
-$card->create($cardType, $baseInfo, $especial);
+$card->create($cardType = 'member_card', array $attributes);
 ```
 
-- `cardType` string - 是要添加卡券的类型
-- `baseInfo` array  - 为卡券的基本数据
-- `especial` array  - 是扩展字段
+- `attributes` array 卡券信息
 
 示例：
 
@@ -50,63 +40,110 @@ $card->create($cardType, $baseInfo, $especial);
 
 	$cardType = 'GROUPON';
 
-    $baseInfo = [
-        'logo_url' => 'http://mmbiz.qpic.cn/mmbiz/2aJY6aCPatSeibYAyy7yct9zJXL9WsNVL4JdkTbBr184gNWS6nibcA75Hia9CqxicsqjYiaw2xuxYZiaibkmORS2oovdg/0',
-        'brand_name' => '测试商户造梦空间',
-        'code_type' => 'CODE_TYPE_QRCODE',
-        'title' => '测试',
-        'sub_title' => '测试副标题',
-        'color' => 'Color010',
-        'notice' => '测试使用时请出示此券',
-        'service_phone' => '15311931577',
-        'description' => "测试不可与其他优惠同享\n如需团购券发票，请在消费时向商户提出\n店内均可使用，仅限堂食",
+    $attributes = [
+      'base_info' => [
+          'brand_name' => '微信餐厅',
+          'code_type' => 'CODE_TYPE_TEXT',
+          'title' => '132元双人火锅套餐',
+          //...
+      ],
 
-        'date_info' => [
-          'type' => 'DATE_TYPE_FIX_TERM',
-          'fixed_term' => 90, //表示自领取后多少天内有效，不支持填写0
-          'fixed_begin_term' => 0, //表示自领取后多少天开始生效，领取后当天生效填写0。
-        ],
+      'use_limit' => 100,
+      'get_limit' => 3,
+      // ...
 
-        'sku' => [
-          'quantity' => '0', //自定义code时设置库存为0
-        ],
-
-        'location_id_list' => ['461907340'],  //获取门店位置poi_id，具备线下门店的商户为必填
-
-        'get_limit' => 1,
-        'use_custom_code' => true, //自定义code时必须为true
-        'get_custom_code_mode' => 'GET_CUSTOM_CODE_MODE_DEPOSIT',  //自定义code时设置
-        'bind_openid' => false,
-        'can_share' => true,
-        'can_give_friend' => false,
-        'center_title' => '顶部居中按钮',
-        'center_sub_title' => '按钮下方的wording',
-        'center_url' => 'http://www.qq.com',
-        'custom_url_name' => '立即使用',
-        'custom_url' => 'http://www.qq.com',
-        'custom_url_sub_title' => '6个汉字tips',
-        'promotion_url_name' => '更多优惠',
-        'promotion_url' => 'http://www.qq.com',
-        'source' => '造梦空间',
-      ];
-
-    $especial = [
-      'deal_detail' => 'deal_detail',
+      'advanced_info' => [
+          'use_condition' => [
+              'accept_category' => '鞋类',
+              'reject_category' => '阿迪达斯',
+              'can_use_with_other_discount' => true,
+          ],
+          //...
+      ],
     ];
 
-    $result = $card->create($cardType, $baseInfo, $especial);
+$result = $card->create($cardType, $attributes);
+```
+
+### 获取卡券详情
+
+```php
+$cardInfo = $card->get($cardId);
 ```
 
 
+### 批量查询卡列表
+
+```php
+$card->list($offset = 0, $count = 10, $statusList = 'CARD_STATUS_VERIFY_OK');
+```
+
+- `offset` int - 查询卡列表的起始偏移量，从0开始
+- `count` int - 需要查询的卡片的数量
+- `statusList` -  支持开发者拉出指定状态的卡券列表，详见 example
+
+示例：
+
+```php
+// CARD_STATUS_NOT_VERIFY, 待审核；
+// CARD_STATUS_VERIFY_FAIL, 审核失败；
+// CARD_STATUS_VERIFY_OK， 通过审核；
+// CARD_STATUS_USER_DELETE，卡券被商户删除；
+// CARD_STATUS_DISPATCH，在公众平台投放过的卡券；
+
+$result = $card->list($offset, $count, 'CARD_STATUS_NOT_VERIFY');
+```
+
+
+### 更改卡券信息接口
+
+支持更新所有卡券类型的部分通用字段及特殊卡券中特定字段的信息。
+
+```php
+$card->update($cardId, $type, $attributes = []);
+```
+
+- `type` string - 卡券类型
+
+示例：
+
+```php
+$cardId = 'pdkJ9uCzKWebwgNjxosee0ZuO3Os';
+
+$type = 'groupon';
+
+$attributes = [
+  'base_info' => [
+    'logo_url' => 'http://mmbiz.qpic.cn/mmbiz/2aJY6aCPatSeibYAyy7yct9zJXL9WsNVL4JdkTbBr184gNWS6nibcA75Hia9CqxicsqjYiaw2xuxYZiaibkmORS2oovdg/0',
+    'center_title' => '顶部居中按钮',
+    'center_sub_title' => '按钮下方的wording',
+    'center_url' => 'http://www.easywechat.com',
+    'custom_url_name' => '立即使用',
+    'custom_url' => 'http://www.qq.com',
+    'custom_url_sub_title' => '6个汉字tips',
+    'promotion_url_name' => '更多优惠',
+    'promotion_url' => 'http://www.qq.com',
+  ],
+  //...
+];
+
+$result = $card->update($cardId, $type, $attributes);
+```
+
+### 删除卡券
+
+```php
+$card->delete($cardId);
+```
 
 ### 创建二维码
 
 开发者可调用该接口生成一张卡券二维码供用户扫码后添加卡券到卡包。
 
-自定义Code码的卡券调用接口时，POST数据中需指定code，非自定义code不需指定，指定openid同理。指定后的二维码只能被用户扫描领取一次。
+自定义 Code 码的卡券调用接口时，POST 数据中需指定 code，非自定义 code 不需指定，指定 openid 同理。指定后的二维码只能被用户扫描领取一次。
 
 ```php
-$card->QRCode($cards);
+$card->createQrCode($cards);
 ```
 
 - `cards` array - 卡券相关信息
@@ -114,7 +151,7 @@ $card->QRCode($cards);
 示例：
 
 ```php
-//领取单张卡券
+// 领取单张卡券
 $cards = [
     'action_name' => 'QR_CARD',
     'expire_seconds' => 1800,
@@ -127,11 +164,11 @@ $cards = [
     ],
   ];
 
-$result = $card->QRCode($cards);
+$result = $card->createQrCode($cards);
 ```
 
 ```php
-//领取多张卡券
+// 领取多张卡券
 $cards = [
     'action_name' => 'QR_MULTIPLE_CARD',
     'action_info' => [
@@ -143,33 +180,21 @@ $cards = [
     ],
   ];
 
-$result = $card->QRCode($cardList);
+$result = $card->createQrCode($cards);
 ```
 
 请求成功返回值示例：
 
-```php
-array(4) {
-  ["ticket"]=>
-  string(96) "gQHa7joAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xLzdrUFlQMHJsV3Zvanc5a2NzV1N5AAIEJUVyVwMEAKd2AA=="
-  ["expire_seconds"]=>
-  int(7776000)
-  ["url"]=>
-  string(43) "http://weixin.qq.com/q/7kPYP0rlWvojw9kcsWSy"
-  ["show_qrcode_url"]=>
-  string(151) "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQHa7joAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xLzdrUFlQMHJsV3Zvanc5a2NzV1N5AAIEJUVyVwMEAKd2AA%3D%3D"
-}
+```json
+{
+ "errcode": 0,
+ "errmsg": "ok",
+ "ticket": "gQHB8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0JIV3lhX3psZmlvSDZmWGVMMTZvAAIEsNnKVQMEIAMAAA==",//获取ticket后需调用换取二维码接口获取二维码图片，详情见字段说明。
+ "expire_seconds": 1800,
+ "url": "http://weixin.qq.com/q/BHWya_zlfioH6fXeL16o ",
+ "show_qrcode_url": "https://mp.weixin.qq.com/cgi-bin/showqrcode?  ticket=gQH98DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0czVzRlSWpsamlyM2plWTNKVktvAAIE6SfgVQMEgDPhAQ%3D%3D"
+ }
 ```
-
-成功返回值列表说明：
-
-|       参数名       | 描述                                       |
-| :-: | : |
-|     ticket      | 获取的二维码ticket，凭借此ticket调用[通过ticket换取二维码接口](http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1443433542&token=&lang=zh_CN)可以在有效时间内换取二维码。 |
-| expire_seconds  | 二维码的有效时间                                 |
-|       url       | 二维码图片解析后的地址，开发者可根据该地址自行生成需要的二维码图片        |
-| show_qrcode_url | 二维码显示地址，点击后跳转二维码页面                       |
-
 
 
 ### ticket 换取二维码图片
@@ -177,7 +202,7 @@ array(4) {
 获取二维码 ticket 后，开发者可用 ticket 换取二维码图片。
 
 ```php
-$card->showQRCode($ticket);
+$card->getQrCode($ticket);
 ```
 
 - `ticket` string  - 获取的二维码 ticket，凭借此 ticket 可以在有效时间内换取二维码。
@@ -186,44 +211,21 @@ $card->showQRCode($ticket);
 
 ```php
 $ticket = 'gQFF8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL01VTzN0T0hsS1BwUlBBYUszbVN5AAIEughxVwMEAKd2AA==';
-$result = $card->showQRCode($ticket);
+$result = $card->getQrCode($ticket);
 ```
 
 
 ### ticket 换取二维码链接
 
 ```php
-$card->getQRCodeUrl($ticket);  //获取的二维码ticket
+$card->getQrCodeUrl($ticket);
 ```
 
 示例：
 
 ```php
 $ticket = 'gQFF8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL01VTzN0T0hsS1BwUlBBYUszbVN5AAIEughxVwMEAKd2AA==';
-$card->getQRCodeUrl($ticket);
-```
-
-### JSAPI 卡券批量下发到用户
-
-微信卡券：JSAPI 卡券
-
-```php
-$cards = [
-    ['card_id' => 'pdkJ9uLRSbnB3UFEjZAgUxAJrjeY', 'outer_id' => 2],
-    ['card_id' => 'pdkJ9uJ37aU-tyRj4_grs8S45k1c', 'outer_id' => 3],
-];
-$json = $card->jsConfigForAssign($cards); // 返回 json 格式
-```
-
-返回 json，在模板里的用法：
-
-```html
-wx.addCard({
-    cardList: <?= $json ?>, // 需要打开的卡券列表
-    success: function (res) {
-        var cardList = res.cardList; // 添加的卡券列表信息
-    }
-});
+$card->getQrCodeUrl($ticket);
 ```
 
 ### 创建货架接口
@@ -243,7 +245,7 @@ $card->createLandingPage($banner, $pageTitle, $canShare, $scene, $cards);
 示例：
 
 ```php
-$banner     = 'http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFN';
+$banner = 'http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFN';
 $pageTitle = '惠城优惠大派送';
 $canShare  = true;
 
@@ -265,65 +267,6 @@ $result = $card->createLandingPage($banner, $pageTitle, $canShare, $scene, $card
 ```
 
 
-
-### 导入code接口
-
-在自定义code卡券成功创建并且通过审核后，必须将自定义code按照与发券方的约定数量调用导入code接口导入微信后台。
-
-```php
-$card->deposit($card_id, $code);
-```
-
-- `cardId` string - 要导入code的卡券ID
-- `code` string - 要导入微信卡券后台的自定义 code，最多100个
-
-示例：
-
-```php
-$cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
-$code    = ['11111', '22222', '33333'];
-
-$result = $card->deposit($cardId, $code);
-```
-
-
-
-### 查询导入code数目
-
-```php
-$card->getDepositedCount($cardId);  //要导入code的卡券ID
-```
-
-示例：
-
-```php
-$cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
-
-$result = $card->getDepositedCount($cardId);
-```
-
-
-
-### 核查code接口
-
-为了避免出现导入差错，强烈建议开发者在查询完code数目的时候核查code接口校验code导入微信后台的情况。
-
-```php
-$card->checkCode($cardId, $code);
-```
-
-示例：
-
-```php
-$cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
-
-$code = ['807732265476', '22222', '33333'];
-
-$result = $card->checkCode($cardId, $code);
-```
-
-
-
 ### 图文消息群发卡券
 
 特别注意：目前该接口仅支持填入非自定义code的卡券,自定义code的卡券需先进行code导入后调用。
@@ -339,8 +282,6 @@ $cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
 
 $result = $card->getHtml($cardId);
 ```
-
-
 
 ### 设置测试白名单
 
@@ -363,69 +304,8 @@ $result = $card->setTestWhitelist($openids);
 
 // by username
 $usernames = ['tianye0327', 'iovertrue'];
-$result = $card->setTestWhitelistByUsername($usernames);
+$result = $card->setTestWhitelistByName($usernames);
 ```
-
-### 查询Code接口
-
-```php
-$card->getCode($code, $checkConsume, $cardId);
-```
-
-- checkConsume  是否校验code核销状态，true和false
-
-示例：
-
-```php
-$code          = '736052543512';
-$checkConsume = true;
-$cardId       = 'pdkJ9uDgnm0pKfrTb1yV0dFMO_Gk';
-
-$result = $card->getCode($code, $checkConsume, $cardId);
-```
-
-
-
-### 核销Code接口
-
-```php
-$card->consume($code);
-
-// 或者指定 cardId
-
-$card->consume($code, $cardId);
-```
-
-示例：
-
-```php
-$cardId = 'pdkJ9uDmhkLj6l5bm3cq9iteQBck';
-$code    = '789248558333';
-
-$result = $card->consume($code);
-
-//或
-
-$result = $card->consume($code, $cardId);
-```
-
-
-
-### Code解码接口
-
-```php
-$card->decryptCode($encryptedCode);
-```
-
-示例：
-
-```php
-$encryptedCode = 'XXIzTtMqCxwOaawoE91+VJdsFmv7b8g0VZIZkqf4GWA60Fzpc8ksZ/5ZZ0DVkXdE';
-
-$result = $card->decryptCode($encryptedCode);
-```
-
-
 
 ### 获取用户已领取卡券接口
 
@@ -439,97 +319,16 @@ $card->getUserCards($openid, $cardId);
 
 ```php
 $openid  = 'odkJ9uDUz26RY-7DN1mxkznfo9xU';
-$cardId = ''; //卡券ID。不填写时默认查询当前appid下的卡券。
+$cardId = ''; // 卡券ID。不填写时默认查询当前 appid 下的卡券。
 
 $result = $card->getUserCards($openid, $cardId);
 ```
 
 
-
-### 查看卡券详情
-
-开发者可以调用该接口查询某个card_id的创建信息、审核状态以及库存数量。
-
-```php
-$card->getCard($cardId);
-```
-
-示例：
-
-```php
-$cardId = 'pdkJ9uLRSbnB3UFEjZAgUxAJrjeY';
-
-$result = $card->getCard($cardId);
-```
-
-
-
-### 批量查询卡列表
-
-```php
-$card->list($offset, $count, $statusList);
-```
-
-- `offset` int - 查询卡列表的起始偏移量，从0开始
-- `count` int - 需要查询的卡片的数量
-- `statusList` -  支持开发者拉出指定状态的卡券列表，详见example
-
-示例：
-
-```php
-$offset      = 0;
-$count       = 10;
-
-//CARD_STATUS_NOT_VERIFY,待审核；
-//CARD_STATUS_VERIFY_FAIL,审核失败；
-//CARD_STATUS_VERIFY_OK，通过审核；
-//CARD_STATUS_USER_DELETE，卡券被商户删除；
-//CARD_STATUS_DISPATCH，在公众平台投放过的卡券；
-$statusList = 'CARD_STATUS_VERIFY_OK';
-
-$result = $card->list($offset, $count, $statusList);
-```
-
-
-
-### 更改卡券信息接口
-
-支持更新所有卡券类型的部分通用字段及特殊卡券中特定字段的信息。
-
-```php
-$card->update($cardId, $type, $baseInfo);
-```
-
-- `type` string - 卡券类型
-
-示例：
-
-```php
-$cardId = 'pdkJ9uCzKWebwgNjxosee0ZuO3Os';
-
-$type = 'groupon';
-
-$baseInfo = [
-    'logo_url' => 'http://mmbiz.qpic.cn/mmbiz/2aJY6aCPatSeibYAyy7yct9zJXL9WsNVL4JdkTbBr184gNWS6nibcA75Hia9CqxicsqjYiaw2xuxYZiaibkmORS2oovdg/0',
-    'center_title' => '顶部居中按钮',
-    'center_sub_title' => '按钮下方的wording',
-    'center_url' => 'http://www.baidu.com',
-    'custom_url_name' => '立即使用',
-    'custom_url' => 'http://www.qq.com',
-    'custom_url_sub_title' => '6个汉字tips',
-    'promotion_url_name' => '更多优惠',
-    'promotion_url' => 'http://www.qq.com',
-];
-
-$result = $card->update($cardId, $type, $baseInfo);
-```
-
-
-
 ### 设置微信买单接口
 
 ```php
-$card->setPayCell($cardId, $isOpen);
+$card->setPayCell($cardId, $isOpen = true);
 ```
 
 - `isOpen` string - 是否开启买单功能，填 true/false，不填默认 true
@@ -538,8 +337,8 @@ $card->setPayCell($cardId, $isOpen);
 
 ```php
 $cardId = 'pdkJ9uH7u11R-Tu1kilbaW_zDFow';
-$isOpen = true;
 
+$result = $card->setPayCell($cardId); // isOpen = true
 $result = $card->setPayCell($cardId, $isOpen);
 ```
 
@@ -563,41 +362,136 @@ $cardId = 'pdkJ9uLRSbnB3UFEjZAgUxAJrjeY';
 $result = $card->increaseStock($cardId, 100);
 ```
 
+## 卡券 Code
 
-### 更改Code接口
+### 导入code接口
+
+在自定义code卡券成功创建并且通过审核后，必须将自定义code按照与发券方的约定数量调用导入code接口导入微信后台。
 
 ```php
-$card->updateCode($code, $newCode, $cardId);
+$card->code->deposit($cardId, $codes);
 ```
 
-- `newCode` string - 变更后的有效Code码
+- `cardId` string - 要导入code的卡券ID
+- `codes` array - 要导入微信卡券后台的自定义 code，最多100个
 
 示例：
 
 ```php
-$code     = '148246271394';
+$cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
+$codes    = ['11111', '22222', '33333'];
+
+$result = $card->code->deposit($cardId, $codes);
+```
+
+
+
+### 查询导入code数目
+
+```php
+$card->code->getDepositedCount($cardId);  // 要导入 code 的卡券 ID
+```
+
+示例：
+
+```php
+$cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
+
+$result = $card->code->getDepositedCount($cardId);
+```
+
+
+
+### 核查 code 接口
+
+为了避免出现导入差错，强烈建议开发者在查询完 code 数目的时候核查 code 接口校验 code 导入微信后台的情况。
+
+```php
+$card->code->check($cardId, $codes);
+```
+
+示例：
+
+```php
+$cardId = 'pdkJ9uLCEF_HSKO7JdQOUcZ-PUzo';
+
+$codes = ['807732265476', '22222', '33333'];
+
+$result = $card->code->check($cardId, $codes);
+```
+
+
+### 查询 Code 接口
+
+```php
+$card->code->get($code, $cardId, $checkConsume = true);
+```
+
+- checkConsume  是否校验code核销状态，true和false
+
+示例：
+
+```php
+$code = '736052543512';
+$cardId = 'pdkJ9uDgnm0pKfrTb1yV0dFMO_Gk';
+
+$result = $card->code->get($code, $cardId);
+$result = $card->code->get($code, $cardId, false); // check_consume = false
+```
+
+
+
+### 核销Code接口
+
+```php
+$card->code->consume($code);
+// 或者指定 cardId
+$card->code->consume($code, $cardId);
+```
+
+示例：
+
+```php
+$code = '789248558333';
+$cardId = 'pdkJ9uDmhkLj6l5bm3cq9iteQBck';
+
+$result = $card->code->consume($code);
+// 或
+$result = $card->code->consume($code, $cardId);
+```
+
+### Code 解码接口
+
+```php
+$card->code->decrypt($encryptedCode);
+```
+
+示例：
+
+```php
+$encryptedCode = 'XXIzTtMqCxwOaawoE91+VJdsFmv7b8g0VZIZkqf4GWA60Fzpc8ksZ/5ZZ0DVkXdE';
+
+$result = $card->code->decrypt($encryptedCode);
+```
+
+
+### 更改 Code 接口
+
+```php
+$card->code->update($code, $newCode, $cardId);
+```
+
+- `newCode` string - 变更后的有效 Code 码
+
+示例：
+
+```php
+$code = '148246271394';
 $newCode = '659266965266';
-$cardId  = '';
+$cardId = '';
 
-$result = $card->updateCode($code, $newCode, $cardId);
+$result = $card->code->update($code, $newCode, $cardId);
 ```
-
-
-
-### 删除卡券接口
-
-```php
-$card->delete($cardId);
-```
-
-示例：
-
-```php
-$cardId = 'pdkJ9uItT7iUpBp4GjZp8Cae0Vig';
-
-$result = $card->delete($cardId);
-```
-
 
 
 ### 设置卡券失效
@@ -615,12 +509,32 @@ $cardId = '';
 $result = $card->disable($code, $cardId);
 ```
 
+## 通用卡券
 
-
-### 会员卡接口激活
+## 卡券激活
 
 ```php
-$result = $card->activate($info);
+$result = $card->general_card->activate($info);
+```
+
+## 撤销激活
+
+```php
+$result = $card->general_card->deactivate(string $cardId, string $code);
+```
+
+## 更新用户信息
+
+```php
+$result = $card->general_card->updateUser(array $info);
+```
+
+## 会员卡
+
+### 会员卡激活
+
+```php
+$result = $card->member_card->activate($info);
 ```
 
 - `info` - 需要激活的会员卡信息
@@ -628,7 +542,7 @@ $result = $card->activate($info);
 示例：
 
 ```php
-$activate = [
+$info = [
       'membership_number'        => '357898858', //会员卡编号，由开发者填入，作为序列号显示在用户的卡包里。可与Code码保持等值。
       'code'                     => '916679873278', //创建会员卡时获取的初始code。
       'activate_begin_time'      => '1397577600', //激活后的有效起始时间。若不填写默认以创建时的 data_info 为准。Unix时间戳格式
@@ -640,26 +554,23 @@ $activate = [
       'init_custom_field_value3' => '200', //创建时字段custom_field3定义类型的初始值，限制为4个汉字，12字节。
 ];
 
-$result = $card->activate($activate);
+$result = $card->member_card->activate($info);
 ```
 
-
-
-### 设置开卡字段接口
+### 设置开卡字段
 
 ```php
-$card->activateUserForm($cardId, $requiredForm, $optionalForm);
+$card->member_card->setActivationForm($cardId, $settings);
 ```
 
-- `requiredForm` array - 会员卡激活时的必填选项
-- `optionalForm` array - 会员卡激活时的选填项
+- `settings` array - 会员卡激活时的选项
 
 示例：
 
 ```php
 $cardId = 'pdkJ9uJYAyfLXsUCwI2LdH2Pn1AU';
 
-$requiredForm = [
+$settings = [
     'required_form' => [
         'common_field_id_list' => [
             'USER_FORM_INFO_FLAG_MOBILE',
@@ -670,9 +581,6 @@ $requiredForm = [
             '喜欢的食物',
         ],
     ],
-];
-
-$optionalForm = [
     'optional_form' => [
         'common_field_id_list' => [
             'USER_FORM_INFO_FLAG_EMAIL',
@@ -683,15 +591,15 @@ $optionalForm = [
     ],
 ];
 
-$result = $card->activateUserForm($cardId, $requiredForm, $optionalForm);
+$result = $card->member_card->activateUserForm($cardId, $settings);
 ```
 
 
 
-### 拉取会员信息接口
+### 拉取会员信息
 
 ```php
-$card->getMemberCardUser($cardId, $code);
+$card->member_card->getUser($cardId, $code);
 ```
 
 示例：
@@ -700,7 +608,7 @@ $card->getMemberCardUser($cardId, $code);
 $cardId = 'pbLatjtZ7v1BG_ZnTjbW85GYc_E8';
 $code    = '916679873278';
 
-$result = $card->getMemberCardUser($cardId, $code);
+$result = $card->member_card->getUser($cardId, $code);
 ```
 
 
@@ -708,15 +616,15 @@ $result = $card->getMemberCardUser($cardId, $code);
 ### 更新会员信息
 
 ```php
-$card->updateMemberCardUser($updateUser);
+$card->member_card->updateUser($info);
 ```
 
-- `updateUser` array - 可以更新的会员信息
+- `info` array - 可以更新的会员信息
 
 示例：
 
 ```php
-$updateUser = [
+$info = [
     'code'                => '916679873278', //卡券Code码。
     'card_id'             => 'pbLatjtZ7v1BG_ZnTjbW85GYc_E8', //卡券ID。
     'record_bonus'        => '消费30元，获得3积分', //商家自定义积分消耗记录，不超过14个汉字。
@@ -728,30 +636,21 @@ $updateUser = [
     'custom_field_value3' => '300', //创建时字段custom_field3定义类型的最新数值，限制为4个汉字，12字节。
 ];
 
-$result = $card->updateMemberCardUser($updateUser);
+$result = $card->member_card->updateUser($info);
 ```
 
-
+## 子商户
 
 ### 添加子商户
 
 ```php
-$card->craeteSubMerchant($brandName, $logoUrl, $protocol, $endTime, $primaryCategoryId, $secondaryCategoryId, $agreementMediaId, $operatorMediaId, $appId); 
+$card->sub_merchant->create(array $attributes); 
 ```
-
-- `brand_name` string - 子商户名称（12个汉字内），该名称将在制券时填入并显示在卡券页面上
-- `logo_url`  string - 子商户 logo，可通过上传 logo 接口获取。该 logo 将在制券时填入并显示在卡券页面上
-- `protocol`  string - 授权函ID，即通过上传临时素材接口上传授权函后获得的 meida_id
-- `primary_category_id`  int - 一级类目id,可以通过本文档中接口查询
-- `secondary_category_id` int - 二级类目id，可以通过本文档中接口查询
-- `agreement_media_id`  string - 营业执照或个体工商户营业执照彩照或扫描件
-- `operator_media_id`  string - 营业执照内登记的经营者身份证彩照或扫描件
-- `app_id`  string - 子商户的公众号 app_id，配置后子商户卡券券面上的 app_id 为该 app_id, app_id 须经过认证
 
 示例：
 
 ```php
-$info = [
+$attributes = [
     'brand_name' => 'overtrue',
     'logo_url' => 'http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFNjakmxibMLGWpXrEXB33367o7zHN0CwngnQY7zb7g/0',
     'protocol' => 'qIqwTfzAdJ_1-VJFT0fIV53DSY4sZY2WyhkzZzbV498Qgdp-K5HJtZihbHLS0Ys0',
@@ -763,13 +662,13 @@ $info = [
     'app_id' => '',
 ];
 
-$result = $card->createSubMerchant($info);
+$result = $card->sub_merchant->create($attributes);
 ```
 
 ### 更新子商户
 
 ```php
-$card->updateSubMerchant($merchantId, $info);
+$card->sub_merchant->update(int $merchantId, array $info);
 ```
 
 - `$merchantId` int - 子商户 ID
@@ -781,19 +680,53 @@ $card->updateSubMerchant($merchantId, $info);
 $info = [
   //...
 ];
-$result = $card->updateSubMerchant('12', $info);
+$result = $card->sub_merchant->update('12', $info);
 ```
 
-### 卡券开放类目查询接口
+## 特殊票券
+
+### 机票值机
 
 ```php
-$card->getCategories();
+$card->boarding_pass->checkin(array $params);
 ```
 
-示例：
+### 更新会议门票 - 更新用户
+
 
 ```php
-$result = $card->getCategories();
+$card->meeting_ticket->updateUser(array $params);
 ```
 
-关于卡券接口的使用请参阅官方文档：http://mp.weixin.qq.com/wiki/
+### 更新电影门票 - 更新用户
+
+
+```php
+$card->movie_ticket->updateUser(array $params);
+```
+
+
+## JSAPI
+
+### JSAPI 卡券批量下发到用户
+
+微信卡券：JSAPI 卡券
+
+```php
+$cards = [
+    ['card_id' => 'pdkJ9uLRSbnB3UFEjZAgUxAJrjeY', 'outer_id' => 2],
+    ['card_id' => 'pdkJ9uJ37aU-tyRj4_grs8S45k1c', 'outer_id' => 3],
+];
+$json = $card->jsConfigForAssign($cards); // 返回 json 格式
+```
+
+返回 json，在模板里的用法：
+
+```html
+wx.addCard({
+    cardList: <?= $json ?>, // 需要打开的卡券列表
+    success: function (res) {
+        var cardList = res.cardList; // 添加的卡券列表信息
+    }
+});
+```
