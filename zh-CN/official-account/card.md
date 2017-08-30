@@ -708,16 +708,14 @@ $card->movie_ticket->updateUser(array $params);
 
 ## JSAPI
 
-### JSAPI 卡券批量下发到用户
-
-微信卡券：JSAPI 卡券
+### 卡券批量下发到用户
 
 ```php
 $cards = [
     ['card_id' => 'pdkJ9uLRSbnB3UFEjZAgUxAJrjeY', 'outer_id' => 2],
     ['card_id' => 'pdkJ9uJ37aU-tyRj4_grs8S45k1c', 'outer_id' => 3],
 ];
-$json = $card->jsConfigForAssign($cards); // 返回 json 格式
+$json = $card->jssdk->assign($cards); // 返回 json 格式
 ```
 
 返回 json，在模板里的用法：
@@ -729,4 +727,12 @@ wx.addCard({
         var cardList = res.cardList; // 添加的卡券列表信息
     }
 });
+```
+
+### 获取 Ticket
+
+```php
+$card->jssdk->getTicket();
+// 强制刷新
+$card->jssdk->getTicket(true);
 ```
