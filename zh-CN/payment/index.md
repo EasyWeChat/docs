@@ -97,20 +97,14 @@ if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
 
 而对于用户的退款操作，在退款成功之后也会有一个异步回调通知。
 
-本 SDK 内预置了一个 trait，以方便开发者处理这些通知。
+本 SDK 内预置了相关方法，以方便开发者处理这些通知。
 
 以支付成功结果通知为例，具体用法如下：
 
-1. 在控制器方法中引用这个 trait
+只需要在控制器中使用 `handleNotify()` 方法，在其中对自己的业务进行处理并向微信服务器发送一个响应。
 
 ```php
-use EasyWeChat\Payment\Traits\HandleNotiry;
-```
-
-2. 使用相关的处理方法对业务进行处理并向微信服务器返回消息
-
-```php
-$response = $this->handleNotify(function($notify, $successful){
+$response = $payment->handleNotify(function($notify, $successful){
     // 你的逻辑
     return true; // 或者错误消息
 });
@@ -133,7 +127,7 @@ $response->send(); // Laravel 里请使用：return $response;
 通常我们的处理逻辑大概是下面这样（**以下只是伪代码**）：
 
 ```php
-$response = $this->handleNotify(function($notify, $successful){
+$response = $payment->handleNotify(function($notify, $successful){
     // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
     $order = 查询订单($notify->out_trade_no);
 
@@ -315,3 +309,25 @@ $payment->report($api, $timeConsuming, $resultCode, $returnCode, [
 $response = $payment->authCodeToOpenId($authCode);
 $response->openid;
 ```
+
+## 沙箱模式
+
+微信支付沙箱环境，是提供给微信支付商户的开发者，用于模拟支付及回调通知。以验证商户是否理解回调通知、账单格式，以及是否对异常做了正确的处理。Easywecaht SDK 对于这一功能进行了封装，开发者只需一步即可在沙箱模式和常规模式间切换，方便开发与最终的部署。
+
+```php
+// 开启沙箱模式
+$payment->sandboxMode(true);
+
+// 关闭沙箱模式
+$payment->sandboxMode(false);
+```
+
+此外， sandboxMode 方法也可以链式调用，如：
+
+```php
+$payment->sandboxMode(true)->prepare(new Order([
+    // ...
+]));
+```
+
+**特别注意，沙箱模式对于测试用例有严格要求，若使用的用例与规定不符，将导致测试失败。具体用例要求可关注公众号“微信支付商户接入验收助手”（WXPayAssist）查看。**
