@@ -28,41 +28,44 @@ $payment = Factory::payment($options);
 ```
 
 ## 创建订单
+
 - 正常模式
-```php
-use EasyWeChat\Payment\Order;
 
-$attributes = [
-    'trade_type'   => 'JSAPI', // JSAPI，NATIVE，APP...
-    'body'         => 'iPad mini 16G 白色',
-    'detail'       => 'iPad mini 16G 白色',
-    'out_trade_no' => '1217752501201407033233368018',
-    'total_fee'    => 5388, // 单位：分
-    'notify_url'   => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-    'openid'       => '当前用户的 openid', // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
-    // ...
-];
+    ```php
+    use EasyWeChat\Payment\Order;
 
-$order = new Order($attributes);
-```
+    $attributes = [
+        'trade_type'   => 'JSAPI', // JSAPI，NATIVE，APP...
+        'body'         => 'iPad mini 16G 白色',
+        'detail'       => 'iPad mini 16G 白色',
+        'out_trade_no' => '1217752501201407033233368018',
+        'total_fee'    => 5388, // 单位：分
+        'notify_url'   => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+        'openid'       => '当前用户的 openid', // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+        // ...
+    ];
+
+    $order = new Order($attributes);
+    ```
 
 - 子服务商模式
-```php
-use EasyWeChat\Payment\Order;
 
-$attributes = [
-    'trade_type'   => 'JSAPI', // JSAPI，NATIVE，APP...
-    'body'         => 'iPad mini 16G 白色',
-    'detail'       => 'iPad mini 16G 白色',
-    'out_trade_no' => '1217752501201407033233368018',
-    'total_fee'    => 5388, // 单位：分
-    'notify_url'   => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-    'sub_openid'   => '当前用户的 openid', // 如果传入sub_openid, 请在实例化Application时, 同时传入$sub_app_id, $sub_merchant_id
-    // ...
-];
+    ```php
+    use EasyWeChat\Payment\Order;
 
-$order = new Order($attributes);
-```
+    $attributes = [
+        'trade_type'   => 'JSAPI', // JSAPI，NATIVE，APP...
+        'body'         => 'iPad mini 16G 白色',
+        'detail'       => 'iPad mini 16G 白色',
+        'out_trade_no' => '1217752501201407033233368018',
+        'total_fee'    => 5388, // 单位：分
+        'notify_url'   => 'http://xxx.com/order-notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+        'sub_openid'   => '当前用户的 openid', // 如果传入sub_openid, 请在实例化Application时, 同时传入$sub_app_id, $sub_merchant_id
+        // ...
+    ];
+
+    $order = new Order($attributes);
+    ```
 
 
 通知url必须为直接可访问的url，不能携带参数。示例：notify_url：“https://pay.weixin.qq.com/wxpay/pay.action”
@@ -73,9 +76,9 @@ $order = new Order($attributes);
 
 [官方文档](https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_10)
 
-```php
-$result = $payment->pay($order);
-```
+    ```php
+    $result = $payment->pay($order);
+    ```
 
 > 也许你需要生成二维码图片，参考页面底部相关的包推荐
 
@@ -83,12 +86,13 @@ $result = $payment->pay($order);
 
 [公众号支付](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1)、[扫码支付](https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_1)、[APP 支付](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=9_1) 都统一使用此接口完成订单的创建。
 
-```php
-$result = $payment->prepare($order);
-if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
-    $prepayId = $result->prepay_id;
-}
-```
+    ```php
+    $result = $payment->prepare($order);
+
+    if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
+        $prepayId = $result->prepay_id;
+    }
+    ```
 
 ## 支付及退款结果通知
 
