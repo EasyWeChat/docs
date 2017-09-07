@@ -24,9 +24,9 @@ $config = [
     //...
 ];
 
-$weWork = Factory::weWork($config);
+$work = Factory::work($config);
 
-$app = $weWork->agent('foo');
+$app = $work->agent('foo');
 ```
 
 接着配置服务端与公众号的服务端用法一样：
