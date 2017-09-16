@@ -14,9 +14,9 @@ $config = [
     //...
 ];
 
-$weWork = Factory::weWork($config);
+$work = Factory::work($config);
 
-$oa = $weWork->agent('oa');
+$oa = $work->agent('oa');
 ```
 
 ## 获取打卡数据

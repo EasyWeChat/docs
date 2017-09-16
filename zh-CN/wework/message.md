@@ -7,7 +7,7 @@ use EasyWeChat\Kernel\Messages\TextCard;
 
 
 // 获取 Messenger 实例
-$messenger = $weWork->agent('foo')->messenger;
+$messenger = $work->agent('foo')->messenger;
 
 // 准备消息
 $message = new TextCard('你的请假单审批通过', '单号：1928373, ....', 'http://easywechat.com/oa/....');

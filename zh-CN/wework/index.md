@@ -1,6 +1,6 @@
 ## 企业微信
 
-企业微信的使用与公众号以及其它几个应用的使用方式都是一致的，使用 `\EasyWeChat\Factory::weWork($config)` 来初始化：
+企业微信的使用与公众号以及其它几个应用的使用方式都是一致的，使用 `\EasyWeChat\Factory::work($config)` 来初始化：
 
 ```php
 $config = [
@@ -28,9 +28,9 @@ $config = [
     ],
 ];
 
-$weWork = Factory::weWork($config);
+$work = Factory::work($config);
 
-$contacts = $weWork->agent('contacts');
+$contacts = $work->agent('contacts');
 ```
 
 然后你就可以用 `$contacts` 来调用企业微信的服务了。

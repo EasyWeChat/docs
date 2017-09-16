@@ -3,9 +3,9 @@
 自定义菜单是指为单个应用设置自定义菜单功能，所以在使用时请注意调用正确的应用实例。
 
 ```php
-$weWork = Factory::weWork($config);
+$work = Factory::work($config);
 
-$menu = $weWork->agent('foo')->menu;
+$menu = $work->agent('foo')->menu;
 ```
 
 ## 创建菜单

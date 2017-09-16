@@ -15,9 +15,9 @@ $config = [
     //...
 ];
 
-$weWork = Factory::weWork($config);
+$work = Factory::work($config);
 
-$contacts = $weWork->agent('contacts');
+$contacts = $work->agent('contacts');
 ```
 
 ## 成员管理

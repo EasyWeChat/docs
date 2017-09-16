@@ -1,6 +1,6 @@
 # 临时素材
 
-它的使用是不基于应用的，或者说基于任何一个应用都能访问这些 API，所以在用法上是直接调用 weWork 实例的 `media` 属性：
+它的使用是不基于应用的，或者说基于任何一个应用都能访问这些 API，所以在用法上是直接调用 work 实例的 `media` 属性：
 
 **上传的媒体文件限制：**
 所有文件size必须大于5个字节
@@ -15,29 +15,29 @@
 > 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
 
 ```php
-$wework->media->uploadImage($path); // $path 为本地文件路径
+$work->media->uploadImage($path); // $path 为本地文件路径
 ```
 
 ## 上传声音
 
 ```php
-$wework->media->uploadVoice($path);
+$work->media->uploadVoice($path);
 ```
 
 ## 上传视频
 
 ```php
-$wework->media->uploadVideo($path, $title, $description);
+$work->media->uploadVideo($path, $title, $description);
 ```
 
 ## 上传普通文件
 
 ```php
-$wework->media->uploadFile($path);
+$work->media->uploadFile($path);
 ```
 
 ## 获取素材
 
 ```php
-$wework->media->get($mediaId);
+$work->media->get($mediaId);
 ```
