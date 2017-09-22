@@ -3,10 +3,11 @@ title: 安装
 
 ## 环境要求
 
-- PHP >= 5.5.9
+- PHP >= 5.5.9 （v3.2.2开始仅支持PHP7及以上）
 - [PHP cURL 扩展](http://php.net/manual/en/book.curl.php)
 - [PHP OpenSSL 扩展](http://php.net/manual/en/book.openssl.php)
 - [PHP fileinfo 拓展](http://php.net/manual/en/book.fileinfo.php) 素材管理模块需要用到
+
 
 
 Laravel 5 拓展包: [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat)
