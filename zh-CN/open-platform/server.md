@@ -22,6 +22,8 @@ $openPlatform = Factory::openPlatform($config);
 
 公众号第三方平台推送的有四个事件：
 
+> 如已经授权的公众号、小程序再次进行授权，而未修改已授权的权限的话，是没有相关事件推送的。
+
 ​	授权成功 `authorized`
 
 ​	授权更新 `updateauthorized`
