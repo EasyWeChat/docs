@@ -40,7 +40,7 @@ return [
     'app_id'  => 'your-app-id',         // AppID
     'secret'  => 'your-app-secret',     // AppSecret
     'token'   => 'your-token',          // Token
-    'aes_key' => '',                    // EncodingAESKey，安全模式下请一定要填写！！！
+    'aes_key' => '',                    // EncodingAESKey，兼容与安全模式下请一定要填写！！！
 
      /**
       * 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名
