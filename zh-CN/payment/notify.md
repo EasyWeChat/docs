@@ -23,13 +23,14 @@ $response->send(); // Laravel 里请使用：return $response;
 
 这里需要注意的有几个点：
 
-1. `handlePaidNotify` 只接收一个 [`callable`](http://php.net/manual/zh/language.types.callable.php) 参数，通常用一个匿名函数即可。
+0. 扫码支付通知和扫码支付通知的使用方法均类似。
+1. `handlePaidNotify` 只接收一个 [`Closure`](http://php.net/manual/zh/class.closure.php) 匿名函数。
 2. 该匿名函数接收两个参数，这两个参数分别为：
 
     - `$message` 为微信推送过来的通知信息，为一个数组；
     - `$fail` 为一个函数，触发该函数可向微信服务器返回对应的错误信息。
 
-3. 该函数返回值就是告诉微信 **“我是否处理完成”**，如果你返回一个 `false` 或者一个具体的错误消息，那么微信会在稍后再次继续通知你，直到你明确的告诉它：“我已经处理完成了”，在函数里 `return true;` 代表处理完成。
+3. 该函数返回值就是告诉微信 **“我是否处理完成”**。如果你触发 `$fail` 函数，那么微信会在稍后再次继续通知你，直到你明确的告诉它：“我已经处理完成了”，**只有**在函数里 `return true;` 才代表处理完成。
 
 4. `handlePaidNotify` 返回值 `$response` 是一个 Response 对象，如果你要直接输出，使用 `$response->send()`, 在一些框架里（如 Laravel）不是输出而是返回：`return $response`。
 
@@ -64,7 +65,7 @@ $response = $app->handlePaidNotify(function($message, $fail){
     return true; // 返回处理完成
 });
 
-return $response;
+$response->send(); // return $response;
 ```
 
 > 注意：请把 “支付成功与否” 与 “是否处理完成” 分开，它俩没有必然关系。
@@ -72,14 +73,12 @@ return $response;
 
 ## 退款结果通知
 
-使用方法与支付结果通知一致，只是 `$message` 有区别。
-
 使用示例：
 
 ```php
 $response = $app->handleRefundedNotify(function ($message, $fail) {
     // 其中 $message['req_info'] 获取到的是加密信息，获取解密后的信息可通过如下方法获取：
-    $info = $message['decrypted']['req_info'];
+    $info = $this->reqInfo();
     // 你的业务逻辑...
     return true; // 返回 true 告诉微信“我已处理完成”
     // 或返回错误原因 $fail('参数格式校验错误');

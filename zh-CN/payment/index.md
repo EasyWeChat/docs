@@ -10,15 +10,27 @@
 use EasyWeChat\Factory;
 
 $options = [
+    // 必要配置
     'app_id'             => 'xxxx',
     'mch_id'             => 'your-mch-id',
     'key'                => 'key-for-signature',
+
+    // 如需使用敏感接口（如退款、发送红包等）需要配置证书路径
     'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
     'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+
     'notify_url'         => '默认的订单回调地址',     // 你也可以在下单时单独设置来想覆盖它
 ];
 
 $app = Factory::payment($options);
+```
+
+### 服务商
+
+#### 设置子商户信息
+
+```php
+$app->setSubMerchant('sub-merchant-id', 'sub-app-id');  // 子商户 AppID 为可选项
 ```
 
 ### 刷卡支付
@@ -37,7 +49,7 @@ $result = $app->pay([
 ## 授权码查询OPENID接口
 
 ```php
-$app->authCodeToOpenId($authCode);
+$app->authCodeToOpenid($authCode);
 ```
 
 ## 沙箱模式
@@ -46,10 +58,13 @@ $app->authCodeToOpenId($authCode);
 
 ```php
 // 在实例化的时候传入配置即可
-Factory::payment([
+$app = Factory::payment([
     // ...
     'sandbox' => true, // 设置为 false 或注释则关闭沙箱模式
 ]);
+
+// 判断当前是否为沙箱模式：
+bool $app->inSandbox();
 ```
 
 **特别注意，沙箱模式对于测试用例有严格要求，若使用的用例与规定不符，将导致测试失败。具体用例要求可关注公众号“微信支付商户接入验收助手”（WXPayAssist）查看。**

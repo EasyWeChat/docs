@@ -2,16 +2,17 @@
 
 ## 下载对账单
 
+> 调用参数正确会返回一个 `EasyWeChat\Kernel\Http\StreamResponse` 对象，否则会返回相应错误信息
+
+Example:
+
 ```php
-$bill = $app->bill->download(20140603); // type: ALL
+$bill = $app->bill->download('20140603'); // type: ALL
 // or
 $bill = $app->bill->download('20140603', 'SUCCESS'); // type: SUCCESS
-// bill 为 csv 格式的内容
 
-// 保存为文件
-file_put_contents('YOUR/PATH/TO/bill-20140603.csv', $bill);
-
-// 如发生错误（比如日期不正确），会返回 json 错误信息
+// 调用正确，`$bill` 为 csv 格式的内容，保存为文件：
+$bill->saveAs('your/path/to', 'file-20140603.csv');
 ```
 
 第二个参数为类型：
