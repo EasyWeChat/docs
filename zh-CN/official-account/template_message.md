@@ -41,7 +41,6 @@ $app->template_message->send([
         'touser' => 'user-openid',
         'template_id' => 'template-id',
         'url' => 'https://easywechat.org',
-        'title' => 'title',
         'data' => [
             'key1' => 'VALUE',
             'key2' => 'VALUE2',
@@ -58,7 +57,6 @@ $app->template_message->sendSubscription([
         'template_id' => 'template-id',
         'url' => 'https://easywechat.org',
         'scene' => 1000,
-        'title' => 'title',
         'data' => [
             'key1' => 'VALUE',
             'key2' => 'VALUE2',
