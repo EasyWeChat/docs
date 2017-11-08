@@ -99,7 +99,7 @@ $app->server->push(...);
 use EasyWeChat\Kernel\Messages\Message;
 
 $app->server->push(ImageMessageHandler::class, Message::IMAGE); // 图片消息
-$app->server->push(TextMessageHandler::class, Message::TEXT); // 图片消息
+$app->server->push(TextMessageHandler::class, Message::TEXT); // 文本消息
 
 // 同时处理多种类型的处理器
 $app->server->push(MediaMessageHandler::class, Message::VOICE|Message::VIDEO|Message::SHORT_VIDEO); // 当消息为 三种中任意一种都可触发
