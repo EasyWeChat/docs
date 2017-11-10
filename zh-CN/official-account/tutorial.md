@@ -30,7 +30,6 @@
 
 ```php
 use EasyWeChat\Factory;
-use EasyWeChat\Factory;
 
 $config = [
     'app_id' => 'wx3cf0f39249eb0xxx',
