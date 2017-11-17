@@ -89,7 +89,7 @@ $buttons = [
         // 对应小程序的appid
         "appid" =>  "wxxxxxxxxxxxxxx",
         // 小程序路径
-        "pagepath" =>  "pages/call/phone"
+        "pagepath" =>  "pages/call/phone",
         // 备用网页url
         "url" =>  "http://xxx.xxx/xxx",
     ]
