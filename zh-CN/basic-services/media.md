@@ -65,27 +65,21 @@ $app->media->createVideoForBroadcasting($mediaId, $title, $description);
 
 ## 获取临时素材内容
 
-比如图片、视频、声音等二进制流内容，响应为 `EasyWeChat\Kernel\Http\StreamResponse` 实例。
+比如图片、语音等二进制流内容，响应为 `EasyWeChat\Kernel\Http\StreamResponse` 实例。
 
 ```php
-$stream = $app->media->getStream($mediaId);
+$stream = $app->media->get($mediaId);
 
-// 以内容 md5 为文件名
+// 以内容 md5 为文件名存到本地
 $stream->save('保存目录');
 
 // 自定义文件名，不需要带后缀
 $stream->saveAs('保存目录', '文件名');
 ```
 
-## 下载临时素材到本地
-
-其实就是上一个 API 的封装。
+## 获取 JSSDK 上传的高清语音
 
 ```php
-$app->media->download($mediaId, "/tmp/", "abc.jpg");
+$stream = $app->media->getJssdkMedia($mediaId);
+$stream->saveAs('保存目录', 'custom-name.speex');
 ```
-
-参数说明：
-
-  - `$directory` 为目标目录，
-  - `$filename` 为新的文件名，可以为空，默认使用 `$mediaId` 作为文件名。
