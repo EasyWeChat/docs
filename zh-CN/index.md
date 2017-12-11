@@ -1,18 +1,17 @@
 # EasyWeChat
 
-
-## EasyWeChat 是什么？
-
 EasyWeChat 是一个开源的 [微信](http://www.wechat.com) 非官方 SDK。
 
 EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https://getcomposer.org/) 包，这意味着任何满足下列安装条件的 PHP 项目支持 Composer 都可以使用它。
 
 ### 环境需求
 
-- PHP >= 5.5.9 (其实你不必惊讶，PHP 7 的时代了)
+- PHP >= 7.0
 - [PHP cURL 扩展](http://php.net/manual/en/book.curl.php)
 - [PHP OpenSSL 扩展](http://php.net/manual/en/book.openssl.php)
-- [PHP fileinfo 拓展](http://php.net/manual/en/book.fileinfo.php) 素材管理模块需要用到
+- [PHP SimpleXML 扩展](http://php.net/manual/en/book.simplexml.php)
+- [PHP fileinfo 拓展](http://php.net/manual/en/book.fileinfo.php)
+
 
 
 ### 加入我们
@@ -26,10 +25,12 @@ EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https:
 
 你有以下两种方式加入到我们中来，为广大开发者提供更优质的免费开源的服务：
 
-- **贡献代码**：我们 3.0 的代码都在 [overtrue/wechat](https://github.com/overtrue/wechat) ，你可以提交 PR 到任何一个项目，当然，前提是代码质量必须是 OK 的。
+- **贡献代码**：我们的代码都在 [overtrue/wechat](https://github.com/overtrue/wechat) ，你可以提交 PR 到任何一个项目，当然，前提是代码质量必须是 OK 的。
 - **翻译或补充文档**：我们的文档在：[EasyWeChat/docs](https://github.com/easywechat/docs/)，你可以选择补充文档或者参与英文文档的翻译，目前有 `zh-cn` 与 `en` 两个分支，你可以提交对应的 PR 到目标分支参与翻译工作。
 
 ### 开始之前
+
+我们提供了视频教程：https://www.easywechat.com/tutorials 当然，我还是建议你具备以下基础知识，否则可能没有那么快上手。
 
 本 SDK 不是一个全新再造的东西，所以我不会从 0 开始教会你开发微信，你完全有必要在使用本 SDK 前做好以下工作：
 
