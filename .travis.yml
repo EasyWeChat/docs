@@ -1,7 +1,0 @@
-language: bash
-before_script:
-    - wget https://raw.githubusercontent.com/EasyWeChat/site/master/deploy.sh
-
-script:
-    - chmod +x ./deploy.sh
-    - ./deploy.sh && echo 'Completed.'
