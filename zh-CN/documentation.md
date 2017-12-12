@@ -38,15 +38,13 @@
   - [JSSDK](/docs/{{version}}/{{lang}}/payment/jssdk)
 
 - ## 小程序
-  - [配置](/docs/{{version}}/{{lang}}/mini-program/index)
   - [小程序码](/docs/{{version}}/{{lang}}/mini-program/app_code)
   - [客服消息](/docs/{{version}}/{{lang}}/mini-program/customer_service)
   - [数据统计与分析](/docs/{{version}}/{{lang}}/mini-program/data_cube)
-  - [SNS](/docs/{{version}}/{{lang}}/mini-program/sns)
+  - [微信登录](/docs/{{version}}/{{lang}}/mini-program/auth)
 
 - ## 开放平台
-  - [配置](/docs/{{version}}/{{lang}}/open-platform/index)
-  - [基础接口](/docs/{{version}}/{{lang}}/open-platform/base)
+  - [使用](/docs/{{version}}/{{lang}}/open-platform/index)
   - [服务端](/docs/{{version}}/{{lang}}/open-platform/server)
   - [代授权](/docs/{{version}}/{{lang}}/open-platform/authorizer-delegate)
 
