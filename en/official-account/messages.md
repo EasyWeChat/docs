@@ -311,7 +311,7 @@ $server->setMessageHandler(function ($message) {
 ```php
 use EasyWeChat\Message\Text;
 
-$message = new Text(['content' => 'Hello world!']);
+$message = new Text('Hello world!');
 
 $result = $app->staff->message($message)->to($openId)->send();
 //...
