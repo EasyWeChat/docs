@@ -273,7 +273,7 @@ $app->server->push(function ($message) {
 ```php
 use EasyWeChat\Kernel\Messages\Text;
 
-$message = new Text(['content' => 'Hello world!']);
+$message = new Text('Hello world!');
 
 $result = $app->customer_service->message($message)->to($openId)->send();
 //...
