@@ -34,8 +34,13 @@
 
 - ## 微信支付
   - [配置](/docs/{{version}}/{{lang}}/payment/index)
+  - [订单](/docs/{{version}}/{{lang}}/payment/order)
+  - [退款](/docs/{{version}}/{{lang}}/payment/refund)
+  - [账单](/docs/{{version}}/{{lang}}/payment/bill)
+  - [通知](/docs/{{version}}/{{lang}}/payment/notify)
   - [红包](/docs/{{version}}/{{lang}}/payment/redpack)
   - [JSSDK](/docs/{{version}}/{{lang}}/payment/jssdk)
+  - [撤销订单](/docs/{{version}}/{{lang}}/payment/reverse)
 
 - ## 小程序
   - [小程序码](/docs/{{version}}/{{lang}}/mini-program/app_code)
