@@ -32,6 +32,7 @@
   - [数据统计与分析](/docs/{{version}}/{{lang}}/anaylsis)
   - [二维码](/docs/{{version}}/{{lang}}/qrcode)
   - [短网址](/docs/{{version}}/{{lang}}/short-url)
+  - [小程序](/docs/{{version}}/{{lang}}/mini_program)
   - [语义理解](/docs/{{version}}/{{lang}}/semantic)
   - [自动回复](/docs/{{version}}/{{lang}}/reply)
   - [开放平台](/docs/{{version}}/{{lang}}/open_platform)
