@@ -6,7 +6,7 @@
 ## 获取实例
 
 ```php
-$shakearound = $app->shakearound;
+$shakearound = $app->shake_around;
 
 ```
 
