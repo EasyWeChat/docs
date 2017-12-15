@@ -1,61 +1,59 @@
-# 临时素材 API
+# Temporary material API
 
-上传的临时多媒体文件有格式和大小限制，如下：
+Uploaded temporary multimedia files have format and size restrictions as follows：
 
-- 图片（image）: 1M，支持 `JPG` 格式
-- 语音（voice）：2M，播放长度不超过 `60s`，支持 `AMR\MP3` 格式
-- 视频（video）：10MB，支持 `MP4` 格式
-- 缩略图（thumb）：64KB，支持 `JPG` 格式
+- Image : 1M，support `JPG` format
+- Voice ：2M，play length does not exceed `60s`，support `AMR\MP3` format
+- Video ：10MB，support `MP4` format
+- Thumb ：64KB，support `JPG` format
 
-## 上传图片
+## Upload Image
 
-> 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
+> Note：WeChat image upload service has a sensitive detection system. If the image content contains sensitive content such as pornography， product promotion， fake information，etc， the upload may fail。
 
 ```php
 $temporary->uploadImage($path);
 ```
 
-## 上传声音
+## Upload Voice
 
 ```php
 $temporary->uploadVoice($path);
 ```
 
-## 上传视频
+## Upload Video
 
 ```php
 $temporary->uploadVideo($path, $title, $description);
 ```
 
-## 上传缩略图
+## Upload Thumb
 
-用于视频封面或者音乐封面。
+For video cover or music cover.
 
 ```php
 $temporary->uploadThumb($path);
 ```
 
-## 获取临时素材内容
+## Get Temporary Material
 
-比如图片、视频、声音等二进制流内容。
+Such as pictures，video， audio and other binary stream content.
 
 ```php
 $content = $temporary->getStream($mediaId);
-file_put_contents('/tmp/abc.jpg', $content);// 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
+file_put_contents('/tmp/abc.jpg', $content);// Please use the absolute path method! Unless you correctly understand the relative path (a lot of people do not understand the method)!
 ```
 
-## 下载临时素材到本地
-
-其实就是上一个 API 的封装。
+## Download Temporary Material
 
 ```php
 $temporary->download($mediaId, "/tmp/", "abc.jpg");
 ```
 
-参数说明：
+Params：
 
-  - `$directory` 为目标目录，
-  - `$filename` 为新的文件名，可以为空，默认使用 `$mediaId` 作为文件名。
+  - `$directory` target directory，
+  - `$filename` new filename, which can be null, defaults to `$ mediaId` as the filename。
 
 
-更多请参考 [微信官方文档](http://mp.weixin.qq.com/wiki) `素材管理` 章节
+More use please refer to [WeChat official document](http://mp.weixin.qq.com/wiki/) in the "Material Management" chapter。
