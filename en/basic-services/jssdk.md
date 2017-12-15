@@ -11,12 +11,17 @@ $js = $app->js;
 
 ## API
 
-- `$js->config(array $APIs, $debug = false, $beta = false, $json = true);` 获取JSSDK的配置数组，默认返回 JSON 字符串，当 `$json` 为 `false` 时返回数组，你可以直接使用到网页中。
-- `$js->setUrl($url)` 设置当前URL，如果不想用默认读取的URL，可以使用此方法手动设置，通常不需要。
+- `$js->config(array $APIs, $debug = false, $beta = false, $json = true);` 
 
-example:
+Get `JSSDK` configuration array ，default returns a JSON string，if `$json` is `false` then return an array，You can use it directly into the webpage。
 
-我们可以生成js配置文件：
+- `$js->setUrl($url);`
+
+Set the current `URL`, if you do not want to use the default URL to read, you can use this method manually set, usually do not need。
+
+Example:
+
+We can generate js configuration file：
 
 ```js
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
@@ -24,7 +29,7 @@ example:
     wx.config(<?php echo $js->config(array('onMenuShareQQ', 'onMenuShareWeibo'), true) ?>);
 </script>
 ```
-结果如下：
+The above code will produce the following result：
 
 ```js
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
@@ -40,4 +45,4 @@ wx.config({
 </script>
 ```
 
-更多 JSSDK 的使用请参考 [微信官方文档](http://mp.weixin.qq.com/wiki/) 中 **JSSDK章节**
+More use please refer to [WeChat official document](http://mp.weixin.qq.com/wiki/) in the "JSSDK" chapter。
