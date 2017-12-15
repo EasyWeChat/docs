@@ -45,6 +45,4 @@ wx.config({
 </script>
 ```
 
-More use please refer to [WeChat official document](http://mp.weixin.qq.com/wiki/) in the "JSSDK" chapter
-
-更多 JSSDK 的使用请参考  中 **JSSDK章节**
+More use please refer to [WeChat official document](http://mp.weixin.qq.com/wiki/) in the "JSSDK" chapter。
