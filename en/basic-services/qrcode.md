@@ -1,11 +1,11 @@
-# 二维码
+# QR Code
 
-目前有 2 种类型的二维码：
+There are 2 types of QR code：
 
-1. 临时二维码，是有过期时间的，最长可以设置为在二维码生成后的**30天**后过期，但能够生成较多数量。临时二维码主要用于帐号绑定等不要求二维码永久保存的业务场景
-2. 永久二维码，是无过期时间的，但数量较少（目前为最多10万个）。永久二维码主要用于适用于帐号绑定、用户来源统计等场景。
+1. Temporary QR Code， there is expired time。the maximum expiration time can be set to **30 days**，but it can generate many。temporary QR Code is mainly used for account binding and other business scenarios that do not require QR Code save forever。
+2. Permanent Qr Code，no expiration time，but a small number（currently up to 100,000）。Permanent Qr Code is mainly used for account binding。user source statistics and other scenarios。
 
-## 获取实例
+## Get  Instance
 
 ```php
 <?php
@@ -21,48 +21,48 @@ $qrcode = $app->qrcode;
 
 ## API
 
-+ `Bag temporary($sceneId, $expireSeconds = null)` 创建临时二维码；
-+ `Bag forever($sceneValue)` 创建永久二维码
-+ `Bag card(array $card)` 创建卡券二维码
-+ `string url($ticket)` 获取二维码网址，用法： `<img src="<?php $qrcode->url($qrTicket); ?>">`；
++ `Bag temporary($sceneId, $expireSeconds = null)` Create  Temporary QR Code；
++ `Bag forever($sceneValue)` Create Permanent Qr Code
++ `Bag card(array $card)` Create Card and  Coupons Qr Code
++ `string url($ticket)` Get the QR code URL，usage： `<img src="<?php $qrcode->url($qrTicket); ?>">`；
 
-### 创建临时二维码
+### Create  Temporary QR Code
 
 ```php
 $result = $qrcode->temporary(56, 6 * 24 * 3600);
 
-$ticket = $result->ticket;// 或者 $result['ticket']
-$expireSeconds = $result->expire_seconds; // 有效秒数
-$url = $result->url; // 二维码图片解析后的地址，开发者可根据该地址自行生成需要的二维码图片
+$ticket = $result->ticket;// or $result['ticket']
+$expireSeconds = $result->expire_seconds; // effective seconds
+$url = $result->url; // Qr Code image analysis of the address, developers can generate the required Qr Code pictures based on the address
 ```
 
-### 创建永久二维码
+### Create Permanent Qr Code
 
 ```php
-$result = $qrcode->forever(56);// 或者 $qrcode->forever("foo");
+$result = $qrcode->forever(56);// or $qrcode->forever("foo");
 
-$ticket = $result->ticket; // 或者 $result['ticket']
+$ticket = $result->ticket; // or $result['ticket']
 $url = $result->url;
 ```
 
-### 获取二维码网址
+### Get the QR code URL
 
 ```php
 $url = $qrcode->url($ticket);
 ```
 
-### 创建卡券二维码
+### Create Card and  Coupons Qr Code
 
 ```php
 $qrcode->card($card);
 ```
 
-### 获取二维码内容
+### Get Qr Code contents
 
 ```php
 $url = $qrcode->url($ticket);
 
-$content = file_get_contents($url); // 得到二进制图片内容
+$content = file_get_contents($url); // get binary image content
 
-file_put_contents(__DIR__ . '/code.jpg', $content); // 写入文件
+file_put_contents(__DIR__ . '/code.jpg', $content); // write the file
 ```
