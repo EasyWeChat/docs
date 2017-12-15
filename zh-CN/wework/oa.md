@@ -16,7 +16,7 @@ $config = [
 
 $work = Factory::work($config);
 
-$oa = $work->agent('oa');
+$oa = $work->agent('oa')->oa;
 ```
 
 ## 获取打卡数据
