@@ -122,5 +122,5 @@ $result = $redpack->prepare($redpackData);
 
 ```php
 $mchBillNo = "商户系统内部的订单号（mch_billno）";
-$redpack->query($mchBillNo);
+$redpack->info($mchBillNo);
 ```
