@@ -79,9 +79,13 @@ $result = $app->material->updateArticle($mediaId, new Article(...));
 // or
 
 $result = $app->material->updateArticle($mediaId, [
-    'title' => 'xxx',
-    'thumb_media_id' => 'xxx',
-    // ...
+   'title' => 'EasyWeChat 4.0 发布了！',
+    'thumb_media_id' => 'qQFxUQGO21Li4YrSn3MhnrqtRp9Zi3cbM9uBsepvDmE', // 封面图片 mediaId
+    'author' => 'overtrue', // 作者
+    'show_cover' => 1, // 是否在文章内容显示封面图片
+    'digest' => '这里是文章摘要',
+    'content' => '这里是文章内容，你可以放很长的内容',
+    'source_url' => 'https://www.easywechat.com',
   ]);
 
 // 指定更新多图文中的第 2 篇

@@ -10,7 +10,7 @@ use EasyWeChat\Factory;
 $options = [
     // 前面的appid什么的也得保留哦
     'app_id'             => 'xxxx',
-    'merchant_id'        => 'your-mch-id',
+    'mch_id'             => 'your-mch-id',
     'key'                => 'key-for-signature',
     'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
     'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
