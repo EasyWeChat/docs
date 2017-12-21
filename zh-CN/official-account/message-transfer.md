@@ -4,7 +4,7 @@
 
 ```php
 
-use \EasyWeChat\Kernel\Messages\Transfer;
+use EasyWeChat\Kernel\Messages\Transfer;
 
 // 转发收到的消息给客服
 $app->server->push(function($message) {
@@ -17,7 +17,7 @@ $response = $app->server->serve();
 当然，你也可以指定转发给某一个客服：
 
 ```php
-use \EasyWeChat\Kernel\Messages\Transfer;
+use EasyWeChat\Kernel\Messages\Transfer;
 
 $app->server->push(function($message) {
     return new Transfer($account);
