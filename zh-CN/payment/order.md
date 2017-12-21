@@ -15,6 +15,22 @@ $result = $app->order->unify([
     'trade_type' => 'JSAPI',
     'openid' => 'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o',
 ]);
+
+// $result:
+//{
+//  "xml": {
+//    "return_code": "SUCCESS",
+//    "return_msg": "OK",
+//    "appid": "wx2421b1c4390ec4sb",
+//    "mch_id": "10000100",
+//    "nonce_str": "IITRi8Iabbblz1J",
+//    "openid": "oUpF8uMuAJO_M2pxb1Q9zNjWeSs6o",
+//    "sign": "7921E432F65EB8ED0CE9755F0E86D72F2",
+//    "result_code": "SUCCESS",
+//    "prepay_id": "wx201411102639507cbf6ffd8b0779950874",
+//    "trade_type": "JSAPI"
+//  }
+//}
 ```
 
 ## 查询订单
