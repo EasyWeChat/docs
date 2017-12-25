@@ -15,29 +15,29 @@
 > 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
 
 ```php
-$work->media->uploadImage($path); // $path 为本地文件路径
+$app->media->uploadImage($path); // $path 为本地文件路径
 ```
 
 ## 上传声音
 
 ```php
-$work->media->uploadVoice($path);
+$app->media->uploadVoice($path);
 ```
 
 ## 上传视频
 
 ```php
-$work->media->uploadVideo($path, $title, $description);
+$app->media->uploadVideo($path, $title, $description);
 ```
 
 ## 上传普通文件
 
 ```php
-$work->media->uploadFile($path);
+$app->media->uploadFile($path);
 ```
 
 ## 获取素材
 
 ```php
-$work->media->get($mediaId);
+$app->media->get($mediaId);
 ```

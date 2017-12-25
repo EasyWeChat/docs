@@ -3,21 +3,11 @@
 ```php
 $config = [
     'corp_id' => 'xxxxxxxxxxxxxxxxx',
-
-    // 应用列表
-    'agents' => [
-        'contacts' => [
-            'agent_id' => 100020,
-            'secret'   => 'xxxxxxxxxx',
-        ],
-        //...
-    ],
+    'secret'   => 'xxxxxxxxxx', // 通讯录的 secret
     //...
 ];
 
-$work = Factory::work($config);
-
-$contacts = $work->agent('contacts');
+$contacts = Factory::work($config);
 ```
 
 ## 成员管理

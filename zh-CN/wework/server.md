@@ -6,27 +6,17 @@
 $config = [
     'corp_id' => 'xxxxxxxxxxxxxxxxx',
 
-    // 应用列表
-    'agents' => [
-        'foo' => [
-            'agent_id' => 100022,
-            'secret'   => 'xxxxxxxxxx',
+    'agent_id' => 100022,
+    'secret'   => 'xxxxxxxxxx',
 
-            // server config
-            'token' => 'xxxxxxxxx',
-            'aes_key' => 'xxxxxxxxxxxxxxxxxx',
-
-            //...
-        ],
-        //...
-    ],
+    // server config
+    'token' => 'xxxxxxxxx',
+    'aes_key' => 'xxxxxxxxxxxxxxxxxx',
 
     //...
 ];
 
-$work = Factory::work($config);
-
-$app = $work->agent('foo');
+$app = Factory::work($config);
 ```
 
 接着配置服务端与公众号的服务端用法一样：

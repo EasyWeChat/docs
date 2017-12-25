@@ -6,18 +6,8 @@
 $config = [
     'corp_id' => 'xxxxxxxxxxxxxxxxx',
 
-    // 应用列表
-    'agents' => [
-        'contacts' => [
-            'agent_id' => 100020,
-            'secret'   => 'xxxxxxxxxx',
-        ],
-        'foo' => [
-            'agent_id' => 100022,
-            'secret'   => 'xxxxxxxxxx',
-        ],
-        //...
-    ],
+    'agent_id' => 100020, // 如果有 agend_id 则填写
+    'secret'   => 'xxxxxxxxxx',
 
     // 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名
     'response_type' => 'array',
@@ -28,9 +18,7 @@ $config = [
     ],
 ];
 
-$work = Factory::work($config);
-
-$contacts = $work->agent('contacts');
+$app = Factory::work($config);
 ```
 
-然后你就可以用 `$contacts` 来调用企业微信的服务了。
+然后你就可以用 `$app` 来调用企业微信的服务了。
