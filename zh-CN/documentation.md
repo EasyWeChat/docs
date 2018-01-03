@@ -47,6 +47,7 @@
   - [客服消息](/docs/{{version}}/{{lang}}/mini-program/customer_service)
   - [数据统计与分析](/docs/{{version}}/{{lang}}/mini-program/data_cube)
   - [微信登录](/docs/{{version}}/{{lang}}/mini-program/auth)
+  - [模板消息](/docs/{{version}}/{{lang}}/mini-program/template_message)
 
 - ## 开放平台
   - [使用](/docs/{{version}}/{{lang}}/open-platform/index)
