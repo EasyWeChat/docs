@@ -124,6 +124,7 @@ $app->server->push(MediaMessageHandler::class, Message::VOICE|Message::VIDEO|Mes
 ### 图片：
 
     - MsgType  image
+    - MediaId        图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
     - PicUrl   图片链接
 
 ### 语音：
