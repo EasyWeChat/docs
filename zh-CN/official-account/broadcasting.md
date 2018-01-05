@@ -2,12 +2,6 @@
 
 微信的群发消息接口有各种乱七八糟的注意事项及限制，具体请阅读微信官方文档。
 
-## 获取实例
-
-```php
-$broadcast = $app->broadcasting;
-```
-
 ## 发送消息
 
 以下所有方法均有第二个参数 `$to` 用于指定接收对象：
@@ -17,7 +11,7 @@ $broadcast = $app->broadcasting;
 - 为 `$to` 为 `null` 时表示全部用户
 
 ```php
-$broadcast->sendMessage(Message $message, array | int $to = null);
+$app->broadcasting->sendMessage(Message $message, array | int $to = null);
 ```
 
 下面的别名方法 `sendXXX` 都是基于上面 `sendMessage` 方法的封装。
@@ -25,38 +19,38 @@ $broadcast->sendMessage(Message $message, array | int $to = null);
 ### 文本消息
 
 ```php
-$broadcast->sendText("大家好！欢迎使用 EasyWeChat。");
+$app->broadcasting->sendText("大家好！欢迎使用 EasyWeChat。");
 
 // 指定目标用户
 // 至少两个用户的 openid，必须是数组。
-$broadcast->sendText("大家好！欢迎使用 EasyWeChat。", [$openid1, $openid2]);
+$app->broadcasting->sendText("大家好！欢迎使用 EasyWeChat。", [$openid1, $openid2]);
 
 // 指定标签组用户
-$broadcast->sendText("大家好！欢迎使用 EasyWeChat。", $tagId); // $tagId 必须是整型数字
+$app->broadcasting->sendText("大家好！欢迎使用 EasyWeChat。", $tagId); // $tagId 必须是整型数字
 ```
 
 ### 图文消息
 
 ```php
-$broadcast->sendNews($mediaId);
-$broadcast->sendNews($mediaId, [$openid1, $openid2]);
-$broadcast->sendNews($mediaId, $tagId);
+$app->broadcasting->sendNews($mediaId);
+$app->broadcasting->sendNews($mediaId, [$openid1, $openid2]);
+$app->broadcasting->sendNews($mediaId, $tagId);
 ```
 
 ### 图片消息
 
 ```php
-$broadcast->sendImage($mediaId);
-$broadcast->sendImage($mediaId, [$openid1, $openid2]);
-$broadcast->sendImage($mediaId, $tagId);
+$app->broadcasting->sendImage($mediaId);
+$app->broadcasting->sendImage($mediaId, [$openid1, $openid2]);
+$app->broadcasting->sendImage($mediaId, $tagId);
 ```
 
 ### 语音消息
 
 ```php
-$broadcast->sendVoice($mediaId);
-$broadcast->sendVoice($mediaId, [$openid1, $openid2]);
-$broadcast->sendVoice($mediaId, $tagId);
+$app->broadcasting->sendVoice($mediaId);
+$app->broadcasting->sendVoice($mediaId, [$openid1, $openid2]);
+$app->broadcasting->sendVoice($mediaId, $tagId);
 ```
 
 ### 视频消息
@@ -76,26 +70,26 @@ $videoMedia = $app->media->uploadVideoForBroadcasting($video, '视频标题', '�
 //}
 
 // 2. 使用上面得到的 media_id 群发视频消息
-$broadcast->sendVideo($videoMedia['media_id']);
+$app->broadcasting->sendVideo($videoMedia['media_id']);
 ```
 
 ### 卡券消息
 
 ```php
-$broadcast->sendCard($cardId);
-$broadcast->sendCard($mediaId, [$openid1, $openid2]);
-$broadcast->sendCard($mediaId, $tagId);
+$app->broadcasting->sendCard($cardId);
+$app->broadcasting->sendCard($mediaId, [$openid1, $openid2]);
+$app->broadcasting->sendCard($mediaId, $tagId);
 ```
 
 ### 发送预览群发消息给指定的 `openId` 用户
 
 ```php
-$broadcast->previewText($text, $openId);
-$broadcast->previewNews($mediaId, $openId);
-$broadcast->previewVoice($mediaId, $openId);
-$broadcast->previewImage($mediaId, $openId);
-$broadcast->previewVideo($message, $openId);
-$broadcast->previewCard($cardId, $openId);
+$app->broadcasting->previewText($text, $openId);
+$app->broadcasting->previewNews($mediaId, $openId);
+$app->broadcasting->previewVoice($mediaId, $openId);
+$app->broadcasting->previewImage($mediaId, $openId);
+$app->broadcasting->previewVideo($message, $openId);
+$app->broadcasting->previewCard($cardId, $openId);
 ```
 
 ### 发送预览群发消息给指定的微信号用户
@@ -103,22 +97,22 @@ $broadcast->previewCard($cardId, $openId);
 > $wxanme 是用户的微信号，比如：notovertrue
 
 ```php
-$broadcast->previewTextByName($text, $wxname);
-$broadcast->previewNewsByName($mediaId, $wxname);
-$broadcast->previewVoiceByName($mediaId, $wxname);
-$broadcast->previewImageByName($mediaId, $wxname);
-$broadcast->previewVideoByName($message, $wxname);
-$broadcast->previewCardByName($cardId, $wxname);
+$app->broadcasting->previewTextByName($text, $wxname);
+$app->broadcasting->previewNewsByName($mediaId, $wxname);
+$app->broadcasting->previewVoiceByName($mediaId, $wxname);
+$app->broadcasting->previewImageByName($mediaId, $wxname);
+$app->broadcasting->previewVideoByName($message, $wxname);
+$app->broadcasting->previewCardByName($cardId, $wxname);
 ```
 
 ### 删除群发消息
 
 ```php
-$broadcast->delete($msgId);
+$app->broadcasting->delete($msgId);
 ```
 
 ### 查询群发消息发送状态
 
 ```php
-$broadcast->status($msgId);
+$app->broadcasting->status($msgId);
 ```
