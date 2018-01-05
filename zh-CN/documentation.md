@@ -33,7 +33,7 @@
   - [评论数据管理](/docs/{{version}}/{{lang}}/official-account/comment)
 
 - ## 微信支付
-  - [配置](/docs/{{version}}/{{lang}}/payment/index)
+  - [入门](/docs/{{version}}/{{lang}}/payment/index)
   - [订单](/docs/{{version}}/{{lang}}/payment/order)
   - [退款](/docs/{{version}}/{{lang}}/payment/refund)
   - [账单](/docs/{{version}}/{{lang}}/payment/bill)
@@ -50,12 +50,12 @@
   - [模板消息](/docs/{{version}}/{{lang}}/mini-program/template_message)
 
 - ## 开放平台
-  - [使用](/docs/{{version}}/{{lang}}/open-platform/index)
+  - [入门](/docs/{{version}}/{{lang}}/open-platform/index)
   - [服务端](/docs/{{version}}/{{lang}}/open-platform/server)
   - [代授权](/docs/{{version}}/{{lang}}/open-platform/authorizer-delegate)
 
 - ## 企业微信
-  - [配置](/docs/{{version}}/{{lang}}/wework/index)
+  - [入门](/docs/{{version}}/{{lang}}/wework/index)
   - [服务端](/docs/{{version}}/{{lang}}/wework/server)
   - [应用管理](/docs/{{version}}/{{lang}}/wework/agents)
   - [通讯录](/docs/{{version}}/{{lang}}/wework/contacts)
