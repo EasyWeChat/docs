@@ -8,7 +8,7 @@
 
 - 当 `$to` 为整型时为标签 id
 - 当 `$to` 为数组时为用户的 openid 列表（至少两个用户的 openid）
-- 为 `$to` 为 `null` 时表示全部用户
+- 当 `$to` 为 `null` 时表示全部用户
 
 ```php
 $app->broadcasting->sendMessage(Message $message, array | int $to = null);
