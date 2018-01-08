@@ -9,7 +9,7 @@
 ```php
 use EasyWeChat\Factory;
 
-$options = [
+$config = [
     // 必要配置
     'app_id'             => 'xxxx',
     'mch_id'             => 'your-mch-id',
@@ -22,7 +22,7 @@ $options = [
     'notify_url'         => '默认的订单回调地址',     // 你也可以在下单时单独设置来想覆盖它
 ];
 
-$app = Factory::payment($options);
+$app = Factory::payment($config);
 ```
 
 ### 服务商

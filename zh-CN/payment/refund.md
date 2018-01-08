@@ -15,7 +15,7 @@
 
 ```php
 // 参数分别为：微信订单号、商户退款单号、订单金额、退款金额、其他参数
-$app->refund->byTransactionId(string $transactionId, string $refundNumber, int $totalFee, int $refundFee, array $options = []);
+$app->refund->byTransactionId(string $transactionId, string $refundNumber, int $totalFee, int $refundFee, array $config = []);
 
 // Example:
 $result = $app->refund->byTransactionId('transaction-id-xxx', 'refund-no-xxx', 10000, 10000, [
@@ -27,7 +27,7 @@ $result = $app->refund->byTransactionId('transaction-id-xxx', 'refund-no-xxx', 1
 
 ```php
 // 参数分别为：商户订单号、商户退款单号、订单金额、退款金额、其他参数
-$app->refund->byOutTradeNumber(string $number, string $refundNumber, int $totalFee, int $refundFee, array $options = []);
+$app->refund->byOutTradeNumber(string $number, string $refundNumber, int $totalFee, int $refundFee, array $config = []);
 
 // Example:
 $result = $app->refund->byOutTradeNumber('out-trade-no-xxx', 'refund-no-xxx', 20000, 1000, [

@@ -40,7 +40,9 @@
   - [通知](/docs/{{version}}/{{lang}}/payment/notify)
   - [红包](/docs/{{version}}/{{lang}}/payment/redpack)
   - [JSSDK](/docs/{{version}}/{{lang}}/payment/jssdk)
+  - [企业付款](/docs/{{version}}/{{lang}}/payment/transfer)
   - [撤销订单](/docs/{{version}}/{{lang}}/payment/reverse)
+  - [安全工具](/docs/{{version}}/{{lang}}/payment/security)
 
 - ## 小程序
   - [小程序码](/docs/{{version}}/{{lang}}/mini-program/app_code)

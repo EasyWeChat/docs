@@ -10,7 +10,7 @@
 ```php
 use EasyWeChat\Factory;
 
-$options = [
+$config = [
     'app_id'    => 'you-app-id',
     'mch_id'    => 'your-mch-id',
     'key'       => 'key-for-signature',
@@ -19,7 +19,7 @@ $options = [
     // ...
 ];
 
-$payment = Factory::payment($options);
+$payment = Factory::payment($config);
 
 $redpack = $payment->redpack;
 ```

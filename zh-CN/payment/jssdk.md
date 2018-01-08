@@ -7,7 +7,7 @@ JSSDK 模块用于生成调起微信支付以及共享收货地址的调用所�
 ```php
 use EasyWeChat\Factory;
 
-$options = [
+$config = [
     // 前面的appid什么的也得保留哦
     'app_id'             => 'xxxx',
     'mch_id'             => 'your-mch-id',
@@ -21,7 +21,7 @@ $options = [
     // ...
 ];
 
-$payment = Factory::payment($options);
+$payment = Factory::payment($config);
 
 $jssdk = $payment->jssdk;
 ```
