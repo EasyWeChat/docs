@@ -55,7 +55,7 @@ $config = [
     'key_path'           => '/path/to/your/key',      // XXX: 绝对路径！！！！
 
     // 将上面得到的公钥存放路径填写在这里
-    'rsa_public_key_path' => '/path/to/your/rsa/publick/key/public-14339221228.pem',
+    'rsa_public_key_path' => '/path/to/your/rsa/publick/key/public-14339221228.pem', // <<<------------------------
 
     'notify_url'         => '默认的订单回调地址',     // 你也可以在下单时单独设置来想覆盖它
 ];
