@@ -1,5 +1,7 @@
 # 企业付款
 
+> EasyWeChat 4.0.7+
+
 该模块需要用到双向证书，请参考：https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=4_3
 
 ## 企业付款到用户零钱

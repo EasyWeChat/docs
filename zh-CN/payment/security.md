@@ -1,5 +1,7 @@
 # 安全与风控
 
+> EasyWeChat 4.0.7+
+
 ## 获取 RSA 公钥
 
 ```php
