@@ -31,7 +31,7 @@ $app->transfer->queryBankCardOrder($partnerTradeNo);
 
 然后，在项目根目录执行以下命令下载公钥：
 
-```shell
+```sh
 $ ./vendor/bin/easywechat payment:rsa_public_key \
     --mch_id=14339221228 \
     --api_key=36YTbDmLgyQ52noqdxgwGiYy \
