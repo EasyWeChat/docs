@@ -13,7 +13,7 @@ $app->transfer->toBalance([
     'check_name' => 'FORCE_CHECK', // NO_CHECK：不校验真实姓名, FORCE_CHECK：强校验真实姓名
     're_user_name' => '王小帅', // 如果 check_name 设置为FORCE_CHECK，则必填用户真实姓名
     'amount' => 10000, // 企业付款金额，单位为分
-    'desc' => '理赔', 企业付款操作说明信息。必填
+    'desc' => '理赔', // 企业付款操作说明信息。必填
 ]);
 ```
 
