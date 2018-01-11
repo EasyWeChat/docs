@@ -77,8 +77,8 @@ $app->broadcasting->sendVideo($videoMedia['media_id']);
 
 ```php
 $app->broadcasting->sendCard($cardId);
-$app->broadcasting->sendCard($mediaId, [$openid1, $openid2]);
-$app->broadcasting->sendCard($mediaId, $tagId);
+$app->broadcasting->sendCard($cardId, [$openid1, $openid2]);
+$app->broadcasting->sendCard($cardId, $tagId);
 ```
 
 ### 发送预览群发消息给指定的 `openId` 用户
