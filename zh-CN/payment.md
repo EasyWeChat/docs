@@ -41,6 +41,7 @@ $payment = $app->payment;
 ## 创建订单
 - 正常模式
 ```php
+
 <?php
 
 use EasyWeChat\Payment\Order;
