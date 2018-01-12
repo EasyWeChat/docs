@@ -9,6 +9,7 @@
 
 配置在前面的例子中已经提到过了，支付的相关配置如下：
 
+
 ```php
 <?php
 
@@ -39,9 +40,10 @@ $payment = $app->payment;
 ```
 
 ## 创建订单
-- 正常模式
-```php
 
+### 正常模式
+
+```php
 <?php
 
 use EasyWeChat\Payment\Order;
@@ -61,7 +63,8 @@ $order = new Order($attributes);
 
 ```
 
-- 子服务商模式
+### 子服务商模式
+
 ```php
 <?php
 
