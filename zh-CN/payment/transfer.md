@@ -21,7 +21,7 @@ $app->transfer->toBalance([
 
 ```php
 $partnerTradeNo = 1233455;
-$app->transfer->queryBankCardOrder($partnerTradeNo);
+$app->transfer->queryBalanceOrder($partnerTradeNo);
 ```
 
 
