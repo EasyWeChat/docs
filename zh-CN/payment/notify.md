@@ -94,7 +94,7 @@ $response->send();
 
 ```php
 // 扫码支付通知接收第三个参数 `$alert`，如果触发该函数，会返回“业务错误”到微信服务器，触发 `$fail` 则返回“通信错误”
-$response = $app->handleScanedNotify(function ($message, $fail, $alert) use ($app) {
+$response = $app->handleScannedNotify(function ($message, $fail, $alert) use ($app) {
     // 如：$alert('商品已售空');
     // 如业务流程正常，则要调用“统一下单”接口，并返回 prepay_id 字符串，代码如下
     $result = $app->order->unify([
