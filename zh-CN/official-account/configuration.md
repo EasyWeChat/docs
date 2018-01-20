@@ -23,17 +23,12 @@ $app = Factory::officialAccount($config);
 
 下面是一个完整的配置样例：
 
+> 不建议你在配置的时候弄这么多，用到啥就配置啥才是最好的，因为大部分用默认值即可。
+
 ```php
 <?php
 
 return [
-    /**
-     * Debug 模式，bool 值：true/false
-     *
-     * 当值为 false 时，所有的日志都不会记录
-     */
-    'debug'  => true,
-
     /**
      * 账号基本信息，请从微信公众平台/开放平台获取
      */
