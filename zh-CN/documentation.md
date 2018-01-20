@@ -64,6 +64,7 @@
   - [自定义菜单](/docs/{{version}}/{{lang}}/wework/menu)
   - [素材管理](/docs/{{version}}/{{lang}}/wework/media)
   - [OA](/docs/{{version}}/{{lang}}/wework/oa)
+  - [电子发票](/docs/{{version}}/{{lang}}/wework/invoice)
   - [JSSDK](/docs/{{version}}/{{lang}}/basic-services/jssdk)
 
 - ## 自定义
