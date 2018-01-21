@@ -29,6 +29,10 @@ $app->transfer->queryBalanceOrder($partnerTradeNo);
 
 企业付款到银行卡需要对银行卡号与姓名进行 RSA 加密，所以这里需要先下载 RSA 公钥到本地（服务器），我们提供了一个命令行工具：[EasyWeChat/console](https://github.com/EasyWeChat/console)，请使用 composer 安装完成。
 
+```bash
+$ composer require easywechat/console -vvv
+```
+
 然后，在项目根目录执行以下命令下载公钥：
 
 ```bash
