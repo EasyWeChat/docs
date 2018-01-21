@@ -54,7 +54,7 @@ $response = $app->handlePaidNotify(function($message, $fail){
             $order->status = 'paid';
         
         // 用户支付失败
-        } elseif (array_get($message, 'result_code')) === 'FAIL') {
+        } elseif (array_get($message, 'result_code') === 'FAIL') {
             $order->status = 'paid_fail';
         }
     } else { 
