@@ -23,7 +23,7 @@ $response->send(); // Laravel 里请使用：return $response;
 
 这里需要注意的有几个点：
 
-0. 扫码支付通知和扫码支付通知的使用方法均类似。
+0. 退款结果通知和扫码支付通知的使用方法均类似。
 1. `handlePaidNotify` 只接收一个 [`Closure`](http://php.net/manual/zh/class.closure.php) 匿名函数。
 2. 该匿名函数接收两个参数，这两个参数分别为：
 
