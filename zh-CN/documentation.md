@@ -1,10 +1,12 @@
 - ## 开始使用
+
   - [概述](/docs/{{version}}/{{lang}}/index)
   - [安装](/docs/{{version}}/{{lang}}/installation)
   - [在框架中使用](/docs/{{version}}/{{lang}}/integration)
   - [常见问题汇总](/docs/{{version}}/{{lang}}/troubleshooting)
 
 - ## 公众号
+
   - [入门](/docs/{{version}}/{{lang}}/official-account/index)
   - [快速开始](/docs/{{version}}/{{lang}}/official-account/tutorial)
   - [配置](/docs/{{version}}/{{lang}}/official-account/configuration)
@@ -33,6 +35,7 @@
   - [评论数据管理](/docs/{{version}}/{{lang}}/official-account/comment)
 
 - ## 微信支付
+
   - [入门](/docs/{{version}}/{{lang}}/payment/index)
   - [订单](/docs/{{version}}/{{lang}}/payment/order)
   - [退款](/docs/{{version}}/{{lang}}/payment/refund)
@@ -45,7 +48,8 @@
   - [安全工具](/docs/{{version}}/{{lang}}/payment/security)
 
 - ## 小程序
-  - [入门](/docs/{{version}}/{{lang}}/mini-program/index)
+
+  - [入门](/docs/{{version}}/{{lang}}/mini-program/index)
   - [小程序码](/docs/{{version}}/{{lang}}/mini-program/app_code)
   - [客服消息](/docs/{{version}}/{{lang}}/mini-program/customer_service)
   - [数据统计与分析](/docs/{{version}}/{{lang}}/mini-program/data_cube)
@@ -53,11 +57,13 @@
   - [模板消息](/docs/{{version}}/{{lang}}/mini-program/template_message)
 
 - ## 开放平台
+
   - [入门](/docs/{{version}}/{{lang}}/open-platform/index)
   - [服务端](/docs/{{version}}/{{lang}}/open-platform/server)
   - [代授权](/docs/{{version}}/{{lang}}/open-platform/authorizer-delegate)
 
 - ## 企业微信
+
   - [入门](/docs/{{version}}/{{lang}}/wework/index)
   - [服务端](/docs/{{version}}/{{lang}}/wework/server)
   - [应用管理](/docs/{{version}}/{{lang}}/wework/agents)
@@ -69,9 +75,11 @@
   - [JSSDK](/docs/{{version}}/{{lang}}/basic-services/jssdk)
 
 - ## 自定义
+
   - [Access Token](/docs/{{version}}/{{lang}}/customize/access_token)
   - [缓存](/docs/{{version}}/{{lang}}/customize/cache)
 
 - ## 其他
+
   - [常见问题](/docs/{{version}}/{{lang}}/troubleshooting)
   - [参与贡献](/docs/{{version}}/{{lang}}/contributing)
