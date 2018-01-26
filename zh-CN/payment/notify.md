@@ -44,20 +44,20 @@ $response = $app->handlePaidNotify(function($message, $fail){
     if (!$order || $order->paid_at) { // 如果订单不存在 或者 订单已经支付过了
         return true; // 告诉微信，我已经处理完了，订单没找到，别再通知我了
     }
-    
-    ///////////// <- 建议在这里调用微信的【订单查询】接口查一下该笔订单的情况，确认是已经支付 ///////////// 
+
+    ///////////// <- 建议在这里调用微信的【订单查询】接口查一下该笔订单的情况，确认是已经支付 /////////////
 
     if ($message['return_code'] === 'SUCCESS') { // return_code 表示通信状态，不代表支付状态
         // 用户是否支付成功
         if (array_get($message, 'result_code') === 'SUCCESS') {
             $order->paid_at = time(); // 更新支付时间为当前时间
             $order->status = 'paid';
-        
+
         // 用户支付失败
         } elseif (array_get($message, 'result_code') === 'FAIL') {
             $order->status = 'paid_fail';
         }
-    } else { 
+    } else {
         return $fail('通信失败，请稍后再通知我');
     }
 
@@ -77,9 +77,9 @@ $response->send(); // return $response;
 使用示例：
 
 ```php
-$response = $app->handleRefundedNotify(function ($message, $fail) {
-    // 其中 $message['req_info'] 获取到的是加密信息，获取解密后的信息可通过如下方法获取：
-    $info = $this->reqInfo();
+$response = $app->handleRefundedNotify(function ($message, $reqInfo, $fail) {
+    // 其中 $message['req_info'] 获取到的是加密信息
+    // $reqInfo 为 message['req_info'] 解密后的信息
     // 你的业务逻辑...
     return true; // 返回 true 告诉微信“我已处理完成”
     // 或返回错误原因 $fail('参数格式校验错误');
