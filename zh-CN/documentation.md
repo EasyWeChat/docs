@@ -45,6 +45,7 @@
   - [安全工具](/docs/{{version}}/{{lang}}/payment/security)
 
 - ## 小程序
+  - [入门](/docs/{{version}}/{{lang}}/mini-program/index)
   - [小程序码](/docs/{{version}}/{{lang}}/mini-program/app_code)
   - [客服消息](/docs/{{version}}/{{lang}}/mini-program/customer_service)
   - [数据统计与分析](/docs/{{version}}/{{lang}}/mini-program/data_cube)
