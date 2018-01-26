@@ -7,7 +7,7 @@
 API:
 
 ```
-$miniProgram->app_code->get(string $path, array $optional = []);
+$app->app_code->get(string $path, array $optional = []);
 ```
 
 其中 `$optional` 为以下可选参数：
@@ -19,9 +19,9 @@ $miniProgram->app_code->get(string $path, array $optional = []);
 示例代码：
 
 ```php
-$response = $miniProgram->app_code->get('path/to/page');
+$response = $app->app_code->get('path/to/page');
 // 或者
-$response = $miniProgram->app_code->get('path/to/page', [
+$response = $app->app_code->get('path/to/page', [
     'width' => 600,
     //...
 ]);
@@ -39,7 +39,7 @@ $filename = $response->saveAs('/path/to/directory', 'appcode.png');
 API:
 
 ```
-$miniProgram->app_code->getUnlimit(string $scene, array $optional = []);
+$app->app_code->getUnlimit(string $scene, array $optional = []);
 ```
 
 > 其中 $scene 必填，$optinal 与 get 方法一致，多一个 page 参数。
@@ -47,7 +47,7 @@ $miniProgram->app_code->getUnlimit(string $scene, array $optional = []);
 示例代码：
 
 ```php
-$response = $miniProgram->app_code->getUnlimit('scene-value', [
+$response = $app->app_code->getUnlimit('scene-value', [
     //...
 ]);
 
@@ -64,7 +64,7 @@ $filename = $response->saveAs('/path/to/directory', 'appcode.png');
 API:
 
 ```
-$miniProgram->app_code->getQrCode(string $path, int $width = null);
+$app->app_code->getQrCode(string $path, int $width = null);
 ```
 
 > 其中 $path 必填，其余参数可留空。
@@ -72,7 +72,7 @@ $miniProgram->app_code->getQrCode(string $path, int $width = null);
 示例代码：
 
 ```php
-$response = $miniProgram->app_code->qrcode('/path/to/page');
+$response = $app->app_code->qrcode('/path/to/page');
 
 // $response 为 EasyWeChat\Kernel\Http\StreamResponse 实例
 

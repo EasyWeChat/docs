@@ -3,7 +3,7 @@
 ## 获取实例
 
 ```php
-$service = $miniProgram->customer_service;
+$service = $app->customer_service;
 ```
 
 > 使用方法详看公众号-客服消息章节。

@@ -5,5 +5,5 @@
 API:
 
 ```php
-$miniProgram->auth->session(string $code);
+$app->auth->session(string $code);
 ```
