@@ -72,7 +72,7 @@ $app->app_code->getQrCode(string $path, int $width = null);
 示例代码：
 
 ```php
-$response = $app->app_code->qrcode('/path/to/page');
+$response = $app->app_code->getQrCode('/path/to/page');
 
 // $response 为 EasyWeChat\Kernel\Http\StreamResponse 实例
 
