@@ -23,7 +23,8 @@ $result = $app->refund->byTransactionId('transaction-id-xxx', 'refund-no-xxx', 1
     'refund_desc' => '商品已售完',
 ]);
 
-```### 根据商户订单号退款
+```
+### 根据商户订单号退款
 
 ```php
 // 参数分别为：商户订单号、商户退款单号、订单金额、退款金额、其他参数
