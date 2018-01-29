@@ -47,11 +47,6 @@ $card->create($cardType = 'member_card', array $attributes);
           'title' => '132元双人火锅套餐',
           //...
       ],
-
-      'use_limit' => 100,
-      'get_limit' => 3,
-      // ...
-
       'advanced_info' => [
           'use_condition' => [
               'accept_category' => '鞋类',
