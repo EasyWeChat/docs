@@ -89,10 +89,10 @@ $app->customer_service->message('hello')
 
 ### 邀请微信用户加入客服
 
-以账号 `foo@test` 邀请 openid 为 `openidxxxx` 的微信用户加入客服。
+以账号 `foo@test` 邀请 微信号 为 `xxxx` 的微信用户加入客服。
 
 ```php
-$app->customer_service->invite('foo@test', 'openidxxxx');
+$app->customer_service->invite('foo@test', 'xxxx');
 ```
 
 ## 客服会话控制
