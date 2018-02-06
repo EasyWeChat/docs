@@ -12,7 +12,7 @@
 
 ```php
 //如果同一个微信支付账户配置有公众号和小程序等多OpenId，为了初始化，可以先调取appid进行对比，再对应初始化.
-$noticeArr = EasyWeChat\Kernel\Support\XML::parse(file_get_contents('php://input'));
+$noticeArr = \EasyWeChat\Kernel\Support\XML::parse(file_get_contents('php://input'));
 if($noticeArr['appid']===config('wechat.mini_program.default.app_id')){
     $app=app('wechat.payment.mini_program')
 }else{
