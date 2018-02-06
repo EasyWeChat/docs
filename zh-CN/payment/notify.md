@@ -47,7 +47,7 @@ $response = $app->handlePaidNotify(function($message, $fail){
 
     ///////////// <- 建议在这里调用微信的【订单查询】接口查一下该笔订单的情况，确认是已经支付 /////////////
     
-    if(!EasyWeChat\Kernel\Support\checkSign($message)){//除了在线拉取订单校验以外，本地核对签名会更快。
+    if(!EasyWeChat\Kernel\Support\checkSign($message, config('wechat.payment.default.key')){//除了在线拉取订单校验以外，本地核对签名会更快。
         return $fail('签名错误');
     }
 
