@@ -11,6 +11,14 @@
 只需要在控制器中使用 `handlePaidNotify()` 方法，在其中对自己的业务进行处理并向微信服务器发送一个响应。
 
 ```php
+//如果同一个微信支付账户配置有公众号和小程序等多OpenId，为了初始化，可以先调取appid进行对比，再对应初始化.
+$noticeArr = EasyWeChat\Kernel\Support\XML::parse(file_get_contents('php://input'));
+if($noticeArr['appid']===config('wechat.mini_program.default.app_id')){
+    $app=app('wechat.payment.mini_program')
+}else{
+    $app=app('wechat.payment.default')
+}
+
 $response = $app->handlePaidNotify(function ($message, $fail) {
     // 你的逻辑
     return true;
