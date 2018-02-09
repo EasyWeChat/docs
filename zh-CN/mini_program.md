@@ -27,7 +27,7 @@ $miniProgram = $app->mini_program;
 ### 通过 Code 换取 SessionKey
 
 ```php
-$miniProgram->sns->getSessionKey($code);
+$miniProgram->user->getSessionKey($code);
 ```
 
 ## 加密数据解密
