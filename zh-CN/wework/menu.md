@@ -3,9 +3,12 @@
 自定义菜单是指为单个应用设置自定义菜单功能，所以在使用时请注意调用正确的应用实例。
 
 ```php
+$config = [
+    'corp_id' => 'xxxxxxxxxxxxxxxxx',
+    'secret'   => 'xxxxxxxxxx', // 应用的 secret
+    //...
+];
 $app = Factory::work($config);
-
-$menu = $app->menu;
 ```
 
 ## 创建菜单
@@ -27,17 +30,17 @@ $menus = [
     ],
 ];
 
-$menu->create($menus);
+$app->menu->create($menus);
 ```
 
 ## 获取菜单
 
 ```php
-$menu->get();
+$app->menu->get();
 ```
 
 ## 删除菜单
 
 ```php
-$menu->delete();
+$app->menu->delete();
 ```
