@@ -9,7 +9,8 @@ use EasyWeChat\Factory;
 $config = [
   'app_id'   => '开放平台第三方平台 APPID',
   'secret'   => '开放平台第三方平台 Secret',
-  'token'    => '开放平台第三方平台 Token',
+  开放平台并没有aeskey啊？还有这个token
+  'token'    => '开放平台第三方平台 Token',
   'aes_key'  => '开放平台第三方平台 AES Key'
 ];
 
