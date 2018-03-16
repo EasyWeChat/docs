@@ -28,7 +28,7 @@ $jssdk = $payment->jssdk;
 
 ## 生成支付 JS 配置
 
-有两种发起支付的方式：[WeixinJSBridge](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6), [JSSDK](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115&token=&lang=zh_CN)
+有两种发起支付的方式：[WeixinJSBridge](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6), [JSSDK](https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_1)
 
 1. WeixinJSBridge:
 
