@@ -5,7 +5,7 @@
 
 ```php
 <?php
-use EasyWeChat\Foundation\Application;
+use EasyWeChat\BasicService\Application;
 //...
 $app = new Application($options);
 
