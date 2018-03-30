@@ -281,15 +281,16 @@ $result = $app->customer_service->message($message)->to($openId)->send();
 
 #### 发送多图文消息
 
-多图文消息其实就是单图文消息的一个数组而已了：
+多图文消息其实就是单图文消息组成的一个 News 对象而已：
 
 ```php
 $news1 = new NewsItem(...);
 $news2 = new NewsItem(...);
 $news3 = new NewsItem(...);
 $news4 = new NewsItem(...);
+$news = new News([$news1, $news2, $news3, $news4]);
 
-$app->customer_service->message([$news1, $news2, $news3, $news4])->to($openId)->send();
+$app->customer_service->message($news)->to($openId)->send();
 ```
 
 ### 群发消息
