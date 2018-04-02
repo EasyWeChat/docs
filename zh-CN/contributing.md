@@ -18,14 +18,14 @@
 
 ```shell
     $ git checkout -b new_feature
-```shell
+```
 
 3. 编写代码。
 4. Push 到你的分支:
 
 ```shell
     $ git push origin new_feature
-```shell
+```
 
 5. 创建 Pull Request 并描述你完成的功能或者做出的修改。
 
@@ -43,7 +43,7 @@
 ```shell
     $ git clone https://github.com/<username>/site.git
     $ cd docs
-```shell
+```
 
 3. 创建新的分支，编辑文档
 4. Push 到你的分支。
