@@ -34,7 +34,7 @@ $app['cache'] = $cache;
 use Symfony\Component\Cache\Simple\RedisCache;
 
 $predis = app('redis')->connection()->client(); // connection($name), $name 默认为 `default`
-$cache = new PredisCache($predis);
+$cache = new RedisCache($predis);
 
 $app['cache'] = $cache;
 ```
