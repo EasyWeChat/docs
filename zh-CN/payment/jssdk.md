@@ -63,7 +63,7 @@ $jssdk = $payment->jssdk;
 
     ```js
     wx.chooseWXPay({
-        timestamp: <?= $config['timestamp'] ?>,
+        timeStamp: <?= $config['timeStamp'] ?>,
         nonceStr: '<?= $config['nonceStr'] ?>',
         package: '<?= $config['package'] ?>',
         signType: '<?= $config['signType'] ?>',
