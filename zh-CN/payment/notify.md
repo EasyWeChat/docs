@@ -90,7 +90,7 @@ $response->send();
 
 ## 扫码支付通知
 
-扫码支付：https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4
+扫码支付【模式一】：https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4
 
 ```php
 // 扫码支付通知接收第三个参数 `$alert`，如果触发该函数，会返回“业务错误”到微信服务器，触发 `$fail` 则返回“通信错误”
