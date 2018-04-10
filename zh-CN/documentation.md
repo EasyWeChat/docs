@@ -55,6 +55,7 @@
   - [数据统计与分析](/docs/{{version}}/{{lang}}/mini-program/data_cube)
   - [微信登录](/docs/{{version}}/{{lang}}/mini-program/auth)
   - [模板消息](/docs/{{version}}/{{lang}}/mini-program/template_message)
+  - [消息解密](/docs/{{version}}/{{lang}}/mini-program/decrypt)
 
 - ## 开放平台
 
