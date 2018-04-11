@@ -64,7 +64,7 @@ $result = $app->store->updateMerchant($data);
 ## 从腾讯地图拉取省市区信息
 
 ```php
-$app->store->district();
+$app->store->districts();
 ```
 
 ## 在腾讯地图中搜索门店
