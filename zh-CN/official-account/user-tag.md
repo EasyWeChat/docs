@@ -31,31 +31,31 @@ $tags = $app->user_tag->list();
 ## 创建标签
 
 ```php
-$tag->create($name);
+$app->user_tag->create($name);
 ```
 
 示例：
 
 ```php
-$tag->create('测试标签');
+$app->user_tag->create('测试标签');
 ```
 
 ## 修改标签信息
 
 ```php
-$tag->update($tagId, $name);
+$app->user_tag->update($tagId, $name);
 ```
 
 示例：
 
 ```php
-$tag->update(12, "新的名称");
+$app->user_tag->update(12, "新的名称");
 ```
 
 ## 删除标签
 
 ```php
-$tag->delete($tagId);
+$app->user_tag->delete($tagId);
 ```
 
 ## 获取指定 openid 用户所属的标签
@@ -71,7 +71,7 @@ $userTags = $app->user_tag->userTags($openId);
 ## 获取标签下用户列表
 
 ```php
-$tag->usersOfTag($tagId, $nextOpenId = '');
+$app->user_tag->usersOfTag($tagId, $nextOpenId = '');
 // $nextOpenId：第一个拉取的OPENID，不填默认从头开始拉取
 
 // {
@@ -90,7 +90,7 @@ $tag->usersOfTag($tagId, $nextOpenId = '');
 
 ```php
 $openIds = [$openId1, $openId2, ...];
-$tag->tagUsers($openIds, $tagId);
+$app->user_tag->tagUsers($openIds, $tagId);
 ```
 
 
@@ -98,5 +98,5 @@ $tag->tagUsers($openIds, $tagId);
 
 ```php
 $openIds = [$openId1, $openId2, ...];
-$tag->untagUsers($openIds, $tagId);
+$app->user_tag->untagUsers($openIds, $tagId);
 ```
