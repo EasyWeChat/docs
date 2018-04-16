@@ -182,7 +182,7 @@ $app->server->push(MediaMessageHandler::class, Message::VOICE|Message::VIDEO|Mes
     $message->Description  消息描述
     $message->Url          消息链接
     
-### 链接：
+### 文件：
 
     $message->MsgType      file
     $message->Title        文件名
