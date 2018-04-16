@@ -59,6 +59,8 @@ $server->setMessageHandler(function ($message) {
         case 'link':
             return '收到链接消息';
             break;
+        case 'file':
+            return '收到文件消息';
         // ... 其它消息
         default:
             return '收到其它消息';
@@ -153,6 +155,15 @@ $server->setMessageHandler(function ($message) {
     $message->Title        消息标题
     $message->Description  消息描述
     $message->Url          消息链接
+
+### 文件：
+
+    $message->MsgType      file
+    $message->Title        文件名
+    $message->Description  文件描述，可能为null
+    $message->FileKey      文件KEY
+    $message->FileMd5      文件MD5值
+    $message->FileTotalLen 文件大小，单位字节
 
 ## 回复消息
 
