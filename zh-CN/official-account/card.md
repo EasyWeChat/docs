@@ -284,7 +284,7 @@ $result = $card->getHtml($cardId);
 
 ```php
 $card->setTestWhitelist($openids); // 使用 openid
-$card->setTestWhitelistByUsername($usernames); // 使用 username
+$card->setTestWhitelistByName($usernames); // 使用 username
 ```
 
 - `openids` array - 测试的openid列表
