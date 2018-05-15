@@ -1,64 +1,64 @@
-# 内容安全接口
+# Content Security interfaces
 
-## 文本安全内容检测
+## Text security check
 
-用于校验一段文本是否含有敏感信息（涉黄、涉暴、涉政……）。
+Used to check whether a text contains risky content (porn, violence, politics... ).
 
-### 频率限制
+### Frequency limit
 
-单个appid调用上限为2000次/分钟，1,000,000次/天
+At most 2000 times/min, 1,000,000 times/day for each unique appid.
 
-### 调用示例
+### Example
 
 ```php
-// 传入要检测的文本内容，长度不超过500K字节
+// pass the text taht what to check as the parameter, the content should be NOT longer than 500K Bytes.
 $content = '你好';
 
 $result = $app->content_security->checkText($content);
 
-// 正常返回 0
+// normally, it returns 0
 {
     "errcode": "0",
     "errmsg": "ok"
 }
 
-//当 $content 内含有敏感信息，则返回 87014
+// when $content contains risky content, it returns 87014
 {
     "errcode": 87014,
     "errmsg": "risky content"
 }
 ```
 
-## 图片安全内容检测
+## Image security check
 
-用于校验一张图片是否含有敏感信息。如涉黄、涉及敏感人脸（通常是政治人物）。
+Used to check whether an iamge contains risky content. Such as porn, involving sensitive human faces (usually political figures).
 
-### 频率限制
+### Frequency limit
 
-单个appid调用上限为1000次/分钟，100,000次/天
+At most 1000 times/min, 100,000 times/day for each unique appid.
 
-### 调用示例
+### Example
 
 ```php
-// 所传参数为要检测的图片文件的绝对路径，图片格式支持PNG、JPEG、JPG、GIF, 像素不超过 750 x 1334
+// the parameter refers to the real path of the image, support PNG/JPE/JPG/GIF, and it should be  smaller than 750 x 1334(pixels size)
 $result = $app->content_security->checkImage('/path/to/the/image');
 
-// 正常返回 0
+// normally, it returns 0
 {
     "errcode": "0",
     "errmsg": "ok"
 }
 
-// 当图片文件内含有敏感内容，则返回 87014
+// When the image contains risky content, it returns 87014
 {
     "errcode": 87014,
     "errmsg": "risky content"
 }
 ```
 
-## 重要说明
+## Example
 
-目前上述两个接口仅支持在小程序中使用，示例中的 `$app` 表示小程序实例，即:
+The TWO interfaces above can only be used in mini-programe so far, the variable `$app` refers to the mini-program instance.
 
 ```php
 use EasyWeChat\Factory;
@@ -67,8 +67,6 @@ $config = [
     'app_id' => 'wx3cf0f39249eb0exx',
     'secret' => 'f1c242f4f28f735d4687abb469072axx',
 
-    // 下面为可选项
-    // 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名
     'response_type' => 'array',
 
     'log' => [
