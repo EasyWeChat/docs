@@ -27,8 +27,6 @@ $miniProgram = $openPlatform->miniProgram(string $appId, string $refreshToken);
 >
 > $refreshToken 为授权方的 refresh_token，可通过 [获取授权方授权信息](#) 接口获得。
 
-接下来的 API 调用等操作和公众号、小程序的开发一致，请移步到[公众号](#)或[小程序](#)开发章节继续进行开发吧。
-
 ### 帮助授权方管理开放平台账号
 
 ```php
@@ -56,6 +54,8 @@ $result = $account->getBinding();
 >  第三方平台不可操作（包括绑定/解绑）通过 open.weixin.qq.com 线上流程注册的开放平台帐号。
 >
 >  公众号只可将此权限集授权给一个第三方平台，授权互斥。
+
+接下来的 API 调用等操作和公众号、小程序的开发一致，请移步到[公众号](#)或[小程序](#)开发章节继续进行开发吧。
 
 ### 代码示例
 
