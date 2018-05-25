@@ -29,6 +29,34 @@ $miniProgram = $openPlatform->miniProgram(string $appId, string $refreshToken);
 
 接下来的 API 调用等操作和公众号、小程序的开发一致，请移步到[公众号](#)或[小程序](#)开发章节继续进行开发吧。
 
+### 帮助授权方管理开放平台账号
+
+```php
+// 代公众号实现业务
+$account = $officialAccount->account();
+// 代小程序实现业务
+$account = $miniProgram->account();
+
+// 创建开放平台账号
+// 并绑定公众号或小程序
+$result = $account->create();
+
+// 将公众号或小程序绑定到指定开放平台帐号下
+$result = $account->binTo($openAppId);
+
+// 将公众号/小程序从开放平台帐号下解绑
+$result = $account->unbindFrom($openAppid);
+
+// 获取公众号/小程序所绑定的开放平台帐号
+$result = $account->getBinding();
+```
+
+> 授权第三方平台注册的开放平台帐号只可用于获取用户 unionid 实现用户身份打通。
+>
+>  第三方平台不可操作（包括绑定/解绑）通过 open.weixin.qq.com 线上流程注册的开放平台帐号。
+>
+>  公众号只可将此权限集授权给一个第三方平台，授权互斥。
+
 ### 代码示例
 
 ```php
