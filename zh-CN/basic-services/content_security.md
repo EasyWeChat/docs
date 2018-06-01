@@ -2,7 +2,7 @@
 
 ## 文本安全内容检测
 
-用于校验一段文本是否含有敏感信息（涉黄、涉暴、涉政……）。
+用于校验一段文本是否含有违法内容。
 
 ### 频率限制
 
@@ -40,7 +40,7 @@ $result = $app->content_security->checkText($content);
 ### 调用示例
 
 ```php
-// 所传参数为要检测的图片文件的绝对路径，图片格式支持PNG、JPEG、JPG、GIF, 像素不超过 750 x 1334
+// 所传参数为要检测的图片文件的绝对路径，图片格式支持PNG、JPEG、JPG、GIF, 像素不超过 750 x 1334，同时文件大小以不超过 300K 为宜，否则可能报错
 $result = $app->content_security->checkImage('/path/to/the/image');
 
 // 正常返回 0
