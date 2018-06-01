@@ -2,7 +2,7 @@
 
 ## Text security check
 
-Used to check whether a text contains risky content (porn, violence, politics... ).
+Used to check whether a text contains illegal content.
 
 ### Frequency limit
 
@@ -40,7 +40,7 @@ At most 1000 times/min, 100,000 times/day for each unique appid.
 ### Example
 
 ```php
-// the parameter refers to the real path of the image, support PNG/JPE/JPG/GIF, and it should be  smaller than 750 x 1334(pixels size)
+// the parameter refers to the real path of the image, support PNG/JPE/JPG/GIF, and it should be  smaller than 750 x 1334(pixels size), and smaller than 300K (file size)
 $result = $app->content_security->checkImage('/path/to/the/image');
 
 // normally, it returns 0
