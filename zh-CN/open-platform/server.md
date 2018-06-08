@@ -68,6 +68,6 @@ Route::post('open-platform', function () {
         // 然后进行业务处理，如存数据库等...
     }, Guard::EVENT_AUTHORIZED);
 
-    return $server->serve();
+    return $server->serve()->send();
 });
 ```
