@@ -184,12 +184,12 @@ $app->server->push(MediaMessageHandler::class, Message::VOICE|Message::VIDEO|Mes
     
 ### 文件：
 
-    $message->MsgType      file
-    $message->Title        文件名
-    $message->Description  文件描述，可能为null
-    $message->FileKey      文件KEY
-    $message->FileMd5      文件MD5值
-    $message->FileTotalLen 文件大小，单位字节
+    $message->MsgType      file
+    $message->Title        文件名
+    $message->Description  文件描述，可能为null
+    $message->FileKey      文件KEY
+    $message->FileMd5      文件MD5值
+    $message->FileTotalLen 文件大小，单位字节
 
 ## 回复消息
 
