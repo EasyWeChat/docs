@@ -33,7 +33,6 @@
   - [语义理解](/docs/{{version}}/{{lang}}/official-account/semantic)
   - [自动回复](/docs/{{version}}/{{lang}}/official-account/reply)
   - [评论数据管理](/docs/{{version}}/{{lang}}/official-account/comment)
-  - [内容安全](/docs/{{version}}/{{lang}}/basic-services/content_security)
 
 - ## 微信支付
 
@@ -57,6 +56,7 @@
   - [微信登录](/docs/{{version}}/{{lang}}/mini-program/auth)
   - [模板消息](/docs/{{version}}/{{lang}}/mini-program/template_message)
   - [消息解密](/docs/{{version}}/{{lang}}/mini-program/decrypt)
+  - [内容安全](/docs/{{version}}/{{lang}}/basic-services/content_security)
 
 - ## 开放平台
 
