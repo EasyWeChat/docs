@@ -159,13 +159,13 @@ $stream->saveAs('保存目录', '文件名');
 - `$count`  返回素材的数量，可选，默认 `20`, 取值在 1 到 20 之间
 
 ```php
-$app->material->list($type, $offset, $count);
+$app->material->lists($type, $offset, $count);
 ```
 
 示例：
 
 ```
-$list = $app->material->list('image', 0, 10);
+$list = $app->material->lists('image', 0, 10);
 ```
 
 图片、语音、视频 等类型的返回如下
