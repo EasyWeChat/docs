@@ -20,6 +20,6 @@ $config = [
      
 ];
 
-$openPlatform = Factory::openWork($config);
+$app = Factory::openWork($config);
 ```
 
