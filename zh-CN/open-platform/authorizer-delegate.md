@@ -31,16 +31,16 @@ $miniProgram = $openPlatform->miniProgram(string $appId, string $refreshToken);
 
 ```php
 // 代公众号实现业务
-$account = $officialAccount->account();
+$account = $officialAccount->account;
 // 代小程序实现业务
-$account = $miniProgram->account();
+$account = $miniProgram->account;
 
 // 创建开放平台账号
 // 并绑定公众号或小程序
 $result = $account->create();
 
 // 将公众号或小程序绑定到指定开放平台帐号下
-$result = $account->binTo($openAppId);
+$result = $account->bindTo($openAppId);
 
 // 将公众号/小程序从开放平台帐号下解绑
 $result = $account->unbindFrom($openAppid);
