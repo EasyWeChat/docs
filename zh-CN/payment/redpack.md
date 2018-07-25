@@ -30,29 +30,6 @@ $redpack = $payment->redpack;
 
 **默认情况下，通过接口发送的红包金额应该在200元以内，但可以通过在调用发送接口时传递场景 ID (scene_id)来发送特定场景的红包，不同场景红包可以由商户自己登录商户平台设置最大金额。scene_id 的可选值及对应含义可参阅微信支付官方文档。**
 
-### 通用发送接口
-
-```php
-$redpackData = [
-    'mch_billno'   => 'xy123456',
-    'send_name'    => '测试红包',
-    're_openid'    => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
-    'total_num'    => 1,  //普通红包固定为1，裂变红包不小于3
-    'total_amount' => 100,  //单位为分，普通红包不小于100，裂变红包不小于300
-    'wishing'      => '祝福语',
-    'client_ip'    => '192.168.0.1',  //可不传，不传则由 SDK 取当前客户端 IP
-    'act_name'     => '测试活动',
-    'remark'       => '测试备注',
-    // ...
-];
-
-$result = $redpack->send($redpackData, \EasyWeChat\Payment\LuckyMoney\API::TYPE_NORMAL);
-或
-$result = $redpack->send($redpackData, \EasyWeChat\Payment\LuckyMoney\API::TYPE_GROUP);
-```
-
-> 不同类型红包所传参数有所差别，请参考官方文档中参数列表。
-
 
 ### 发送普通红包接口
 
