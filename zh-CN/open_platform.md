@@ -111,12 +111,15 @@ $app->access_token = $app->open_platform->authorizer_token;
 开发者必须设置授权方来调用 API。
 
 ```php
-$app = new Application($options);
+$openPlatform = new Application($options)->open_platform;
 
 // 加载授权方信息，比如 $authorizer = Authorizer::find($id);
 $authorizerAppId = $authorizer->app_id;
+$authorizerRefreshToken = $authorizer->refresh_token;
 
-$app->open_platform->authorization->setAuthorizerAppId($authorizerAppId);
+$app = $openPlatform->createAuthorizerApplication($authorizerAppId, $authorizerRefreshToken);
+// 然后调用方法和普通调用一致。
+// ...
 ```
 
 ### 授权 API
@@ -124,44 +127,37 @@ $app->open_platform->authorization->setAuthorizerAppId($authorizerAppId);
 #### 获取预授权网址
 
 ```php
-$openPlatform->pre_auth
-    ->setRedirectUri('http://domain.com/callback')
-    ->getAuthLink();
+// 直接跳转
+$response = $openPlatform->pre_auth->redirect('https://domain.com/callback');
 
+// 获取跳转的链接
+$response->getTargetUrl();
 ```
 
-用户授权后会带上 `code` 跳转到 `$redirectUri`。
+用户授权后会带上 `code` 跳转到 `redirect` 指定的链接。
 
 #### 使用授权码换取公众号的接口调用凭据和授权信息
 
 ```php
-$authorizer = $openPlatform->authorizer;
-
 // 使用授权码换取公众号的接口调用凭据和授权信息
 // Optional: $authorizationCode 不传值时会自动获取 URL 中 auth_code 值
-$authorizer->getAuthorizationInfo($authorizationCode = null);
+$openPlatform->getAuthorizationInfo($authorizationCode = null);
 ```
 
 #### 获取授权方的公众号帐号基本信息
 
 ```php
-$authorizer = $openPlatform->authorizer;
-
-$authorizer->getAuthorizerInfo($authorizerAppId);
+$openPlatform->getAuthorizerInfo($authorizerAppId);
 ```
 
 #### 获取授权方的选项设置信息
 
 ```php
-$authorizer = $openPlatform->authorizer;
-
-$authorizer->getAuthorizerOption($authorizerAppId, $optionName);
+$openPlatform->getAuthorizerOption($authorizerAppId, $optionName);
 ```
 
 #### 设置授权方的选项信息
 
 ```php
-$authorizer = $openPlatform->authorizer;
-
-$authorizer->setAuthorizerOption($authorizerAppId, $optionName, $optionValue);
+$openPlatform->setAuthorizerOption($authorizerAppId, $optionName, $optionValue);
 ```
