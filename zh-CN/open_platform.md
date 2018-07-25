@@ -95,17 +95,6 @@ SDK 默认处理：删除 `authorizer_access_token` 和 `authorizer_refresh_toke
 
 ### 调用 API
 
-#### 替换 Access Token
-
-第三方必须使用 `authorizer_access_token` 而不是原来的 `access_token` 来调用 API。
-
-替换原来的 access token:
-
-```php
-$app = new Application($options);
-$app->access_token = $app->open_platform->authorizer_token;
-```
-
 #### 设置授权方的 App Id
 
 开发者必须设置授权方来调用 API。
