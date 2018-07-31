@@ -35,7 +35,7 @@ use EasyWeChat\Factory;
 $config = [
     'app_id' => 'wx3cf0f39249eb0xxx',
     'secret' => 'f1c242f4f28f735d4687abb469072xxx',
-
+    'token' => 'TestToken',
     'response_type' => 'array',
 
     'log' => [
