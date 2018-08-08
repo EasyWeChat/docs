@@ -28,7 +28,7 @@ $jssdk = $payment->jssdk;
 
 ## 生成支付 JS 配置
 
-有两种发起支付的方式：[WeixinJSBridge](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6), [JSSDK](https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_1)
+有三种发起支付的方式：[WeixinJSBridge](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6), [JSSDK](https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_1), [小程序](https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7)
 
 1. WeixinJSBridge:
 
@@ -64,6 +64,27 @@ $jssdk = $payment->jssdk;
     ```js
     wx.chooseWXPay({
         timestamp: <?= $config['timestamp'] ?>,
+        nonceStr: '<?= $config['nonceStr'] ?>',
+        package: '<?= $config['package'] ?>',
+        signType: '<?= $config['signType'] ?>',
+        paySign: '<?= $config['paySign'] ?>', // 支付签名
+        success: function (res) {
+            // 支付成功后的回调函数
+        }
+    });
+    ```
+
+3. 小程序:
+
+    ```php
+    $config = $jssdk->sdkConfig($prepayId); // 返回数组
+    ```
+
+    javascript:
+
+    ```js
+    wx.chooseWXPay({
+        timeStamp: <?= $config['timestamp'] ?>, //注意 timeStamp 的格式
         nonceStr: '<?= $config['nonceStr'] ?>',
         package: '<?= $config['package'] ?>',
         signType: '<?= $config['signType'] ?>',
