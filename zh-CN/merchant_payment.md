@@ -13,6 +13,7 @@
 use EasyWeChat\Foundation\Application;
 
 $options = [
+    'app_id' => 'your-app-id',
     // payment
     'payment' => [
         'merchant_id'        => 'your-mch-id',
