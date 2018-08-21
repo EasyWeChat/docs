@@ -233,3 +233,7 @@ $stats = $app->material->stats();
 ```php
 $app->material->delete($mediaId);
 ```
+
+### 文章预览
+
+文章预览请参阅 “消息群发” 章节。
