@@ -124,3 +124,17 @@ OpenSSL support => enabled
 ```
 xdebug.max_nesting_level=200
 ```
+## Request access_token fail:{"errcode":61023,"errmsg":"refresh_token is invalid hint: [zDNUIA07582974]"}！
+
+在用户授权时会获得该authorizer_refresh_token刷新令牌，而当缓存或数据库存储的该authorizer_refresh_token刷新令牌丢失后，可能会出现该问题，微信文档中说明
+
+1.接口调用凭据刷新令牌（在授权的公众号具备API权限时，才有此返回值），刷新令牌主要用于第三方平台获取和刷新已授权用户的access_token，只会在授权时刻提供，请妥善保存。
+
+2.一旦丢失，只能让用户重新授权，才能再次拿到新的刷新令牌(https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1453779503&token=&lang=)。
+
+3.为避免该问题，请将存储该刷新令牌的缓存有效期设置为0(永久存储)，并尽量不要去将该缓存或数据库清空。
+
+如下:以redis为例。
+```
+'expire'     => 0,
+```
