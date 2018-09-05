@@ -586,7 +586,7 @@ $settings = [
     ],
 ];
 
-$result = $card->member_card->activateUserForm($cardId, $settings);
+$result = $card->member_card->setActivationForm($cardId, $settings);
 ```
 
 
