@@ -70,6 +70,10 @@ $app->media->createVideoForBroadcasting($mediaId, $title, $description);
 ```php
 $stream = $app->media->get($mediaId);
 
+if (is_array($stream)) {
+  // 获取失败
+}
+
 // 以内容 md5 为文件名存到本地
 $stream->save('保存目录');
 
