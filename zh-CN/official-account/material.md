@@ -145,11 +145,13 @@ $resource = $app->material->get($mediaId);
 ```
 $stream = $app->material->get($mediaId);
 
-// 以内容 md5 为文件名
-$stream->save('保存目录');
+if ($stram instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+    // 以内容 md5 为文件名
+    $stream->save('保存目录');
 
-// 自定义文件名，不需要带后缀
-$stream->saveAs('保存目录', '文件名');
+    // 自定义文件名，不需要带后缀
+    $stream->saveAs('保存目录', '文件名');
+}
 ```
 
 ### 获取永久素材列表
