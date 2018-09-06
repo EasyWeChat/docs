@@ -70,15 +70,13 @@ $app->media->createVideoForBroadcasting($mediaId, $title, $description);
 ```php
 $stream = $app->media->get($mediaId);
 
-if (is_array($stream)) {
-  // 获取失败
+if ($stram instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+  // 以内容 md5 为文件名存到本地
+  $stream->save('保存目录');
+
+  // 自定义文件名，不需要带后缀
+  $stream->saveAs('保存目录', '文件名');
 }
-
-// 以内容 md5 为文件名存到本地
-$stream->save('保存目录');
-
-// 自定义文件名，不需要带后缀
-$stream->saveAs('保存目录', '文件名');
 ```
 
 ## 获取 JSSDK 上传的高清语音
