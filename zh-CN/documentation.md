@@ -39,11 +39,12 @@
 
 - ## 自定义
 
- - [Access Token](/docs/{{version}}/{{lang}}/access_token)
- - [缓存](/docs/{{version}}/{{lang}}/cache)
+  - [Access Token](/docs/{{version}}/{{lang}}/access_token)
+  - [缓存](/docs/{{version}}/{{lang}}/cache)
 
 - ## 其他
- - [问题解答](/docs/{{version}}/{{lang}}/troubleshooting)
- - [贡献](/docs/{{version}}/{{lang}}/contributing)
- - [更新日志](/docs/{{version}}/{{lang}}/releases)
- - [路线图](/docs/{{version}}/{{lang}}/roadmap)
+
+  - [问题解答](/docs/{{version}}/{{lang}}/troubleshooting)
+  - [贡献](/docs/{{version}}/{{lang}}/contributing)
+  - [更新日志](/docs/{{version}}/{{lang}}/releases)
+  - [路线图](/docs/{{version}}/{{lang}}/roadmap)
