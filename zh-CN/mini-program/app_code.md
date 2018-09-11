@@ -14,7 +14,7 @@ $app->app_code->get(string $path, array $optional = []);
 
 - **width** Int - 默认 430 二维码的宽度
 - **auto_color**  默认 false  自动配置线条颜色，如果颜色依然是黑色，则说明不建议配置主色调
-- **line_color**  示例：`{"r":"0","g":"0","b":"0"}` `auto_color` 为 `false` 时生效，使用 rgb 设置颜色 例如 `{"r":"xxx","g":"xxx","b":"xxx"}`
+- **line_color**  数组，`auto_color` 为 `false` 时生效，使用 rgb 设置颜色 例如 ，示例：`["r" => 0,"g" => 0,"b" => 0]`。
 
 示例代码：
 
@@ -26,12 +26,27 @@ $response = $app->app_code->get('path/to/page', [
     //...
 ]);
 
-// $response 为 EasyWeChat\Kernel\Http\StreamResponse 实例
+// 或者指定颜色
+$response = $app->app_code->get('path/to/page', [
+    'width' => 600,
+    'line_color' => [
+        'r' => 105,
+        'g' => 166,
+        'b' => 134,
+    ],  
+]);
+
+// $response 成功时为 EasyWeChat\Kernel\Http\StreamResponse 实例，失败时为数组或者你指定的 API 返回格式
 
 // 保存小程序码到文件
-$filename = $response->save('/path/to/directory');
+if ($response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+    $filename = $response->save('/path/to/directory');
+}
+
 // 或
-$filename = $response->saveAs('/path/to/directory', 'appcode.png');
+if ($response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+    $filename = $response->saveAs('/path/to/directory', 'appcode.png');
+}
 ```
 
 ### 接口B：适用于需要的码数量极多，或仅临时使用的业务场景
@@ -50,13 +65,16 @@ $app->app_code->getUnlimit(string $scene, array $optional = []);
 $response = $app->app_code->getUnlimit('scene-value', [
     //...
 ]);
-
-// $response 为 EasyWeChat\Kernel\Http\StreamResponse 实例
+// $response 成功时为 EasyWeChat\Kernel\Http\StreamResponse 实例，失败为数组或你指定的 API 返回类型
 
 // 保存小程序码到文件
-$filename = $response->save('/path/to/directory');
+if ($response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+    $filename = $response->save('/path/to/directory');
+}
 // 或
-$filename = $response->saveAs('/path/to/directory', 'appcode.png');
+if ($response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+    $filename = $response->saveAs('/path/to/directory', 'appcode.png');
+}
 ```
 
 ## 获取小程序二维码
@@ -74,12 +92,17 @@ $app->app_code->getQrCode(string $path, int $width = null);
 ```php
 $response = $app->app_code->getQrCode('/path/to/page');
 
-// $response 为 EasyWeChat\Kernel\Http\StreamResponse 实例
+// $response 成功时为 EasyWeChat\Kernel\Http\StreamResponse 实例，失败为数组或你指定的 API 返回类型
 
 // 保存小程序码到文件
-$filename = $response->save('/path/to/directory');
+if ($response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+    $filename = $response->save('/path/to/directory');
+}
+
 // 或
-$filename = $response->saveAs('/path/to/directory', 'appcode.png');
+if ($response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+    $filename = $response->saveAs('/path/to/directory', 'appcode.png');
+}
 ```
 
 ##
