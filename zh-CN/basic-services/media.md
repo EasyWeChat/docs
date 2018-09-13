@@ -70,7 +70,7 @@ $app->media->createVideoForBroadcasting($mediaId, $title, $description);
 ```php
 $stream = $app->media->get($mediaId);
 
-if ($stram instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+if ($stream instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
   // 以内容 md5 为文件名存到本地
   $stream->save('保存目录');
 
