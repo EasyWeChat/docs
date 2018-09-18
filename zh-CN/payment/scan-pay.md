@@ -59,6 +59,8 @@ $result = $app->order->unify([
 
 #### 生成二维码
 
+> 版本 4.1.7+ 支持
+
 从上一步得到的 `$result['code_url']` 得到二维码内容：
 
 ```php
