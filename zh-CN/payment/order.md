@@ -18,7 +18,6 @@ $result = $app->order->unify([
 
 // $result:
 //{
-//  "xml": {
 //    "return_code": "SUCCESS",
 //    "return_msg": "OK",
 //    "appid": "wx2421b1c4390ec4sb",
@@ -29,7 +28,6 @@ $result = $app->order->unify([
 //    "result_code": "SUCCESS",
 //    "prepay_id": "wx201411102639507cbf6ffd8b0779950874",
 //    "trade_type": "JSAPI"
-//  }
 //}
 ```
 
