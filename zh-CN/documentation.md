@@ -42,6 +42,7 @@
   - [账单](/docs/{{version}}/{{lang}}/payment/bill)
   - [通知](/docs/{{version}}/{{lang}}/payment/notify)
   - [红包](/docs/{{version}}/{{lang}}/payment/redpack)
+  - [扫码支付](/docs/{{version}}/{{lang}}/payment/scan-pay)
   - [JSSDK](/docs/{{version}}/{{lang}}/payment/jssdk)
   - [企业付款](/docs/{{version}}/{{lang}}/payment/transfer)
   - [撤销订单](/docs/{{version}}/{{lang}}/payment/reverse)
