@@ -63,12 +63,7 @@ $result = $app->order->unify([
 
 从上一步得到的 `$result['code_url']` 得到二维码内容：
 
-```php
-$content = $app->scheme($result['code_url']);
-// 示例：weixin://wxpay/bizpayurl?sr=xxxxx
-```
-
-将 `$content` 生成二维码图片向用户展示即可扫码，生成工具上面自己找一下即可。 SDK 不内置
+将 `$result['code_url']` 生成二维码图片向用户展示即可扫码，生成工具上面自己找一下即可。 SDK 不内置
 
 #### 支付通知
 
