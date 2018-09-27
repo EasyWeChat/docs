@@ -124,6 +124,12 @@ OpenSSL support => enabled
 ```
 xdebug.max_nesting_level=200
 ```
+
+## 扫码支付 获取商户订单信息超时或商户返回httpcode非200!
+
+1.确定签名正确,使用SDK基本上不会出什么问题
+2.微信调用扫码支付回调链接,使用POST方式,确定服务器回调方法是否取消csrf验证
+
 ## Request access_token fail:{"errcode":61023,"errmsg":"refresh_token is invalid hint: [zDNUIA07582974]"}！
 
 在用户授权时会获得该authorizer_refresh_token刷新令牌，而当缓存或数据库存储的该authorizer_refresh_token刷新令牌丢失后，可能会出现该问题，微信文档中说明
