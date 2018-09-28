@@ -492,7 +492,7 @@ $result = $card->code->update($code, $newCode, $cardId);
 ### 设置卡券失效
 
 ```php
-$card->disable($code, $cardId);
+$card->code->disable($code, $cardId);
 ```
 
 示例：
