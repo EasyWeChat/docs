@@ -501,7 +501,7 @@ $card->code->disable($code, $cardId);
 $code    = '736052543512';
 $cardId = '';
 
-$result = $card->disable($code, $cardId);
+$result = $card->code->disable($code, $cardId);
 ```
 
 ## 通用卡券
