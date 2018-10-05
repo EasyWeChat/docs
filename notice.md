@@ -75,14 +75,14 @@ $messageId = $notice->to($userOpenId)->url($url)->withTemplateId($templateId)->s
 ### 模板
 
 ```
-{{ first.DATA }}
+@{{ first.DATA }}
 
 商品明细：
 
-名称：{{ name.DATA }}
-价格：{{ price.DATA }}
+名称：@{{ name.DATA }}
+价格：@{{ price.DATA }}
 
-{{ remark.DATA }}
+@{{ remark.DATA }}
 ```
 
 发送模板消息：
