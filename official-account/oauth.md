@@ -46,7 +46,7 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 7. 将用户信息写入 SESSION。
 8. 跳转到第 3 步写入的 `target_url` 页面（`/user/profile`）。
 
-> 看懵了？没事，使用 SDK，你不用管这么多。:smile:
+> {warning} 看懵了？没事，使用 SDK，你不用管这么多。:smile:
 >
 > 注意，上面的第3步：redirect_uri=callback.php实际上我们会在 `callback.php` 后面还会带上授权目标页面 `user/profile`，所以完整的 `redirect_uri` 应该是下面的这样的PHP去拼出来：`'redirect_uri='.urlencode('callback.php?target=user/profile')`
 > 结果：redirect_uri=callback.php%3Ftarget%3Duser%2Fprofile
@@ -116,7 +116,7 @@ $user = $app->oauth->user();
 
 返回的 `$user` 是 [Overtrue\Socialite\User](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的信息](https://github.com/overtrue/socialite#user-interface)。
 
-> :pray: 注意：`$user` 里没有 `openid`， `$user->id` 便是 `openid`.
+> {warning} 注意：`$user` 里没有 `openid`， `$user->id` 便是 `openid`.
 > 如果你想拿微信返回给你的原样的全部信息，请使用：$user->getOriginal();
 
 当 `scope` 为 `snsapi_base` 时 `$oauth->user();` 对象里只有 `id`，没有其它信息。

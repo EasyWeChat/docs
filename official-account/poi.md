@@ -42,7 +42,7 @@ $info = array(
 $result = $app->poi->create($info); // true or exception
 ```
 
-> 注意：新创建的门店在审核通过后,会以事件形式推送给商户填写的回调 URL
+> {warning} 注意：新创建的门店在审核通过后,会以事件形式推送给商户填写的回调 URL
 
 ## 获取指定门店信息
 

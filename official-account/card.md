@@ -264,7 +264,7 @@ $result = $card->createLandingPage($banner, $pageTitle, $canShare, $scene, $card
 
 ### 图文消息群发卡券
 
-特别注意：目前该接口仅支持填入非自定义code的卡券,自定义code的卡券需先进行code导入后调用。
+> {warning} 特别注意：目前该接口仅支持填入非自定义 code 的卡券,自定义 code 的卡券需先进行 code 导入后调用。
 
 ```php
 $card->getHtml($cardId);
