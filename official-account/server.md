@@ -113,74 +113,74 @@ $app->server->push(MediaMessageHandler::class, Message::VOICE|Message::VIDEO|Mes
 
 请求消息基本属性(以下所有消息都有的基本属性)：
 
-  - `$message['ToUserName']`    接收方帐号（该公众号 ID）
-  - `$message['FromUserName']`  发送方帐号（OpenID, 代表用户的唯一标识）
-  - `$message['CreateTime']`    消息创建时间（时间戳）
-  - `$message['MsgId']`        消息 ID（64位整型）
+>>  - `ToUserName`    接收方帐号（该公众号 ID）
+>>  - `FromUserName`  发送方帐号（OpenID, 代表用户的唯一标识）
+>>  - `CreateTime`    消息创建时间（时间戳）
+>>  - `MsgId`        消息 ID（64位整型）
 
 ### 文本：
 
-  - `MsgType`  text
-  - `Content`  文本消息内容
+>  - `MsgType`  text
+>  - `Content`  文本消息内容
 
 ### 图片：
 
-  - `MsgType`  image
-  - `MediaId`  图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
-  - `PicUrl`   图片链接
+>  - `MsgType`  image
+>  - `MediaId`  图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
+>  - `PicUrl`   图片链接
 
 ### 语音：
 
-  - `MsgType`        voice
-  - `MediaId`        语音消息媒体id，可以调用多媒体文件下载接口拉取数据。
-  - `Format`         语音格式，如 amr，speex 等
-  - `Recognition`  * 开通语音识别后才有
+>  - `MsgType`        voice
+>  - `MediaId`        语音消息媒体id，可以调用多媒体文件下载接口拉取数据。
+>  - `Format`         语音格式，如 amr，speex 等
+>  - `Recognition`  * 开通语音识别后才有
 
   > {warning} 请注意，开通语音识别后，用户每次发送语音给公众号时，微信会在推送的语音消息XML数据包中，增加一个 `Recongnition` 字段
 
 ### 视频：
 
-  - `MsgType`       video
-  - `MediaId`       视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
-  - `ThumbMediaId`  视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
+>  - `MsgType`       video
+>  - `MediaId`       视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
+>  - `ThumbMediaId`  视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
 
 ### 小视频：
 
-  - `MsgType`     shortvideo
-  - `MediaId`     视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
-  - `ThumbMediaId`    视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
+>  - `MsgType`     shortvideo
+>  - `MediaId`     视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
+>  - `ThumbMediaId`    视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
 
 ### 事件：
 
-  - `MsgType`     event
-  - `Event`       事件类型 （如：subscribe(订阅)、unsubscribe(取消订阅) ...， CLICK 等）
+>  - `MsgType`     event
+>  - `Event`       事件类型 （如：subscribe(订阅)、unsubscribe(取消订阅) ...， CLICK 等）
 
 #### 扫描带参数二维码事件
-  - `EventKey`    事件KEY值，比如：qrscene_123123，qrscene_为前缀，后面为二维码的参数值
-  - `Ticket`      二维码的 ticket，可用来换取二维码图片
+>  - `EventKey`    事件KEY值，比如：qrscene_123123，qrscene_为前缀，后面为二维码的参数值
+>  - `Ticket`      二维码的 ticket，可用来换取二维码图片
 
 #### 上报地理位置事件
-  - `Latitude`    23.137466   地理位置纬度
-  - `Longitude`   113.352425  地理位置经度
-  - `Precision`   119.385040  地理位置精度
+>  - `Latitude`    23.137466   地理位置纬度
+>  - `Longitude`   113.352425  地理位置经度
+>  - `Precision`   119.385040  地理位置精度
 
 #### 自定义菜单事件
-  - `EventKey`    事件KEY值，与自定义菜单接口中KEY值对应，如：CUSTOM_KEY_001, www.qq.com
+>  - `EventKey`    事件KEY值，与自定义菜单接口中KEY值对应，如：CUSTOM_KEY_001, www.qq.com
 
 ### 地理位置：
 
-  - `MsgType`     location
-  - `Location_X`  地理位置纬度
-  - `Location_Y`  地理位置经度
-  - `Scale`       地图缩放大小
-  - `Label`       地理位置信息
+>  - `MsgType`     location
+>  - `Location_X`  地理位置纬度
+>  - `Location_Y`  地理位置经度
+>  - `Scale`       地图缩放大小
+>  - `Label`       地理位置信息
 
 ### 链接：
 
-  - `MsgType`      link
-  - `Title`        消息标题
-  - `Description`  消息描述
-  - `Url`          消息链接
+>  - `MsgType`      link
+>  - `Title`        消息标题
+>  - `Description`  消息描述
+>  - `Url`          消息链接
 
 ### 文件：
 

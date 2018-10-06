@@ -37,10 +37,10 @@ $ composer require easywechat/console -vvv
 
 ```bash
 $ ./vendor/bin/easywechat payment:rsa_public_key \
-    --mch_id=14339221228 \
-    --api_key=36YTbDmLgyQ52noqdxgwGiYy \
-    --cert_path=/Users/overtrue/www/demo/apiclient_cert.pem \
-    --key_path=/Users/overtrue/www/demo/apiclient_key.pem
+  >  --mch_id=14339221228 \
+  >  --api_key=36YTbDmLgyQ52noqdxgwGiYy \
+  >  --cert_path=/Users/overtrue/www/demo/apiclient_cert.pem \
+  >  --key_path=/Users/overtrue/www/demo/apiclient_key.pem
 ```
 
 将会在当前目录生成一个 `./public-14339221228.pem` 文件，你可以将它移动到敏感目录，然后在支付配置文件中加如以下选项：

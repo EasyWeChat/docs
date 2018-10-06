@@ -3,7 +3,6 @@
 
 ## 环境要求
 
-> {info}
 > - PHP >= 7.0
 > - [PHP cURL 扩展](http://php.net/manual/en/book.curl.php)
 > - [PHP OpenSSL 扩展](http://php.net/manual/en/book.openssl.php)

@@ -64,17 +64,17 @@ $app->customer_service->message($message)->to($openId)->send();
 
 ```php
 $app->customer_service->message('hello')
-                    ->to('oV-gpwdOIwSI958m9osAhGBFxxxx')
-                    ->send();
+                  >  ->to('oV-gpwdOIwSI958m9osAhGBFxxxx')
+                  >  ->send();
 ```
 
 ### 指定客服发送消息
 
 ```php
 $app->customer_service->message($message)
-                        ->from('account@test')
-                        ->to($openId)
-                        ->send();
+                      >  ->from('account@test')
+                      >  ->to($openId)
+                      >  ->send();
 ```
 > `$message` 为消息对象或文本，请参考：[消息](messages.html)
 
@@ -82,9 +82,9 @@ $app->customer_service->message($message)
 
 ```php
 $app->customer_service->message('hello')
-                    ->from('kf2001@gh_176331xxxx')
-                    ->to('oV-gpwdOIwSI958m9osAhGBFxxxx')
-                    ->send();
+                  >  ->from('kf2001@gh_176331xxxx')
+                  >  ->to('oV-gpwdOIwSI958m9osAhGBFxxxx')
+                  >  ->send();
 ```
 
 ### 邀请微信用户加入客服

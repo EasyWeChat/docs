@@ -6,10 +6,10 @@
 
 所有文件size必须大于5个字节
 
-  - 图片（image）：2MB，支持JPG,PNG格式
-  - 语音（voice）：2MB，播放长度不超过60s，支持AMR格式
-  - 视频（video）：10MB，支持MP4格式
-  - 普通文件（file）：20MB
+>  - 图片（image）：2MB，支持JPG,PNG格式
+>  - 语音（voice）：2MB，播放长度不超过60s，支持AMR格式
+>  - 视频（video）：10MB，支持MP4格式
+>  - 普通文件（file）：20MB
 
 ## 上传图片
 

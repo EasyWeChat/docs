@@ -25,11 +25,11 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 
 它们的区别有两处，授权地址不同，`scope` 不同。
 
-  - **公众平台网页授权获取用户信息**
+>  - **公众平台网页授权获取用户信息**
     **授权 URL**: `https://open.weixin.qq.com/connect/oauth2/authorize`
     **Scopes**: `snsapi_base` 与 `snsapi_userinfo`
 
-  - **开放平台网页登录**
+>  - **开放平台网页登录**
     **授权 URL**: `https://open.weixin.qq.com/connect/qrconnect`
     **Scopes**: `snsapi_login`
 
@@ -71,15 +71,15 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 
 ```php
 $response = $app->oauth->scopes(['snsapi_userinfo'])
-                          ->redirect();
+                        >  ->redirect();
 ```
 
 当你的应用是分布式架构且没有会话保持的情况下，你需要自行设置请求对象以实现会话共享。比如在 [Laravel](http://laravel.com) 框架中支持Session储存在Redis中，那么需要这样：
 
 ```php
 $response = $app->oauth->scopes(['snsapi_userinfo'])
-                          ->setRequest($request)
-                          ->redirect();
+                        >  ->setRequest($request)
+                        >  ->redirect();
 
 //回调后获取user时也要设置$request对象
 //$user = $app->oauth->setRequest($request)->user();
