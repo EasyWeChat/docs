@@ -112,7 +112,7 @@ $resource = $app->material->get($mediaId);
 
 如果请求的素材为图文消息，则响应如下：
 
-```
+```json
 {
  "news_item": [
        {
@@ -132,7 +132,7 @@ $resource = $app->material->get($mediaId);
 
 如果返回的是视频消息素材，则内容如下：
 
-```
+```json
 {
   "title":TITLE,
   "description":DESCRIPTION,
@@ -142,7 +142,7 @@ $resource = $app->material->get($mediaId);
 
 其他类型的素材消息，则响应为 `EasyWeChat\Kernel\Http\StreamResponse` 实例，开发者可以自行保存为文件。例如
 
-```
+```php
 $stream = $app->material->get($mediaId);
 
 if ($stram instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
@@ -166,13 +166,13 @@ $app->material->list($type, $offset, $count);
 
 示例：
 
-```
+```php
 $list = $app->material->list('image', 0, 10);
 ```
 
 图片、语音、视频 等类型的返回如下
 
-```
+```json
 {
    "total_count": TOTAL_COUNT,
    "item_count": ITEM_COUNT,
@@ -189,7 +189,7 @@ $list = $app->material->list('image', 0, 10);
 
 永久图文消息素材列表的响应如下：
 
-```
+```json
 {
    "total_count": TOTAL_COUNT,
    "item_count": ITEM_COUNT,
