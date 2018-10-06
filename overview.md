@@ -34,9 +34,9 @@ EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https:
 
 本 SDK 不是一个全新再造的东西，所以我不会从 0 开始教会你开发微信，你完全有必要在使用本 SDK 前做好以下工作：
 
->  - 具备 PHP 基础知识，不要连闭包是啥都不明白，可以参考我在知乎的回答: [想要开发自己的PHP框架需要那些知识储备？](http://www.zhihu.com/  question/26635323/answer/33812516)
+>  - 具备 PHP 基础知识，不要连闭包是啥都不明白，可以参考我在知乎的回答: [想要开发自己的PHP框架需要那些知识储备？](http://www.zhihu.com/question/26635323/answer/33812516)
 >  - 熟悉 PHP 常见的知识：自动加载、composer 的使用、JSON 处理、Curl 的使用等；
->  - **仔细阅读并看懂** （不是**看过**，是**看明白+看完** :exclamation:） [微信官方文档](http://mp.weixin.qq.com/  wiki/13/80a1a25adbc46faf2716774c423b3151.html) [微信开放平台文档](https://open.weixin.qq.com/cgi-bin/  showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419318292&token=&lang=zh_CN)；
+>  - **仔细阅读并看懂** （不是**看过**，是**看明白+看完** :exclamation:） [微信官方文档](http://mp.weixin.qq.com/wiki/13/80a1a25adbc46faf2716774c423b3151.html) [微信开放平台文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419318292&token=&lang=zh_CN)；
 >  - 明白微信接口的组成，自有服务器、微信服务器、公众号（还有其它各种号）、测试号、以及通信原理（交互过程）；
 >  - 了解基本的 HTTP 协议，Header 头、请求方式（GET\POST\PUT\PATCH\DELETE）等；
 >  - 基本的 Debug 技能，查看 php 日志，nginx 日志等。
