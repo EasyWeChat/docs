@@ -69,9 +69,9 @@ $app->material->uploadArticle([$article, $article2, ...]);
 
 有三个参数：
 
-- `$mediaId` 要更新的文章的 `mediaId`
-- `$article` 文章内容，`Article` 实例或者 全字段数组
-- `$index` 要更新的文章在图文消息中的位置（多图文消息时，此字段才有意义，单图片忽略此参数），第一篇为 0；
+    - `$mediaId` 要更新的文章的 `mediaId`
+    - `$article` 文章内容，`Article` 实例或者 全字段数组
+    - `$index` 要更新的文章在图文消息中的位置（多图文消息时，此字段才有意义，单图片忽略此参数），第一篇为 0；
 
 ```php
 $result = $app->material->updateArticle($mediaId, new Article(...));
