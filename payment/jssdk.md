@@ -119,7 +119,7 @@ $config = $jssdk->appConfig($prepayId);
 
 你也许需要生成二维码，那么以下这些供参考：
 
-- https://github.com/endroid/QrCode
-- https://github.com/Bacon/BaconQrCode
-- https://github.com/SimpleSoftwareIO/simple-qrcode (Bacon/BaconQrCode 的 Laravel 版本)
-- https://github.com/aferrandini/PHPQRCode
+  - https://github.com/endroid/QrCode
+  - https://github.com/Bacon/BaconQrCode
+  - https://github.com/SimpleSoftwareIO/simple-qrcode (Bacon/BaconQrCode 的 Laravel 版本)
+  - https://github.com/aferrandini/PHPQRCode

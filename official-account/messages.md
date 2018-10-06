@@ -18,9 +18,7 @@
 
 属性列表：
 
-```
-- content 文本内容
-```
+  - `content` 文本内容
 
 ```php
 use EasyWeChat\Kernel\Messages\Text;
@@ -56,12 +54,10 @@ $image = new Image($mediaId);
 
 属性列表：
 
-```
-- title 标题
-- description 描述
-- media_id 媒体资源 ID
-- thumb_media_id 封面资源 ID
-```
+  - `title` 标题
+  - `description` 描述
+  - `media_id` 媒体资源 ID
+  - `thumb_media_id` 封面资源 ID
 
 ```php
 
@@ -77,9 +73,7 @@ $video = new Video($mediaId, [
 
 属性列表：
 
-```
-- media_id 媒体资源 ID
-```
+  - `media_id` 媒体资源 ID
 
 ```php
 use EasyWeChat\Kernel\Messages\Voice;
@@ -101,12 +95,10 @@ $voice = new Voice($mediaId);
 
 `NewsItem` 属性：
 
-```
-- title 标题
-- description 描述
-- image 图片链接
-- url 链接 URL
-```
+  - `title` 标题
+  - `description` 描述
+  - `image` 图片链接
+  - `url` 链接 URL
 
 ```php
 use EasyWeChat\Kernel\Messages\News;
@@ -131,15 +123,13 @@ $news = new News($items);
 
 属性列表：
 
-```
-- title 标题
-- author 作者
-- content 具体内容
-- thumb_media_id 图文消息的封面图片素材id（必须是永久mediaID）
-- digest 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空
-- source_url 来源 URL
-- show_cover 是否显示封面，0 为 false，即不显示，1 为 true，即显示
-```
+  - `title` 标题
+  - `author` 作者
+  - `content` 具体内容
+  - `thumb_media_id` 图文消息的封面图片素材id（必须是永久mediaID）
+  - `digest` 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空
+  - `source_url` 来源 URL
+  - `show_cover` 是否显示封面，0 为 false，即不显示，1 为 true，即显示
 
 ```php
 use EasyWeChat\Kernel\Messages\Article;
@@ -169,8 +159,8 @@ $article->content = '微信 SDK ...';
 
 在构造时有两个参数：
 
-- `$type` 素材类型，目前只支持：`mpnews`、 `mpvideo`、`voice`、`image` 等。
-- `$mediaId` 素材 ID，从接口查询或者上传后得到。
+  - `$type` 素材类型，目前只支持：`mpnews`、 `mpvideo`、`voice`、`image` 等。
+  - `$mediaId` 素材 ID，从接口查询或者上传后得到。
 
 
 ```php

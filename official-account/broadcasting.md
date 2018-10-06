@@ -6,9 +6,9 @@
 
 以下所有方法均有第二个参数 `$to` 用于指定接收对象：
 
-- 当 `$to` 为整型时为标签 id
-- 当 `$to` 为数组时为用户的 openid 列表（至少两个用户的 openid）
-- 当 `$to` 为 `null` 时表示全部用户
+  - 当 `$to` 为整型时为标签 id
+  - 当 `$to` 为数组时为用户的 openid 列表（至少两个用户的 openid）
+  - 当 `$to` 为 `null` 时表示全部用户
 
 ```php
 $app->broadcasting->sendMessage(Message $message, array | int $to = null);

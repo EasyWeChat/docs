@@ -25,26 +25,24 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 
 它们的区别有两处，授权地址不同，`scope` 不同。
 
-- **公众平台网页授权获取用户信息**
+  - **公众平台网页授权获取用户信息**
+    **授权 URL**: `https://open.weixin.qq.com/connect/oauth2/authorize`
+    **Scopes**: `snsapi_base` 与 `snsapi_userinfo`
 
-  **授权 URL**: `https://open.weixin.qq.com/connect/oauth2/authorize`
-  **Scopes**: `snsapi_base` 与 `snsapi_userinfo`
-
-- **开放平台网页登录**
-
-  **授权 URL**: `https://open.weixin.qq.com/connect/qrconnect`
-  **Scopes**: `snsapi_login`
+  - **开放平台网页登录**
+    **授权 URL**: `https://open.weixin.qq.com/connect/qrconnect`
+    **Scopes**: `snsapi_login`
 
 他们的逻辑都一样：
 
-1. 用户尝试访问一个我们的业务页面，例如: `/user/profile`
-2. 如果用户已经登录，则正常显示该页面
-2. 系统检查当前访问的用户并未登录（从 session 或者其它方式检查），则跳转到**跳转到微信授权服务器**（上面的两种中一种**授权 URL**），并告知微信授权服务器我的**回调URL（redirect_uri=callback.php)**，此时用户看到蓝色的授权确认页面（`scope` 为 `snsapi_base` 时不显示）
-4. 用户点击确定完成授权，浏览器跳转到**回调URL**: `callback.php` 并带上 `code`： `?code=CODE&state=STATE`。
-5. 在 `callback.php` 中得到 `code` 后，通过 `code` 再次向微信服务器请求得到 **网页授权 access_token** 与 `openid`
-6. 你可以选择拿 `openid` 去请求 API 得到用户信息（可选）
-7. 将用户信息写入 SESSION。
-8. 跳转到第 3 步写入的 `target_url` 页面（`/user/profile`）。
+  1. 用户尝试访问一个我们的业务页面，例如: `/user/profile`
+  2. 如果用户已经登录，则正常显示该页面
+  2. 系统检查当前访问的用户并未登录（从 session 或者其它方式检查），则跳转到**跳转到微信授权服务器**（上面的两种中一种**授权 URL**  ），并告知微信授权服务器我的**回调URL（redirect_uri=callback.php)**，此时用户看到蓝色的授权确认页面（`scope` 为 `snsapi_base` 时不显示）
+  4. 用户点击确定完成授权，浏览器跳转到**回调URL**: `callback.php` 并带上 `code`： `?code=CODE&state=STATE`。
+  5. 在 `callback.php` 中得到 `code` 后，通过 `code` 再次向微信服务器请求得到 **网页授权 access_token** 与 `openid`
+  6. 你可以选择拿 `openid` 去请求 API 得到用户信息（可选）
+  7. 将用户信息写入 SESSION。
+  8. 跳转到第 3 步写入的 `target_url` 页面（`/user/profile`）。
 
 > {warning} 看懵了？没事，使用 SDK，你不用管这么多。:smile:
 >
@@ -55,9 +53,9 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 
 从上面我们所描述的授权流程来看，我们至少有3个页面：
 
-1. **业务页面**，也就是需要授权才能访问的页面。
-2. **发起授权页**，此页面其实可以省略，可以做成一个中间件，全局检查未登录就发起授权。
-3. **授权回调页**，接收用户授权后的状态，并获取用户信息，写入用户会话状态（SESSION）。
+  1. **业务页面**，也就是需要授权才能访问的页面。
+  2. **发起授权页**，此页面其实可以省略，可以做成一个中间件，全局检查未登录就发起授权。
+  3. **授权回调页**，接收用户授权后的状态，并获取用户信息，写入用户会话状态（SESSION）。
 
 ## 开始之前
 
