@@ -37,11 +37,7 @@ $config = [
     'secret' => 'f1c242f4f28f735d4687abb469072xxx',
     'token' => 'TestToken',
     'response_type' => 'array',
-
-    'log' => [
-        'level' => 'debug',
-        'file' => __DIR__.'/wechat.log',
-    ],
+    //...
 ];
 
 $app = Factory::officialAccount($config);
@@ -49,7 +45,7 @@ $app = Factory::officialAccount($config);
 $response = $app->server->serve();
 
 // 将响应输出
-$response->send(); // Laravel 里请使用：return $response;
+$response->send();exit; // Laravel 里请使用：return $response;
 
 ```
 
@@ -72,7 +68,7 @@ $app = Factory::officialAccount($config);
 $response = $app->server->serve();
 
 // 将响应输出
-$response->send(); // Laravel 里请使用：return $response;
+$response->send(); exit; // Laravel 里请使用：return $response;
 ```
 
 最后这一行我有必要详细讲一下：
@@ -134,7 +130,10 @@ $response->send(); // Laravel 里请使用：return $response;
  $app = Factory::openPlatform($config);
 
  // 企业微信
- $app = Factory::weWork($config);
+ $app = Factory::work($config);
+
+ // 企业微信开放平台
+ $app = Factory::openWork($config);
 
  // 微信支付
  $app = Factory::payment($config);
