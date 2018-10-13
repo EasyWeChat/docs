@@ -93,6 +93,8 @@ $voice = new Voice($mediaId);
 
 图文消息分为 `NewsItem` 与 `News`，`NewsItem` 为图文内容条目。
 
+> {warning} [10月12日起，被动回复消息与客服消息接口的图文消息类型中图文数目只能为一条](https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&announce_id=115383153198yAvN&version=&lang=zh_CN&token=)
+
 `NewsItem` 属性：
 
 >  - `title` 标题
@@ -112,9 +114,6 @@ $items = [
         'image'       => $image,
         // ...
     ]),
-    new NewsItem([...]),
-    new NewsItem([...]),
-    // ...
 ];
 $news = new News($items);
 ```
@@ -238,6 +237,8 @@ $app->server->push(function ($message) {
 
 #### 回复多图文消息
 
+> {warning} [10月12日起，被动回复消息与客服消息接口的图文消息类型中图文数目只能为一条](https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&announce_id=115383153198yAvN&version=&lang=zh_CN&token=)
+
 多图文消息其实就是单图文消息的一个数组而已了：
 
 ```php
@@ -246,12 +247,8 @@ use EasyWeChat\Kernel\Messages\NewsItem;
 
 // ...
 $app->server->push(function ($message) {
-    $news1 = new NewsItem(...);
-    $news2 = new NewsItem(...);
-    $news3 = new NewsItem(...);
-    $news4 = new NewsItem(...);
-
-    return new News([$news1, $news2, $news3, $news4]);
+   $news = new NewsItem(...);
+   return new News([$news]);
 });
 // ...
 ```
@@ -272,14 +269,13 @@ $result = $app->customer_service->message($message)->to($openId)->send();
 
 #### 发送多图文消息
 
+> {warning} [10月12日起，被动回复消息与客服消息接口的图文消息类型中图文数目只能为一条](https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&announce_id=115383153198yAvN&version=&lang=zh_CN&token=)
+
 多图文消息其实就是单图文消息组成的一个 News 对象而已：
 
 ```php
 $news1 = new NewsItem(...);
-$news2 = new NewsItem(...);
-$news3 = new NewsItem(...);
-$news4 = new NewsItem(...);
-$news = new News([$news1, $news2, $news3, $news4]);
+$news = new News([$news1]);
 
 $app->customer_service->message($news)->to($openId)->send();
 ```
