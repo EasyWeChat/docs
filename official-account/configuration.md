@@ -113,12 +113,13 @@ return [
 由于日志使用的是 [Monolog](https://github.com/Seldaek/monolog)，所以，除了默认的文件式日志外，你可以自定义日志处理器：
 
 ```php
+use Monolog\Logger;
 use Monolog\Handler\RotatingFileHandler;
 
 
 // 注册自定义日志
 $app->logger->extend('mylog', function($app, $config){
-    return new Monolog($this->parseChannel($config), [
+    return new Logger($this->parseChannel($config), [
         $this->prepareHandler(new RotatingFileHandler(
             $config['path'], $config['days'], $this->level($config)
         )),
