@@ -130,7 +130,7 @@ $app->logger->extend('mylog', function($app, $config){
 
 配置文件中在 `driver` 部分即可使用你自定义的驱动了：
 
-```
+```php
 'log' => [
     'default' => 'dev', // 默认使用的 channel，生产环境可以改为下面的 prod
     'channels' => [
