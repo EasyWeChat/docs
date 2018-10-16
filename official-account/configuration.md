@@ -115,7 +115,6 @@ return [
 ```php
 use Monolog\Handler\RotatingFileHandler;
 
-$handler = new RotatingFileHandler('/path/to/wechat.log', 5, 'debug');
 
 // 注册自定义日志
 $app->logger->extend('mylog', function($app, $config){
