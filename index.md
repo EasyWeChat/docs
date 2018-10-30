@@ -68,6 +68,7 @@
 - ## 自定义
   - [Access Token](/docs/{{version}}/customize/access_token)
   - [缓存](/docs/{{version}}/customize/cache)
+  - [模块替换](/docs/{{version}}/customize/replace-service)
 - ## 其他
   - [常见问题](/docs/{{version}}/troubleshooting)
   - [参与贡献](/docs/{{version}}/contributing)
