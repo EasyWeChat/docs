@@ -13,7 +13,8 @@ EasyWeChat 是一个通用的 Composer 包，所以不需要对框架单独做�
 
 ## Yii
 
->  - [max-wen/yii2-easy-wechat](https://github.com/max-wen/yii2-easy-wechat)
+> - [jianyan74/yii2-easy-wechat](https://github.com/jianyan74/yii2-easy-wechat) 适用于 EasyWeChat 4.x 
+> - [max-wen/yii2-easy-wechat](https://github.com/max-wen/yii2-easy-wechat) 适用于 EasyWeChat 3.x 
 
 ## ThinkPHP
 
