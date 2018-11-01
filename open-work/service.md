@@ -31,9 +31,9 @@ $app->corp->getAuthorization(string $authCorpId, string $permanentCode); //$auth
 $app->corp->getManagers(string $authCorpId, string $agentId); //$authCorpId 授权的企业corp_id  $agentId 授权方安装的应用agentid
 ```
 
-# 网页授权登录第三方
+##  网页授权登录第三方
 
-## 构造第三方oauth2链接
+### 构造第三方oauth2链接
 
 ```php
 //$redirectUri 回调uri 这里可以覆盖 默认读取配置文件
@@ -42,13 +42,13 @@ $app->corp->getManagers(string $authCorpId, string $agentId); //$authCorpId 授�
 $app->corp->getOAuthRedirectUrl(string $redirectUri = '', string $scope = 'snsapi_userinfo', string $state = null); 
 ```
 
-## 第三方根据code获取企业成员信息
+### 第三方根据code获取企业成员信息
 
 ```php
 $app->corp->getUserByCode(string $code); 
 ```
 
-## 第三方使用user_ticket获取成员详情
+### 第三方使用user_ticket获取成员详情
 
 ```php
 $app->corp->getUserByTicket(string $userTicket); 
