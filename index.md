@@ -65,6 +65,12 @@
   - [OA](/docs/{{version}}/wework/oa)
   - [电子发票](/docs/{{version}}/wework/invoice)
   - [JSSDK](/docs/{{version}}/basic-services/jssdk)
+- ## 企业微信开放平台
+  - [入门](/docs/{{version}}/open-work/index)
+  - [服务商接口](/docs/{{version}}/open-work/provider)
+  - [服务商](/docs/{{version}}/open-work/server)
+  - [第三方应用接口](/docs/{{version}}/open-work/service)
+  - [企业相关](/docs/{{version}}/open-work/work)
 - ## 自定义
   - [Access Token](/docs/{{version}}/customize/access_token)
   - [缓存](/docs/{{version}}/customize/cache)
