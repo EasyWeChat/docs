@@ -57,7 +57,7 @@ API:
 $app->app_code->getUnlimit(string $scene, array $optional = []);
 ```
 
-> 其中 $scene 必填，$optinal 与 get 方法一致，多一个 page 参数。
+> 其中 $scene 必填，$optinal 与 get 方法一致，多一个 path 参数。
 
 示例代码：
 
