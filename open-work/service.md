@@ -10,13 +10,13 @@ $app->corp->getPreAuthCode();
 ## 设置授权配置
 
 ```php
-$app->corp->setSession(array $data);
+$app->corp->setSession(string $preAuthCode, array $sessionInfo);
 ```
 
 ## 获取企业永久授权码
 
 ```php
-$app->corp->getPermanentByCode(string $authCode); //传入临时授权码
+$app->corp->getPermanentByCode(string $preAuthCode); //传入临时授权码
 ```
 
 ## 获取企业授权信息
