@@ -1,5 +1,7 @@
 # JSSDK
 
+微信 JSSDK 官方文档：https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115
+
 ## API
 
 >  - `$app->jssdk->buildConfig(array $APIs, $debug = false, $beta = false, $json = true);` 获取JSSDK的配置数组，默认返回 JSON 字符串，当 `$json` 为 `false` 时返回数组，你可以直接使用到网页中。
