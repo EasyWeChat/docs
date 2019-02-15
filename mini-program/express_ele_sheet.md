@@ -80,7 +80,7 @@ $app->express->getOrder($data);
 
 ```
 
-$data 格式 [参考](https://developers.weixin.qq.com/miniprogram/dev/api/getOrder.html)
+$data 格式 [参考](https://developers.weixin.qq.com/miniprogram/dev/api/getPath.html)
 
 $app->express->getPath($data);
 
