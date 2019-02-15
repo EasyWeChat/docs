@@ -25,7 +25,7 @@ $app->express->listProviders();
 
 > https://developers.weixin.qq.com/miniprogram/dev/api/addOrder.html
 
-```
+```php
 
 $app->express->createWaybill($data);
 
@@ -62,7 +62,7 @@ $app->express->createWaybill($data);
 
 > https://developers.weixin.qq.com/miniprogram/dev/api/cancelOrder.html
 
-```
+```php
 $app->express->deleteWaybill($data);
 
 ```
@@ -71,7 +71,7 @@ $app->express->deleteWaybill($data);
 
 > https://developers.weixin.qq.com/miniprogram/dev/api/getOrder.html
 
-```
+```php
 $app->express->getWaybill($data);
 
 ```
@@ -80,7 +80,7 @@ $app->express->getWaybill($data);
 
 > https://developers.weixin.qq.com/miniprogram/dev/api/getPath.html
 
-```
+```php
 $app->express->getWaybillTrack($data);
 
 ```
@@ -91,7 +91,7 @@ $app->express->getWaybillTrack($data);
 
 > https://developers.weixin.qq.com/miniprogram/dev/api/getQuota.html
 
-```
+```php
 
 $app->express->getBalance($deliveryId, $bizId);
 
