@@ -100,6 +100,7 @@ $jssdk = $payment->jssdk;
 1. 发起 OAuth 授权，获取用户 `$accessToken`,参考网页授权章节。
 
 2. 使用 `$accessToken` 获取配置
+
 ```php
 $configForPickAddress = $jssdk->shareAddressConfig($token);
 
