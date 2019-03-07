@@ -77,14 +77,14 @@ $jssdk = $payment->jssdk;
 3. 小程序:
 
     ```php
-    $config = $jssdk->sdkConfig($prepayId); // 返回数组
+    $config = $jssdk->bridgeConfig($prepayId); // 返回数组
     ```
 
     javascript:
 
     ```js
-    wx.chooseWXPay({
-        timeStamp: <?= $config['timestamp'] ?>, //注意 timeStamp 的格式
+    wx.requestPayment({
+        timeStamp: <?= $config['timeStamp'] ?>, //注意 timeStamp 的格式
         nonceStr: '<?= $config['nonceStr'] ?>',
         package: '<?= $config['package'] ?>',
         signType: '<?= $config['signType'] ?>',
