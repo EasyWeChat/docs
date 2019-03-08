@@ -57,13 +57,14 @@ API:
 $app->app_code->getUnlimit(string $scene, array $optional = []);
 ```
 
-> 其中 $scene 必填，$optinal 与 get 方法一致，多一个 path 参数。
+> 其中 $scene 必填，$optinal 与 get 方法一致，多一个 page 参数。
 
 示例代码：
 
 ```php
 $response = $app->app_code->getUnlimit('scene-value', [
-    //...
+    'page'  => 'path/to/page',
+    'width' => 600,
 ]);
 // $response 成功时为 EasyWeChat\Kernel\Http\StreamResponse 实例，失败为数组或你指定的 API 返回类型
 
