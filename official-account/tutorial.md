@@ -37,11 +37,7 @@ $config = [
     'secret' => 'f1c242f4f28f735d4687abb469072xxx',
     'token' => 'TestToken',
     'response_type' => 'array',
-
-    'log' => [
-        'level' => 'debug',
-        'file' => __DIR__.'/wechat.log',
-    ],
+    //...
 ];
 
 $app = Factory::officialAccount($config);
@@ -49,7 +45,7 @@ $app = Factory::officialAccount($config);
 $response = $app->server->serve();
 
 // 将响应输出
-$response->send(); // Laravel 里请使用：return $response;
+$response->send();exit; // Laravel 里请使用：return $response;
 
 ```
 
@@ -72,7 +68,7 @@ $app = Factory::officialAccount($config);
 $response = $app->server->serve();
 
 // 将响应输出
-$response->send(); // Laravel 里请使用：return $response;
+$response->send(); exit; // Laravel 里请使用：return $response;
 ```
 
 最后这一行我有必要详细讲一下：
@@ -110,11 +106,11 @@ $response->send(); // Laravel 里请使用：return $response;
 
 ```
 
-> 注意：send() 方法里已经包含 echo 了，请不要再加 echo 在前面。
+> {warning} 注意：send() 方法里已经包含 echo 了，请不要再加 echo 在前面。
 
 好吧，打开你的微信客户端，向你的公众号发送任意一条消息，你应该会收到回复：`您好！欢迎使用 EasyWeChat!`。
 
-> 没有收到回复？看到了“你的公众号暂时无法提供服务” ？， 好，那检查一下你的日志吧，日志在哪儿？我们的配置里写了日志路径了(`__DIR__.'/wechat.log'`)。 没有这个文件？看看权限哦。
+> {warning} 没有收到回复？看到了“你的公众号暂时无法提供服务” ？， 好，那检查一下你的日志吧，日志在哪儿？我们的配置里写了日志路径了(`__DIR__.'/wechat.log'`)。 没有这个文件？看看权限哦。
 
 一个基本的服务端验证就完成了。
 
@@ -134,7 +130,10 @@ $response->send(); // Laravel 里请使用：return $response;
  $app = Factory::openPlatform($config);
 
  // 企业微信
- $app = Factory::weWork($config);
+ $app = Factory::work($config);
+
+ // 企业微信开放平台
+ $app = Factory::openWork($config);
 
  // 微信支付
  $app = Factory::payment($config);

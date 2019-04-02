@@ -14,9 +14,9 @@ $content = $app->scheme($productId); // $productId 为你的产品/商品ID，�
 
 将 `$content` 生成二维码，SDK 并不内置二维码生成库，使用你熟悉的工具创建二维码即可，比如 PHP 部分有以下工具可以选择：
 
-- https://github.com/endroid/qr-code
-- https://github.com/SimpleSoftwareIO/simple-qrcode
-- https://github.com/aferrandini/PHPQRCode
+>  - https://github.com/endroid/qr-code
+>  - https://github.com/SimpleSoftwareIO/simple-qrcode
+>  - https://github.com/aferrandini/PHPQRCode
 
 #### 处理回调
 

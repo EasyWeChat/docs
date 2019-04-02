@@ -22,7 +22,7 @@ $redis->connect('redis_host', 6379);
 $cache = new RedisCache($redis);
 
 // 替换应用中的缓存
-$app['cache'] = $cache;
+$app->rebind('cache', $cache);
 ```
 
 ### Laravel 中使用
@@ -36,7 +36,7 @@ use Symfony\Component\Cache\Simple\RedisCache;
 $predis = app('redis')->connection()->client(); // connection($name), $name 默认为 `default`
 $cache = new RedisCache($predis);
 
-$app['cache'] = $cache;
+$app->rebind('cache', $cache);
 ```
 
 > 上面提到的 `app('redis')->connection($name)`, 这里的 `$name` 是 laravel 项目中配置文件 `database.php` 中 `redis` 配置名 `default`：https://github.com/laravel/laravel/blob/master/config/database.php#L118
@@ -113,7 +113,7 @@ class MyCustomCache implements CacheInterface
 然后实例化你的缓存类并在 EasyWeChat 里使用它：
 
 ```php
-$app['cache'] = new MyCustomCache();
+$app->rebind('cache', new MyCustomCache());
 ```
 
 OK，这样就完成了自定义缓存的操作。

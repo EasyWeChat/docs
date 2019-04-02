@@ -45,7 +45,7 @@ $result = $app->refund->byOutTradeNumber('out-trade-no-xxx', 'refund-no-xxx', 20
 
 可通过 4 种不同类型的单号查询：
 
-- 微信订单号 => `queryByTransactionId($transactionId)`
-- 商户订单号 => `queryByOutTradeNumber($outTradeNumber)`
-- 商户退款单号 => `queryByOutRefundNumber($outRefundNumber)`
-- 微信退款单号 => `queryByRefundId($refundId)`
+>  - 微信订单号 => `queryByTransactionId($transactionId)`
+>  - 商户订单号 => `queryByOutTradeNumber($outTradeNumber)`
+>  - 商户退款单号 => `queryByOutRefundNumber($outRefundNumber)`
+>  - 微信退款单号 => `queryByRefundId($refundId)`

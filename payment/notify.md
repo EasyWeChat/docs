@@ -23,16 +23,15 @@ $response->send(); // Laravel 里请使用：return $response;
 
 这里需要注意的有几个点：
 
-0. 退款结果通知和扫码支付通知的使用方法均类似。
-1. `handlePaidNotify` 只接收一个 [`Closure`](http://php.net/manual/zh/class.closure.php) 匿名函数。
-2. 该匿名函数接收两个参数，这两个参数分别为：
+  0. 退款结果通知和扫码支付通知的使用方法均类似。
+  1. `handlePaidNotify` 只接收一个 [`Closure`](http://php.net/manual/zh/class.closure.php) 匿名函数。
+  2. 该匿名函数接收两个参数，这两个参数分别为：
+  >  - `$message` 为微信推送过来的通知信息，为一个数组；
+  >  - `$fail` 为一个函数，触发该函数可向微信服务器返回对应的错误信息，**微信会稍后重试再通知**。
 
-    - `$message` 为微信推送过来的通知信息，为一个数组；
-    - `$fail` 为一个函数，触发该函数可向微信服务器返回对应的错误信息，**微信会稍后重试再通知**。
+  3. 该函数返回值就是告诉微信 **“我是否处理完成”**。如果你触发 `$fail` 函数，那么微信会在稍后再次继续通知你，直到你明确的告诉它：“我已经处理完成了”，**只有**在函数里 `return true;` 才代表处理完成。
 
-3. 该函数返回值就是告诉微信 **“我是否处理完成”**。如果你触发 `$fail` 函数，那么微信会在稍后再次继续通知你，直到你明确的告诉它：“我已经处理完成了”，**只有**在函数里 `return true;` 才代表处理完成。
-
-4. `handlePaidNotify` 返回值 `$response` 是一个 Response 对象，如果你要直接输出，使用 `$response->send()`, 在一些框架里（如 Laravel）不是输出而是返回：`return $response`。
+  4. `handlePaidNotify` 返回值 `$response` 是一个 Response 对象，如果你要直接输出，使用 `$response->send()`, 在一些框架里（如 Laravel）不是输出而是返回：`return $response`。
 
 通常我们的处理逻辑大概是下面这样（**以下只是伪代码**）：
 

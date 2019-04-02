@@ -12,9 +12,9 @@ $app->app_code->get(string $path, array $optional = []);
 
 其中 `$optional` 为以下可选参数：
 
-- **width** Int - 默认 430 二维码的宽度
-- **auto_color**  默认 false  自动配置线条颜色，如果颜色依然是黑色，则说明不建议配置主色调
-- **line_color**  数组，`auto_color` 为 `false` 时生效，使用 rgb 设置颜色 例如 ，示例：`["r" => 0,"g" => 0,"b" => 0]`。
+>  - **width** Int - 默认 430 二维码的宽度
+>  - **auto_color**  默认 false  自动配置线条颜色，如果颜色依然是黑色，则说明不建议配置主色调
+>  - **line_color**  数组，`auto_color` 为 `false` 时生效，使用 rgb 设置颜色 例如 ，示例：`["r" => 0,"g" => 0,"b" => 0]`。
 
 示例代码：
 
@@ -33,7 +33,7 @@ $response = $app->app_code->get('path/to/page', [
         'r' => 105,
         'g' => 166,
         'b' => 134,
-    ],  
+    ],
 ]);
 
 // $response 成功时为 EasyWeChat\Kernel\Http\StreamResponse 实例，失败时为数组或者你指定的 API 返回格式
@@ -63,7 +63,8 @@ $app->app_code->getUnlimit(string $scene, array $optional = []);
 
 ```php
 $response = $app->app_code->getUnlimit('scene-value', [
-    //...
+    'page'  => 'path/to/page',
+    'width' => 600,
 ]);
 // $response 成功时为 EasyWeChat\Kernel\Http\StreamResponse 实例，失败为数组或你指定的 API 返回类型
 

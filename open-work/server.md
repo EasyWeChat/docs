@@ -6,7 +6,7 @@
 SDK 默认会处理事件 `suite_ticket` ，并会缓存 `suite_ticket`
 
 
-> 需要注意的是：授权成功、变更授权、取消授权通知时间的响应必须在1000ms内完成，以保证用户安装应用的体验。建议在接收到此事件时 立即回应企业微信，之后再做相关业务的处理。
+> {info} 需要注意的是：授权成功、变更授权、取消授权通知时间的响应必须在1000ms内完成，以保证用户安装应用的体验。建议在接收到此事件时 立即回应企业微信，之后再做相关业务的处理。
 
 
 ```php
@@ -24,7 +24,7 @@ $server->push(function ($message) {
         case 'cancel_auth':
             break;
         //通讯录事件通知
-        case 'change_contact':                
+        case 'change_contact':
             switch ($message['ChangeType']){
                 case 'create_user':
                     return '新增成员事件';

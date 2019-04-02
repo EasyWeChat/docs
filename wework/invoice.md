@@ -60,9 +60,9 @@ mixed update(string $cardId, string $encryptCode, string $status)
 ```
 
 > {warning} $status: 发报销状态
-    - INVOICE_REIMBURSE_INIT：发票初始状态，未锁定；
-    - INVOICE_REIMBURSE_LOCK：发票已锁定，无法重复提交报销;
-    - INVOICE_REIMBURSE_CLOSURE:发票已核销，从用户卡包中移除
+>>  - INVOICE_REIMBURSE_INIT：发票初始状态，未锁定；
+>>  - INVOICE_REIMBURSE_LOCK：发票已锁定，无法重复提交报销;
+>>  - INVOICE_REIMBURSE_CLOSURE:发票已核销，从用户卡包中移除
 
 ## 批量更新发票状态
 

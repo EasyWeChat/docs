@@ -97,38 +97,54 @@ return [
 
 ## 日志配置
 
-日志有两种配置方式：
+你可以配置多个日志的 channel，每个 channel 里的 `driver` 对应不同的日志驱动，内置可用的 `driver` 如下表：
 
-### 文件式
+名称 | 描述
+------------- | -------------
+`stack` | 复合型，可以包含下面多种驱动的混合模式
+`single` | 基于 `StreamHandler` 的单一文件日志，参数有 `path`，`level`
+`daily` | 基于 `RotatingFileHandler` 按日期生成日志文件，参数有 `path`，`level`，`days`(默认 7 天)
+`slack` | 基于 `SlackWebhookHandler` 的 Slack 组件，参数请参考源码：[LogManager.php](https://github.com/overtrue/wechat/blob/master/src/Kernel/Log/LogManager.php#L247)
+`syslog` | 基于 `SyslogHandler` Monolog 驱动，参数有 `facility` 默认为 `LOG_USER`，`level`
+`errorlog` | 记录日志到系统错误日志，基于 `ErrorLogHandler`，参数有 `type`，默认为 `ErrorLogHandler::OPERATING_SYSTEM`
 
-```php
-'log' => [
-    'level'      => 'debug',
-    'permission' => 0777,
-    'file'       => '/tmp/easywechat.log',
-],
-```
-
-配置文件里的 `/tmp/...` 是绝对路径
-
-如果在 windows 平台，需要把它改成 `C:\foo\bar` 的形式，
-
-如果需要按日独立存储，可以配置成 `'file'  => storage_path('/tmp/easywechat/easywechat_'.date('Ymd').'.log'),`
-
-### 自定义 Handler
+### 自定义日志驱动
 
 由于日志使用的是 [Monolog](https://github.com/Seldaek/monolog)，所以，除了默认的文件式日志外，你可以自定义日志处理器：
 
 ```php
+use Monolog\Logger;
 use Monolog\Handler\RotatingFileHandler;
 
-$handler = new RotatingFileHandler('/path/to/wechat.log', 5, 'debug');
 
-...
+// 注册自定义日志
+$app->logger->extend('mylog', function($app, $config){
+    return new Logger($this->parseChannel($config), [
+        $this->prepareHandler(new RotatingFileHandler(
+            $config['path'], $config['days'], $this->level($config)
+        )),
+    ]);
+});
+```
 
+> {info} 在你自定义的闭包函数中，可以使用 `EasyWeChat\Kernel\LogLogManager` 中的方法，具体请查看 SDK 源代码。
+
+配置文件中在 `driver` 部分即可使用你自定义的驱动了：
+
+```php
 'log' => [
-    'level'   => 'debug',
-    'handler' => $handler,
+    'default' => 'dev', // 默认使用的 channel，生产环境可以改为下面的 prod
+    'channels' => [
+        // 测试环境
+        'dev' => [
+            'driver' => 'mylog',
+            'path' => '/tmp/easywechat.log',
+            'level' => 'debug', 
+            'days' => 5,
+        ],
+
+        //...
+    ],
 ],
 ```
 

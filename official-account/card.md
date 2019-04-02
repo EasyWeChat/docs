@@ -31,7 +31,7 @@ $card->categories();
 $card->create($cardType = 'member_card', array $attributes);
 ```
 
-- `attributes` array 卡券信息
+>  - `attributes` array 卡券信息
 
 示例：
 
@@ -73,9 +73,9 @@ $cardInfo = $card->get($cardId);
 $card->list($offset = 0, $count = 10, $statusList = 'CARD_STATUS_VERIFY_OK');
 ```
 
-- `offset` int - 查询卡列表的起始偏移量，从0开始
-- `count` int - 需要查询的卡片的数量
-- `statusList` -  支持开发者拉出指定状态的卡券列表，详见 example
+>  - `offset` int - 查询卡列表的起始偏移量，从0开始
+>  - `count` int - 需要查询的卡片的数量
+>  - `statusList` -  支持开发者拉出指定状态的卡券列表，详见 example
 
 示例：
 
@@ -98,7 +98,7 @@ $result = $card->list($offset, $count, 'CARD_STATUS_NOT_VERIFY');
 $card->update($cardId, $type, $attributes = []);
 ```
 
-- `type` string - 卡券类型
+>  - `type` string - 卡券类型
 
 示例：
 
@@ -141,7 +141,7 @@ $card->delete($cardId);
 $card->createQrCode($cards);
 ```
 
-- `cards` array - 卡券相关信息
+>  - `cards` array - 卡券相关信息
 
 示例：
 
@@ -200,7 +200,7 @@ $result = $card->createQrCode($cards);
 $card->getQrCode($ticket);
 ```
 
-- `ticket` string  - 获取的二维码 ticket，凭借此 ticket 可以在有效时间内换取二维码。
+>  - `ticket` string>  - 获取的二维码 ticket，凭借此 ticket 可以在有效时间内换取二维码。
 
 示例：
 
@@ -231,11 +231,11 @@ $card->getQrCodeUrl($ticket);
 $card->createLandingPage($banner, $pageTitle, $canShare, $scene, $cards);
 ```
 
-- `banner` string -页面的 banner 图;
-- `pageTitle` string - 页面的 title
-- `canShare` bool - 页面是不是可以分享，true 或 false
-- `scene`  string - 投放页面的场景值，具体值请参考下面的 example
-- `cards`  array - 卡券列表，每个元素有两个字段
+>  - `banner` string -页面的 banner 图;
+>  - `pageTitle` string - 页面的 title
+>  - `canShare` bool - 页面是不是可以分享，true 或 false
+>  - `scene`  string - 投放页面的场景值，具体值请参考下面的 example
+>  - `cards`  array - 卡券列表，每个元素有两个字段
 
 示例：
 
@@ -264,7 +264,7 @@ $result = $card->createLandingPage($banner, $pageTitle, $canShare, $scene, $card
 
 ### 图文消息群发卡券
 
-特别注意：目前该接口仅支持填入非自定义code的卡券,自定义code的卡券需先进行code导入后调用。
+> {warning} 特别注意：目前该接口仅支持填入非自定义 code 的卡券,自定义 code 的卡券需先进行 code 导入后调用。
 
 ```php
 $card->getHtml($cardId);
@@ -287,8 +287,8 @@ $card->setTestWhitelist($openids); // 使用 openid
 $card->setTestWhitelistByName($usernames); // 使用 username
 ```
 
-- `openids` array - 测试的openid列表
-- `usernames` array  - 测试的微信号列表
+>  - `openids` array - 测试的openid列表
+>  - `usernames` array>  - 测试的微信号列表
 
 示例：
 
@@ -326,7 +326,7 @@ $result = $card->getUserCards($openid, $cardId);
 $card->setPayCell($cardId, $isOpen = true);
 ```
 
-- `isOpen` string - 是否开启买单功能，填 true/false，不填默认 true
+>  - `isOpen` string - 是否开启买单功能，填 true/false，不填默认 true
 
 示例：
 
@@ -346,8 +346,8 @@ $card->increaseStock($cardId, $amount); // 增加库存
 $card->reductStock($cardId, $amount); // 减少库存
 ```
 
-- `cardId` string - 卡券 ID
-- `amount` int - 修改多少库存
+>  - `cardId` string - 卡券 ID
+>  - `amount` int - 修改多少库存
 
 示例：
 
@@ -367,8 +367,8 @@ $result = $card->increaseStock($cardId, 100);
 $card->code->deposit($cardId, $codes);
 ```
 
-- `cardId` string - 要导入code的卡券ID
-- `codes` array - 要导入微信卡券后台的自定义 code，最多100个
+>  - `cardId` string - 要导入code的卡券ID
+>  - `codes` array - 要导入微信卡券后台的自定义 code，最多100个
 
 示例：
 
@@ -422,7 +422,7 @@ $result = $card->code->check($cardId, $codes);
 $card->code->get($code, $cardId, $checkConsume = true);
 ```
 
-- checkConsume  是否校验code核销状态，true和false
+>  - checkConsume  是否校验code核销状态，true和false
 
 示例：
 
@@ -476,7 +476,7 @@ $result = $card->code->decrypt($encryptedCode);
 $card->code->update($code, $newCode, $cardId);
 ```
 
-- `newCode` string - 变更后的有效 Code 码
+>  - `newCode` string - 变更后的有效 Code 码
 
 示例：
 
@@ -532,7 +532,7 @@ $result = $card->general_card->updateUser(array $info);
 $result = $card->member_card->activate($info);
 ```
 
-- `info` - 需要激活的会员卡信息
+>  - `info` - 需要激活的会员卡信息
 
 示例：
 
@@ -558,7 +558,7 @@ $result = $card->member_card->activate($info);
 $card->member_card->setActivationForm($cardId, $settings);
 ```
 
-- `settings` array - 会员卡激活时的选项
+>  - `settings` array - 会员卡激活时的选项
 
 示例：
 
@@ -614,7 +614,7 @@ $result = $card->member_card->getUser($cardId, $code);
 $card->member_card->updateUser($info);
 ```
 
-- `info` array - 可以更新的会员信息
+>  - `info` array - 可以更新的会员信息
 
 示例：
 
@@ -666,8 +666,8 @@ $result = $card->sub_merchant->create($attributes);
 $card->sub_merchant->update(int $merchantId, array $info);
 ```
 
-- `$merchantId` int - 子商户 ID
-- `$info` array - 参数与创建子商户参数一样
+>  - `$merchantId` int - 子商户 ID
+>  - `$info` array - 参数与创建子商户参数一样
 
 示例：
 

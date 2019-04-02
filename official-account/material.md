@@ -5,7 +5,7 @@
 
 ### 上传图片
 
-> 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
+> {warning} 注意：微信图片上传服务有敏感检测系统，图片内容如果含有敏感内容，如色情，商品推广，虚假信息等，上传可能失败。
 
 ```php
 $result = $app->material->uploadImage("/path/to/your/image.jpg");
@@ -69,9 +69,9 @@ $app->material->uploadArticle([$article, $article2, ...]);
 
 有三个参数：
 
-- `$mediaId` 要更新的文章的 `mediaId`
-- `$article` 文章内容，`Article` 实例或者 全字段数组
-- `$index` 要更新的文章在图文消息中的位置（多图文消息时，此字段才有意义，单图片忽略此参数），第一篇为 0；
+>  - `$mediaId` 要更新的文章的 `mediaId`
+>  - `$article` 文章内容，`Article` 实例或者 全字段数组
+>  - `$index` 要更新的文章在图文消息中的位置（多图文消息时，此字段才有意义，单图片忽略此参数），第一篇为 0；
 
 ```php
 $result = $app->material->updateArticle($mediaId, new Article(...));
@@ -112,7 +112,7 @@ $resource = $app->material->get($mediaId);
 
 如果请求的素材为图文消息，则响应如下：
 
-```
+```json
 {
  "news_item": [
        {
@@ -132,7 +132,7 @@ $resource = $app->material->get($mediaId);
 
 如果返回的是视频消息素材，则内容如下：
 
-```
+```json
 {
   "title":TITLE,
   "description":DESCRIPTION,
@@ -142,7 +142,7 @@ $resource = $app->material->get($mediaId);
 
 其他类型的素材消息，则响应为 `EasyWeChat\Kernel\Http\StreamResponse` 实例，开发者可以自行保存为文件。例如
 
-```
+```php
 $stream = $app->material->get($mediaId);
 
 if ($stram instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
@@ -156,9 +156,9 @@ if ($stram instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
 
 ### 获取永久素材列表
 
-- `$type`   素材的类型，图片（`image`）、视频（`video`）、语音 （`voice`）、图文（`news`）
-- `$offset` 从全部素材的该偏移位置开始返回，可选，默认 `0`，0 表示从第一个素材 返回
-- `$count`  返回素材的数量，可选，默认 `20`, 取值在 1 到 20 之间
+>  - `$type`   素材的类型，图片（`image`）、视频（`video`）、语音 （`voice`）、图文（`news`）
+>  - `$offset` 从全部素材的该偏移位置开始返回，可选，默认 `0`，0 表示从第一个素材 返回
+>  - `$count`  返回素材的数量，可选，默认 `20`, 取值在 1 到 20 之间
 
 ```php
 $app->material->list($type, $offset, $count);
@@ -166,13 +166,13 @@ $app->material->list($type, $offset, $count);
 
 示例：
 
-```
+```php
 $list = $app->material->list('image', 0, 10);
 ```
 
 图片、语音、视频 等类型的返回如下
 
-```
+```json
 {
    "total_count": TOTAL_COUNT,
    "item_count": ITEM_COUNT,
@@ -189,7 +189,7 @@ $list = $app->material->list('image', 0, 10);
 
 永久图文消息素材列表的响应如下：
 
-```
+```json
 {
    "total_count": TOTAL_COUNT,
    "item_count": ITEM_COUNT,

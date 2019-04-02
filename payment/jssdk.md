@@ -77,14 +77,14 @@ $jssdk = $payment->jssdk;
 3. 小程序:
 
     ```php
-    $config = $jssdk->sdkConfig($prepayId); // 返回数组
+    $config = $jssdk->bridgeConfig($prepayId, false); // 返回数组
     ```
 
     javascript:
 
     ```js
-    wx.chooseWXPay({
-        timeStamp: <?= $config['timestamp'] ?>, //注意 timeStamp 的格式
+    wx.requestPayment({
+        timeStamp: <?= $config['timeStamp'] ?>, //注意 timeStamp 的格式
         nonceStr: '<?= $config['nonceStr'] ?>',
         package: '<?= $config['package'] ?>',
         signType: '<?= $config['signType'] ?>',
@@ -100,6 +100,7 @@ $jssdk = $payment->jssdk;
 1. 发起 OAuth 授权，获取用户 `$accessToken`,参考网页授权章节。
 
 2. 使用 `$accessToken` 获取配置
+
 ```php
 $configForPickAddress = $jssdk->shareAddressConfig($token);
 
@@ -119,7 +120,7 @@ $config = $jssdk->appConfig($prepayId);
 
 你也许需要生成二维码，那么以下这些供参考：
 
-- https://github.com/endroid/QrCode
-- https://github.com/Bacon/BaconQrCode
-- https://github.com/SimpleSoftwareIO/simple-qrcode (Bacon/BaconQrCode 的 Laravel 版本)
-- https://github.com/aferrandini/PHPQRCode
+>  - https://github.com/endroid/QrCode
+>  - https://github.com/Bacon/BaconQrCode
+>  - https://github.com/SimpleSoftwareIO/simple-qrcode (Bacon/BaconQrCode 的 Laravel 版本)
+>  - https://github.com/aferrandini/PHPQRCode

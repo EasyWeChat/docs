@@ -14,7 +14,7 @@ $app->store->categories();
 $app->store->createMerchant($baseInfo);
 ```
 
-- `$baseInfo` 为门店小程序的基本信息数组，**`qualification_list` 字段为类目相关证件的临时素材 `mediaid` 如果 `second_catid` 对应的 `sensitive_type` 为 1 ，则 `qualification_list` 字段需要填 支持 0~5 个 `mediaid`，例如 `mediaid1`。`headimg_mediaid` 字段为头像 --- 临时素材 `mediaid`。`mediaid` 用现有的 `media/upload` 接口得到的,获取链接： [临时素材](media) ( 支持PNG\JPEG\JPG\GIF格式的图片，后续加上其他格式)**
+>  - `$baseInfo` 为门店小程序的基本信息数组，**`qualification_list` 字段为类目相关证件的临时素材 `mediaid` 如果 `second_catid` 对应的 `sensitive_type` 为 1 ，则 `qualification_list` 字段需要填 支持 0~5 个 `mediaid`，例如 `mediaid1`。`headimg_mediaid` 字段为头像 --- 临时素材 `mediaid`。`mediaid` 用现有的 `media/upload` 接口得到的,获取链接： [临时素材](media) ( 支持PNG\JPEG\JPG\GIF格式的图片，后续加上其他格式)**
 
 示例：
 
@@ -34,7 +34,7 @@ $info = [
 $result = $app->store->createMerchant($info);
 ```
 
-> 注意：创建门店小程序的审核结果,会以事件形式推送给商户填写的回调 URL
+> {warning} 注意：创建门店小程序的审核结果,会以事件形式推送给商户填写的回调 URL
 
 ## 查询门店小程序审核结果
 
@@ -48,7 +48,7 @@ $app->store->getStatus($baseInfo);
 $app->store->updateMerchant($data);
 ```
 
-- `$data` 需要更新的部分数据，目前仅支持门店头像和门店小程序介绍，**若有填写内容则为覆盖更新,若无内容则视为不修改,维持原有内容。`headimg_mediaid`、`intro` 字段参考创建门店小程序**
+>  - `$data` 需要更新的部分数据，目前仅支持门店头像和门店小程序介绍，**若有填写内容则为覆盖更新,若无内容则视为不修改,维持原有内容。`headimg_mediaid`、`intro` 字段参考创建门店小程序**
 
 示例：
 
@@ -72,8 +72,8 @@ $app->store->districts();
 ```php
 $app->store->searchFromMap($districtId, $keyword);
 ```
-- `$districtId` 为从腾讯地图拉取的地区 `id`
-- `$keyword` 为搜索的关键词
+>  - `$districtId` 为从腾讯地图拉取的地区 `id`
+>  - `$keyword` 为搜索的关键词
 
 ## 在腾讯地图中创建门店
 
@@ -101,7 +101,7 @@ $baseInfo = [
 ];
 ```
 
-- `$baseInfo`: 门店相关信息
+>  - `$baseInfo`: 门店相关信息
 
 > 事件推送 --- 腾讯地图中创建门店的审核结果。腾讯地图审核周期为3个工作日，请在期间内留意审核结果事件推送。提交后未当即返回事件推送即为审核中，请耐心等待。
 
@@ -124,7 +124,7 @@ $baseInfo = [
 ];
 ```
 
-- `$baseInfo`: 门店相关信息。`pic_list` 门店图片，可传多张图片 `pic_list`
+>  - `$baseInfo`: 门店相关信息。`pic_list` 门店图片，可传多张图片 `pic_list`
 
 > 事件推送 - 创建门店的审核结果
 
@@ -134,6 +134,6 @@ $baseInfo = [
 $app->store->update($baseInfo);
 ```
 
-- `$baseInfo`: 门店相关信息。
+>  - `$baseInfo`: 门店相关信息。
 
->需要注意的是，如果要更新门店的图片，实际相当于走一次重新为门店添加图片的流程，之前的旧图片会全部废弃。并且如果重新添加的图片中有与之前旧图片相同的，此时这个图片不需要重新审核。
+> {warning} 需要注意的是，如果要更新门店的图片，实际相当于走一次重新为门店添加图片的流程，之前的旧图片会全部废弃。并且如果重新添加的图片中有与之前旧图片相同的，此时这个图片不需要重新审核。

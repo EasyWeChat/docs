@@ -3,12 +3,11 @@
 
 ## 环境要求
 
-- PHP >= 7.0
-- [PHP cURL 扩展](http://php.net/manual/en/book.curl.php)
-- [PHP OpenSSL 扩展](http://php.net/manual/en/book.openssl.php)
-- [PHP SimpleXML 扩展](http://php.net/manual/en/book.simplexml.php)
-- [PHP fileinfo 拓展](http://php.net/manual/en/book.fileinfo.php)
-
+> - PHP >= 7.0
+> - [PHP cURL 扩展](http://php.net/manual/en/book.curl.php)
+> - [PHP OpenSSL 扩展](http://php.net/manual/en/book.openssl.php)
+> - [PHP SimpleXML 扩展](http://php.net/manual/en/book.simplexml.php)
+> - [PHP fileinfo 拓展](http://php.net/manual/en/book.fileinfo.php)
 
 Laravel 5 拓展包: [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat)
 
