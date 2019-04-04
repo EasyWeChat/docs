@@ -86,15 +86,15 @@ $app->user->blacklist($beginOpenid = null); // $beginOpenid 可选
 2. 将有授权关系用户的 openid 转换为新帐号的 openid。
 3. 将卡券关联用户的 openid 转换为新帐号的 openid。
 
-- ◆ 原帐号：准备要迁移的帐号，当审核完成且管理员确认后即被回收。
-- ◆ 新帐号：用来接纳粉丝的帐号。新帐号在整个流程中均能正常使用。
+- 原帐号：准备要迁移的帐号，当审核完成且管理员确认后即被回收。
+- 新帐号：用来接纳粉丝的帐号。新帐号在整个流程中均能正常使用。
 
 一定要按照下面的步骤来操作。
 1. 一定要在原帐号被冻结之前，最好是准备提交审核前，获取原帐号的用户列表。如果没有原帐号的用户列表，用不了转换工具。如果原账号被回收，这时候也没办法调用接口获取用户列表。
 
-如何获取用户列表见这里：https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140840
-
 2. 转换 openid 的 API 接口如下，可在帐号迁移审核完成后开始调用，并最多保留15天。若帐号迁移没完成，调用时无返回结果或报错。帐号迁移15天后，该转换接口将会失效、无法拉取到数据。
+
+> {info} 如何获取用户列表见这里：https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140840
 
 ```php
 $app->user->changeOpenid($oldAppId, $openidList);
