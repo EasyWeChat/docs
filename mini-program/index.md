@@ -1,6 +1,5 @@
-## 小程序
+# 小程序
 
-### 实例化
 
 ```php
 use EasyWeChat\Factory;
