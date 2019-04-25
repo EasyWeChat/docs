@@ -4,7 +4,7 @@
 
 ## API
 
-### 获取JSSDK的配置数组
+#### 获取JSSDK的配置数组
 
 ```php
 $app->jssdk->buildConfig(array $APIs, $debug = false, $beta = false, $json = true);
