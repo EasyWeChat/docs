@@ -4,8 +4,20 @@
 
 ## API
 
->  - `$app->jssdk->buildConfig(array $APIs, $debug = false, $beta = false, $json = true);` 获取JSSDK的配置数组，默认返回 JSON 字符串，当 `$json` 为 `false` 时返回数组，你可以直接使用到网页中。
->  - `$app->jssdk->setUrl($url)` 设置当前URL，如果不想用默认读取的URL，可以使用此方法手动设置，通常不需要。
+### 获取JSSDK的配置数组
+
+```php
+$app->jssdk->buildConfig(array $APIs, $debug = false, $beta = false, $json = true);
+```
+
+默认返回 JSON 字符串，当 `$json` 为 `false` 时返回数组，你可以直接使用到网页中。
+
+#### 设置当前URL
+
+```php
+$app->jssdk->setUrl($url)
+```
+如果不想用默认读取的URL，可以使用此方法手动设置，通常不需要。
 
 示例：
 
