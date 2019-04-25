@@ -14,36 +14,19 @@
 ```js
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
-    wx.config(<?php echo $app->jssdk->buildConfig(array('onMenuShareQQ', 'onMenuShareWeibo'), true) ?>);
+    wx.config(<?php echo $app->jssdk->buildConfig(array('updateAppMessageShareData', 'updateTimelineShareData'), true) ?>);
 </script>
 ```
 结果如下：
 
-1.2 版本：
-
-> {warning} 官方即将废弃该版本，请不要再使用
-
-```js
-<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" charset="utf-8">
-wx.config({
-    debug: true,
-    appId: 'wx3cf0f39249eb0e60',
-    timestamp: 1430009304,
-    nonceStr: 'qey94m021ik',
-    signature: '4F76593A4245644FAE4E1BC940F6422A0C3EC03E',
-    jsApiList: ['onMenuShareQQ', 'onMenuShareWeibo']
-});
-</script>
-```
 
 或者最新的 1.4 版本：
 
 ```js
-<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
 wx.config({
-    debug: true,
+    debug: true, // 请在上线前删除它
     appId: 'wx3cf0f39249eb0e60',
     timestamp: 1430009304,
     nonceStr: 'qey94m021ik',
