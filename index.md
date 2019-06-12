@@ -72,6 +72,15 @@
   - [服务商](/docs/{{version}}/open-work/server)
   - [第三方应用接口](/docs/{{version}}/open-work/service)
   - [企业相关](/docs/{{version}}/open-work/work)
+- ## 小微商户
+  - [入门](/docs/{{version}}/micro-merchant/index)
+  - [获取平台证书](/docs/{{version}}/micro-merchant/certficates)
+  - [图片上传](/docs/{{version}}/micro-merchant/media)
+  - [商户入驻](/docs/{{version}}/micro-merchant/submit-application)
+  - [商户升级](/docs/{{version}}/micro-merchant/upgrade)
+  - [商户信息修改](/docs/{{version}}/micro-merchant/material)
+  - [提现相关](/docs/{{version}}/micro-merchant/withdraw)
+  - [商户配置](/docs/{{version}}/micro-merchant/merchant-config)
 - ## 自定义
   - [Access Token](/docs/{{version}}/customize/access_token)
   - [缓存](/docs/{{version}}/customize/cache)
