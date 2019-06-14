@@ -2,7 +2,7 @@
 ## 修改结算银行卡
 
 ```php
-$response = $app->media->setSettlementCard([
+$response = $app->material->setSettlementCard([
     // 'sub_mch_id' => '1230000109',
     'account_number' => '银行卡号',
     'bank_name' => '开户银行全称（含支行）',
@@ -13,7 +13,7 @@ $response = $app->media->setSettlementCard([
 ## 修改联系信息
 
 ```php
-$response = $app->media->updateContact([
+$response = $app->material->updateContact([
     // 'sub_mch_id' => '1230000109',
     'mobile_phone' => '手机号',
     'email' => '邮箱',
