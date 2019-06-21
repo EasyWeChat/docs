@@ -160,7 +160,14 @@ $msg = [
     ],
 ];
 
-app->external_contact_message->submit($msg);
+$app->external_contact_message->submit($msg);
+
+// {
+//     "errcode": 0,
+//     "errmsg": "ok",
+//     "fail_list":["wmqfasd1e19278asdasdasd"],
+//     "msgid":"msgGCAAAXtWyujaWJHDDGi0mACas1w"
+// }
 ```
 
 ### 获取企业群发消息发送结果
@@ -168,7 +175,7 @@ app->external_contact_message->submit($msg);
 ```php
 $msgId = 'msgGCAAAXtWyujaWJHDDGi0mACas1w';
 
-app->external_contact_message->get($msgId);
+$app->external_contact_message->get($msgId);
 ```
 
 ### 发送新客户欢迎语
@@ -197,7 +204,7 @@ $msg = [
     ],
 ];
 
-app->external_contact_message->sendWelcome($welcomeCode, $msg);
+$app->external_contact_message->sendWelcome($welcomeCode, $msg);
 ```
 
 
