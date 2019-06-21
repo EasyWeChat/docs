@@ -10,7 +10,18 @@ $config = [
 ];
 
 $app = Factory::work($config);
-$crm = $app->crm;
+
+// 基础接口
+$app->external_contact;
+
+// 「联系我」
+$app->contact_way;
+
+// 消息管理
+$app->external_contact_message;
+
+// 数据统计
+$app->external_contact_statistics;
 ```
 
 ## 基础接口
@@ -18,7 +29,7 @@ $crm = $app->crm;
 ### 获取配置了客户联系功能的成员列表
 
 ```php
-$crm->followUsers();
+$app->external_contact->getFollowUsers();
 ```
 
 ### 获取外部联系人列表
@@ -26,7 +37,7 @@ $crm->followUsers();
 ```php
 $userId = 'zhangsan';
 
-$crm->list($userId);
+$app->external_contact->list($userId);
 ```
 
 ### 获取外部联系人详情
@@ -34,10 +45,35 @@ $crm->list($userId);
 ```php
 $externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
 
-$crm->get($externalUserId);
+$app->external_contact->get($externalUserId);
 ```
 
+
+### 获取离职成员的客户列表
+
+```php
+$pageId = 0;
+$pageSize = 1000;
+$app->external_contact->getUnassigned($pageId, $pageSize);
+```
+
+### 离职成员的外部联系人再分配
+
+```php
+$externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
+$handoverUserId = 'zhangsan';
+$takeoverUserId = 'lisi';
+ 
+$app->external_contact->transfer($externalUserId, $handoverUserId, $takeoverUserId);
+```
+
+
 ## 配置客户联系「联系我」方式
+
+> {warning} 注意：
+> 1. 通过API添加的「联系我」不会在管理端进行展示。
+> 2. 每个企业可通过API最多配置10万个「联系我」。
+> 3. 截止 2019-06-21 官方文档没有提供获取所有「联系我」列表的接口，请开发者注意自行保管处理 configId，避免无法溯源。
 
 ### 增加「联系我」方式
 
@@ -52,7 +88,7 @@ $config = [
    'user' => ['UserID1', 'UserID2', 'UserID3'],
 ];
 
-$crm->contact_way->add($type, $scene, $config);
+$app->contact_way->create($type, $scene, $config);
 ```
 
 ### 获取「联系我」方式
@@ -60,7 +96,7 @@ $crm->contact_way->add($type, $scene, $config);
 ```php
 $configId = '42b34949e138eb6e027c123cba77fad7';
 
-$crm->contact_way->get($configId);
+$app->contact_way->get($configId);
 ```
 
 ### 更新「联系我」方式
@@ -76,7 +112,7 @@ $config = [
    'user' => ['UserID4', 'UserID5', 'UserID6'],
 ];
 
-$crm->contact_way->update($configId, $config);
+$app->contact_way->update($configId, $config);
 ```
 
 ### 删除「联系我」方式
@@ -84,7 +120,7 @@ $crm->contact_way->update($configId, $config);
 ```php
 $configId = '42b34949e138eb6e027c123cba77fad7';
 
-$crm->contact_way->delete($configId);
+$app->contact_way->delete($configId);
 ```
 
 ## 消息管理
@@ -118,7 +154,7 @@ $msg = [
     ],
 ];
 
-$crm->msg->addTemplateMessage($msg);
+app->external_contact_message->submit($msg);
 ```
 
 ### 获取企业群发消息发送结果
@@ -126,7 +162,7 @@ $crm->msg->addTemplateMessage($msg);
 ```php
 $msgId = 'msgGCAAAXtWyujaWJHDDGi0mACas1w';
 
-$crm->msg->getGroupMsgResult($msgId);
+app->external_contact_message->get($msgId);
 ```
 
 ### 发送新客户欢迎语
@@ -155,28 +191,9 @@ $msg = [
     ],
 ];
 
-$crm->msg->sendWelcomeMsg($welcomeCode, $msg);
+app->external_contact_message->sendWelcome($welcomeCode, $msg);
 ```
 
-## 离职管理
-
-### 获取离职成员的客户列表
-
-```php
-$pageId = 0;
-$pageSize = 1000;
-$crm->dimission->getUnassignedList($pageId, $pageSize);
-```
-
-### 离职成员的外部联系人再分配
-
-```php
-$externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
-$handoverUserId = 'zhangsan';
-$takeoverUserId = 'lisi';
- 
-$crm->dimission->transfer($externalUserId, $handoverUserId, $takeoverUserId);
-```
 
 ## 数据统计
 
@@ -191,7 +208,7 @@ $userIds = [
 $from = 1536508800;
 $to = 1536940800;
 
-$crm->data_cube->userBehavior($userIds, $from, $to);
+$app->external_contact_statistics->userBehavior($userIds, $from, $to);
 ```
 
 
