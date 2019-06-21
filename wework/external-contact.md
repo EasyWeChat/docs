@@ -89,6 +89,12 @@ $config = [
 ];
 
 $app->contact_way->create($type, $scene, $config);
+
+// {
+//   "errcode": 0,
+//   "errmsg": "ok",
+//   "config_id":"42b34949e138eb6e027c123cba77fad7"　　
+// }
 ```
 
 ### 获取「联系我」方式
