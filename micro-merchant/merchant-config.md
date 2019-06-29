@@ -3,9 +3,9 @@
 ## 关注功能配置
 
 ```php
-$response = $app->merchantConfig->setFollowConfig(string $subAppid, string $subscribeAppid, string $receiptAppid = '');
+$response = $app->merchantConfig->setFollowConfig(string $subAppid, string $subscribeAppid, string $receiptAppid = '', string $subMchId = '');
 ```
-> 注意：`subscribe_appid`，`receipt_appid` 两个参数二选一，具体请参考小微商户专属文档
+> 注意：`subscribe_appid`，`receipt_appid` 两个参数二选一，两个都填的话SDK默认选第一个，具体请参考小微商户专属文档
 
 ## 开发配置新增支付目录
 
