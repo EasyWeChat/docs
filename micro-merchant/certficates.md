@@ -2,8 +2,8 @@
 调用获取平台证书接口之前，请前往微信支付商户平台升级API证书，升级后才可成功调用本接口。
 
 ```php
-// $returnRaw bool 默认false
-$response = $app->certficates->get($returnRaw);
+// 获取到证书后可以做缓存处理，无需每次重新获取
+$response = $app->certficates->get(bool $returnRaw = false);
 
 // 获取到平台证书后，可以直接使用 setCertificate 方法把证书配置追加到配置项里面去
 $app->setCertificate(string $certificate, string $serial_no);
