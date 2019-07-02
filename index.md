@@ -52,6 +52,7 @@
   - [消息解密](/docs/{{version}}/mini-program/decrypt)
   - [内容安全](/docs/{{version}}/basic-services/content_security)
   - [物流助手](/docs/{{version}}/mini-program/express)
+  - [生物认证](/docs/{{version}}/mini-program/soter)
 - ## 开放平台
   - [入门](/docs/{{version}}/open-platform/index)
   - [服务端](/docs/{{version}}/open-platform/server)
