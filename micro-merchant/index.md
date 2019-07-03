@@ -21,12 +21,10 @@ $config = [
     // 'serial_no'     => '获取证书接口获取到的平台证书序列号',
     // 'certificate'   => '获取证书接口获取到的证书内容'
     
-    'appid'            => 'wx931386123456789e' // 服务商的公众账号 ID
-
-    
     // 以下为可选项
     // 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名
-    'response_type'    => 'array'
+    'response_type' => 'array'
+    'appid'            => 'wx931386123456789e' // 服务商的公众账号 ID
 ];
 
 $app = Factory::microMerchant($config);
