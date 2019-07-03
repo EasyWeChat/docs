@@ -45,5 +45,5 @@ $app = Factory::microMerchant($config);
 ```php
 // $subMchId 为子商户号
 // $appid    服务商的公众账号 ID
-$app->setSubMchId(string $subMchId, string $appid = '');
+$app->setSubMchId(string $subMchId, string $appId = '');
 ```

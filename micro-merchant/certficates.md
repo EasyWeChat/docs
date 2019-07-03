@@ -6,7 +6,7 @@
 $response = $app->certficates->get(bool $returnRaw = false);
 
 // 获取到平台证书后，可以直接使用 setCertificate 方法把证书配置追加到配置项里面去
-$app->setCertificate(string $certificate, string $serial_no);
+$app->setCertificate(string $certificate, string $serialNo);
 ```
 > $returnRaw 不填默认为false时，请确保你的PHP已安装了sodium扩展    
 > 返回值：固定array格式的解密后的证书信息
