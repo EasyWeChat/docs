@@ -61,6 +61,7 @@
   - [入门](/docs/{{version}}/wework/index)
   - [服务端](/docs/{{version}}/wework/server)
   - [应用管理](/docs/{{version}}/wework/agents)
+  - [消息发送](/docs/{{version}}/wework/message)
   - [通讯录](/docs/{{version}}/wework/contacts)
   - [外部联系人管理](/docs/{{version}}/wework/external-contact)
   - [自定义菜单](/docs/{{version}}/wework/menu)
