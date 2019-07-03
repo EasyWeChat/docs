@@ -52,6 +52,7 @@
   - [消息解密](/docs/{{version}}/mini-program/decrypt)
   - [内容安全](/docs/{{version}}/basic-services/content_security)
   - [物流助手](/docs/{{version}}/mini-program/express)
+  - [生物认证](/docs/{{version}}/mini-program/soter)
 - ## 开放平台
   - [入门](/docs/{{version}}/open-platform/index)
   - [服务端](/docs/{{version}}/open-platform/server)
@@ -60,6 +61,7 @@
   - [入门](/docs/{{version}}/wework/index)
   - [服务端](/docs/{{version}}/wework/server)
   - [应用管理](/docs/{{version}}/wework/agents)
+  - [消息发送](/docs/{{version}}/wework/message)
   - [通讯录](/docs/{{version}}/wework/contacts)
   - [外部联系人管理](/docs/{{version}}/wework/external-contact)
   - [自定义菜单](/docs/{{version}}/wework/menu)
