@@ -41,6 +41,10 @@ $app->template_message->send([
         'touser' => 'user-openid',
         'template_id' => 'template-id',
         'url' => 'https://easywechat.org',
+        'miniprogram' => [
+                'appid' => 'xxxxxxx',
+                'pagepath' => 'pages/xxx',
+        ],
         'data' => [
             'key1' => 'VALUE',
             'key2' => 'VALUE2',
@@ -48,6 +52,7 @@ $app->template_message->send([
         ],
     ]);
 ```
+> 如果 url 和 miniprogram 字段都传，会优先跳转小程序。
 
 ## 发送一次性订阅消息
 
