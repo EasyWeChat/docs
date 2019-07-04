@@ -25,7 +25,7 @@ $url = $app->oauth->redirect($callbackUrl); // $callbackUrl 为授权回调地�
 在回调页面中，你可以使用以下方式获取授权者信息：
 
 ```php
-$user = $app->oauth->user();
+$user = $app->oauth->detailed()->user();
 
 // 获取用户信息
 $user->getId(); // 对应企业微信英文名（userid）
