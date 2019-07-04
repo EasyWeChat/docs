@@ -63,6 +63,7 @@
   - [应用管理](/docs/{{version}}/wework/agents)
   - [消息发送](/docs/{{version}}/wework/message)
   - [通讯录](/docs/{{version}}/wework/contacts)
+  - [网页授权](/docs/{{version}}/wework/oauth)
   - [外部联系人管理](/docs/{{version}}/wework/external-contact)
   - [自定义菜单](/docs/{{version}}/wework/menu)
   - [素材管理](/docs/{{version}}/wework/media)
