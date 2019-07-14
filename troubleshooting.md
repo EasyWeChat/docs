@@ -153,3 +153,9 @@ xdebug.max_nesting_level=200
 $app = Factory::miniProgram($config);
 $app['guzzle_handler'] = CoroutineHandler::class;
 ```
+
+鉴于有些同学找不到可用的 `CoroutineHandler`，这里提供几个，供大家使用。
+
+- hyperf/guzzle
+- yurunsoft/guzzle-swoole
+- mix/guzzle-hook
