@@ -7,7 +7,30 @@
 
 你可以参考[symfony/cache官方文档](https://symfony.com/doc/current/components/cache.html) 来替换掉应用中默认的缓存配置：
 
-> 以 redis 为例
+
+## 以 redis 为例
+
+
+### Symfony 4.3 + 
+
+> 请先安装 redis 拓展：`composer require predis/predis`
+
+```php
+
+use Symfony\Component\Cache\Adapter\RedisAdapter;
+
+// 创建 redis 实例
+$client = new \Predis\Client('tcp://10.0.0.1:6379');
+
+// 创建缓存实例
+$cache = new RedisAdapter($redis);
+
+// 替换应用中的缓存
+$app->rebind('cache', $cache);
+```
+
+### Symfony 3.4 + 
+
 > 请先安装 redis 拓展：https://github.com/phpredis/phpredis
 
 ```php
@@ -25,9 +48,26 @@ $cache = new RedisCache($redis);
 $app->rebind('cache', $cache);
 ```
 
+
 ### Laravel 中使用
 
 在 Laravel 中框架使用 [predis/predis](https://github.com/nrk/predis)：
+
+### Symfony 4.3 + 
+
+> 请先安装 redis 拓展：`composer require predis/predis`
+
+```php
+
+use Symfony\Component\Cache\Adapter\RedisAdapter;
+
+// 创建缓存实例
+$cache = new RedisAdapter(app('redis')->connection()->client());
+$app->rebind('cache', $cache);
+
+```
+
+### Symfony 3.4 + 
 
 ```php
 

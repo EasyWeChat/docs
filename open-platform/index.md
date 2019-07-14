@@ -1,5 +1,9 @@
 # 微信开放平台第三方平台
 
+此页涉及接口信息与说明请参见：[授权流程技术说明 - 官方文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1453779503&token=&lang=)
+
+# 微信开放平台第三方平台
+
 ## 实例化
 
 ```php
@@ -49,6 +53,9 @@ $openPlatform->getAuthorizerOption(string $appId, string $name);
 ```php
 $openPlatform->setAuthorizerOption(string $appId, string $name, string $value);
 ```
+
+> 该API用于获取授权方的公众号或小程序的选项设置信息，如：地理位置上报，语音识别开关，多客服开关。注意，获取各项选项设置信息，需要有授权方的授权，详见权限集说明。
+
 
 ## 获取已授权的授权方列表
 

@@ -5,5 +5,5 @@
 API:
 
 ```php
-$decryptedData = $app->encryptor->decryptData($session, $iv, $encryptData);
+$decryptedData = $app->encryptor->decryptData($session, $iv, $encryptedData);
 ```

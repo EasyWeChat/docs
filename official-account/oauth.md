@@ -85,6 +85,13 @@ $response = $app->oauth->scopes(['snsapi_userinfo'])
 //$user = $app->oauth->setRequest($request)->user();
 ```
 
+当然你也可以在发起授权的时候指定回调URL，比如设置回调URL为当前页面：
+
+```php
+$response = $app->oauth->scopes(['snsapi_userinfo'])
+                          ->redirect($request->fullUrl());
+```
+
 它的返回值 `$response` 是一个 [Symfony\Component\HttpFoundation\RedirectResponse](http://api.symfony.com/3.0/Symfony/Component/HttpFoundation/RedirectResponse.html) 实例。
 
 你可以选择在框架中做一些正确的响应，比如在 [Laravel](http://laravel.com) 框架中控制器方法是要求返回响应值的，那么你就直接:
