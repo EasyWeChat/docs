@@ -30,6 +30,7 @@
   - [语义理解](/docs/{{version}}/official-account/semantic)
   - [自动回复](/docs/{{version}}/official-account/reply)
   - [评论数据管理](/docs/{{version}}/official-account/comment)
+  - [返佣商品](/docs/{{version}}/official-account/goods)
 - ## 微信支付
   - [入门](/docs/{{version}}/payment/index)
   - [订单](/docs/{{version}}/payment/order)
