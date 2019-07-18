@@ -42,7 +42,7 @@ use EasyWeChat\Work\GroupRobot\Messages\Text;
 
 // 通过构造函数传参
 $text = new Text('hello', 'her-cat', '18700000000');
-//$text = new Text('hello', ['her-cat', 'overtrue'], ['18700000000', '18700000000']);
+//$text = new Text('hello', ['her-cat', 'overtrue'], ['18700000000', '18700000001']);
 
 // 通过 userId
 $text->mention('her-cat');
@@ -50,7 +50,7 @@ $text->mention('her-cat');
 
 // 通过手机号
 $text->mentionByMobile('18700000000');
-//$text->mentionByMobile(['18700000000', '18700000000']);
+//$text->mentionByMobile(['18700000000', '18700000001']);
 
 // @所有人
 $text->mention('@all');
