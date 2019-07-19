@@ -77,6 +77,12 @@ $contacts->user->userIdToOpenid($userId, $agentId);
 $contacts->user->openidToUserId($openid);
 ```
 
+### 手机号转为用户 ID
+
+```php
+$contacts->user->mobileToUserId($mobile);
+```
+
 ### 二次验证
 
 企业在成员验证成功后，调用如下接口即可让成员加入成功
