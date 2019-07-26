@@ -1,5 +1,7 @@
 # 插件管理
 
+> 微信文档：https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/plugin-management/pluginManager.applyPlugin.html
+
 ## 申请使用插件
 
 ```php
