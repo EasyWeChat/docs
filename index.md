@@ -55,6 +55,7 @@
   - [物流助手](/docs/{{version}}/mini-program/express)
   - [生物认证](/docs/{{version}}/mini-program/soter)
   - [插件管理](/docs/{{version}}/mini-program/plugin)
+  - [附近的小程序](/docs/{{version}}/mini-program/nearby_poi)
 - ## 开放平台
   - [入门](/docs/{{version}}/open-platform/index)
   - [服务端](/docs/{{version}}/open-platform/server)
