@@ -91,6 +91,30 @@ $contacts->user->mobileToUserId($mobile);
 $contacts->user->accept($userId);
 ```
 
+### 邀请成员
+
+企业可通过接口批量邀请成员使用企业微信，邀请后将通过短信或邮件下发通知。
+
+```php
+$params = [
+    'user' => ['UserID1', 'UserID2', 'UserID3'],    // 成员ID列表, 最多支持1000个
+    'party' => ['PartyID1', 'PartyID2'],            // 部门ID列表，最多支持100个
+    'tag' => ['TagID1', 'TagID2'],                  // 标签ID列表，最多支持100个
+];
+
+$contacts->user->invite($params);
+```
+
+> `user`, `party`, `tag` 三者不能同时为空
+
+### 获取加入企业二维码
+
+```php
+$sizeType = 1;  // qrcode尺寸类型，1: 171 x 171; 2: 399 x 399; 3: 741 x 741; 4: 2052 x 2052
+
+$contacts->user->getJoinCorpQrCode($sizeType);
+```
+
 ## 部门管理
 
 ### 创建部门
