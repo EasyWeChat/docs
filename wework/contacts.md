@@ -107,12 +107,12 @@ $contacts->user->invite($params);
 
 > `user`, `party`, `tag` 三者不能同时为空
 
-### 获取加入企业二维码
+### 获取邀请二维码
 
 ```php
 $sizeType = 1;  // qrcode尺寸类型，1: 171 x 171; 2: 399 x 399; 3: 741 x 741; 4: 2052 x 2052
 
-$contacts->user->getJoinCorpQrCode($sizeType);
+$contacts->user->getInvitationQrCode($sizeType);
 ```
 
 ## 部门管理
