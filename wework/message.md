@@ -10,7 +10,11 @@ use EasyWeChat\Kernel\Messages\TextCard;
 $messenger = $app->messenger;
 
 // 准备消息
-$message = new TextCard('你的请假单审批通过', '单号：1928373, ....', 'http://easywechat.com/oa/....');
+$message = new TextCard([
+    'title' => '你的请假单审批通过', 
+    'description' => '单号：1928373, ....', 
+    'url' => 'http://easywechat.com/oa/....'
+]);
 
 // 发送
 $messenger->message($message)->toUser('overtrue')->send();
