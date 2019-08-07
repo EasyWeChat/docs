@@ -30,6 +30,7 @@
   - [语义理解](/docs/{{version}}/official-account/semantic)
   - [自动回复](/docs/{{version}}/official-account/reply)
   - [评论数据管理](/docs/{{version}}/official-account/comment)
+  - [返佣商品](/docs/{{version}}/official-account/goods)
 - ## 微信支付
   - [入门](/docs/{{version}}/payment/index)
   - [订单](/docs/{{version}}/payment/order)
@@ -53,6 +54,8 @@
   - [内容安全](/docs/{{version}}/basic-services/content_security)
   - [物流助手](/docs/{{version}}/mini-program/express)
   - [生物认证](/docs/{{version}}/mini-program/soter)
+  - [插件管理](/docs/{{version}}/mini-program/plugin)
+  - [附近的小程序](/docs/{{version}}/mini-program/nearby_poi)
 - ## 开放平台
   - [入门](/docs/{{version}}/open-platform/index)
   - [服务端](/docs/{{version}}/open-platform/server)
@@ -70,6 +73,7 @@
   - [OA](/docs/{{version}}/wework/oa)
   - [电子发票](/docs/{{version}}/wework/invoice)
   - [JSSDK](/docs/{{version}}/basic-services/jssdk)
+  - [群机器人](/docs/{{version}}/wework/group-robot)
 - ## 企业微信开放平台
   - [入门](/docs/{{version}}/open-work/index)
   - [服务商接口](/docs/{{version}}/open-work/provider)
