@@ -2,7 +2,7 @@
 
 ## 统一下单
 
-没错，什么 H5 支付，公众号支付，扫码支付，全部都是用这个接口下单。
+没错，什么 H5 支付，公众号支付，扫码支付，支付中签约，全部都是用这个接口下单。
 
 > {info} 参数 `appid`, `mch_id`, `nonce_str`, `sign`, `sign_type` 可不用传入
 
@@ -29,6 +29,49 @@ $result = $app->order->unify([
 //    "result_code": "SUCCESS",
 //    "prepay_id": "wx201411102639507cbf6ffd8b0779950874",
 //    "trade_type": "JSAPI"
+//}
+```
+
+
+**第二个参数**为是否[支付中签约](https://pay.weixin.qq.com/wiki/doc/api/pap.php?chapter=18_13&index=5)，默认 `false`
+
+> {info} 支付中签约相关参数 `contract_mchid`, `contract_appid`, `request_serial` 可不用传入
+
+```php
+$isContract = true;
+
+$result = $app->order->unify([
+    'body' => '腾讯充值中心-QQ会员充值',
+    'out_trade_no' => '20150806125346',
+    'total_fee' => 88,
+    'spbill_create_ip' => '123.12.12.123', // 可选，如不传该参数，SDK 将会自动获取相应 IP 地址
+    'notify_url' => 'https://pay.weixin.qq.com/wxpay/pay.action', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+    'trade_type' => 'JSAPI', // 请对应换成你的支付方式对应的值类型
+    'openid' => 'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o',
+    
+    'plan_id' => 123,// 协议模板id
+    'contract_code' => 100001256,// 签约协议号
+    'contract_display_account' => '腾讯充值中心',// 签约用户的名称
+    'contract_notify_url' => 'http://easywechat.org/contract_notify'
+], $isContract);
+
+//$result:
+//{
+//  "return_code": "SUCCESS",
+//  "return_msg": "OK",
+//  "appid": "wx123456",
+//  "mch_id": "10000100",
+//  "nonce_str": "CfOcMkDFblzulYvI",
+//  "sign": "B53F4AFEE7FA6AD5739581486A5CB9C9",
+//  "result_code": "SUCCESS",
+//  "prepay_id": "wx08175759731015754a5c13791522969400",
+//  "trade_type": "JSAPI",
+//  "plan_id": "123",
+//  "request_serial": "1565258279",
+//  "contract_code": "100001256",
+//  "contract_display_account": "腾讯充值中心",
+//  "out_trade_no": "201908088195558331565258279",
+//  "contract_result_code": "SUCCESS"
 //}
 ```
 
