@@ -88,14 +88,27 @@ $result = $app->order->unify([
 
 ### 根据商户订单号查询
 
+> **第二个参数**为是否[签约代扣订单](https://pay.weixin.qq.com/wiki/doc/api/pap.php?chapter=18_10&index=14)，默认 `false`
+
 ```php
 $app->order->queryByOutTradeNumber("商户系统内部的订单号（out_trade_no）");
+
+// 查询微信代扣订单
+$isContract = true;
+$app->order->queryByOutTradeNumber("商户系统内部的订单号（out_trade_no）", $isContract);
 ```
 
 ### 根据微信订单号查询
 
+> **第二个参数**为是否[签约代扣订单](https://pay.weixin.qq.com/wiki/doc/api/pap.php?chapter=18_10&index=14)，默认 `false`
+
+
 ```php
 $app->order->queryByTransactionId("微信订单号（transaction_id）");
+
+// 查询微信代扣订单
+$isContract = true;
+$app->order->queryByTransactionId("微信订单号（transaction_id）", $isContract);
 ```
 
 ## 关闭订单
