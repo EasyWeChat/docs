@@ -2,7 +2,7 @@
 
 ## 获取支持的快递公司列表
 
-> https://developers.weixin.qq.com/miniprogram/dev/api/getAllDelivery.html
+> https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/express/by-business/logistics.getAllDelivery.html
 
 ```php
 
@@ -23,7 +23,7 @@ $app->express->listProviders();
 
 ## 生成运单
 
-> https://developers.weixin.qq.com/miniprogram/dev/api/addOrder.html
+> https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/express/by-business/logistics.addOrder.html
 
 ```php
 
@@ -60,7 +60,7 @@ $app->express->createWaybill($data);
 
 ## 取消运单
 
-> https://developers.weixin.qq.com/miniprogram/dev/api/cancelOrder.html
+> https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/express/by-business/logistics.cancelOrder.html
 
 ```php
 $app->express->deleteWaybill($data);
@@ -69,7 +69,7 @@ $app->express->deleteWaybill($data);
 
 ## 获取运单数据
 
-> https://developers.weixin.qq.com/miniprogram/dev/api/getOrder.html
+> https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/express/by-business/logistics.getOrder.html
 
 ```php
 $app->express->getWaybill($data);
@@ -78,7 +78,7 @@ $app->express->getWaybill($data);
 
 ## 查询运单轨迹
 
-> https://developers.weixin.qq.com/miniprogram/dev/api/getPath.html
+> https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/express/by-business/logistics.getPath.html
 
 ```php
 $app->express->getWaybillTrack($data);
@@ -89,7 +89,7 @@ $app->express->getWaybillTrack($data);
 
 仅在使用加盟类快递公司时，才可以调用。
 
-> https://developers.weixin.qq.com/miniprogram/dev/api/getQuota.html
+> https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/express/by-business/logistics.getQuota.html
 
 ```php
 
@@ -104,7 +104,7 @@ $app->express->getBalance('YTO', 'xyz');
 
 若需要使用微信打单 PC 软件，才需要调用。
 
-> https://developers.weixin.qq.com/miniprogram/dev/api/updatePrinter.html
+> https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/express/by-business/logistics.updatePrinter.html
 
 ```php
 $app->express->bindPrinter($openid);
@@ -114,7 +114,7 @@ $app->express->bindPrinter($openid);
 
 若需要使用微信打单 PC 软件，才需要调用。
 
-> https://developers.weixin.qq.com/miniprogram/dev/api/updatePrinter.html
+> https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/express/by-business/logistics.updatePrinter.html
 
 ```php
 $app->express->unbindPrinter($openid);
