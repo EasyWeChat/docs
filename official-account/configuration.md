@@ -33,6 +33,12 @@ return [
     'secret'  => 'your-app-secret',     // AppSecret
     'token'   => 'your-token',          // Token
     'aes_key' => '',                    // EncodingAESKey，兼容与安全模式下请一定要填写！！！
+    
+    /**
+     * 微信双向证书，退款等接口使用到的
+     */
+    'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
+    'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
 
      /**
       * 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名
