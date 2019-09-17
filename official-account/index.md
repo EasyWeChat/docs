@@ -19,4 +19,4 @@ $config = [
 $app = Factory::officialAccount($config);
 ```
 
-`$app` 在所有相关公众号的的文档都是指 `Factory::officialAccount` 得到的实例，就不在每个页面单独写了。
+`$app` 在所有相关公众号的文档都是指 `Factory::officialAccount` 得到的实例，就不在每个页面单独写了。
