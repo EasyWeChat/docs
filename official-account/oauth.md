@@ -92,6 +92,14 @@ $response = $app->oauth->scopes(['snsapi_userinfo'])
                           ->redirect($request->fullUrl());
 ```
 
+如果你需要自定义 state 值时，如区分不同业务处理场景时，可以使用 with 方法来实现：
+
+```php
+$response = $app->oauth->scopes(['snsapi_userinfo'])
+                       ->with(['state' => 'bbs_login'])->redirect();
+```
+
+
 它的返回值 `$response` 是一个 [Symfony\Component\HttpFoundation\RedirectResponse](http://api.symfony.com/3.0/Symfony/Component/HttpFoundation/RedirectResponse.html) 实例。
 
 你可以选择在框架中做一些正确的响应，比如在 [Laravel](http://laravel.com) 框架中控制器方法是要求返回响应值的，那么你就直接:
