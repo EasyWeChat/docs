@@ -19,7 +19,7 @@ $result = $app->submitApplication([
 ```php
 $applymentId = '商户申请单号(applyment_id 申请入驻接口返回)';
 $businessCode = '业务申请编号(business_code)';
-$app->order->getStatus(string $applymentId, string $businessCode = '');
+$app->getStatus(string $applymentId, string $businessCode = '');
 ```
 > 商户申请单号和业务申请编号填写一个就行了，当 `applyment_id` 已填写时，`business_code` 字段无效。
 
