@@ -45,7 +45,7 @@ EasyWeChat 的安装非常简单，因为它是一个标准的 [Composer](https:
 
 另外你有必要看一下以下的链接：
 
->  - https://phphub.org/topics/535
+>  - https://learnku.com/laravel/t/535/assertion-people-who-do-not-understand-the-wisdom-of-asking-questions-will-not-graduate-from-junior-programmers
 >  - http://laravel-china.github.io/php-the-right-way/
 
 如果你在群里问以下类似的问题，这真的是你没有做好上面的工作：
