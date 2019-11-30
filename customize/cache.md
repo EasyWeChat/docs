@@ -23,7 +23,7 @@ use Symfony\Component\Cache\Adapter\RedisAdapter;
 $client = new \Predis\Client('tcp://10.0.0.1:6379');
 
 // 创建缓存实例
-$cache = new RedisAdapter($redis);
+$cache = new RedisAdapter($client);
 
 // 替换应用中的缓存
 $app->rebind('cache', $cache);
