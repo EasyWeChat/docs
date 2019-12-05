@@ -145,7 +145,7 @@ $resource = $app->material->get($mediaId);
 ```php
 $stream = $app->material->get($mediaId);
 
-if ($stram instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+if ($stream instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
     // 以内容 md5 为文件名
     $stream->save('保存目录');
 
