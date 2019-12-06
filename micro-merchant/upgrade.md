@@ -22,6 +22,6 @@ $result = $app->upgrade([
 3)若申请状态为待签约，接口会返回签约二维码
 
 ```php
-$app->order->getUpgradeStatus(string $subMchId = '');
+$app->getUpgradeStatus(string $subMchId = '');
 ```
 > 调用该接口前调用过 `setSubMchId` 方法则无需传入 `$subMchId` 参数
