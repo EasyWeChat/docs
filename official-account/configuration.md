@@ -127,7 +127,7 @@ $app->logger->extend('mylog', function($app, $config){
 });
 ```
 
-> {info} 在你自定义的闭包函数中，可以使用 `EasyWeChat\Kernel\LogLogManager` 中的方法，具体请查看 SDK 源代码。
+> {info} 在你自定义的闭包函数中，可以使用 `EasyWeChat\Kernel\Log\LogManager` 中的方法，具体请查看 SDK 源代码。
 
 配置文件中在 `driver` 部分即可使用你自定义的驱动了：
 
