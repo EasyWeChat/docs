@@ -11,6 +11,7 @@
 在 SDK 中使用 `$app->server->push(callable $callback)` 来设置消息处理器：
 
 ```php
+// 小程序中，应使用 $app->server->push(function ($message) use ($app) {})
 $app->server->push(function ($message) {
     // $message['FromUserName'] // 用户的 openid
     // $message['MsgType'] // 消息类型：event, text....
