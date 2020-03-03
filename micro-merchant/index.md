@@ -31,7 +31,7 @@ $app = Factory::microMerchant($config);
 
 ```
 
-`$app` 在所有相关小程序的文档都是指 `Factory::miniProgram` 得到的实例，就不在每个页面单独写了。
+`$app` 在所有相关小程序的文档都是指 `Factory::microMerchant` 得到的实例，就不在每个页面单独写了。
 
 ## 使用时值得注意的地方：
 1、小微商户所有接口中以下列出参数 `version`, `mch_id`, `nonce_str`, `sign`, `sign_type`, `cert_sn` 可不用传入。
