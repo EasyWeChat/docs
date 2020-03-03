@@ -2,6 +2,9 @@
 
 你在阅读本文之前确认你已经仔细阅读了：[微信小微商户专属接口文档](https://pay.weixin.qq.com/wiki/doc/api/xiaowei.php?chapter=19_2)。
 
+PS: ⚠️ 因系统升级，腾讯暂时关闭了小微商户接口，恢复时间未定。调用提交申请接口会提示「PARAM_ERROR」，详细说明可参见[微信开放平台相关帖子](https://developers.weixin.qq.com/community/develop/doc/0000a0ffc9ce28bd4bc9999ba5b800)
+
+
 ## 配置
 
 小微商户整体接口调用方式相对于其他微信接口略有不同，配置时请勿填错，相关配置如下：
