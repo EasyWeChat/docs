@@ -31,6 +31,7 @@ $app = Factory::microMerchant($config);
 
 ```
 
+
 `$app` 在所有相关小微商户的文档都是指 `Factory::microMerchant` 得到的实例，就不在每个页面单独写了。
 
 ## 使用时值得注意的地方：

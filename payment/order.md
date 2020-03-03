@@ -6,6 +6,8 @@
 
 > {info} 参数 `appid`, `mch_id`, `nonce_str`, `sign`, `sign_type` 可不用传入
 
+> 服务商模式下, 需使用 `sub_openid`, 并传入`sub_mch_id` 和`sub_appid` 
+
 ```php
 $result = $app->order->unify([
     'body' => '腾讯充值中心-QQ会员充值',
@@ -31,7 +33,6 @@ $result = $app->order->unify([
 //    "trade_type": "JSAPI"
 //}
 ```
-
 
 **第二个参数**为是否[支付中签约](https://pay.weixin.qq.com/wiki/doc/api/pap.php?chapter=18_13&index=5)，默认 `false`
 
