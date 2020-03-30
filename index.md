@@ -57,6 +57,7 @@
   - [插件管理](/docs/{{version}}/mini-program/plugin)
   - [附近的小程序](/docs/{{version}}/mini-program/nearby_poi)
   - [订阅消息](/docs/{{version}}/mini-program/subscribe_message)
+  - [直播](/docs/{{version}}/mini-program/live)
 - ## 开放平台
   - [入门](/docs/{{version}}/open-platform/index)
   - [服务端](/docs/{{version}}/open-platform/server)
