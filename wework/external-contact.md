@@ -48,6 +48,23 @@ $externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
 $app->external_contact->get($externalUserId);
 ```
 
+### 修改客户备注信息
+
+```php
+$data  = [
+    "userid"=>'员工id',
+    "external_userid"=>'客户id',
+    "remark"=> '新备注',
+    "description"=>'新描述',
+    "remark_company"=>'新公司',
+    "remark_mobiles"=>[ '电话1','电话2'],
+    "remark_pic_mediaid"=> "MEDIAID"
+];
+
+$app->external_contact->remark($data);
+```
+
+
 
 ### 获取离职成员的客户列表
 
