@@ -110,9 +110,9 @@ $response->send(); // Laravel 里请使用：return $response;
 
 好吧，打开你的微信客户端，向你的公众号发送任意一条消息，你应该会收到回复：`您好！欢迎使用 EasyWeChat!`。
 
-> {warning} 没有收到回复？看到了“你的公众号暂时无法提供服务” ？， 好，那检查一下你的日志吧，日志在哪儿？我们的配置里写了日志路径了(`__DIR__.'/wechat.log'`)。 没有这个文件？看看权限哦。
+> {warning} 没有收到回复？看到了“你的公众号暂时无法提供服务” ？好，那检查一下你的日志吧，日志在哪儿？我们的配置里写了日志路径了(`__DIR__.'/wechat.log'`)。 没有这个文件？看看权限哦。
 
-> {warning} 注意：在 Laravel 框架应用时，因 POST 请求默认会有 CSRF 验证，所以需要在 `App\Http\Middleware\VerifyCsrfToken` 的 `except`  数组中添加微信请求，否则会提示“你的公众号暂时无法提供服务”。
+> 注意：在 Laravel 框架应用时，因 POST 请求默认会有 CSRF 验证，所以需要在 `App\Http\Middleware\VerifyCsrfToken` 的 `except` 数组中添加微信请求，否则会提示“你的公众号暂时无法提供服务”。
 
 一个基本的服务端验证就完成了。
 
