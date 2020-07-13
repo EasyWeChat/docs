@@ -84,6 +84,111 @@ $takeoverUserId = 'lisi';
 $app->external_contact->transfer($externalUserId, $handoverUserId, $takeoverUserId);
 ```
 
+## 客户群管理
+
+### 获取客户群列表
+
+```php
+$params = [
+    "status_filter" => 0,
+    "owner_filter" => [
+        "userid_list" => ["abel"],
+        "partyid_list" => [7]
+    ],
+    "offset" => 0,
+    "limit" => 100
+];
+
+$app->external_contact->getGroupChats(array $params);
+```
+
+### 获取客户群详情
+
+```php
+$chatId = 'wrOgQhDgAAMYQiS5ol9G7gK9JVAAAA';
+
+$app->external_contact->getGroupChat(string $chatId);
+```
+
+## 客户标签管理
+
+> 注意: 对于添加/删除/编辑企业客户标签接口，目前仅支持使用“客户联系”secret所获取的accesstoken来调用。
+> 原文: https://work.weixin.qq.com/api/doc/90000/90135/92117
+### 获取企业标签库
+
+```php
+$tagIds = [
+    "etXXXXXXXXXX",
+    "etYYYYYYYYYY"
+];
+
+$app->external_contact->getCorpTags(array $tagIds=[]);
+```
+
+### 添加企业客户标签
+
+```php
+$params = [
+    "group_id" => "GROUP_ID",
+    "group_name" => "GROUP_NAME",
+    "order" => 1,
+    "tag" => [
+        [
+            "name" => "TAG_NAME_1",
+            "order" => 1
+        ],
+        [
+            "name" => "TAG_NAME_2",
+            "order" => 2
+        ]
+    ]
+];
+
+$app->external_contact->addCorpTag(array $params);
+```
+
+
+### 编辑企业客户标签
+
+```php
+$id = 'TAG_ID';
+$name = 'NEW_TAG_NAME';
+$order = 1;
+
+$app->external_contact->updateCorpTag(string $id, string $name, int $order = 1);
+```
+
+
+
+### 删除企业客户标签
+
+```php
+$tagId = [
+    'TAG_ID_1',
+    'TAG_ID_2'
+];
+$groupId = [
+    'GROUP_ID_1',
+    'GROUP_ID_2'
+];
+
+$app->external_contact->deleteCorpTag(array $tagId,array $groupId);
+```
+
+
+
+### 编辑客户企业标签
+
+```php
+$params = [
+    "userid" => "zhangsan",
+    "external_userid" => "woAJ2GCAAAd1NPGHKSD4wKmE8Aabj9AAA",
+    "add_tag" => ["TAGID1", "TAGID2"],
+    "remove_tag" => ["TAGID3", "TAGID4"]
+];
+
+$app->external_contact->markTags(array $params);
+```
 
 ## 配置客户联系「联系我」方式
 
