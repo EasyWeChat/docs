@@ -7,7 +7,7 @@
 #### 获取JSSDK的配置数组
 
 ```php
-$app->jssdk->buildConfig(array $APIs, $debug = false, $beta = false, $json = true);
+$app->jssdk->buildConfig(array $APIs, $debug = false, $beta = false, $json = true, array $openTagList = []);
 ```
 
 默认返回 JSON 字符串，当 `$json` 为 `false` 时返回数组，你可以直接使用到网页中。
