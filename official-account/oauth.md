@@ -82,7 +82,7 @@ $response = $app->oauth->scopes(['snsapi_userinfo'])
                           ->redirect();
 
 //回调后获取user时也要设置$request对象
-//$user = $app->oauth->setRequest($request)->user();
+//$user = $app->oauth->setRequest($request)->userFromCode($code);
 ```
 
 当然你也可以在发起授权的时候指定回调URL，比如设置回调URL为当前页面：
@@ -109,20 +109,27 @@ $response->send(); // Laravel 里请使用：return $response;
 ### 获取已授权用户
 
 ```php
-$user = $app->oauth->user();
-// $user 可以用的方法:
-// $user->getId();  // 对应微信的 OPENID
-// $user->getNickname(); // 对应微信的 nickname
-// $user->getName(); // 对应微信的 nickname
-// $user->getAvatar(); // 头像网址
-// $user->getOriginal(); // 原始API返回的结果
-// $user->getToken(); // access_token， 比如用于地址共享时使用
+$code = "微信回调URL携带的 code";
+
+$user = $app->oauth->userFromCode($code);
 ```
 
 返回的 `$user` 是 [Overtrue\Socialite\User](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的信息](https://github.com/overtrue/socialite#user-interface)。
 
+
+#### $user 可以用的方法:
+- `$user->getId(); `  对应微信的 `openid`
+- `$user->getNickname(); `  对应微信的 `nickname`
+- `$user->getName(); `  对应微信的 `nickname`
+- `$user->getAvatar(); `  头像地址
+- `$user->getRaw(); ` 原始 API 返回的结果
+- `$user->getAccessToken(); ` `access_token`
+- `$user->getRefreshToken(); ` `refresh_token`
+- `$user->getExpiresIn(); ` `expires_in`，Access Token 过期时间
+- `$user->getTokenResponse(); ` 返回 `access_token` 时的响应值
+
 > {warning} 注意：`$user` 里没有 `openid`， `$user->id` 便是 `openid`.
-> 如果你想拿微信返回给你的原样的全部信息，请使用：$user->getOriginal();
+> 如果你想拿微信返回给你的原样的全部信息，请使用：$user->getRaw();
 
 当 `scope` 为 `snsapi_base` 时 `$oauth->user();` 对象里只有 `id`，没有其它信息。
 
@@ -181,13 +188,20 @@ $app = Factory::officialAccount($config);
 $oauth = $app->oauth;
 
 // 获取 OAuth 授权结果用户信息
-$user = $oauth->user();
+$code = "微信回调URL携带的 code";
+$user = $oauth->userFromCode();
 
 $_SESSION['wechat_user'] = $user->toArray();
 
 $targetUrl = empty($_SESSION['target_url']) ? '/' : $_SESSION['target_url'];
 
-header('location:'. $targetUrl); // 跳转到 user/profile
+header('Location:'. $targetUrl); // 跳转到 user/profile
 ```
 
-上面的例子呢都是基于 `$_SESSION` 来保持会话的，在微信客户端中，你可以结合 COOKIE 来存储，但是有效期平台不一样时间也不一样，好像 Android 的失效会快一些，不过基本也够用了。
+上面的例子呢都是基于 `$_SESSION` 来保持会话的，在微信客户端中，你可以结合 Cookies 来存储，但是有效期平台不一样时间也不一样，好像 Android 的失效会快一些，不过基本也够用了。
+
+
+## 参考阅读
+
+- 本模块基于 [overtrue/socialite](https://github.com/overtrue/socialite/) 实现，更多的使用请阅读该扩展包文档。
+- state 参数的使用: [overtrue/socialite/#state](https://github.com/overtrue/socialite/#state)
