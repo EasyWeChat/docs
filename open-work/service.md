@@ -1,5 +1,10 @@
 # 第三方应用接口
 
+## 获取应用suite_access_token
+
+```php
+$app->suite_access_token->getToken()
+```
 
 ## 获取预授权码
 
