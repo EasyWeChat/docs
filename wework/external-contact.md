@@ -74,7 +74,7 @@ $pageSize = 1000;
 $app->external_contact->getUnassigned($pageId, $pageSize);
 ```
 
-### 离职成员的外部联系人再分配
+### 分配成员的客户(离职或在职)
 
 ```php
 $externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
@@ -83,6 +83,17 @@ $takeoverUserId = 'lisi';
  
 $app->external_contact->transfer($externalUserId, $handoverUserId, $takeoverUserId);
 ```
+
+### 查询客户接替结果
+
+```php
+$externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
+$handoverUserId = 'zhangsan';
+$takeoverUserId = 'lisi';
+ 
+$app->external_contact->getTransferResult($externalUserId, $handoverUserId, $takeoverUserId);
+```
+
 
 ## 客户群管理
 
