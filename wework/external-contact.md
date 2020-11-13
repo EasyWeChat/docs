@@ -80,8 +80,9 @@ $app->external_contact->getUnassigned($pageId, $pageSize);
 $externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
 $handoverUserId = 'zhangsan';
 $takeoverUserId = 'lisi';
+$transferSuccessMessage = '您好，您的服务已升级，后续将由我的同事张三@腾讯接替我的工作，继续为您服务。'; //不填则使用默认文案
  
-$app->external_contact->transfer($externalUserId, $handoverUserId, $takeoverUserId);
+$app->external_contact->transfer($externalUserId, $handoverUserId, $takeoverUserId, $transferSuccessMessage);
 ```
 
 
