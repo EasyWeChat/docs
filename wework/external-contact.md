@@ -84,6 +84,18 @@ $takeoverUserId = 'lisi';
 $app->external_contact->transfer($externalUserId, $handoverUserId, $takeoverUserId);
 ```
 
+
+### 离职成员的群再分配
+
+```php
+$chatIds = ['群聊id1', '群聊id2'];
+$takeoverUserId = '接替群主userid';
+ 
+$app->external_contact->transferGroupChat($chatIds, $takeoverUserId);
+```
+
+
+
 ### 查询客户接替结果
 
 ```php
