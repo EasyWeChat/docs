@@ -2,7 +2,7 @@
 
 我们在入门小教程一节以服务端为例讲解了一个基本的消息的处理，这里就不再讲服务器验证的流程了，请直接参考前面的入门实例即可。
 
-服务端的作用呢，在整个微信开发中主要是负责 **[接收用户发送过来的消息](http://mp.weixin.qq.com/wiki/10/79502792eef98d6e0c6e1739da387346.html)**，还有 **[用户触发的一系列事件](http://mp.weixin.qq.com/wiki/2/5baf56ce4947d35003b86a9805634b1e.html)**。
+服务端的作用呢，在整个微信开发中主要是负责 **[接收用户发送过来的消息](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html)**，还有 **[用户触发的一系列事件](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html)**。
 
 首先我们得理清消息与事件的回复逻辑，当你收到用户消息后（消息由微信服务器推送到你的服务器），在你对消息进行一些处理后，不管是选择回复一个消息还是什么不都回给用户，你也应该给微信服务器一个 “答复”，如果是选择回复一条消息，就直接返回一个消息xml就好，如果选择不作任何回复，你也得回复一个空字符串或者字符串 `SUCCESS`（不然用户就会看到 `该公众号暂时无法提供服务`）。
 
@@ -184,12 +184,12 @@ $app->server->push(MediaMessageHandler::class, Message::VOICE|Message::VIDEO|Mes
 
 ### 文件：
 
-  `MsgType`      file
-  `Title`        文件名
-  `Description`  文件描述，可能为null
-  `FileKey`      文件KEY
-  `FileMd5`      文件MD5值
-  `FileTotalLen` 文件大小，单位字节
+>  - `MsgType`      file
+>  - `Title`        文件名
+>  - `Description`  文件描述，可能为null
+>  - `FileKey`      文件KEY
+>  - `FileMd5`      文件MD5值
+>  - `FileTotalLen` 文件大小，单位字节
 
 ## 回复消息
 
