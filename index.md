@@ -43,6 +43,7 @@
   - [企业付款](/docs/{{version}}/payment/transfer)
   - [撤销订单](/docs/{{version}}/payment/reverse)
   - [安全工具](/docs/{{version}}/payment/security)
+  - [分账](/docs/{{version}}/payment/profit-sharing)
 - ## 小程序
   - [入门](/docs/{{version}}/mini-program/index)
   - [小程序码](/docs/{{version}}/mini-program/app_code)
