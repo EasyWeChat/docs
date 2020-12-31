@@ -85,15 +85,39 @@ $pageSize = 1000;
 $app->external_contact->getUnassigned($pageId, $pageSize);
 ```
 
-### 离职成员的外部联系人再分配
+### 分配成员的客户(离职或在职)
+
+```php
+$externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
+$handoverUserId = 'zhangsan';
+$takeoverUserId = 'lisi';
+$transferSuccessMessage = '您好，您的服务已升级，后续将由我的同事张三@腾讯接替我的工作，继续为您服务。'; //不填则使用默认文案
+ 
+$app->external_contact->transfer($externalUserId, $handoverUserId, $takeoverUserId, $transferSuccessMessage);
+```
+
+
+### 离职成员的群再分配
+
+```php
+$chatIds = ['群聊id1', '群聊id2'];
+$takeoverUserId = '接替群主userid';
+ 
+$app->external_contact->transferGroupChat($chatIds, $takeoverUserId);
+```
+
+
+
+### 查询客户接替结果
 
 ```php
 $externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
 $handoverUserId = 'zhangsan';
 $takeoverUserId = 'lisi';
  
-$app->external_contact->transfer($externalUserId, $handoverUserId, $takeoverUserId);
+$app->external_contact->getTransferResult($externalUserId, $handoverUserId, $takeoverUserId);
 ```
+
 
 ## 客户群管理
 

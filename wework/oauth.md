@@ -37,12 +37,19 @@ $redirect->send();
 在回调页面中，你可以使用以下方式获取授权者信息：
 
 ```php
-$user = $app->oauth->detailed()->user();
+$code = "回调URL中的code";
+$user = $app->oauth->detailed()->userFromCode($code);
 
 // 获取用户信息
 $user->getId(); // 对应企业微信英文名（userid）
-$user->getOriginal(); // 获取企业微信接口返回的原始信息
+$user->getRaw(); // 获取企业微信接口返回的原始信息
 ```
 
 获取用户其他信息需调用通讯录接口，参考：[企业微信通讯录API](https://github.com/EasyWeChat/docs/blob/master/wework/contacts.md)
 ```php
+
+
+## 参考阅读
+
+- 本模块基于 [overtrue/socialite](https://github.com/overtrue/socialite/) 实现，更多的使用请阅读该扩展包文档。
+- state 参数的使用: [overtrue/socialite/#state](https://github.com/overtrue/socialite/#state)

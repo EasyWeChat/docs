@@ -24,7 +24,7 @@ return $server->serve();
 
 ## 自定义消息处理器
 
-> *消息处理器详细说明见公众号开发 - 服务器一节*
+> *消息处理器详细说明见公众号开发 - 服务端一节*
 
 ```php
 use EasyWeChat\OpenPlatform\Server\Guard;

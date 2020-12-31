@@ -33,7 +33,7 @@ $contacts->user->get('overtrue');
 
 ```php
 $contacts->user->update('overtrue', [
-    "isleader": 0,
+    "isleader" => 0,
     'position' => 'PHP 酱油工程师',
     //...
 ]);

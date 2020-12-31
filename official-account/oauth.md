@@ -70,59 +70,54 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 ### 发起授权
 
 ```php
-$response = $app->oauth->scopes(['snsapi_userinfo'])
+// $redirectUrl 为跳转目标，请自行 302 跳转到目标地址
+$redirectUrl = $app->oauth->scopes(['snsapi_userinfo'])
                           ->redirect();
-```
-
-当你的应用是分布式架构且没有会话保持的情况下，你需要自行设置请求对象以实现会话共享。比如在 [Laravel](http://laravel.com) 框架中支持Session储存在Redis中，那么需要这样：
-
-```php
-$response = $app->oauth->scopes(['snsapi_userinfo'])
-                          ->setRequest($request)
-                          ->redirect();
-
-//回调后获取user时也要设置$request对象
-//$user = $app->oauth->setRequest($request)->user();
 ```
 
 当然你也可以在发起授权的时候指定回调URL，比如设置回调URL为当前页面：
 
 ```php
-$response = $app->oauth->scopes(['snsapi_userinfo'])
+$redirectUrl = $app->oauth->scopes(['snsapi_userinfo'])
                           ->redirect($request->fullUrl());
 ```
 
-它的返回值 `$response` 是一个 [Symfony\Component\HttpFoundation\RedirectResponse](http://api.symfony.com/3.0/Symfony/Component/HttpFoundation/RedirectResponse.html) 实例。
-
-你可以选择在框架中做一些正确的响应，比如在 [Laravel](http://laravel.com) 框架中控制器方法是要求返回响应值的，那么你就直接:
+它的返回值 `$redirectUrl` 是一个字符串跳转地址，请自行使用框架的跳转方法实现跳转，PHP 原生写法：
 
 ```php
-return $response;
+header("Location: {$redirectUrl}");
 ```
 
-在有的框架 (比如yii2) 中是直接 `echo` 或者 `$this->display()` 这种的时候，你就直接：
+在 [Laravel](http://laravel.com) 框架中控制器方法是要求返回响应值的，那么你就直接:
 
 ```php
-$response->send(); // Laravel 里请使用：return $response;
+return \redirect($redirectUrl);
 ```
 
 ### 获取已授权用户
 
 ```php
-$user = $app->oauth->user();
-// $user 可以用的方法:
-// $user->getId();  // 对应微信的 OPENID
-// $user->getNickname(); // 对应微信的 nickname
-// $user->getName(); // 对应微信的 nickname
-// $user->getAvatar(); // 头像网址
-// $user->getOriginal(); // 原始API返回的结果
-// $user->getToken(); // access_token， 比如用于地址共享时使用
+$code = "微信回调URL携带的 code";
+
+$user = $app->oauth->userFromCode($code);
 ```
 
 返回的 `$user` 是 [Overtrue\Socialite\User](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的信息](https://github.com/overtrue/socialite#user-interface)。
 
+
+#### $user 可以用的方法:
+- `$user->getId(); `  对应微信的 `openid`
+- `$user->getNickname(); `  对应微信的 `nickname`
+- `$user->getName(); `  对应微信的 `nickname`
+- `$user->getAvatar(); `  头像地址
+- `$user->getRaw(); ` 原始 API 返回的结果
+- `$user->getAccessToken(); ` `access_token`
+- `$user->getRefreshToken(); ` `refresh_token`
+- `$user->getExpiresIn(); ` `expires_in`，Access Token 过期时间
+- `$user->getTokenResponse(); ` 返回 `access_token` 时的响应值
+
 > {warning} 注意：`$user` 里没有 `openid`， `$user->id` 便是 `openid`.
-> 如果你想拿微信返回给你的原样的全部信息，请使用：$user->getOriginal();
+> 如果你想拿微信返回给你的原样的全部信息，请使用：$user->getRaw();
 
 当 `scope` 为 `snsapi_base` 时 `$oauth->user();` 对象里只有 `id`，没有其它信息。
 
@@ -153,9 +148,10 @@ if (empty($_SESSION['wechat_user'])) {
 
   $_SESSION['target_url'] = 'user/profile';
 
-  return $oauth->redirect();
-  // 这里不一定是return，如果你的框架action不是返回内容的话你就得使用
-  // $oauth->redirect()->send();
+  $redirectUrl = $oauth->redirect();
+  
+  header("Location: {$redirectUrl}");
+  exit;
 }
 
 // 已经登录过
@@ -181,13 +177,20 @@ $app = Factory::officialAccount($config);
 $oauth = $app->oauth;
 
 // 获取 OAuth 授权结果用户信息
-$user = $oauth->user();
+$code = "微信回调URL携带的 code";
+$user = $oauth->userFromCode();
 
 $_SESSION['wechat_user'] = $user->toArray();
 
 $targetUrl = empty($_SESSION['target_url']) ? '/' : $_SESSION['target_url'];
 
-header('location:'. $targetUrl); // 跳转到 user/profile
+header('Location:'. $targetUrl); // 跳转到 user/profile
 ```
 
-上面的例子呢都是基于 `$_SESSION` 来保持会话的，在微信客户端中，你可以结合 COOKIE 来存储，但是有效期平台不一样时间也不一样，好像 Android 的失效会快一些，不过基本也够用了。
+上面的例子呢都是基于 `$_SESSION` 来保持会话的，在微信客户端中，你可以结合 Cookies 来存储，但是有效期平台不一样时间也不一样，好像 Android 的失效会快一些，不过基本也够用了。
+
+
+## 参考阅读
+
+- 本模块基于 [overtrue/socialite](https://github.com/overtrue/socialite/) 实现，更多的使用请阅读该扩展包文档。
+- state 参数的使用: [overtrue/socialite/#state](https://github.com/overtrue/socialite/#state)
