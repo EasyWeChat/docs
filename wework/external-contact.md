@@ -48,6 +48,17 @@ $externalUserId = 'woAJ2GCAAAXtWyujaWJHDDGi0mACH71w';
 $app->external_contact->get($externalUserId);
 ```
 
+### 批量获取客户详情
+
+```php
+$userId = 'zhangsai';
+$cursor = '';
+$limit = 100;
+
+$app->external_contact->batchGetByUser(string $userId, string $cursor, int $limit);
+```
+
+
 ### 修改客户备注信息
 
 ```php
@@ -356,18 +367,49 @@ $app->external_contact_message->sendWelcome($welcomeCode, $msg);
 
 ## 数据统计
 
-### 获取员工行为数据
+###  获取「联系客户统计」数据
 
 ```php
 $userIds = [
     'zhangsan',
     'lisi'
 ];
-
+$partyIds = [
+    'PARTY_ID_1',
+    'PARTY_ID_2'
+];
 $from = 1536508800;
 $to = 1536940800;
 
-$app->external_contact_statistics->userBehavior($userIds, $from, $to);
+$app->external_contact_statistics->userBehavior($userIds, $from, $to, $partyIds);
 ```
 
+###  获取「群聊数据统计」数据. 
 
+- 按群主聚合的方式
+
+```php
+$params = [
+    'day_begin_time' => 1600272000,
+    'day_end_time' => 1600444800,
+    'owner_filter' => [
+        'userid_list' => ['zhangsan']
+    ],
+    'order_by' => 2,
+    'order_asc' => 0,
+    'offset' => 0,
+    'limit' => 1000
+];
+
+$app->external_contact_statistics->groupChatStatistic(array $params);
+```
+
+- 按自然日聚合的方式
+
+```php
+$dayBeginTime = 1600272000;
+$dayEndTime = 1600444800;
+$userIds = ['userid1', 'userid2'];
+
+$app->external_contact_statistics->groupChatStatisticGroupByDay(int $dayBeginTime, int $dayEndTime, array $userIds);
+```
