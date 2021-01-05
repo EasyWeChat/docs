@@ -206,6 +206,7 @@ $app->external_contact_moment->getComments(string $momentId, string $userId);
 
 > 注意: 对于添加/删除/编辑企业客户标签接口，目前仅支持使用“客户联系”secret所获取的accesstoken来调用。
 > 原文: https://work.weixin.qq.com/api/doc/90000/90135/92117
+
 ### 获取企业标签库
 
 ```php
