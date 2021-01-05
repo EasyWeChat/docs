@@ -1,4 +1,4 @@
-# 外部联系人管理
+# 客户联系 (原外部联系人)
 
 ## 获取实例
 
@@ -143,6 +143,63 @@ $app->external_contact->getGroupChats(array $params);
 $chatId = 'wrOgQhDgAAMYQiS5ol9G7gK9JVAAAA';
 
 $app->external_contact->getGroupChat(string $chatId);
+```
+## 客户朋友圈
+
+
+### 获取企业全部的发表列表
+```php
+$params = [
+    'start_time' => 1605000000,
+    'end_time' => 1605172726,
+    'creator' => 'zhangshan',
+    'filter_type' => 1,
+    'cursor' => 'CURSOR',
+    'limit' => 10
+];
+
+$app->external_contact_moment->list(array $params);
+```
+
+### 获取客户朋友圈企业发表的列表
+
+```php
+$momentId = 'momxxx';
+$cursor = 'CURSOR';
+$limit = 10;
+
+$app->external_contact_moment->getTasks(string $momentId, string $cursor, int $limit);
+```
+
+### 获取客户朋友圈发表时选择的可见范围
+
+```php
+$momentId = 'momxxx';
+$userId = 'xxx';
+$cursor = 'CURSOR';
+$limit = 10;
+
+$app->external_contact_moment->getCustomers(string $momentId, string $userId, string $cursor, int $limit);
+```
+
+### 获取客户朋友圈发表后的可见客户列表
+
+```php
+$momentId = 'momxxx';
+$userId = 'xxx';
+$cursor = 'CURSOR';
+$limit = 10;
+
+$app->external_contact_moment->getSendResult(string $momentId, string $userId, string $cursor, int $limit);
+```
+
+### 获取客户朋友圈的互动数据
+
+```php
+$momentId = 'momxxx';
+$userId = 'xxx';
+
+$app->external_contact_moment->getComments(string $momentId, string $userId);
 ```
 
 ## 客户标签管理
