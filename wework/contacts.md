@@ -203,6 +203,44 @@ $contacts->tag->untagUsers($tagId, [$userId1, $userId2, ...]);
 $contacts->tag->untagDepartments($tagId, [$departmentId1, $departmentId2, ...]);
 ```
 
+## 互联企业
 
+### 获取应用的可见范围
 
+```php
+$contacts->linked_corp->getAgentPermissions();
+```
 
+### 获取互联企业成员详细信息
+
+```php
+$userId = 'corpId/userId';
+
+$contacts->linked_corp->getUser(string $userId);
+```
+
+### 获取互联企业部门成员
+
+```php
+$departmentId = 'linkedId/departmentId';
+$fetchChild = true;
+
+$contacts->linked_corp->getUsers(string $departmentId, bool $fetchChild = true);
+```
+
+### 获取互联企业部门成员详情
+
+```php
+$departmentId = 'linkedId/departmentId';
+$fetchChild = true;
+
+$contacts->linked_corp->getDetailedUsers(string $departmentId, bool $fetchChild = true);
+```
+
+### 获取互联企业部门列表
+
+```php
+$departmentId = 'linkedId/departmentId';
+
+$contacts->linked_corp->getDepartments(string $departmentId);
+```
