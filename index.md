@@ -60,6 +60,7 @@
   - [订阅消息](/docs/{{version}}/mini-program/subscribe_message)
   - [直播](/docs/{{version}}/mini-program/live)
   - [安全风控](/docs/{{version}}/mini-program/safety_control)
+  - [URL Scheme](/docs/{{version}}/mini-program/url_scheme_generate)
 - ## 开放平台
   - [入门](/docs/{{version}}/open-platform/index)
   - [服务端](/docs/{{version}}/open-platform/server)
