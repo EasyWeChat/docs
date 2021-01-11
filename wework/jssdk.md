@@ -68,6 +68,7 @@ $app->jssdk->buildAgentConfig(
 
 ```js
 <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://open.work.weixin.qq.com/wwopen/js/jwxwork-1.0.0.js"></script>
 <script type="text/javascript" charset="utf-8">
 wx.config({
     debug: true, // 请在上线前删除它
@@ -96,7 +97,7 @@ wx.ready(function(){
     });
 });
 wx.error(function(res){
-    console.log('失败');
+    console.log('失败');  
 });
 </script>
 ```
