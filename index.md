@@ -77,7 +77,7 @@
   - [企业互联](/docs/{{version}}/wework/corp-group)
   - [会话内容存档](/docs/{{version}}/wework/msg-audit)
   - [电子发票](/docs/{{version}}/wework/invoice)
-  - [JSSDK](/docs/{{version}}/basic-services/jssdk)
+  - [JSSDK](/docs/{{version}}/wework/jssdk)
   - [群机器人](/docs/{{version}}/wework/group-robot)
 - ## 企业微信开放平台
   - [入门](/docs/{{version}}/open-work/index)
