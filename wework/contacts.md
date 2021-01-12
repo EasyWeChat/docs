@@ -203,6 +203,67 @@ $contacts->tag->untagUsers($tagId, [$userId1, $userId2, ...]);
 $contacts->tag->untagDepartments($tagId, [$departmentId1, $departmentId2, ...]);
 ```
 
+## 异步批量接口
+
+> 注意: 【异步批量接口】需要使用“通讯录同步”secret所获取的accesstoken来调用。 
+> 传送: https://work.weixin.qq.com/wework_admin/frame#apps/contactsApi 
+
+
+### 增量更新成员
+
+```php
+$params = [
+    'media_id' => 'mediaId',
+    'to_invite' => true,
+    'callback' => [
+        'url' => 'xxx',
+        'token' => 'xxx',
+        'encodingaeskey' => 'xxx'
+    ]
+];
+
+$contacts->batch_jobs->batchUpdateUsers(array $params);
+```
+
+### 全量覆盖成员
+
+```php
+$params = [
+    'media_id' => 'mediaId',
+    'to_invite' => true,
+    'callback' => [
+        'url' => 'xxx',
+        'token' => 'xxx',
+        'encodingaeskey' => 'xxx'
+    ]
+];
+
+$contacts->batch_jobs->batchReplaceUsers(array $params);
+```
+
+### 全量覆盖部门
+
+```php
+$params = [
+    'media_id' => 'mediaId',
+    'callback' => [
+        'url' => 'xxx',
+        'token' => 'xxx',
+        'encodingaeskey' => 'xxx'
+    ]
+];
+
+$contacts->batch_jobs->batchReplaceDepartments(array $params);
+```
+
+### 获取异步任务结果
+
+```php
+$jobId = '2322232';
+
+$contacts->batch_jobs->getJobStatus(array $jobId);
+```
+
 ## 互联企业
 
 ### 获取应用的可见范围
