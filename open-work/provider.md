@@ -57,3 +57,17 @@ $app->provider->setAgentScope(
 ```php
 $app->provider->contactSyncSuccess(string $accessToken); //$accessToken //查询注册状态接口返回的access_token
 ```
+
+### 通讯录单个搜索
+
+```php
+$app->provider->searchContact(
+                         string $corpId, //查询的企业corpid
+                         string $queryWord, //搜索关键词。当查询用户时应为用户名称、名称拼音或者英文名；当查询部门时应为部门名称或者部门名称拼音
+                         string $agentId, //授权方应用id
+                         int $offset = 0, //查询的偏移量，每次调用的offset在上一次offset基础上加上limit
+                         int $limit = 50, //查询返回的最大数量，默认为50，最多为200，查询返回的数量可能小于limit指定的值
+                         int $queryType = 0, //查询类型 1：查询用户，返回用户userid列表 2：查询部门，返回部门id列表。 不填该字段或者填0代表同时查询部门跟用户
+                         $fullMatchField = null //如果需要精确匹配用户名称或者部门名称或者英文名，不填则默认为模糊匹配；1：匹配用户名称或者部门名称 2：匹配用户英文名
+                     )
+```
