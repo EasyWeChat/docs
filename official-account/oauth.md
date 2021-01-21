@@ -98,7 +98,6 @@ return \redirect($redirectUrl);
 
 ```php
 $code = "微信回调URL携带的 code";
-
 $user = $app->oauth->userFromCode($code);
 ```
 
@@ -119,7 +118,7 @@ $user = $app->oauth->userFromCode($code);
 > {warning} 注意：`$user` 里没有 `openid`， `$user->id` 便是 `openid`.
 > 如果你想拿微信返回给你的原样的全部信息，请使用：$user->getRaw();
 
-当 `scope` 为 `snsapi_base` 时 `$oauth->user();` 对象里只有 `id`，没有其它信息。
+当 `scope` 为 `snsapi_base` 时 `$oauth->userFromCode($code);` 对象里只有 `id`，没有其它信息。
 
 ## 网页授权实例
 
@@ -178,7 +177,7 @@ $oauth = $app->oauth;
 
 // 获取 OAuth 授权结果用户信息
 $code = "微信回调URL携带的 code";
-$user = $oauth->userFromCode();
+$user = $oauth->userFromCode($code);
 
 $_SESSION['wechat_user'] = $user->toArray();
 
