@@ -98,7 +98,6 @@ return \redirect($redirectUrl);
 
 ```php
 $code = "微信回调URL携带的 code";
-
 $user = $app->oauth->userFromCode($code);
 ```
 
