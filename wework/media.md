@@ -28,13 +28,19 @@ $app->media->uploadVoice($path);
 ## 上传视频
 
 ```php
-$app->media->uploadVideo($path, $title, $description);
+$app->media->uploadVideo($path);
 ```
 
 ## 上传普通文件
 
 ```php
-$app->media->uploadFile($path);
+$path = '/path/to/企业微信操作手册.pdf'
+
+$form = [ //可选 发送时,中文文件名不显示或被过虑可传此参数
+    'filename' => '企业微信操作手册.pdf'
+];
+
+$app->media->uploadFile(string $path, array $form = []);
 ```
 
 ## 获取素材
