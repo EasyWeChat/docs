@@ -7,5 +7,5 @@
 ```php
 $code = 'CODE';
 
-$app->mobile->getUsercode(string $code);
+$app->mobile->getUser(string $code);
 ```
