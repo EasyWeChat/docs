@@ -24,6 +24,13 @@ $payment = Factory::payment($config);
 $redpack = $payment->redpack;
 ```
 
+**服务商模式下需注意**
+
+```php
+// 不能传递第二个参数subAppID，否则微信将一直返回签名错误
+$payment->setSubMerchant($subMerchantID);
+```
+
 ## 发送红包
 
 微信的现金红包分为**普通红包**和**裂变红包**两类。SDK 中对其分别进行了封装，同时也提供了一个统一的调用方法。
