@@ -72,7 +72,7 @@ $app->server->push(function ($message) {
 某些情况，我们需要直接使用 `$message` 参数，那么怎么在 `push` 的闭包外调用呢？
 
 ```php
-    $message = $server->getMessage();
+    $message = $app->server->getMessage();
 ```
 > {warning} 注意：`$message` 的类型取决于你的配置中 `response_type`
 
