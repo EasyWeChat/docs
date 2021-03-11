@@ -46,8 +46,6 @@ $user->getRaw(); // 获取企业微信接口返回的原始信息
 ```
 
 获取用户其他信息需调用通讯录接口，参考：[企业微信通讯录API](https://github.com/EasyWeChat/docs/blob/master/wework/contacts.md)
-```php
-
 
 ## 参考阅读
 
