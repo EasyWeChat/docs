@@ -22,7 +22,10 @@ $app = Factory::work($config);
 接着配置服务端与公众号的服务端用法一样：
 
 ```php
-$app->server->push(function(){
+$app->server->push(function($message){
+   // $message['FromUserName'] // 消息来源
+   // $message['MsgType'] // 消息类型：event ....
+    
     return 'Hello easywechat.';
 });
 
