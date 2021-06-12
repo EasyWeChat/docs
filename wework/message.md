@@ -32,3 +32,11 @@ $messenger->toUser('overtrue')->send('你的请假单（单号：1928373）已�
 ## 接收消息
 
 被动接收消息，与回复消息，请参考：[服务端](server)
+
+
+## 更新任务卡片消息状态 
+
+```php
+$messenger->updateTaskcard(array $userids, int $agentId, string $taskId, string $replaceName = '已收到')
+```
+
