@@ -1,204 +1,156 @@
 # 服务端
 
-我们在入门小教程一节以服务端为例讲解了一个基本的消息的处理，这里就不再讲服务器验证的流程了，请直接参考前面的入门实例即可。
-
-服务端的作用呢，在整个微信开发中主要是负责 **[接收用户发送过来的消息](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html)**，还有 **[用户触发的一系列事件](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html)**。
-
-首先我们得理清消息与事件的回复逻辑，当你收到用户消息后（消息由微信服务器推送到你的服务器），在你对消息进行一些处理后，不管是选择回复一个消息还是什么不都回给用户，你也应该给微信服务器一个 “答复”，如果是选择回复一条消息，就直接返回一个消息xml就好，如果选择不作任何回复，你也得回复一个空字符串或者字符串 `SUCCESS`（不然用户就会看到 `该公众号暂时无法提供服务`）。
-
-## 基本使用
-
-在 SDK 中使用 `$app->server->push(callable $callback)` 来设置消息处理器：
+你可以通过 `$app->getServer()` 获取服务端模块：
 
 ```php
-$app->server->push(function ($message) {
-    // $message['FromUserName'] // 用户的 openid
-    // $message['MsgType'] // 消息类型：event, text....
-    return "您好！欢迎使用 EasyWeChat";
-});
+use EasyWeChat\OfficialAccount\Application;
 
-// 在 laravel 中：
-$response = $app->server->serve();
+$config = [...];
+$app = new Application($config);
 
-// $response 为 `Symfony\Component\HttpFoundation\Response` 实例
-// 对于需要直接输出响应的框架，或者原生 PHP 环境下
-$response->send();
-
-// 而 laravel 中直接返回即可：
-
-return $response;
+$server = $app->getServer();
 ```
 
-这里我们使用 `push` 传入了一个 **闭包（[Closure](http://php.net/manual/en/class.closure.php)）**，该闭包接收一个参数 `$message` 为消息对象（类型取决于你的配置中 `response_type`），你可以在全局消息处理器中对消息类型进行筛选：
+
+### 中间件模式
+
+与 5.x 的设计类似，服务端使用中间件模式来依次调用开发者注册的中间件：
 
 ```php
-$app->server->push(function ($message) {
-    switch ($message['MsgType']) {
-        case 'event':
-            return '收到事件消息';
-            break;
-        case 'text':
-            return '收到文字消息';
-            break;
-        case 'image':
-            return '收到图片消息';
-            break;
-        case 'voice':
-            return '收到语音消息';
-            break;
-        case 'video':
-            return '收到视频消息';
-            break;
-        case 'location':
-            return '收到坐标消息';
-            break;
-        case 'link':
-            return '收到链接消息';
-            break;
-        case 'file':
-            return '收到文件消息';
-        // ... 其它消息
-        default:
-            return '收到其它消息';
-            break;
+$server->with(function($message, \Closure $next) {
+    // 你的自定义逻辑
+    return $next($message)
+});
+
+$response = $server->serve();
+```
+
+你可以注册多个中间件来处理不同的情况：
+
+```php
+$server
+    ->with(function($message, \Closure $next) {
+        // 你的自定义逻辑1
+        return $next($message)
+    })
+    ->with(function($message, \Closure $next) {
+        // 你的自定义逻辑2
+        return $next($message)
+    })
+    ->with(function($message, \Closure $next) {
+        // 你的自定义逻辑3
+        return $next($message)
+    });
+
+$response = $server->serve();
+```
+
+
+### 回复消息
+
+当你在中间件里不回复消息时，你将要传递消息给下一个中间件：
+
+```php
+function($message, \Closure $next) {
+    // 你的自定义逻辑3
+    return $next($message)
+}
+```
+
+如果此时你需要返回消息给用户，你可以直接像下面这样回复消息内容：
+
+```php
+function($message, \Closure $next) {
+    return '感谢你使用 EasyWeChat';
+}
+```
+
+> 注意：回复消息后其他没运行的中间件将不再执行，所以请你将全局都需要执行的中间件优先提前注册。
+
+其他类型的消息时，请直接[参考官方文档消息的 XML 结构](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html) 以数组形式返回即可。
+
+需要省略 `ToUserName`、`FromUserName` 和 `CreateTime`，以回复图片消息为例:
+
+```php
+function($message, \Closure $next) {
+    return [
+        'MsgType' => 'image',
+        'Image' => [
+            'MediaId' => 'media_id',
+        ],
+    ];
+}
+```
+
+#### 怎么发送多条消息？
+
+服务端只能回复一条消息，如果你想在接收到消息时向用户发送多条消息，你可以调用[客服消息](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html) 接口来发送多条。
+
+### 使用独立的中间件类
+
+当然，中间件也支持多种类型，比如你可以使用一个独立的类作为中间件：
+
+```php
+class MyCustomHandler
+{
+    public function __invoke($message, \Closure $next)
+    {
+        if ($message->MsgType === 'text') {
+            //...
+        }
+
+        return $next($message);
     }
-
-    // ...
-});
+}
 ```
 
-当然，因为这里 `push` 接收一个 [`callable`](http://php.net/manual/zh/language.types.callable.php) 的参数，所以你不一定要传入一个 Closure 闭包，你可以选择传入一个函数名，一个 `[$class, $method]` 或者 `Foo::bar` 这样的类型。
-
-某些情况，我们需要直接使用 `$message` 参数，那么怎么在 `push` 的闭包外调用呢？
+注册中间件：
 
 ```php
-    $message = $server->getMessage();
+$server->with(MyCustomHandler::class);
+
+// 或者
+
+$server->with(new MyCustomHandler());
 ```
-> {warning} 注意：`$message` 的类型取决于你的配置中 `response_type`
 
-## 注册多个消息处理器
+### 使用 callable 类型中间件
 
-有时候你可能需要对消息记日志，或者一系列的自定义操作，你可以注册多个 handler：
+中间件支持 [`callable`](http://php.net/manual/zh/language.types.callable.php) 类型的参数，所以你不一定要传入一个闭包（Closure），你可以选择传入一个函数名，一个 `[$class, $method]` 或者 `Foo::bar` 这样的类型。
 
 ```php
-$app->server->push(MessageLogHandler::class);
-$app->server->push(MessageReplyHandler::class);
-$app->server->push(OtherHandler::class);
-$app->server->push(...);
+$server->with([$object, 'method']);
+$server->with('ClassName::method');
 ```
-
-> {warning} 注意：
-    1. 最后一个非空返回值将作为最终应答给用户的消息内容，如果中间某一个 handler 返回值 false, 则将终止整个调用链，不会调用后续的 handlers。
-    2. 传入的自定义 Handler 类需要实现 `\EasyWeChat\Kernel\Contracts\EventHandlerInterface`。
 
 ## 注册指定消息类型的消息处理器
 
-我们想对特定类型的消息应用不同的处理器，可以在第二个参数传入类型筛选：
+为了方便开发者处理消息推送，server 类内置了两个便捷方法：
 
-> 注意，第二个参数必须是 `\EasyWeChat\Kernel\Messages\Message` 类的常量。
+### 处理普通消息
+
+当普通微信用户向公众账号发消息时被调用，且匹配对应的事件类型：
 
 ```php
-use EasyWeChat\Kernel\Messages\Message;
-
-$app->server->push(ImageMessageHandler::class, Message::IMAGE); // 图片消息
-$app->server->push(TextMessageHandler::class, Message::TEXT); // 文本消息
-
-// 同时处理多种类型的处理器
-$app->server->push(MediaMessageHandler::class, Message::VOICE|Message::VIDEO|Message::SHORT_VIDEO); // 当消息为 三种中任意一种都可触发
+$server->addMessageListener('text', function() { ... });
 ```
 
-## 请求消息的属性
+**参数**
 
-当你接收到用户发来的消息时，可能会提取消息中的相关属性，参考：
+ - 参数 1 为消息类型，也就是 message 中的 `MsgType` 字段，例如：`image`;
+ - 参数 2 是中间件，也就是上面讲到的多种类型的中间件。
 
-请求消息基本属性(以下所有消息都有的基本属性)：
+### 处理事件消息
 
->>  - `ToUserName`    接收方帐号（该公众号 ID）
->>  - `FromUserName`  发送方帐号（OpenID, 代表用户的唯一标识）
->>  - `CreateTime`    消息创建时间（时间戳）
->>  - `MsgId`        消息 ID（64位整型）
+事件消息中间件仅在推送事件消息时被调用，且匹配对应的事件类型：
 
-### 文本：
+```php
+$server->addEventListener('subscribe', function() { ... });
+```
 
->  - `MsgType`  text
->  - `Content`  文本消息内容
+**参数**
 
-### 图片：
+ - 参数 1 为事件类型，也就是 message 中的 `Event` 字段，例如：`subscribe`;
+ - 参数 2 是中间件，也就是上面讲到的多种类型的中间件。
 
->  - `MsgType`  image
->  - `MediaId`  图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
->  - `PicUrl`   图片链接
-
-### 语音：
-
->  - `MsgType`        voice
->  - `MediaId`        语音消息媒体id，可以调用多媒体文件下载接口拉取数据。
->  - `Format`         语音格式，如 amr，speex 等
->  - `Recognition`  * 开通语音识别后才有
-
-  > {warning} 请注意，开通语音识别后，用户每次发送语音给公众号时，微信会在推送的语音消息XML数据包中，增加一个 `Recongnition` 字段
-
-### 视频：
-
->  - `MsgType`       video
->  - `MediaId`       视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
->  - `ThumbMediaId`  视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
-
-### 小视频：
-
->  - `MsgType`     shortvideo
->  - `MediaId`     视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
->  - `ThumbMediaId`    视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
-
-### 事件：
-
->  - `MsgType`     event
->  - `Event`       事件类型 （如：subscribe(订阅)、unsubscribe(取消订阅) ...， CLICK 等）
-
-#### 扫描带参数二维码事件
->  - `EventKey`    事件KEY值，比如：qrscene_123123，qrscene_为前缀，后面为二维码的参数值
->  - `Ticket`      二维码的 ticket，可用来换取二维码图片
-
-#### 上报地理位置事件
->  - `Latitude`    23.137466   地理位置纬度
->  - `Longitude`   113.352425  地理位置经度
->  - `Precision`   119.385040  地理位置精度
-
-#### 自定义菜单事件
->  - `EventKey`    事件KEY值，与自定义菜单接口中KEY值对应，如：CUSTOM_KEY_001, www.qq.com
-
-### 地理位置：
-
->  - `MsgType`     location
->  - `Location_X`  地理位置纬度
->  - `Location_Y`  地理位置经度
->  - `Scale`       地图缩放大小
->  - `Label`       地理位置信息
-
-### 链接：
-
->  - `MsgType`      link
->  - `Title`        消息标题
->  - `Description`  消息描述
->  - `Url`          消息链接
-
-### 文件：
-
->  - `MsgType`      file
->  - `Title`        文件名
->  - `Description`  文件描述，可能为null
->  - `FileKey`      文件KEY
->  - `FileMd5`      文件MD5值
->  - `FileTotalLen` 文件大小，单位字节
-
-## 回复消息
-
-回复的消息可以为 `null`，此时 SDK 会返回给微信一个 "SUCCESS"，你也可以回复一个普通字符串，比如：`欢迎关注 overtrue.`，此时 SDK 会对它进行一个封装，产生一个 [`EasyWeChat\Kernel\Messages\Text`](https://github.com/EasyWeChat/message/blob/master/src/Kernel/Messages/Text.php) 类型的消息并在最后的 `$app->server->serve();` 时生成对应的消息 XML 格式。
-
-如果你想返回一个自己手动拼的原生 XML 格式消息，请返回一个 [`EasyWeChat\Kernel\Messages\Raw`](https://github.com/EasyWeChat/message/blob/master/src/Kernel/Messages/Raw.php) 实例即可。
-
-## 消息转发给客服系统
-
-参见：[多客服消息转发](message-transfer)
-
-关于消息的使用，请参考 [`消息`](messages) 章节。
+关于回复消息的结构，可以查阅 [消息](message.md) 章节了解更多。

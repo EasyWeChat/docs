@@ -144,4 +144,4 @@ $response->send(); // Laravel 里请使用：return $response;
 
  ## 最后
 
- 希望你在使用本 SDK 的时候如果你发现 SDK 的不足，欢迎提交 PR 或者给我[提建议 & 报告问题](https://github.com/overtrue/wechat/issues)。
+ 希望你在使用本 SDK 的时候如果你发现 SDK 的不足，欢迎提交 PR 或者给我[提建议 & 报告问题](https://github.com/w7corp/wechat/issues)。
