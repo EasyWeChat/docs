@@ -48,7 +48,7 @@ $app->getClient();
 $config = $app->getConfig();
 ```
 
-你可以轻松使用 `$config->get($key, $default)` 或 `$config->set($key, $value)` 在调用前修改配置项。
+你可以轻松使用 `$config->get($key, $default)` 读取配置，或使用 `$config->set($key, $value)` 在调用前修改配置项。
 
 ### AccessToken
 
