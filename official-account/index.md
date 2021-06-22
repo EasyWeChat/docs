@@ -1,4 +1,4 @@
-# 使用配置创建应用
+# 公众号
 
 常用的配置参数会比较少，因为除非你有特别的定制，否则基本上默认值就可以了：
 
@@ -16,110 +16,60 @@ $config = [
 $app = new Application($config);
 ```
 
-下面是一个完整的配置样例：
+更多配置项请参考：[配置](config.md)
 
-> 不建议你在配置的时候弄这么多，用到啥就配置啥才是最好的，因为大部分用默认值即可。
+## API
 
-```php
-<?php
+Application 就是一个工厂类，所有的模块都是从 `$app` 中访问，并且几乎都提供了协议和 setter 可自定义修改。
 
-return [
-    /**
-     * 账号基本信息，请从微信公众平台/开放平台获取
-     */
-    'app_id'  => 'your-app-id',         // AppID
-    'secret'  => 'your-app-secret',     // AppSecret
-    'token'   => 'your-token',          // Token
-    'aes_key' => '',                    // EncodingAESKey，兼容与安全模式下请一定要填写！！！
+### 服务端
 
-    /**
-     * 日志配置
-     *
-     * level: 日志级别, 可选为：
-     *         debug/info/notice/warning/error/critical/alert/emergency
-     * path：日志文件位置(绝对路径!!!)，要求可写权限
-     */
-    'log' => [
-        'default' => 'dev', // 默认使用的 channel，生产环境可以改为下面的 prod
-        'channels' => [
-            // 测试环境
-            'dev' => [
-                'driver' => 'single',
-                'path' => '/tmp/easywechat.log',
-                'level' => 'debug',
-            ],
-            // 生产环境
-            'prod' => [
-                'driver' => 'daily',
-                'path' => '/tmp/easywechat.log',
-                'level' => 'info',
-            ],
-        ],
-    ],
-
-    /**
-     * 接口请求相关配置，超时时间等，具体可用参数请参考：
-     * https://github.com/symfony/symfony/blob/5.3/src/Symfony/Contracts/HttpClient/HttpClientInterface.php
-     */
-    'http' => [
-        'timeout' => 5.0,
-        // 'base_uri' => 'https://api.weixin.qq.com/', // 如果你在国外想要覆盖默认的 url 的时候才使用，根据不同的模块配置不同的 uri
-    ],
-];
-```
-
-> :heart: 安全模式下请一定要填写 `aes_key`
-
-## 日志配置
-
-你可以配置多个日志的 channel，每个 channel 里的 `driver` 对应不同的日志驱动，内置可用的 `driver` 如下表：
-
-名称 | 描述
-------------- | -------------
-`stack` | 复合型，可以包含下面多种驱动的混合模式
-`single` | 基于 `StreamHandler` 的单一文件日志，参数有 `path`，`level`
-`daily` | 基于 `RotatingFileHandler` 按日期生成日志文件，参数有 `path`，`level`，`days`(默认 7 天)
-`slack` | 基于 `SlackWebhookHandler` 的 Slack 组件，参数请参考源码：[LogManager.php](https://github.com/w7corp/wechat/blob/master/src/Kernel/Log/LogManager.php#L247)
-`syslog` | 基于 `SyslogHandler` Monolog 驱动，参数有 `facility` 默认为 `LOG_USER`，`level`
-`errorlog` | 记录日志到系统错误日志，基于 `ErrorLogHandler`，参数有 `type`，默认为 `ErrorLogHandler::OPERATING_SYSTEM`
-
-### 自定义日志驱动
-
-由于日志使用的是 [Monolog](https://github.com/Seldaek/monolog)，所以，除了默认的文件式日志外，你可以自定义日志处理器：
+服务端模块封装了服务端相关的便捷操作，隐藏了部分复杂的细节，基于中间件模式可以更方便的处理消息推送和服务端验证。
 
 ```php
-use Monolog\Logger;
-use Monolog\Handler\RotatingFileHandler;
-
-
-// 注册自定义日志
-$app->getLogger()->extend('mylog', function($app, $config){
-    return new Logger($this->parseChannel($config), [
-        $this->prepareHandler(new RotatingFileHandler(
-            $config['path'], $config['days'], $this->level($config)
-        )),
-    ]);
-});
+$app->getServer();
 ```
 
-> {info} 在你自定义的闭包函数中，可以使用 `EasyWeChat\Kernel\Log\LogManager` 中的方法，具体请查看 SDK 源代码。
+更多说明请参阅：[服务端使用文档](server.md)
 
-配置文件中在 `driver` 部分即可使用你自定义的驱动了：
+### API Client
+
+封装了多种模式的 API 调用类，你可以选择自己喜欢的方式调用公众号任意 API，默认自动处理了 access_token 相关的逻辑。
 
 ```php
-'log' => [
-    'default' => 'dev', // 默认使用的 channel，生产环境可以改为下面的 prod
-    'channels' => [
-        // 测试环境
-        'dev' => [
-            'driver' => 'mylog',
-            'path' => '/tmp/easywechat.log',
-            'level' => 'debug',
-            'days' => 5,
-        ],
-
-        //...
-    ],
-],
+$app->getClient();
 ```
 
+更多说明请参阅：[API调用](client.md)
+
+### 配置
+
+```php
+$config = $app->getConfig();
+```
+
+你可以轻松使用 `$config->get($key, $default)` 或 `$config->set($key, $value)` 在调用前修改配置项。
+
+### AccessToken
+
+access_token 是公众号 API 调用的必备条件，如果你想获取它的值，你可以通过以下方式拿到当前的 access_token：
+
+```php
+$accessToken = $app->getAccessToken();
+$accessToken->getToken(); // string
+```
+
+当然你也可以使用自己的 AccessToken 类：
+
+```php
+$accessToken = new MyCustomAccessToken();
+$app->setAccessToken($accessToken)
+```
+
+### 公众号账户
+
+公众号账号类，提供一系列 API 获取公众号的基本信息：
+
+```php
+$app->getAccount();
+```

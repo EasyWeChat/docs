@@ -1,6 +1,6 @@
 # 服务端
 
-你可以通过 `$app->getServer()` 获取服务端模块：
+你可以通过 `$app->getServer()` 获取服务端模块，**服务端模块默认处理了服务端验证的逻辑**：
 
 ```php
 use EasyWeChat\OfficialAccount\Application;
@@ -154,3 +154,27 @@ $server->addEventListener('subscribe', function() { ... });
  - 参数 2 是中间件，也就是上面讲到的多种类型的中间件。
 
 关于回复消息的结构，可以查阅 [消息](message.md) 章节了解更多。
+
+
+## 完整示例
+
+以下示例完成了服务端验证，自定义中间件回复等逻辑：
+
+```php
+use EasyWeChat\OfficialAccount\Application;
+
+$config = [...];
+$app = new Application($config);
+
+$server = $app->getServer();
+
+$server->addEventListener('subscribe', function($message, \Closure $next) {
+    return '感谢您关注 EasyWeChat!';
+});
+
+$response = $server->serve();
+
+return $response;
+```
+
+> `$response` 是一个 [Psr\Http\Message\ResponseInterface](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php) 实现，所以请自己决定如何适配您的框架。
