@@ -67,7 +67,7 @@ function($message, \Closure $next) {
 
 > 注意：回复消息后其他没运行的中间件将不再执行，所以请你将全局都需要执行的中间件优先提前注册。
 
-其他类型的消息时，请直接[参考官方文档消息的 XML 结构](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html) 以数组形式返回即可。
+其他类型的消息时，请直接参考 **[官方文档消息的 XML 结构](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html)** 以数组形式返回即可。
 
 需要省略 `ToUserName`、`FromUserName` 和 `CreateTime`，以回复图片消息为例:
 
@@ -84,7 +84,7 @@ function($message, \Closure $next) {
 
 #### 怎么发送多条消息？
 
-服务端只能回复一条消息，如果你想在接收到消息时向用户发送多条消息，你可以调用[客服消息](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html) 接口来发送多条。
+服务端只能回复一条消息，如果你想在接收到消息时向用户发送多条消息，你可以调用 **[客服消息](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html)** 接口来发送多条。
 
 ### 使用独立的中间件类
 
@@ -116,7 +116,7 @@ $server->with(new MyCustomHandler());
 
 ### 使用 callable 类型中间件
 
-中间件支持 [`callable`](http://php.net/manual/zh/language.types.callable.php) 类型的参数，所以你不一定要传入一个闭包（Closure），你可以选择传入一个函数名，一个 `[$class, $method]` 或者 `Foo::bar` 这样的类型。
+中间件支持 **[`callable`](http://php.net/manual/zh/language.types.callable.php)** 类型的参数，所以你不一定要传入一个闭包（Closure），你可以选择传入一个函数名，一个 `[$class, $method]` 或者 `Foo::bar` 这样的类型。
 
 ```php
 $server->with([$object, 'method']);
@@ -153,7 +153,7 @@ $server->addEventListener('subscribe', function() { ... });
  - 参数 1 为事件类型，也就是 message 中的 `Event` 字段，例如：`subscribe`;
  - 参数 2 是中间件，也就是上面讲到的多种类型的中间件。
 
-关于回复消息的结构，可以查阅 [消息](message.md) 章节了解更多。
+关于回复消息的结构，可以查阅 **[消息](message.md)** 章节了解更多。
 
 
 ## 完整示例

@@ -16,7 +16,7 @@ $config = [
 $app = new Application($config);
 ```
 
-更多配置项请参考：[配置](config.md)
+:book: 更多配置项请参考：[配置](config.md)
 
 ## API
 
@@ -30,7 +30,7 @@ Application 就是一个工厂类，所有的模块都是从 `$app` 中访问，
 $app->getServer();
 ```
 
-更多说明请参阅：[服务端使用文档](server.md)
+:book: 更多说明请参阅：[服务端使用文档](server.md)
 
 ### API Client
 
@@ -40,7 +40,7 @@ $app->getServer();
 $app->getClient();
 ```
 
-更多说明请参阅：[API调用](client.md)
+:book: 更多说明请参阅：[API调用](client.md)
 
 ### 配置
 
@@ -71,5 +71,10 @@ $app->setAccessToken($accessToken)
 公众号账号类，提供一系列 API 获取公众号的基本信息：
 
 ```php
-$app->getAccount();
+$account = $app->getAccount();
+
+$account->getAppId();
+$account->getSecret();
+$account->getToken();
+$account->getAesKey();
 ```
