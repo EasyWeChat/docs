@@ -1,5 +1,7 @@
 # 公众号
 
+> 🚨 使用前建议熟读 [微信官方文档: 公众号](https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Overview.html)
+
 常用的配置参数会比较少，因为除非你有特别的定制，否则基本上默认值就可以了：
 
 ```php
@@ -40,7 +42,7 @@ $app->getServer();
 $app->getClient();
 ```
 
-:book: 更多说明请参阅：[API调用](client.md)
+:book: 更多说明请参阅：[API调用](/docs/{{version}}/common/client.md)
 
 ### 配置
 
