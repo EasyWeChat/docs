@@ -126,4 +126,49 @@ $httpLogs = $response->getInfo('debug');
 
 ## 异步请求
 
-todo
+所有的请求都是异步的，当你第一次访问 `$response` 时才会真正的请求，比如：
+
+```php
+// 这段代码会立即执行，并不会发起网络请求
+$response = $api->post('/cgi-bin/user/info/updateremark', ['body' => [
+    "openid" => "oDF3iY9ffA-hqb2vVvbr7qxf6A0Q",
+    "remark" => "pangzi"
+]])
+
+// 当你尝试访问 $response 的信息时，才会发起请求并等待返回
+$contentType = $response->getHeaders()['content-type'][0];
+
+// 尝试获取响应内容将阻塞执行，直到接收到完整的响应内容
+$content = $response->getContent();
+```
+
+### 并行请求
+
+由于请求天然是异步的，那么你可以很简单实现并行请求：
+
+```php
+$responses = [
+    $api->cgiBin->user->get->get(),
+    $api->cgiBin->user->info->updateremark(['body' => ...]),
+    $api->cgiBin->user->message->custom->send(['body' => ...]),
+];
+
+// 访问任意一个 $response 时将执行并发请求：
+foreach ($responses as $response) {
+    $content = $response->getContent();
+    // ...
+}
+```
+
+当然你也可以给每个请求分配名字独立访问：
+
+```php
+$responses = [
+    'users' => $api->cgiBin->user->get->get(),
+    'remark' => $api->cgiBin->user->info->updateremark(['body' => ...]),
+    'message' => $api->cgiBin->user->message->custom->send(['body' => ...]),
+];
+
+// 访问任意一个 $response 时将执行并发请求：
+$responses['users']->toArray();
+```
