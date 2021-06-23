@@ -80,7 +80,7 @@ $response = $api->post('/cgi-bin/user/info/updateremark', ['body' => [
 ### 语法说明
 
 ```php
-Psr\Http\Message\ResponseInterface {get/post/patch/put/delete}($uri, $options = [])
+Symfony\Contracts\HttpClient\ResponseInterface {get/post/patch/put/delete}($uri, $options = [])
 ```
 
 **参数说明：**
@@ -172,3 +172,7 @@ $responses = [
 // 访问任意一个 $response 时将执行并发请求：
 $responses['users']->toArray();
 ```
+
+## 更多使用方法
+
+:book: 更多使用请参考：[symfony/http-client](https://github.com/symfony/http-client)
