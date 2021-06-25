@@ -101,7 +101,7 @@ $account->getAesKey();
 $oauth = $app->getOAuth();
 ```
 
-详情请参考：[公众号：网页授权](/docs/{{version}}/official-account/oauth.md)
+:book: 详情请参考：[公众号：网页授权](/docs/{{version}}/official-account/oauth.md)
 
 
 ## 使用授权码获取授权信息
@@ -189,7 +189,7 @@ $officialAccount = $app->getOfficialAccount($authorizerAccessToken);
 $users = $officialAccount->getClient()->cgiBin->users->list->get()->toArray();
 ```
 
-更多公众号用法请参考：[公众号](/docs/{{version}}/official-account/index.md)
+:book: 更多公众号用法请参考：[公众号](/docs/{{version}}/official-account/index.md)
 
 **获取小程序实例**
 
@@ -201,4 +201,4 @@ $miniApp = $app->getMiniApp($authorizerAccessToken);
 $users = $miniApp->getClient()->cgiBin->users->list->get()->toArray();
 ```
 
-更多小程序用法请参考：[小程序](/docs/{{version}}/mini-app/index.md)
+:book: 更多小程序用法请参考：[小程序](/docs/{{version}}/mini-app/index.md)
