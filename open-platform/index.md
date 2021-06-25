@@ -159,27 +159,66 @@ $app->refreshAuthorizerToken($authorizerAppId, $authorizerRefreshToken)
 
 ## 代替公众号请求公众平台 API
 
+你可以通过 AuthorizerAccessToken 来获取公众号实例：
+
 ```php
-// 开放平台永久授权码换取授权者信息
+EasyWeChat\OfficialAccount\Application $app->getOfficialAccount(
+  EasyWeChat\OpenPlatform\AuthorizerAccessToken $authorizerAccessToken
+)
+```
+
+
+```php
+// 第一种方式：开放平台永久授权码换取授权者信息
 $authorizationCode = '授权成功时返回给第三方平台的授权码';
 $authorization = $app->getAuthorization($authorizationCode);
+$authorizerAccessToken = $authorization->getAccessToken();
+
+// 第二种方式：从数据库提取出来的授权码
+$authorizerAccessToken = new AuthorizerAccessToken($authorizerAppId, $token);
 
 // $officialAccount 为 EasyWeChat\OfficialAccount\Application 实例
-$officialAccount = $app->getOfficialAccount($authorization->getAccessToken());
+$officialAccount = $app->getOfficialAccount($authorizerAccessToken);
 
 // 调用公众号接口
 $users = $officialAccount->getClient()->cgiBin->users->list->get()->toArray();
 ```
 
-## 代替小程序请求公众平台 API
+## 代替公众号/小程序请求公众平台 API
+
+代替公众号/小程序请求，需要首先拿到 `EasyWeChat\OpenPlatform\AuthorizerAccessToken`。
+
+**获取 AuthorizerAccessToken**
+
+第一种方式：开放平台永久授权码换取授权者信息
 
 ```php
-// 开放平台永久授权码换取授权者信息
 $authorizationCode = '授权成功时返回给第三方平台的授权码';
 $authorization = $app->getAuthorization($authorizationCode);
+$authorizerAccessToken = $authorization->getAccessToken();
+```
 
+第二种方式：从数据库提取出来的授权码
+
+```php
+$authorizerAccessToken = new AuthorizerAccessToken($authorizerAppId, $token);
+```
+
+**获取公众号实例**
+
+```php
+// $officialAccount 为 EasyWeChat\OfficialAccount\Application 实例
+$officialAccount = $app->getOfficialAccount($authorizerAccessToken);
+
+// 调用公众号接口
+$users = $officialAccount->getClient()->cgiBin->users->list->get()->toArray();
+```
+
+**获取小程序实例**
+
+```php
 // $miniApp 为 EasyWeChat\MiniApp\Application 实例
-$miniApp = $app->getMiniApp($authorization->getAccessToken());
+$miniApp = $app->getMiniApp($authorizerAccessToken);
 
 // 调用小程序接口
 $users = $miniApp->getClient()->cgiBin->users->list->get()->toArray();
