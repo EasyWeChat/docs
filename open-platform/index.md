@@ -189,6 +189,8 @@ $officialAccount = $app->getOfficialAccount($authorizerAccessToken);
 $users = $officialAccount->getClient()->cgiBin->users->list->get()->toArray();
 ```
 
+更多公众号用法请参考：[公众号](/docs/{{version}}/official-account/index.md)
+
 **获取小程序实例**
 
 ```php
@@ -198,3 +200,5 @@ $miniApp = $app->getMiniApp($authorizerAccessToken);
 // 调用小程序接口
 $users = $miniApp->getClient()->cgiBin->users->list->get()->toArray();
 ```
+
+更多小程序用法请参考：[小程序](/docs/{{version}}/mini-app/index.md)
