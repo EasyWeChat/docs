@@ -15,6 +15,17 @@
     'aes_key' => '',                    // EncodingAESKey，兼容与安全模式下请一定要填写！！！
 
     /**
+     * OAuth 配置
+     *
+     * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login
+     * callback：OAuth授权完成后的回调页地址
+     */
+    'oauth' => [
+        'scopes'   => ['snsapi_userinfo'],
+        'callback' => '/examples/oauth_callback.php',
+    ],
+
+    /**
      * 日志配置 (默认不启用日志)
      *
      * level: 日志级别, 可选为：

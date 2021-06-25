@@ -42,7 +42,7 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
   5. 在 `callback.php` 中得到 `code` 后，通过 `code` 再次向微信服务器请求得到 **网页授权 access_token** 与 `openid`
   6. 你可以选择拿 `openid` 去请求 API 得到用户信息（可选）
   7. 将用户信息写入 SESSION。
-  8. 跳转到第 3 步写入的 `target_url` 页面（`/user/profile`）。
+  8. 跳转到第 3 步写入的 `intend_url` 页面（`/user/profile`）。
 
 > {warning} 看懵了？没事，使用 SDK，你不用管这么多。:smile:
 >
@@ -63,48 +63,39 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 
 > 如果你的授权地址为：`http://www.abc.com/xxxxx`，那么请填写 `www.abc.com`，也就是说请填写与网址匹配的域名，前者如果填写 `abc.com` 是通过不了的。
 
-## SDK 中 OAuth 模块的 API
-
-  在 SDK 中，我们使用名称为 `oauth` 的模块来完成授权服务，我们主要用到以下两个 API：
-
 ### 发起授权
 
 ```php
-// $redirectUrl 为跳转目标，请自行 302 跳转到目标地址
-$redirectUrl = $app->oauth->scopes(['snsapi_userinfo'])
-                          ->redirect();
+$redirectUrl = $app->getOAuth()->scopes(['snsapi_userinfo'])->redirect();
+
+// 指定回调 URL，比如设置回调 URL 为当前页面
+$redirectUrl = $app->oauth->scopes(['snsapi_userinfo'])->redirect($request->fullUrl());
 ```
 
-当然你也可以在发起授权的时候指定回调URL，比如设置回调URL为当前页面：
-
-```php
-$redirectUrl = $app->oauth->scopes(['snsapi_userinfo'])
-                          ->redirect($request->fullUrl());
-```
-
-它的返回值 `$redirectUrl` 是一个字符串跳转地址，请自行使用框架的跳转方法实现跳转，PHP 原生写法：
+返回值 `$redirectUrl` 是一个字符串 URL，请自行使用框架的跳转方法实现跳转，PHP 原生写法：
 
 ```php
 header("Location: {$redirectUrl}");
 ```
 
-在 [Laravel](http://laravel.com) 框架中控制器方法是要求返回响应值的，那么你就直接:
+在 [Laravel](http://laravel.com) 框架中控制器方法是要求返回响应值:
 
 ```php
 return \redirect($redirectUrl);
 ```
 
-### 获取已授权用户
+### 处理授权回调
 
 ```php
-$code = "微信回调URL携带的 code";
+$code = "微信回调URL携带的 code"; // $_GET['code']
 $user = $app->oauth->userFromCode($code);
 ```
 
 返回的 `$user` 是 [Overtrue\Socialite\User](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的信息](https://github.com/overtrue/socialite#user-interface)。
 
 
-#### $user 可以用的方法:
+**$user 可以用的方法**
+
 - `$user->getId(); `  对应微信的 `openid`
 - `$user->getNickname(); `  对应微信的 `nickname`
 - `$user->getName(); `  对应微信的 `nickname`
@@ -128,65 +119,72 @@ $user = $app->oauth->userFromCode($code);
 // http://easywechat.org/user/profile
 <?php
 
-use EasyWeChat\Factory;
+use EasyWeChat\OfficialAccount\Application;
 
 $config = [
-  // ...
-  'oauth' => [
-      'scopes'   => ['snsapi_userinfo'],
-      'callback' => '/oauth_callback',
-  ],
-  // ..
+    'app_id' => 'wx3cf0f39249eb0exx',
+    'secret' => 'f1c242f4f28f735d4687abb469072axx',
+    'token' => 'easywechat',
+    'aes_key' => '......'
+  //...
 ];
 
-$app = Factory::officialAccount($config);
-$oauth = $app->oauth;
+
+$app = new Application($config);
+
+$oauth = $app->getOAuth();
 
 // 未登录
 if (empty($_SESSION['wechat_user'])) {
 
-  $_SESSION['target_url'] = 'user/profile';
+  $_SESSION['intend_url'] = 'user/profile';
 
   $redirectUrl = $oauth->redirect();
-  
+
   header("Location: {$redirectUrl}");
   exit;
+} else {
+  // 已经登录过，则从 session 中取授权者信息
+  $user = $_SESSION['wechat_user'];
+
+  // ...
 }
-
-// 已经登录过
-$user = $_SESSION['wechat_user'];
-
-// ...
-
 ```
 
-授权回调页：
+**授权回调页**
+
+用户授权完成后浏览器调回的 URL 逻辑：
 
 ```php
 // http://easywechat.org/oauth_callback
 <?php
 
-use EasyWeChat\Factory;
+use EasyWeChat\OfficialAccount\Application;
 
 $config = [
-  // ...
+    'app_id' => 'wx3cf0f39249eb0exx',
+    'secret' => 'f1c242f4f28f735d4687abb469072axx',
+    'token' => 'easywechat',
+    'aes_key' => '......'
+  //...
 ];
 
-$app = Factory::officialAccount($config);
-$oauth = $app->oauth;
 
-// 获取 OAuth 授权结果用户信息
-$code = "微信回调URL携带的 code";
-$user = $oauth->userFromCode($code);
+$app = new Application($config);
+
+$oauth = $app->getOAuth();
+
+// 获取 OAuth 授权用户信息
+$user = $oauth->userFromCode($_GET['code']);
 
 $_SESSION['wechat_user'] = $user->toArray();
 
-$targetUrl = empty($_SESSION['target_url']) ? '/' : $_SESSION['target_url'];
+$targetUrl = empty($_SESSION['intend_url']) ? '/' : $_SESSION['intend_url'];
 
-header('Location:'. $targetUrl); // 跳转到 user/profile
+header('Location:'. $targetUrl); // 跳转回授权前的目标页面：user/profile
 ```
 
-上面的例子呢都是基于 `$_SESSION` 来保持会话的，在微信客户端中，你可以结合 Cookies 来存储，但是有效期平台不一样时间也不一样，好像 Android 的失效会快一些，不过基本也够用了。
+上面的例子呢都是基于 `$_SESSION` 来保持会话的，在微信客户端中，你也可以结合 Cookies 来存储，但是有效期平台不一样时间也不一样，好像 Android 的失效会快一些，不过基本也够用了。
 
 
 ## 参考阅读
