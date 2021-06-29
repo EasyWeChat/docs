@@ -8,9 +8,34 @@ $api = $app->getClient();
 
 ## 两种调用方式
 
-当前版本准备了两种调用方式：**链式调用** 和 **原始方式调用**，请根据你的喜好自行选择使用方式，效果一致。
+当前版本准备了两种调用方式：**原始方式调用** 和 **链式调用**，请根据你的喜好自行选择使用方式，效果一致。
 
-### 方式一：链式调用
+### 方式一：原始方式调用
+
+如果你不喜欢链式转换的调用方式，你还可以选择以传统方式调用：
+
+
+```php
+$response = $api->post('/cgi-bin/user/info/updateremark', ['body' => [
+    "openid" => "oDF3iY9ffA-hqb2vVvbr7qxf6A0Q",
+    "remark" => "pangzi"
+]]);
+```
+
+#### 语法说明
+
+```php
+Symfony\Contracts\HttpClient\ResponseInterface {get/post/patch/put/delete}($uri, $options = [])
+```
+
+**参数说明：**
+
+- `$uri` 为需要请求的 `path`；
+- `$options` 为请求参数，可以指定 `query` / `body` / `headers` 等等，具体请参考：[Symfony\Contracts\HttpClient\HttpClientInterface::OPTIONS_DEFAULTS](https://github.com/symfony/symfony/blob/5.3/src/Symfony/Contracts/HttpClient/HttpClientInterface.php)
+
+-----
+
+### 方式二：链式调用
 
 你可以将需要调用的 API 以 `/` 分割 + 驼峰写法的形式，写成如下模式：
 
@@ -69,28 +94,7 @@ $api->cgiBin->user->info->updateremark->post([
     ])->toArray();
 ```
 
-### 方式一：原始方式调用
-
-如果你不喜欢链式转换的调用方式，你还可以选择以传统方式调用：
-
-
-```php
-$response = $api->post('/cgi-bin/user/info/updateremark', ['body' => [
-    "openid" => "oDF3iY9ffA-hqb2vVvbr7qxf6A0Q",
-    "remark" => "pangzi"
-]]);
-```
-
-#### 语法说明
-
-```php
-Symfony\Contracts\HttpClient\ResponseInterface {get/post/patch/put/delete}($uri, $options = [])
-```
-
-**参数说明：**
-
-- `$uri` 为需要请求的 `path`；
-- `$options` 为请求参数，可以指定 `query` / `body` / `headers` 等等，具体请参考：[Symfony\Contracts\HttpClient\HttpClientInterface::OPTIONS_DEFAULTS](https://github.com/symfony/symfony/blob/5.3/src/Symfony/Contracts/HttpClient/HttpClientInterface.php)
+-----
 
 ## 处理响应
 
@@ -126,6 +130,8 @@ $httpLogs = $response->getInfo('debug');
 
 :book: 更多使用请参考： [HTTP client: Processing Responses](https://symfony.com/doc/current/http_client.html#processing-responses)
 
+
+-----
 
 
 ## 异步请求
