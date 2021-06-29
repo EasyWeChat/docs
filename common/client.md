@@ -6,11 +6,11 @@
 $api = $app->getClient();
 ```
 
-## 调用方式
+## 两种调用方式
 
 当前版本准备了两种调用方式：**链式调用** 和 **原始方式调用**，请根据你的喜好自行选择使用方式，效果一致。
 
-## 链式调用
+### 链式调用
 
 你可以将需要调用的 API 以 `/` 分割 + 驼峰写法的形式，写成如下模式：
 
@@ -24,7 +24,7 @@ $users = $api->cgiBin->user->get->get()->toArray();
 GET /cgi-bin/user/get
 ```
 
-### 链式转换规则
+#### 链式转换规则
 
 - 请求 path 中的 `/` 为分隔符，切割成属性，例如：`/cgi-bin/user/info/updateremark` 则转换成 `->cgiBin->user->info->updateremark`；
 - path 对应的请求方法（HTTP Method），即作为请求对象的末尾执行方法，例如: `->cgiBin->user->info->updateremark->post([...])`；
@@ -33,9 +33,9 @@ GET /cgi-bin/user/get
 
 > :heart: 链式调用参考自朋友 `TheNorthMemory` 的插件 [TheNorthMemory/wechatpay-axios-plugin](https://github.com/TheNorthMemory/wechatpay-axios-plugin) 中的创意。
 
-### 参数传递
+#### 参数传递
 
-#### GET
+##### GET
 
 你可以在最后的调用方法里传递对应的参数，例如：
 
@@ -69,7 +69,7 @@ $api->cgiBin->user->info->updateremark->post([
     ])->toArray();
 ```
 
-## 原始方式调用
+### 原始方式调用
 
 如果你不喜欢链式转换的调用方式，你还可以选择以传统方式调用：
 
@@ -81,7 +81,7 @@ $response = $api->post('/cgi-bin/user/info/updateremark', ['body' => [
 ]]);
 ```
 
-### 语法说明
+#### 语法说明
 
 ```php
 Symfony\Contracts\HttpClient\ResponseInterface {get/post/patch/put/delete}($uri, $options = [])
@@ -146,7 +146,7 @@ $contentType = $response->getHeaders()['content-type'][0];
 $content = $response->getContent();
 ```
 
-### 并行请求
+## 并行请求
 
 由于请求天然是异步的，那么你可以很简单实现并行请求：
 
