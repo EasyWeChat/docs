@@ -12,9 +12,6 @@ $api = $app->getClient();
 
 ### 方式一：原始方式调用
 
-如果你不喜欢链式转换的调用方式，你还可以选择以传统方式调用：
-
-
 ```php
 $response = $api->post('/cgi-bin/user/info/updateremark', ['body' => [
     "openid" => "oDF3iY9ffA-hqb2vVvbr7qxf6A0Q",
