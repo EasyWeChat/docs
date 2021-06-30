@@ -1,5 +1,7 @@
 ## 企业微信
 
+TODO: update
+
 企业微信的使用与公众号以及其它几个应用的使用方式都是一致的，使用 `\EasyWeChat\Factory::work($config)` 来初始化：
 
 ```php
