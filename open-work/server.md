@@ -10,7 +10,18 @@
 - 授权成功 `create_auth`
 - 授权变更 `change_auth`
 - 授权取消 `cancel_auth`
-- 通讯录变更 `change_contact`
+- 通讯录变更（Event） `change_contact`
+  - ChangeType
+    - 成员变更
+      - 新增成员 `create_user`
+      - 更新成员 `update_user`
+      - 删除成员 `delete_user`
+    - 部门变更
+      - 新增部门 `create_party`
+      - 更新部门 `update_party`
+      - 删除部门 `delete_party`
+    - 标签变更
+      - 成员标签变更 `update_tag`
 - 共享应用事件回调 `share_agent_change`
 
 ## 自定义消息处理器
@@ -29,6 +40,20 @@ $server->handleAuthCancelled(callable | string $handler);
 
 // 通讯录变更事件
 $server->handleContactChanged(callable | string $handler);
+
+
+// 成员变更事件
+$server->handleUserCreated(callable | string $handler);
+$server->handleUserUpdated(callable | string $handler);
+$server->handleUserDeleted(callable | string $handler);
+
+// 部门变更事件
+$server->handlePartyCreated(callable | string $handler);
+$server->handlePartyUpdated(callable | string $handler);
+$server->handlePartyDeleted(callable | string $handler);
+
+// 成员标签变更事件
+$server->handleUserTagUpdated(callable | string $handler);
 
 // 共享应用事件
 $server->handleShareAgentChanged(callable | string $handler);

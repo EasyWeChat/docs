@@ -30,7 +30,7 @@
 $server->handleContactChanged(callable | string $handler);
 
 // 处理任务执行完成事件
-$server->handleBatchJobCompleted(callable | string $handler);
+$server->handleBatchJobsFinished(callable | string $handler);
 
 // 成员变更事件
 $server->handleUserCreated(callable | string $handler);
