@@ -6,7 +6,18 @@
 
 企业微信数据推送的有以下事件：
 
-- 通讯录变更 `change_contact`
+- 通讯录变更（Event） `change_contact`
+  - ChangeType
+    - 成员变更
+      - 新增成员 `create_user`
+      - 更新成员 `update_user`
+      - 删除成员 `delete_user`
+    - 部门变更
+      - 新增部门 `create_party`
+      - 更新部门 `update_party`
+      - 删除部门 `delete_party`
+    - 标签变更
+      - 成员标签变更 `update_tag`
 - 批量任务执行完成 `batch_job_result`
 
 
@@ -15,9 +26,12 @@
 > *消息处理器详细说明见：公众号开发 - 服务端一节*
 
 ```php
-// 处理通讯录变更事件
+// 处理通讯录变更事件（包括成员变更、部门变更、成员标签变更）
 $server->handleContactChanged(callable | string $handler);
 
 // 处理任务执行完成事件
 $server->handleBatchJobCompleted(callable | string $handler);
+
+// 成员标签变更事件
+$server->handleUserTagUpdated(callable | string $handler);
 ```
