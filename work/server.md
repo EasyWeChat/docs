@@ -1,37 +1,23 @@
-## 服务端
+# 服务端
 
-我们在企业微信应用开启接收消息的功能，将设置页面的 token 与 aes key 配置到 agents 下对应的应用内：
+企业微信服务端推送和公众号一样，请参考：[公众号：服务端](/docs/{{version}}/official-account/server.md)
 
-```php
-$config = [
-    'corp_id' => 'xxxxxxxxxxxxxxxxx',
+## 第三方平台推送事件
 
-    'agent_id' => 100022,
-    'secret'   => 'xxxxxxxxxx',
+企业微信数据推送的有以下事件：
 
-    // server config
-    'token' => 'xxxxxxxxx',
-    'aes_key' => 'xxxxxxxxxxxxxxxxxx',
+- 通讯录变更 `change_contact`
+- 批量任务执行完成 `batch_job_result`
 
-    //...
-];
 
-$app = Factory::work($config);
-```
+## 自定义消息处理器
 
-接着配置服务端与公众号的服务端用法一样：
+> *消息处理器详细说明见：公众号开发 - 服务端一节*
 
 ```php
-$app->server->push(function($message){
-   // $message['FromUserName'] // 消息来源
-   // $message['MsgType'] // 消息类型：event ....
-    
-    return 'Hello easywechat.';
-});
+// 处理通讯录变更事件
+$server->handleContactChanged(callable | string $handler);
 
-$response = $app->server->serve();
-
-$response->send();
+// 处理任务执行完成事件
+$server->handleBatchJobCompleted(callable | string $handler);
 ```
-
-`$response` 为 `Symfony\Component\HttpFoundation\Response` 实例，根据你的框架情况来决定如何处理响应。
