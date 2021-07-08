@@ -51,9 +51,25 @@ GET /cgi-bin/user/get
 - 请求 path 中的 `/` 为分隔符，切割成属性，例如：`/cgi-bin/user/info/updateremark` 则转换成 `->cgiBin->user->info->updateremark`；
 - path 对应的请求方法（HTTP Method），即作为请求对象的末尾执行方法，例如: `->cgiBin->user->info->updateremark->post([...])`；
 - 有中横线分隔符(`-`)的，可以使用驼峰（camelCase）风格书写，例如: merchant-service 可写成 merchantService；
-- 动态参数，例如 `business_code/{business_code}` 可写成 `->businessCode[11029999911]`，或按属性风格，直接写值也可以，例如 `businessCode->{2000001234567890}`；
+- 动态参数，例如 `business_code/{business_code}` 可写成 `->businessCode->{'201202828'}`，或按属性风格，直接写值也可以，例如 `businessCode->{'$myCode'}`；
 
 > :heart: 链式调用参考自朋友 `TheNorthMemory` 的插件 [TheNorthMemory/wechatpay-axios-plugin](https://github.com/TheNorthMemory/wechatpay-axios-plugin) 中的创意。
+
+** 动态参数示例 **
+
+URL 中有动态参数，可以用 **单引号变量名写法代替**，然后在请求 `$options` 中传递该参数将会完成替换：
+
+```php
+$out_trade_no = 'order123456';
+$response = $app->getClient()->pay->transactions->outTradeNo->{'$out_trade_no'}->get([
+    'query'=>[
+        'mchid' =>  $app->getMerchant()->getMerchantId()
+    ],
+    'out_trade_no' => $out_trade_no, // <-- 这里将对应替换 URL 中同名的参数 `$out_trade_no`
+]);
+```
+
+> 注意： 一定使用单引号。
 
 #### 参数传递
 
