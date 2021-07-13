@@ -55,7 +55,7 @@ GET /cgi-bin/user/get
 
 > :heart: 链式调用参考自朋友 `TheNorthMemory` 的插件 [TheNorthMemory/wechatpay-axios-plugin](https://github.com/TheNorthMemory/wechatpay-axios-plugin) 中的创意。
 
-** 动态参数示例 **
+##### 动态参数示例
 
 URL 中有动态参数，可以用 **单引号变量名写法代替**，然后在请求 `$options` 中传递该参数将会完成替换：
 
@@ -69,7 +69,7 @@ $response = $app->getClient()->pay->transactions->outTradeNo->{'$out_trade_no'}-
 ]);
 ```
 
-> 注意： 一定使用单引号。
+> 注意： 变量部分一定使用单引号。
 
 #### 参数传递
 
