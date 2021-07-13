@@ -76,6 +76,24 @@ $redpackData = [
 $result = $redpack->sendGroup($redpackData);
 ```
 
+### 发送小程序红包接口
+
+```php
+$redpackData = [
+    'mch_billno'   => 'xy123456',
+    'send_name'    => '测试红包',
+    're_openid'    => 'oxTWIuGaIt6gTKsQRLau2M0yL16E',
+    'total_amount' => 100,  //单位为分，不小于100
+    'wishing'      => '祝福语',
+    'client_ip'    => '192.168.0.1',  //可不传，不传则由 SDK 取当前客户端 IP
+    'act_name'     => '测试活动',
+    'remark'       => '测试备注',
+    // ...
+];
+
+$result = $redpack->sendMiniprogramNormal($redpackData);
+```
+
 ## 红包预下单接口
 
 红包预下单接口是为摇一摇红包接口配合使用的，在开发摇一摇周边的摇红包相关功能时，需要调用本接口获取红包单号。详情参见[官方文档](http://mp.weixin.qq.com/wiki/7/0ddd50ed2421b99fedd071281c074aab.html#.E7.BA.A2.E5.8C.85.E9.A2.84.E4.B8.8B.E5.8D.95.E6.8E.A5.E5.8F.A3)
