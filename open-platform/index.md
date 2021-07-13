@@ -101,7 +101,7 @@ $account->getAesKey();
 $oauth = $app->getOAuth();
 ```
 
-:book: 详情请参考：[公众号：网页授权](/docs/{{version}}/official-account/oauth.md)
+:book: 详情请参考：[网页授权](../common/oauth.md)
 
 
 ## 使用授权码获取授权信息

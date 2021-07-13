@@ -42,7 +42,7 @@ $app->getServer();
 $app->getClient();
 ```
 
-:book: 更多说明请参阅：[API调用](/docs/{{version}}/common/client.md)
+:book: 更多说明请参阅：[API调用](../common/client.md)
 
 ### 配置
 
@@ -67,6 +67,14 @@ $accessToken->getToken(); // string
 $accessToken = new MyCustomAccessToken();
 $app->setAccessToken($accessToken)
 ```
+
+### 网页授权
+
+```php
+$oauth = $app->getOAuth();
+```
+
+:book: 详情请参考：[网页授权](../common/oauth.md)
 
 ### 公众号账户
 

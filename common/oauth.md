@@ -66,10 +66,10 @@ OAuth是一个关于授权（authorization）的开放网络标准，在全世�
 ### 发起授权
 
 ```php
-$redirectUrl = $app->getOAuth()->scopes(['snsapi_userinfo'])->redirect();
+$redirectUrl = $oauth->scopes(['snsapi_userinfo'])->redirect();
 
 // 指定回调 URL，比如设置回调 URL 为当前页面
-$redirectUrl = $app->oauth->scopes(['snsapi_userinfo'])->redirect($request->fullUrl());
+$redirectUrl = $oauth->scopes(['snsapi_userinfo'])->redirect($request->fullUrl());
 ```
 
 返回值 `$redirectUrl` 是一个字符串 URL，请自行使用框架的跳转方法实现跳转，PHP 原生写法：
@@ -88,7 +88,7 @@ return \redirect($redirectUrl);
 
 ```php
 $code = "微信回调URL携带的 code"; // $_GET['code']
-$user = $app->oauth->userFromCode($code);
+$user = $oauth->userFromCode($code);
 ```
 
 返回的 `$user` 是 [Overtrue\Socialite\User](https://github.com/overtrue/socialite/blob/master/src/User.php) 对象，你可以从该对象拿到[更多的信息](https://github.com/overtrue/socialite#user-interface)。
@@ -113,7 +113,7 @@ $user = $app->oauth->userFromCode($code);
 
 ## 网页授权实例
 
-我们这里来用原生 PHP 写法举个例子，`oauth_callback` 是我们的授权回调URL (未urlencode编码的URL), `user/profile` 是我们需要授权才能访问的页面，它的 PHP 代码如下：
+我们这里来用公众号原生 PHP 写法举个例子，`oauth_callback` 是我们的授权回调URL (未urlencode编码的URL), `user/profile` 是我们需要授权才能访问的页面，它的 PHP 代码如下：
 
 ```php
 // http://easywechat.org/user/profile
@@ -132,7 +132,7 @@ $config = [
 
 $app = new Application($config);
 
-$oauth = $app->getOAuth();
+$oauth = $oauth;
 
 // 未登录
 if (empty($_SESSION['wechat_user'])) {
@@ -172,7 +172,7 @@ $config = [
 
 $app = new Application($config);
 
-$oauth = $app->getOAuth();
+$oauth = $oauth;
 
 // 获取 OAuth 授权用户信息
 $user = $oauth->userFromCode($_GET['code']);

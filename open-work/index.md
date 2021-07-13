@@ -91,18 +91,28 @@ $account->getAesKey();
 ```
 
 
-## 第三方应用或网站网页授权
+## 第三方应用需要在打开的网页里面携带用户的身份信息
 
-> {warning} 注意：不是代公众号/小程序授权。
+> [点此查看官方文档](https://open.work.weixin.qq.com/api/doc/90001/90143/91120#%E6%9E%84%E9%80%A0%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%94%E7%94%A8oauth2%E9%93%BE%E6%8E%A5)
 
 第三方应用或者网站网页授权的逻辑和公众号的网页授权基本一样：
 
 ```php
-$oauth = $app->getOAuth();
+$oauth = $app->getOAuth(string $suiteId, AccessTokenInterface $suiteAccessToken);
 ```
 
-:book: 详情请参考：[企业微信服务商：网页授权](oauth.md)
+:book: 详情请参考：[网页授权](./oauth.md)
 
+
+## 企业网页授权
+
+> [点此查看官方文档](https://open.work.weixin.qq.com/api/doc/90001/90143/91120#%E6%9E%84%E9%80%A0%E4%BC%81%E4%B8%9Aoauth2%E9%93%BE%E6%8E%A5)
+
+```php
+$oauth = $app->getCorpOAuth(string $corpId, int $agentId, AccessTokenInterface $suiteAccessToken);
+```
+
+:book: 详情请参考：[网页授权](./oauth.md)
 
 ## 使用授权码获取授权信息
 
