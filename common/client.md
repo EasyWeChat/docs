@@ -60,12 +60,12 @@ GET /cgi-bin/user/get
 URL 中有动态参数，可以用 **单引号变量名写法代替**，然后在请求 `$options` 中传递该参数将会完成替换：
 
 ```php
-$out_trade_no = 'order123456';
-$response = $app->getClient()->pay->transactions->outTradeNo->{'$out_trade_no'}->get([
+$outTradeNo = 'order123456';
+$response = $app->getClient()->pay->transactions->outTradeNo->{'$outTradeNo'}->get([
     'query'=>[
         'mchid' =>  $app->getMerchant()->getMerchantId()
     ],
-    'out_trade_no' => $out_trade_no, // <-- 这里将对应替换 URL 中同名的参数 `$out_trade_no`
+    'outTradeNo' => $outTradeNo, // <-- 这里将对应替换 URL 中同名的参数 `$out_trade_no`
 ]);
 ```
 
