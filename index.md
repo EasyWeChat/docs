@@ -59,6 +59,8 @@
   - [附近的小程序](/docs/{{version}}/mini-program/nearby_poi)
   - [订阅消息](/docs/{{version}}/mini-program/subscribe_message)
   - [直播](/docs/{{version}}/mini-program/live)
+  - [自定义版交易组件 - 申请接入接口](/docs/{{version}}/mini-program/shop/register)
+  - [自定义版交易组件 - 接入商品前接口](/docs/{{version}}/mini-program/shop/basic)
 - ## 开放平台
   - [入门](/docs/{{version}}/open-platform/index)
   - [服务端](/docs/{{version}}/open-platform/server)
