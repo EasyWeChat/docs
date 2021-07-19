@@ -63,6 +63,8 @@
   - [自定义版交易组件 - 接入商品前接口](/docs/{{version}}/mini-program/shop/basic)
   - [自定义版交易组件 - 商家入驻接口](/docs/{{version}}/mini-program/shop/account)
   - [自定义版交易组件 - SPU接口](/docs/{{version}}/mini-program/shop/spu)
+  - [自定义版交易组件 - 订单接口](/docs/{{version}}/mini-program/shop/order)
+- ## 开放平台
 - ## 开放平台
   - [入门](/docs/{{version}}/open-platform/index)
   - [服务端](/docs/{{version}}/open-platform/server)
