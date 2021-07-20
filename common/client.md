@@ -30,7 +30,7 @@ Symfony\Contracts\HttpClient\ResponseInterface {get/post/patch/put/delete}($uri,
 - `$uri` 为需要请求的 `path`；
 - `$options` 为请求参数，可以指定 `query` / `body` / `headers` 等等，具体请参考：[Symfony\Contracts\HttpClient\HttpClientInterface::OPTIONS_DEFAULTS](https://github.com/symfony/symfony/blob/5.3/src/Symfony/Contracts/HttpClient/HttpClientInterface.php)
 
------
+---
 
 ### 方式二：链式调用
 
@@ -107,7 +107,37 @@ $api->cgiBin->user->info->updateremark->post([
     ])->toArray();
 ```
 
------
+#### 文件上传
+
+你有两种上传文件的方式可以选择：
+
+##### 从指定路径上传
+
+```php
+$options = Form::create(
+    [
+        'type' => 'image',
+        'media' => File::fromPath(__DIR__.'/stubs/image.jpg'),
+    ]
+)->toArray();
+
+$response = $app->getClient()->post('cgi-bin/media/upload?type=image', $options);
+```
+
+##### 从二进制内容上传
+
+```php
+$options = Form::create(
+    [
+        'type' => 'image',
+        'media' => File::withContents($contents, 'image.jpg'), // 注意：请指定文件名
+    ]
+)->toArray();
+
+$response = $app->getClient()->post('cgi-bin/media/upload?type=image', $options);
+```
+
+---
 
 ## 处理响应
 
@@ -143,9 +173,7 @@ $httpLogs = $response->getInfo('debug');
 
 :book: 更多使用请参考： [HTTP client: Processing Responses](https://symfony.com/doc/current/http_client.html#processing-responses)
 
-
------
-
+---
 
 ## 异步请求
 
