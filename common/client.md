@@ -114,6 +114,9 @@ $api->cgiBin->user->info->updateremark->post([
 ##### 从指定路径上传
 
 ```php
+use EasyWeChat\Kernel\Form\File;
+use EasyWeChat\Kernel\Form\Form;
+
 $options = Form::create(
     [
         'media' => File::fromPath('/path/to/image.jpg'),
@@ -126,6 +129,9 @@ $response = $app->getClient()->post('cgi-bin/media/upload?type=image', $options)
 ##### 从二进制内容上传
 
 ```php
+use EasyWeChat\Kernel\Form\File;
+use EasyWeChat\Kernel\Form\Form;
+
 $options = Form::create(
     [
         'media' => File::withContents($contents, 'image.jpg'), // 注意：请指定文件名
