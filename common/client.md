@@ -117,7 +117,7 @@ $api->cgiBin->user->info->updateremark->post([
 $options = Form::create(
     [
         'type' => 'image',
-        'media' => File::fromPath(__DIR__.'/stubs/image.jpg'),
+        'media' => File::fromPath('/path/to/image.jpg'),
     ]
 )->toArray();
 
