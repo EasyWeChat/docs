@@ -61,7 +61,7 @@ URL 中有动态参数，可以用 **单引号变量名写法代替**，然后�
 
 ```php
 $outTradeNo = 'order123456';
-$response = $app->getClient()->pay->transactions->outTradeNo->{'$outTradeNo'}->get([
+$response = $api->pay->transactions->outTradeNo->{'$outTradeNo'}->get([
     'query'=>[
         'mchid' =>  $app->getMerchant()->getMerchantId()
     ],
@@ -123,7 +123,7 @@ $options = Form::create(
     ]
 )->toArray();
 
-$response = $app->getClient()->post('cgi-bin/media/upload?type=image', $options);
+$response = $api->post('cgi-bin/media/upload?type=image', $options);
 ```
 
 ##### 从二进制内容上传
@@ -138,7 +138,7 @@ $options = Form::create(
     ]
 )->toArray();
 
-$response = $app->getClient()->post('cgi-bin/media/upload?type=image', $options);
+$response = $api->post('cgi-bin/media/upload?type=image', $options);
 ```
 
 ---
@@ -148,7 +148,7 @@ $response = $app->getClient()->post('cgi-bin/media/upload?type=image', $options)
 API Client 基于 [symfony/http-client](https://github.com/symfony/http-client) 实现，你可以通过以下方式对响应值进行访问：
 
 ```php
-$response = $api->cgiBin->user->get->get();
+$response = $api->get('/cgi-bin/user/get', ['query' => ['openid' => '...']]);
 
 // 获取状态码
 $statusCode = $response->getStatusCode();
@@ -203,9 +203,9 @@ $content = $response->getContent();
 
 ```php
 $responses = [
-    $api->cgiBin->user->get->get(),
-    $api->cgiBin->user->info->updateremark(['body' => ...]),
-    $api->cgiBin->user->message->custom->send(['body' => ...]),
+    $api->get('/cgi-bin/user/get'),
+    $api->post('/cgi-bin/user/info/updateremark', ['body' => ...]),
+    $api->post('/cgi-bin/user/message/custom/send', ['body' => ...]),
 ];
 
 // 访问任意一个 $response 时将执行并发请求：
@@ -219,9 +219,9 @@ foreach ($responses as $response) {
 
 ```php
 $responses = [
-    'users' => $api->cgiBin->user->get->get(),
-    'remark' => $api->cgiBin->user->info->updateremark(['body' => ...]),
-    'message' => $api->cgiBin->user->message->custom->send(['body' => ...]),
+    'users'=> $api->get('/cgi-bin/user/get'),
+    'remark' => $api->post('/cgi-bin/user/info/updateremark', ['body' => ...]),
+    'message' => $api->post('/cgi-bin/user/message/custom/send', ['body' => ...]),
 ];
 
 // 访问任意一个 $response 时将执行并发请求：
