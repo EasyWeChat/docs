@@ -43,10 +43,10 @@ $app->business->getBusiness(1);
 $app->business->list(0, 10);
 ```
 
-#### 接收消息推送
+#### 消息推送
 
 ```php
-// 
+// 可以发送文本，图片，小程序卡片等
 //发送小程序卡片
 $msg = new MiniProgramPage([
     'title' => 'overtrue',
