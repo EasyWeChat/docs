@@ -116,7 +116,6 @@ $api->cgiBin->user->info->updateremark->post([
 ```php
 $options = Form::create(
     [
-        'type' => 'image',
         'media' => File::fromPath('/path/to/image.jpg'),
     ]
 )->toArray();
@@ -129,7 +128,6 @@ $response = $app->getClient()->post('cgi-bin/media/upload?type=image', $options)
 ```php
 $options = Form::create(
     [
-        'type' => 'image',
         'media' => File::withContents($contents, 'image.jpg'), // 注意：请指定文件名
     ]
 )->toArray();
