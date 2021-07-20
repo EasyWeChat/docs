@@ -1,70 +1,209 @@
-# 支付
+# 微信支付
 
-你在阅读本文之前确认你已经仔细阅读了：[微信支付 | 商户平台开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)。
+请仔细阅读并理解：[微信官方文档 - 微信支付](https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/index.shtml)
 
-## 配置
-
-配置在前面的例子中已经提到过了，支付的相关配置如下：
+## 实例化
 
 ```php
-use EasyWeChat\Factory;
+<?php
+use EasyWeChat\Pay\Application;
 
 $config = [
-    // 必要配置
-    'app_id'             => 'xxxx',
-    'mch_id'             => 'your-mch-id',
-    'key'                => 'key-for-signature',   // API 密钥
+    'mch_id' => 1360649000,
 
-    // 如需使用敏感接口（如退款、发送红包等）需要配置 API 证书路径(登录商户平台下载 API 证书)
-    'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
-    'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+    'private_key' => __DIR__ . '/certs/apiclient_key.pem',
+    'certificate' => __DIR__ . '/certs/apiclient_cert.pem',
 
-    'notify_url'         => '默认的订单回调地址',     // 你也可以在下单时单独设置来想覆盖它
+    /**
+     * 证书序列号，可通过命令从证书获取：
+     * `openssl x509 -in application_cert.pem -noout -serial`
+     */
+    'certificate_serial_no' => '6F2BADBE1738B07EE45C6A85C5F86EE343CAABC3',
+
+    'http' => [
+        'base_uri' => 'https://api.mch.weixin.qq.com/',
+    ],
+
+    // v2 API 秘钥
+    //'secret_key' => '26db3e15cfedb44abfbb5fe94fxxxxx',
+    // v3
+    'secret_key' => '43A03299A3C3FED3D8CE7B820Fxxxxx',
+
 ];
 
-$app = Factory::payment($config);
+$app = new Application($config);
 ```
 
-### 服务商
+## API
 
-#### 设置子商户信息
+Application 就是一个工厂类，所有的模块都是从 `$app` 中访问，并且几乎都提供了协议和 setter 可自定义修改。
+
+### API Client
+
+封装了多种模式的 API 调用类，你可以选择自己喜欢的方式调用开放平台任意 API，默认自动处理了 access_token 相关的逻辑。
 
 ```php
-$app->setSubMerchant('sub-merchant-id', 'sub-app-id');  // 子商户 AppID 为可选项
+$app->getClient(); // v3
+$app->getV2Client(); // v2
 ```
 
-### 刷卡支付
+:book: 更多说明请参阅：[API 调用](../common/client.md)
 
-[官方文档](https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_10)
+### 配置
 
 ```php
-$result = $app->pay([
-    'body' => 'image形象店-深圳腾大- QQ公仔',
-    'out_trade_no' => '1217752501201407033233368018',
-    'total_fee' => 888,
-    'auth_code' => '120061098828009406',
-]);
+$config = $app->getConfig();
 ```
 
-## 授权码查询OPENID接口
+你可以轻松使用 `$config->get($key, $default)` 读取配置，或使用 `$config->set($key, $value)` 在调用前修改配置项。
+
+### ComponentAccessToken
+
+access_token 是开放平台 API 调用的必备条件，如果你想获取它的值，你可以通过以下方式拿到当前的 access_token：
 
 ```php
-$app->authCodeToOpenid($authCode);
+$componentAccessToken = $app->getComponentAccessToken();
+$componentAccessToken->getToken(); // string
 ```
 
-## 沙箱模式
-
-微信支付沙箱环境，是提供给微信支付商户的开发者，用于模拟支付及回调通知。以验证商户是否理解回调通知、账单格式，以及是否对异常做了正确的处理。EasyWeChat SDK 对于这一功能进行了封装，开发者只需一步即可在沙箱模式和常规模式间切换，方便开发与最终的部署。
+当然你也可以使用自己的 ComponentAccessToken 类：
 
 ```php
-// 在实例化的时候传入配置即可
-$app = Factory::payment([
-    // ...
-    'sandbox' => true, // 设置为 false 或注释则关闭沙箱模式
-]);
-
-// 判断当前是否为沙箱模式：
-bool $app->inSandbox();
+$componentAccessToken = new MyCustomComponentAccessToken();
+$app->setComponentAccessToken($componentAccessToken)
 ```
 
-> {warning} 特别注意，沙箱模式对于测试用例有严格要求，若使用的用例与规定不符，将导致测试失败。具体用例要求可关注公众号“微信支付商户接入验收助手”（WXPayAssist）查看。
+### VerifyTicket
+
+你可以通过以下方式拿到当前 verify_ticket 类：
+
+```php
+$verifyTicket = $app->getVerfiyTicket();
+
+$verifyTicket->getTicket(); // strval
+```
+
+### 支付账户
+
+支付账户类，提供一系列 API 获取支付的基本信息：
+
+```php
+$account = $app->getMerchant();
+
+$account->getMerchantId();
+$account->getPrivateKey();
+$account->getCertificate();
+$account->getCertificateSerialNumber();
+$account->getSecretKey();
+```
+
+## 第三方应用或网站网页授权
+
+> {warning} 注意：不是代公众号/小程序授权。
+
+第三方应用或者网站网页授权的逻辑和公众号的网页授权基本一样：
+
+```php
+$oauth = $app->getOAuth();
+```
+
+:book: 详情请参考：[网页授权](../common/oauth.md)
+
+## 使用授权码获取授权信息
+
+在用户在授权页授权流程完成后，授权页会自动跳转进入回调 URI，并在 URL 参数中返回授权码和过期时间，如：(`https://easywechat.com/callback?auth_code=xxx&expires_in=600`)
+
+```php
+$authorizationCode = '授权成功时返回给第三方平台的授权码';
+
+$authorization = $app->getAuthorization($authorizationCode);
+
+$authorization->getAppId(); // authorizer_appid
+$authorization->getAccessToken(); // EasyWeChat\OpenPlatform\AuthorizerAccessToken
+$authorization->getRefreshToken(); // authorizer_access_token
+$authorization->toArray();
+$authorization->toJson();
+
+// {
+//   "authorization_info": {
+//     "authorizer_appid": "wxf8b4f85f3a79...",
+//     "authorizer_access_token": "QXjUqNqfYVH0yBE1iI_7vuN_9gQbpjfK7M...",
+//     "expires_in": 7200,
+//     "authorizer_refresh_token": "dTo-YCXPL4llX-u1W1pPpnp8Hgm4wpJt...",
+//     "func_info": [
+//       {
+//         "funcscope_category": {
+//           "id": 1
+//         }
+//       },
+//       //...
+//     ]
+//   }
+// }
+
+```
+
+## 获取/刷新接口调用令牌
+
+在公众号/小程序接口调用令牌（`authorizer_access_token`）失效时，可以使用刷新令牌（authorizer_refresh_token）获取新的接口调用令牌。
+
+> {warning} 注意： `authorizer_access_token` 有效期为 2 小时，开发者需要缓存 `authorizer_access_token`，避免获取/刷新接口调用令牌的 API 调用触发每日限额。缓存方法可以参考：https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html
+
+```php
+$authorizerAppId = '授权方 appid';
+$authorizerRefreshToken = '刷新令牌，上一步得到的 authorizer_refresh_token';
+
+$app->refreshAuthorizerToken($authorizerAppId, $authorizerRefreshToken)
+
+// {
+//   "authorizer_access_token": "some-access-token",
+//   "expires_in": 7200,
+//   "authorizer_refresh_token": "refresh_token_value"
+// }
+```
+
+---
+
+## 代替公众号/小程序请求公众平台 API
+
+代替公众号/小程序请求，需要首先拿到 `EasyWeChat\OpenPlatform\AuthorizerAccessToken`。
+
+**获取 AuthorizerAccessToken**
+
+第一种方式：开放平台永久授权码换取授权者信息
+
+```php
+$authorizationCode = '授权成功时返回给第三方平台的授权码';
+$authorization = $app->getAuthorization($authorizationCode);
+$authorizerAccessToken = $authorization->getAccessToken();
+```
+
+第二种方式：从数据库提取出来的授权码
+
+```php
+$authorizerAccessToken = new AuthorizerAccessToken($authorizerAppId, $token);
+```
+
+**获取公众号实例**
+
+```php
+// $officialAccount 为 EasyWeChat\OfficialAccount\Application 实例
+$officialAccount = $app->getOfficialAccount($authorizerAccessToken);
+
+// 调用公众号接口
+$users = $officialAccount->getClient()->cgiBin->users->list->get()->toArray();
+```
+
+:book: 更多公众号用法请参考：[公众号](/docs/{{version}}/official-account/index.md)
+
+**获取小程序实例**
+
+```php
+// $miniApp 为 EasyWeChat\MiniApp\Application 实例
+$miniApp = $app->getMiniApp($authorizerAccessToken);
+
+// 调用小程序接口
+$users = $miniApp->getClient()->cgiBin->users->list->get()->toArray();
+```
+
+:book: 更多小程序用法请参考：[小程序](/docs/{{version}}/mini-app/index.md)
