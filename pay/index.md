@@ -70,3 +70,53 @@ $account->getCertificate();
 $account->getCertificateSerialNumber();
 $account->getSecretKey();
 ```
+
+### Native下单
+
+```php
+ $data = [
+    'mchid' => (string)$this->app->getMerchant()->getMerchantId(),
+    'out_trade_no' => 'native20210720xxx',
+    'appid' => 'wxe2fb06xxxxxxxxxx6',
+    'description' => 'Image形象店-深圳腾大-QQ公仔',
+    'notify_url' => 'https://weixin.qq.com/',
+    'amount' => [
+        'total' => 1,
+        'currency' => 'CNY',
+    ]
+];
+        
+$response = $app->getClient()->pay->transactions->native->post([ 'json' => $data ]);
+
+print_r($response->toArray());
+```
+
+### 查询订单(商户订单号)
+
+```php
+
+$out_trade_no = 'native20210720xxx';
+$response = $app->getClient()->pay->transactions->{'out-trade-no'}->{$out_trade_no}->get([
+    'query'=>[
+        'mchid' =>  $app->getMerchant()->getMerchantId()
+    ]
+]);
+
+print_r($response->toArray());
+```
+
+### 查询订单(微信支付订单号)
+
+```php
+
+$transaction_id = '217752501201407033233368018';
+$response = $app->getClient()->pay->transactions->id->{$transaction_id}->get([
+    'query'=>[
+        'mchid' =>  $app->getMerchant()->getMerchantId()
+    ]
+]);
+
+print_r($response->toArray());
+```
+
+
