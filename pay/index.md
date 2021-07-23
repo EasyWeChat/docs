@@ -71,11 +71,13 @@ $account->getCertificateSerialNumber();
 $account->getSecretKey();
 ```
 
-### Native下单
+## 请求示例
+
+### Native 下单
 
 ```php
  $data = [
-    'mchid' => (string)$this->app->getMerchant()->getMerchantId(),
+    'mchid' => (string)$app->getMerchant()->getMerchantId(),
     'out_trade_no' => 'native20210720xxx',
     'appid' => 'wxe2fb06xxxxxxxxxx6',
     'description' => 'Image形象店-深圳腾大-QQ公仔',
@@ -85,8 +87,8 @@ $account->getSecretKey();
         'currency' => 'CNY',
     ]
 ];
-        
-$response = $app->getClient()->pay->transactions->native->post([ 'json' => $data ]);
+
+$response = $app->getClient()->post('pay/transactions/native', [ 'json' => $data ]);
 
 print_r($response->toArray());
 ```
@@ -95,8 +97,8 @@ print_r($response->toArray());
 
 ```php
 
-$out_trade_no = 'native20210720xxx';
-$response = $app->getClient()->pay->transactions->{'out-trade-no'}->{$out_trade_no}->get([
+$outTradeNo = 'native20210720xxx';
+$response = $app->getClient()->get("pay/transactions/out-trade-no/{$outTradeNo}", [
     'query'=>[
         'mchid' =>  $app->getMerchant()->getMerchantId()
     ]
@@ -109,8 +111,8 @@ print_r($response->toArray());
 
 ```php
 
-$transaction_id = '217752501201407033233368018';
-$response = $app->getClient()->pay->transactions->id->{$transaction_id}->get([
+$transactionId = '217752501201407033233368018';
+$response = $app->getClient()->get("pay/transactions/id/{$transactionId}", [
     'query'=>[
         'mchid' =>  $app->getMerchant()->getMerchantId()
     ]
@@ -118,5 +120,3 @@ $response = $app->getClient()->pay->transactions->id->{$transaction_id}->get([
 
 print_r($response->toArray());
 ```
-
-
