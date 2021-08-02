@@ -1,5 +1,6 @@
 # 分账
 > 官方文档 https://pay.weixin.qq.com/wiki/doc/api/allocation.php?chapter=27_1&index=1
+
 ```php
 use EasyWeChat\Factory;
 $config = [
@@ -13,8 +14,11 @@ $config = [
 ];
 $payment = Factory::payment($config);
 ```
+
 ### 添加接收方
+
 > 商户发起添加分账接收方请求，后续可通过发起分账请求将结算后的钱分到该分账接收方。
+
 ```php
 $receiver = [
 	"type"          => "PERSONAL_OPENID",
@@ -31,10 +35,13 @@ $receiver = [
 ];
 $payment->profit_sharing->addReceiver($receiver);
 ```
+
 ### 删除接收方
+
 ```php
 $payment->profit_sharing->deleteReceiver($receiver);
 ```
+
 ### 单次分账
 
 ```php
@@ -58,10 +65,13 @@ $sharing = $payment->profit_sharing->share($transaction_id,$out_trade_no,$receiv
 ```
 
 ### 多次分账
+
 ```php
 $payment->profit_sharing->multiShare($transaction_id,$out_trade_no,$receivers);
 ```
+
 ### 多次分账完结
+
 ```php
 $params = [
 	"transaction_id" => "",
@@ -70,11 +80,15 @@ $params = [
 ];
 $payment->profit_sharing->markOrderAsFinished($params);
 ```
+
 ### 分账查询
+
 ```php
 $res = $payment->profit_sharing->query($transaction_id,$out_trade_no);
 ```
+
 > 查询结果
+
 ```
 Array
 (
@@ -92,6 +106,7 @@ Array
 ```
 
 ### 分账退回
+
 ```php
 $out_trade_no = "***";//退款订单号
 $out_return_no = "***";//系统内部退款单号
