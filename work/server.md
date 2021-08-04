@@ -37,6 +37,11 @@ $server->handleUserCreated(callable | string $handler);
 $server->handleUserUpdated(callable | string $handler);
 $server->handleUserDeleted(callable | string $handler);
 
+// 部门变更事件
+$server->handlePartyCreated(callable | string $handler);
+$server->handlePartyUpdated(callable | string $handler);
+$server->handlePartyDeleted(callable | string $handler);
+
 // 成员标签变更事件
 $server->handleUserTagUpdated(callable | string $handler);
 ```
