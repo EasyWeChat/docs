@@ -29,7 +29,7 @@ $pay = [
     ......
 ];
 
-$app->shop_order->add($productId);
+$app->shop_order->pay($productId);
 ```
 
 
