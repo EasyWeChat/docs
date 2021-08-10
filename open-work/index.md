@@ -11,6 +11,8 @@ use EasyWeChat\OpenWork\Application;
 $config = [
   'corp_id' => 'wx3cf0f39249eb0exx',
   'provider_secret' => 'f1c242f4f28f735d4687abb469072axx',
+  'suite_id' => 'wx239393939xxxxx',
+  'suite_ticket => '737a8f72axx90f5d4681c2bb4642f4f2',
   'token' => 'easywechat',
   'aes_key' => '......'
 ];
@@ -64,8 +66,25 @@ $providerAccessToken->getToken(); // string
 
 ```php
 $providerAccessToken = new MyCustomProviderAccessToken();
-$app->setProviderAccessToken($providerAccessToken)
+$app->setProviderAccessToken($providerAccessToken);
 ```
+
+### SuiteAccessToken
+
+suite_access_token 是开放平台 API 调用的必备条件，如果你想获取它的值，你可以通过以下方式拿到当前的 suite_access_token：
+
+```php
+$suiteAccessToken = $app->getSuiteAccessToken();
+$suiteAccessToken->getToken(); // string
+```
+
+你也可以使用自己的 SuiteAccessToken 类：
+
+```php
+$suiteAccessToken = new MyCustomSuiteAccessToken();
+$app->setSuiteAccessToken($suiteAccessToken);
+```
+
 
 ### SuiteTicket
 
@@ -76,6 +95,14 @@ $suiteTicket = $app->getSuiteTicket();
 
 $suiteTicket->getTicket(); // string
 ```
+
+**手动设置 ticket**
+
+```php
+$ticket = '企业微信定时推送的 ticket 内容';
+$app->getSuiteTicket()->setTicket($ticket);
+```
+
 
 ### 开放平台账户
 
@@ -98,7 +125,7 @@ $account->getAesKey();
 第三方应用或者网站网页授权的逻辑和公众号的网页授权基本一样：
 
 ```php
-$oauth = $app->getOAuth(string $suiteId, AccessTokenInterface $suiteAccessToken);
+$oauth = $app->getOAuth(string $suiteId);
 ```
 
 :book: 详情请参考：[网页授权](./oauth.md)
@@ -109,7 +136,7 @@ $oauth = $app->getOAuth(string $suiteId, AccessTokenInterface $suiteAccessToken)
 > [点此查看官方文档](https://open.work.weixin.qq.com/api/doc/90001/90143/91120#%E6%9E%84%E9%80%A0%E4%BC%81%E4%B8%9Aoauth2%E9%93%BE%E6%8E%A5)
 
 ```php
-$oauth = $app->getCorpOAuth(string $corpId, int $agentId, AccessTokenInterface $suiteAccessToken);
+$oauth = $app->getCorpOAuth(string $corpId, int $agentId);
 ```
 
 :book: 详情请参考：[网页授权](./oauth.md)
@@ -120,9 +147,8 @@ $oauth = $app->getCorpOAuth(string $corpId, int $agentId, AccessTokenInterface $
 
 ```php
 $permanentCode = '企业永久授权码';
-$suiteAccessToken = new SuiteAccessToken($suiteId, $suiteSecret);
 
-$authorization = $app->getAuthorization($corpId, $authorizatpermanentCodeionCode, $suiteAccessToken);
+$authorization = $app->getAuthorization($corpId, $authorizatpermanentCodeionCode);
 
 $authorization->getCorpId(); // auth_corp_info.corpid
 $authorization->toArray();
@@ -204,9 +230,7 @@ $authorization->toJson();
 
 ```php
 $permanentCode = '企业永久授权码';
-$suiteAccessToken = new SuiteAccessToken($suiteId, $suiteSecret);
-
-$authorizerAccessToken = $app->getAuthorizerAccessToken($corpId, $permanentCode, $suiteAccessToken)
+$authorizerAccessToken = $app->getAuthorizerAccessToken($corpId, $permanentCode)
 
 // {
 //     "errcode":0 ,
@@ -218,7 +242,3 @@ $authorizerAccessToken = $app->getAuthorizerAccessToken($corpId, $permanentCode,
 
 $authorizerAccessToken->getToken(); // string
 ```
-
----
-
-todo: 调用企业 API
